@@ -13,6 +13,7 @@ public class ModChestLootTables extends VanillaChestLoot {
 
     @Override
     public void generate(BiConsumer<ResourceLocation, LootTable.Builder> lootTableBuilder) {
+
         //lootTableBuilder.accept(FRACTURE_MAP,
         //        LootTable.lootTable().withPool(LootPool.lootPool().add()));
     }
