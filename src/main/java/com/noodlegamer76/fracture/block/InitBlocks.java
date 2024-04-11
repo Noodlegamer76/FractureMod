@@ -2,31 +2,14 @@ package com.noodlegamer76.fracture.block;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.fluid.InitFluids;
-import net.minecraft.commands.arguments.ResourceKeyArgument;
-import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
-import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.function.ToIntFunction;
 
 public class InitBlocks {
 
@@ -41,14 +24,49 @@ public class InitBlocks {
     public static final RegistryObject<Block> FLESH_WALL = BLOCKS.register("flesh_wall",
             () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
 
-    //Fleshy Stone Bricks
-    public static final RegistryObject<Block> FLESHY_STONE_BRICKS = BLOCKS.register("fleshy_stone_bricks",
+    //Darkstone
+    public static final RegistryObject<Block> DARKSTONE = BLOCKS.register("darkstone",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
-    public static final RegistryObject<Block> FLESHY_STONE_BRICK_STAIRS = BLOCKS.register("fleshy_stone_brick_stairs",
-            () -> new StairBlock(FLESHY_STONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
-    public static final RegistryObject<Block> FLESHY_STONE_BRICK_SLAB = BLOCKS.register("fleshy_stone_brick_slab",
+    public static final RegistryObject<Block> DARKSTONE_STAIRS = BLOCKS.register("darkstone_stairs",
+            () -> new StairBlock(DARKSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> DARKSTONE_SLAB = BLOCKS.register("darkstone_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
-    public static final RegistryObject<Block> FLESHY_STONE_BRICK_WALL = BLOCKS.register("fleshy_stone_brick_wall",
+    public static final RegistryObject<Block> DARKSTONE_WALL = BLOCKS.register("darkstone_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
+    //Darkstone Bricks
+    public static final RegistryObject<Block> DARKSTONE_BRICKS = BLOCKS.register("darkstone_bricks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> DARKSTONE_BRICK_STAIRS = BLOCKS.register("darkstone_brick_stairs",
+            () -> new StairBlock(DARKSTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> DARKSTONE_BRICK_SLAB = BLOCKS.register("darkstone_brick_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> DARKSTONE_BRICK_WALL = BLOCKS.register("darkstone_brick_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
+    public static final RegistryObject<Block> CHISELED_DARKSTONE_BRICKS = BLOCKS.register("chiseled_darkstone_bricks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> DARKSTONE_PILLAR = BLOCKS.register("darkstone_pillar",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
+    //Cracked Darkstone Bricks
+    public static final RegistryObject<Block> CRACKED_DARKSTONE_BRICKS = BLOCKS.register("cracked_darkstone_bricks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> CRACKED_DARKSTONE_BRICK_STAIRS = BLOCKS.register("cracked_darkstone_brick_stairs",
+            () -> new StairBlock(CRACKED_DARKSTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> CRACKED_DARKSTONE_BRICK_SLAB = BLOCKS.register("cracked_darkstone_brick_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> CRACKED_DARKSTONE_BRICK_WALL = BLOCKS.register("cracked_darkstone_brick_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
+    //Fleshy Darkstone bricks
+    public static final RegistryObject<Block> FLESHY_DARKSTONE_BRICKS = BLOCKS.register("fleshy_darkstone_bricks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> FLESHY_DARKSTONE_BRICK_STAIRS = BLOCKS.register("fleshy_darkstone_brick_stairs",
+            () -> new StairBlock(FLESHY_DARKSTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> FLESHY_DARKSTONE_BRICK_SLAB = BLOCKS.register("fleshy_darkstone_brick_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> FLESHY_DARKSTONE_BRICK_WALL = BLOCKS.register("fleshy_darkstone_brick_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
 

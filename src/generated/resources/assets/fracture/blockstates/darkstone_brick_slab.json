@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "fracture:block/darkstone_brick_slab"
+    },
+    "type=double": {
+      "model": "fracture:block/darkstone_bricks"
+    },
+    "type=top": {
+      "model": "fracture:block/darkstone_brick_slab_top"
+    }
+  }
+}

@@ -1,6 +1,8 @@
 {
   "values": [
     "fracture:flesh_block",
-    "fracture:fleshy_stone_bricks"
+    "fracture:fleshy_darkstone_bricks",
+    "fracture:large_flesh_bulb",
+    "fracture:bloody_bookshelf"
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "fracture:block/darkstone",
+    "side": "fracture:block/darkstone",
+    "top": "fracture:block/darkstone"
+  }
+}

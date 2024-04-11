@@ -4,12 +4,9 @@ import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import net.minecraft.world.item.*;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.awt.*;
 
 public class InitItems {
 
@@ -27,14 +24,42 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.FLESH_WALL.get(), new Item.Properties()));
 
 
-    public static final RegistryObject<Item> FLESHY_STONE_BRICKS = ITEMS.register("fleshy_stone_bricks",
-            () -> new BlockItem(InitBlocks.FLESHY_STONE_BRICKS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> FLESHY_STONE_BRICK_STAIRS = ITEMS.register("fleshy_stone_brick_stairs",
-            () -> new BlockItem(InitBlocks.FLESHY_STONE_BRICK_STAIRS.get(), new Item.Properties()));
-    public static final RegistryObject<Item> FLESHY_STONE_BRICK_SLAB = ITEMS.register("fleshy_stone_brick_slab",
-            () -> new BlockItem(InitBlocks.FLESHY_STONE_BRICK_SLAB.get(), new Item.Properties()));
-    public static final RegistryObject<Item> FLESHY_STONE_BRICK_WALL = ITEMS.register("fleshy_stone_brick_wall",
-            () -> new BlockItem(InitBlocks.FLESHY_STONE_BRICK_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARKSTONE = ITEMS.register("darkstone",
+            () -> new BlockItem(InitBlocks.DARKSTONE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARKSTONE_STAIRS = ITEMS.register("darkstone_stairs",
+            () -> new BlockItem(InitBlocks.DARKSTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARKSTONE_SLAB = ITEMS.register("darkstone_slab",
+            () -> new BlockItem(InitBlocks.DARKSTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARKSTONE_WALL = ITEMS.register("darkstone_wall",
+            () -> new BlockItem(InitBlocks.DARKSTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARKSTONE_BRICKS = ITEMS.register("darkstone_bricks",
+            () -> new BlockItem(InitBlocks.DARKSTONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARKSTONE_BRICK_STAIRS = ITEMS.register("darkstone_brick_stairs",
+            () -> new BlockItem(InitBlocks.DARKSTONE_BRICK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARKSTONE_BRICK_SLAB = ITEMS.register("darkstone_brick_slab",
+            () -> new BlockItem(InitBlocks.DARKSTONE_BRICK_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARKSTONE_BRICK_WALL = ITEMS.register("darkstone_brick_wall",
+            () -> new BlockItem(InitBlocks.DARKSTONE_BRICK_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CRACKED_DARKSTONE_BRICKS = ITEMS.register("cracked_darkstone_bricks",
+            () -> new BlockItem(InitBlocks.CRACKED_DARKSTONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CRACKED_DARKSTONE_BRICK_STAIRS = ITEMS.register("cracked_darkstone_brick_stairs",
+            () -> new BlockItem(InitBlocks.CRACKED_DARKSTONE_BRICK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CRACKED_DARKSTONE_BRICK_SLAB = ITEMS.register("cracked_darkstone_brick_slab",
+            () -> new BlockItem(InitBlocks.CRACKED_DARKSTONE_BRICK_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CRACKED_DARKSTONE_BRICK_WALL = ITEMS.register("cracked_darkstone_brick_wall",
+            () -> new BlockItem(InitBlocks.CRACKED_DARKSTONE_BRICK_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FLESHY_DARKSTONE_BRICKS = ITEMS.register("fleshy_darkstone_bricks",
+            () -> new BlockItem(InitBlocks.FLESHY_DARKSTONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FLESHY_DARKSTONE_BRICK_STAIRS = ITEMS.register("fleshy_darkstone_brick_stairs",
+            () -> new BlockItem(InitBlocks.FLESHY_DARKSTONE_BRICK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FLESHY_DARKSTONE_BRICK_SLAB = ITEMS.register("fleshy_darkstone_brick_slab",
+            () -> new BlockItem(InitBlocks.FLESHY_DARKSTONE_BRICK_SLAB.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FLESHY_DARKSTONE_BRICK_WALL = ITEMS.register("fleshy_darkstone_brick_wall",
+            () -> new BlockItem(InitBlocks.FLESHY_DARKSTONE_BRICK_WALL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHISELED_DARKSTONE_BRICKS = ITEMS.register("chiseled_darkstone_bricks",
+            () -> new BlockItem(InitBlocks.CHISELED_DARKSTONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARKSTONE_PILLAR = ITEMS.register("darkstone_pillar",
+            () -> new BlockItem(InitBlocks.DARKSTONE_PILLAR.get(), new Item.Properties()));
 
 
     public static final RegistryObject<Item> FLESH_GROWTH = ITEMS.register("flesh_growth",

@@ -1,6 +1,0 @@
-{
-  "parent": "fracture:item/stairs",
-  "textures": {
-    "stairs": "fracture:block/fleshy_stone_bricks"
-  }
-}

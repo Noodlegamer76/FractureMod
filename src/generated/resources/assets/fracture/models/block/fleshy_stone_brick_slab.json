@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "fracture:block/fleshy_stone_bricks",
-    "side": "fracture:block/fleshy_stone_bricks",
-    "top": "fracture:block/fleshy_stone_bricks"
-  }
-}

@@ -15,7 +15,12 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public static final ResourceLocation FLESH_BLOCK = new ResourceLocation(FractureMod.MODID, "block/flesh_block");
-    public static final ResourceLocation FLESHY_STONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/fleshy_stone_bricks");
+    public static final ResourceLocation FLESHY_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/fleshy_darkstone_bricks");
+    public static final ResourceLocation DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/darkstone_bricks");
+    public static final ResourceLocation CRACKED_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/cracked_darkstone_bricks");
+    public static final ResourceLocation DARKSTONE_PILLAR_TOP = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_top");
+    public static final ResourceLocation DARKSTONE_PILLAR_SIDE = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_side");
+    public static final ResourceLocation DARKSTONE = new ResourceLocation(FractureMod.MODID, "block/darkstone");
     public static final ResourceLocation BLOODY_WOOD = new ResourceLocation(FractureMod.MODID, "block/bloody_wood");
     public static final ResourceLocation BLOODY_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/bloody_bookshelf");
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -29,9 +34,21 @@ public class ModItemModelProvider extends ItemModelProvider {
         slabItem(InitBlocks.FLESH_SLAB, FLESH_BLOCK);
         wallItem(InitBlocks.FLESH_WALL, FLESH_BLOCK);
 
-        stairsItem(InitBlocks.FLESHY_STONE_BRICK_STAIRS, FLESHY_STONE_BRICKS);
-        slabItem(InitBlocks.FLESHY_STONE_BRICK_SLAB, FLESHY_STONE_BRICKS);
-        wallItem(InitBlocks.FLESHY_STONE_BRICK_WALL, FLESHY_STONE_BRICKS);
+        stairsItem(InitBlocks.FLESHY_DARKSTONE_BRICK_STAIRS, FLESHY_DARKSTONE_BRICKS);
+        slabItem(InitBlocks.FLESHY_DARKSTONE_BRICK_SLAB, FLESHY_DARKSTONE_BRICKS);
+        wallItem(InitBlocks.FLESHY_DARKSTONE_BRICK_WALL, FLESHY_DARKSTONE_BRICKS);
+
+        stairsItem(InitBlocks.DARKSTONE_BRICK_STAIRS, DARKSTONE_BRICKS);
+        slabItem(InitBlocks.DARKSTONE_BRICK_SLAB, DARKSTONE_BRICKS);
+        wallItem(InitBlocks.DARKSTONE_BRICK_WALL, DARKSTONE_BRICKS);
+
+        stairsItem(InitBlocks.DARKSTONE_STAIRS, DARKSTONE);
+        slabItem(InitBlocks.DARKSTONE_SLAB, DARKSTONE);
+        wallItem(InitBlocks.DARKSTONE_WALL, DARKSTONE);
+
+        stairsItem(InitBlocks.CRACKED_DARKSTONE_BRICK_STAIRS, CRACKED_DARKSTONE_BRICKS);
+        slabItem(InitBlocks.CRACKED_DARKSTONE_BRICK_SLAB, CRACKED_DARKSTONE_BRICKS);
+        wallItem(InitBlocks.CRACKED_DARKSTONE_BRICK_WALL, CRACKED_DARKSTONE_BRICKS);
 
         simpleItem(InitItems.FLESH_GROWTH);
         simpleItem(InitItems.TENDRILS);
@@ -40,6 +57,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.HANGING_FLESH);
 
         cubeColumn("bloody_bookshelf", BLOODY_BOOKSHELF, BLOODY_WOOD);
+        cubeColumn("darkstone_pillar", DARKSTONE_PILLAR_SIDE, DARKSTONE_PILLAR_TOP);
 
         //some examples
         //withExistingParent(InitItems.WARDLING_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

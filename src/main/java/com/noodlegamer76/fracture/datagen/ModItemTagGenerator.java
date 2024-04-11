@@ -26,14 +26,20 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         //example for adding items to tags, check ModItemTagGenerator to see how to make your own tag
         this.tag(ItemTags.WALLS)
                 .add(InitItems.FLESH_WALL.get())
-                .add(InitItems.FLESHY_STONE_BRICK_WALL.get());
+                .add(InitItems.FLESHY_DARKSTONE_BRICK_WALL.get())
+                .add(InitItems.DARKSTONE_BRICK_WALL.get())
+                .add(InitItems.DARKSTONE_WALL.get());
 
         this.tag(ItemTags.STAIRS)
                 .add(InitItems.FLESH_STAIRS.get())
-                .add(InitItems.FLESHY_STONE_BRICK_STAIRS.get());
+                .add(InitItems.FLESHY_DARKSTONE_BRICK_STAIRS.get())
+                .add(InitItems.DARKSTONE_BRICK_STAIRS.get())
+                .add(InitItems.DARKSTONE_STAIRS.get());
 
         this.tag(ItemTags.SLABS)
                 .add(InitItems.FLESH_SLAB.get())
-                .add(InitItems.FLESHY_STONE_BRICK_SLAB.get());
+                .add(InitItems.FLESHY_DARKSTONE_BRICK_SLAB.get())
+                .add(InitItems.DARKSTONE_BRICK_SLAB.get())
+                .add(InitItems.DARKSTONE_SLAB.get());
     }
 }

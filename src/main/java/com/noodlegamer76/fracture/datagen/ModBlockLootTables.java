@@ -28,11 +28,29 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(InitBlocks.FLESH_SLAB.get(),
                 block -> createSlabItemTable(InitBlocks.FLESH_SLAB.get()));
 
-        dropSelf(InitBlocks.FLESHY_STONE_BRICKS.get());
-        dropSelf(InitBlocks.FLESHY_STONE_BRICK_STAIRS.get());
-        dropSelf(InitBlocks.FLESHY_STONE_BRICK_WALL.get());
-        this.add(InitBlocks.FLESHY_STONE_BRICK_SLAB.get(),
-                block -> createSlabItemTable(InitBlocks.FLESHY_STONE_BRICK_SLAB.get()));
+        dropSelf(InitBlocks.FLESHY_DARKSTONE_BRICKS.get());
+        dropSelf(InitBlocks.FLESHY_DARKSTONE_BRICK_STAIRS.get());
+        dropSelf(InitBlocks.FLESHY_DARKSTONE_BRICK_WALL.get());
+        this.add(InitBlocks.FLESHY_DARKSTONE_BRICK_SLAB.get(),
+                block -> createSlabItemTable(InitBlocks.FLESHY_DARKSTONE_BRICK_SLAB.get()));
+
+        dropSelf(InitBlocks.DARKSTONE_BRICKS.get());
+        dropSelf(InitBlocks.DARKSTONE_BRICK_STAIRS.get());
+        dropSelf(InitBlocks.DARKSTONE_BRICK_WALL.get());
+        this.add(InitBlocks.DARKSTONE_BRICK_SLAB.get(),
+                block -> createSlabItemTable(InitBlocks.DARKSTONE_BRICK_SLAB.get()));
+
+        dropSelf(InitBlocks.DARKSTONE.get());
+        dropSelf(InitBlocks.DARKSTONE_STAIRS.get());
+        dropSelf(InitBlocks.DARKSTONE_WALL.get());
+        this.add(InitBlocks.DARKSTONE_SLAB.get(),
+                block -> createSlabItemTable(InitBlocks.DARKSTONE_SLAB.get()));
+
+        dropSelf(InitBlocks.CRACKED_DARKSTONE_BRICKS.get());
+        dropSelf(InitBlocks.CRACKED_DARKSTONE_BRICK_STAIRS.get());
+        dropSelf(InitBlocks.CRACKED_DARKSTONE_BRICK_WALL.get());
+        this.add(InitBlocks.CRACKED_DARKSTONE_BRICK_SLAB.get(),
+                block -> createSlabItemTable(InitBlocks.CRACKED_DARKSTONE_BRICK_SLAB.get()));
 
         this.add(InitBlocks.FLESH_GROWTH.get(),
                 block -> createShearsOnlyDrop(InitItems.FLESH_GROWTH.get()));
@@ -47,6 +65,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.SMALL_FLESH_BULB.get());
         dropSelf(InitBlocks.BLOODY_BOOKSHELF.get());
         dropSelf(InitBlocks.INTESTINE.get());
+        dropSelf(InitBlocks.CHISELED_DARKSTONE_BRICKS.get());
+        dropSelf(InitBlocks.DARKSTONE_PILLAR.get());
+
+        dropOther(InitBlocks.BLOOD_BLOCK.get(), Blocks.BIRCH_DOOR);
 
         //this.add(InitBlocks.WHITE_COSMIC_LEAVES.get(), (block) ->
         //        createLeavesDrops(block, InitBlocks.WHITE_COSMIC_LEAVES.get(), NORMAL_LEAVES_SAPLING_CHANCES));

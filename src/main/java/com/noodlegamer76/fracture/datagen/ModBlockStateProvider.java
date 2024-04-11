@@ -15,7 +15,12 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public static final ResourceLocation FLESH_BLOCK = new ResourceLocation(FractureMod.MODID, "block/flesh_block");
-    public static final ResourceLocation FLESHY_STONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/fleshy_stone_bricks");
+    public static final ResourceLocation FLESHY_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/fleshy_darkstone_bricks");
+    public static final ResourceLocation DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/darkstone_bricks");
+    public static final ResourceLocation CRACKED_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/cracked_darkstone_bricks");
+    public static final ResourceLocation DARKSTONE_PILLAR_TOP = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_top");
+    public static final ResourceLocation DARKSTONE_PILLAR_SIDE = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_side");
+    public static final ResourceLocation DARKSTONE = new ResourceLocation(FractureMod.MODID, "block/darkstone");
     public static final ResourceLocation BLOODY_WOOD = new ResourceLocation(FractureMod.MODID, "block/bloody_wood");
     public static final ResourceLocation BLOODY_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/bloody_bookshelf");
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -31,10 +36,25 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock((SlabBlock) InitBlocks.FLESH_SLAB.get(), FLESH_BLOCK, FLESH_BLOCK);
         wallBlock((WallBlock) InitBlocks.FLESH_WALL.get(), FLESH_BLOCK);
 
-        blockWithItem(InitBlocks.FLESHY_STONE_BRICKS);
-        stairsBlock((StairBlock) InitBlocks.FLESHY_STONE_BRICK_STAIRS.get(), FLESHY_STONE_BRICKS);
-        slabBlock((SlabBlock) InitBlocks.FLESHY_STONE_BRICK_SLAB.get(), FLESHY_STONE_BRICKS, FLESHY_STONE_BRICKS);
-        wallBlock((WallBlock) InitBlocks.FLESHY_STONE_BRICK_WALL.get(), FLESHY_STONE_BRICKS);
+        blockWithItem(InitBlocks.FLESHY_DARKSTONE_BRICKS);
+        stairsBlock((StairBlock) InitBlocks.FLESHY_DARKSTONE_BRICK_STAIRS.get(), FLESHY_DARKSTONE_BRICKS);
+        slabBlock((SlabBlock) InitBlocks.FLESHY_DARKSTONE_BRICK_SLAB.get(), FLESHY_DARKSTONE_BRICKS, FLESHY_DARKSTONE_BRICKS);
+        wallBlock((WallBlock) InitBlocks.FLESHY_DARKSTONE_BRICK_WALL.get(), FLESHY_DARKSTONE_BRICKS);
+
+        blockWithItem(InitBlocks.DARKSTONE_BRICKS);
+        stairsBlock((StairBlock) InitBlocks.DARKSTONE_BRICK_STAIRS.get(), DARKSTONE_BRICKS);
+        slabBlock((SlabBlock) InitBlocks.DARKSTONE_BRICK_SLAB.get(), DARKSTONE_BRICKS, DARKSTONE_BRICKS);
+        wallBlock((WallBlock) InitBlocks.DARKSTONE_BRICK_WALL.get(), DARKSTONE_BRICKS);
+
+        blockWithItem(InitBlocks.DARKSTONE);
+        stairsBlock((StairBlock) InitBlocks.DARKSTONE_STAIRS.get(), DARKSTONE);
+        slabBlock((SlabBlock) InitBlocks.DARKSTONE_SLAB.get(), DARKSTONE, DARKSTONE);
+        wallBlock((WallBlock) InitBlocks.DARKSTONE_WALL.get(), DARKSTONE);
+
+        blockWithItem(InitBlocks.CRACKED_DARKSTONE_BRICKS);
+        stairsBlock((StairBlock) InitBlocks.CRACKED_DARKSTONE_BRICK_STAIRS.get(), CRACKED_DARKSTONE_BRICKS);
+        slabBlock((SlabBlock) InitBlocks.CRACKED_DARKSTONE_BRICK_SLAB.get(), CRACKED_DARKSTONE_BRICKS, CRACKED_DARKSTONE_BRICKS);
+        wallBlock((WallBlock) InitBlocks.CRACKED_DARKSTONE_BRICK_WALL.get(), CRACKED_DARKSTONE_BRICKS);
 
         cross(InitBlocks.FLESH_GROWTH);
         cross(InitBlocks.TENDRILS);
@@ -43,7 +63,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         translucentBlockWithItem(InitBlocks.LARGE_FLESH_BULB);
 
+        blockWithItem(InitBlocks.CHISELED_DARKSTONE_BRICKS);
+
         cubeColumn(InitBlocks.BLOODY_BOOKSHELF, BLOODY_BOOKSHELF, BLOODY_WOOD);
+        cubeColumn(InitBlocks.DARKSTONE_PILLAR, DARKSTONE_PILLAR_SIDE, DARKSTONE_PILLAR_TOP);
 
     }
     private void cutout(RegistryObject<Block> blockRegistryObject) {

@@ -1,0 +1,6 @@
+{
+  "parent": "fracture:item/slab",
+  "textures": {
+    "slab": "fracture:block/cracked_darkstone_bricks"
+  }
+}

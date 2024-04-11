@@ -1,6 +1,8 @@
 {
   "values": [
     "fracture:flesh_slab",
-    "fracture:fleshy_stone_brick_slab"
+    "fracture:fleshy_darkstone_brick_slab",
+    "fracture:darkstone_brick_slab",
+    "fracture:darkstone_slab"
   ]
 }

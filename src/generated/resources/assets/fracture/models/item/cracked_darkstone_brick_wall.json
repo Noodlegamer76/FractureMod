@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "fracture:block/cracked_darkstone_bricks"
+  }
+}

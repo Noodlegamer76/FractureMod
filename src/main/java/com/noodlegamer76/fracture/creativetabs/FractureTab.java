@@ -14,10 +14,6 @@ public class FractureTab {
             event.accept(InitItems.FLESH_STAIRS);
             event.accept(InitItems.FLESH_SLAB);
             event.accept(InitItems.FLESH_WALL);
-            event.accept(InitItems.FLESHY_STONE_BRICKS);
-            event.accept(InitItems.FLESHY_STONE_BRICK_STAIRS);
-            event.accept(InitItems.FLESHY_STONE_BRICK_SLAB);
-            event.accept(InitItems.FLESHY_STONE_BRICK_WALL);
             event.accept(InitItems.FLESH_GROWTH);
             event.accept(InitItems.TENDRILS);
             event.accept(InitItems.LARGE_FLESH_BULB);
@@ -26,6 +22,24 @@ public class FractureTab {
             event.accept(InitItems.INTESTINE);
             event.accept(InitItems.HANGING_FLESH);
             event.accept(InitItems.BLOOD_BUCKET);
+            event.accept(InitItems.FLESHY_DARKSTONE_BRICKS);
+            event.accept(InitItems.FLESHY_DARKSTONE_BRICK_STAIRS);
+            event.accept(InitItems.FLESHY_DARKSTONE_BRICK_SLAB);
+            event.accept(InitItems.FLESHY_DARKSTONE_BRICK_WALL);
+            event.accept(InitItems.DARKSTONE_BRICKS);
+            event.accept(InitItems.DARKSTONE_BRICK_STAIRS);
+            event.accept(InitItems.DARKSTONE_BRICK_SLAB);
+            event.accept(InitItems.DARKSTONE_BRICK_WALL);
+            event.accept(InitItems.DARKSTONE);
+            event.accept(InitItems.DARKSTONE_STAIRS);
+            event.accept(InitItems.DARKSTONE_SLAB);
+            event.accept(InitItems.DARKSTONE_WALL);
+            event.accept(InitItems.CRACKED_DARKSTONE_BRICKS);
+            event.accept(InitItems.CRACKED_DARKSTONE_BRICK_STAIRS);
+            event.accept(InitItems.CRACKED_DARKSTONE_BRICK_SLAB);
+            event.accept(InitItems.CRACKED_DARKSTONE_BRICK_WALL);
+            event.accept(InitItems.CHISELED_DARKSTONE_BRICKS);
+            event.accept(InitItems.DARKSTONE_PILLAR);
         }
     }
 }

@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -29,25 +28,33 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
         this.tag(BlockTags.STAIRS)
                 .add(
                         InitBlocks.FLESH_STAIRS.get(),
-                        InitBlocks.FLESHY_STONE_BRICK_STAIRS.get()
+                        InitBlocks.FLESHY_DARKSTONE_BRICK_STAIRS.get(),
+                        InitBlocks.DARKSTONE_BRICK_STAIRS.get(),
+                        InitBlocks.DARKSTONE_STAIRS.get()
                 );
 
         this.tag(BlockTags.WALLS)
                 .add(
                         InitBlocks.FLESH_WALL.get(),
-                        InitBlocks.FLESHY_STONE_BRICK_WALL.get()
+                        InitBlocks.FLESHY_DARKSTONE_BRICK_WALL.get(),
+                        InitBlocks.DARKSTONE_BRICK_WALL.get(),
+                        InitBlocks.DARKSTONE_WALL.get()
                 );
 
         this.tag(BlockTags.SLABS)
                 .add(
                         InitBlocks.FLESH_SLAB.get(),
-                        InitBlocks.FLESHY_STONE_BRICK_SLAB.get()
+                        InitBlocks.FLESHY_DARKSTONE_BRICK_SLAB.get(),
+                        InitBlocks.DARKSTONE_BRICK_SLAB.get(),
+                        InitBlocks.DARKSTONE_SLAB.get()
                 );
 
         this.tag(FLESH_SOLID)
                 .add(
                         InitBlocks.FLESH_BLOCK.get(),
-                        InitBlocks.FLESHY_STONE_BRICKS.get()
+                        InitBlocks.FLESHY_DARKSTONE_BRICKS.get(),
+                        InitBlocks.LARGE_FLESH_BULB.get(),
+                        InitBlocks.BLOODY_BOOKSHELF.get()
                 );
     }
 }
