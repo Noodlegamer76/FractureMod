@@ -1,0 +1,6 @@
+{
+  "parent": "fracture:item/slab",
+  "textures": {
+    "slab": "fracture:block/fleshy_stone_bricks"
+  }
+}

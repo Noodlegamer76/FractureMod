@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "fracture:block/small_flesh_bulb"
+    },
+    "hanging=true": {
+      "model": "fracture:block/small_flesh_bulb_hanging"
+    }
+  }
+}

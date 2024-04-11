@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "fracture:block/flesh_slab"
+    },
+    "type=double": {
+      "model": "fracture:block/flesh_block"
+    },
+    "type=top": {
+      "model": "fracture:block/flesh_slab_top"
+    }
+  }
+}

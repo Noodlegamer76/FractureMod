@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "fracture:block/bloody_wood",
+    "side": "fracture:block/bloody_bookshelf"
+  }
+}

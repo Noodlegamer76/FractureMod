@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "fracture:block/flesh_block",
+    "side": "fracture:block/flesh_block",
+    "top": "fracture:block/flesh_block"
+  }
+}

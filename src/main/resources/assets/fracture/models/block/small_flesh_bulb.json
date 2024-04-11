@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_lantern",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "lantern": "fracture:block/small_flesh_bulb"
+  }
+}

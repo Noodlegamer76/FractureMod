@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "fracture:block/intestine",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "fracture:block/intestine"
+    },
+    "axis=z": {
+      "model": "fracture:block/intestine",
+      "x": 90
+    }
+  }
+}
