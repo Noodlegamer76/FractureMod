@@ -4,16 +4,18 @@ import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
+import com.noodlegamer76.fracture.fluid.InitFluidTypes;
+import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.InitItems;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import com.noodlegamer76.fracture.particles.BloodParticle;
+import com.noodlegamer76.fracture.particles.InitParticles;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.IItemDecorator;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterItemDecorationsEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -46,6 +48,9 @@ public class FractureMod
         //registers DeferredRegisters
         InitBlocks.BLOCKS.register(modEventBus);
         InitItems.ITEMS.register(modEventBus);
+        InitParticles.PARTICLE_TYPES.register(modEventBus);
+        InitFluids.FLUIDS.register(modEventBus);
+        InitFluidTypes.FLUID_TYPES.register(modEventBus);
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(new FractureTab());
@@ -89,12 +94,19 @@ public class FractureMod
     {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            ItemBlockRenderTypes.setRenderLayer(InitFluids.SOURCE_BLOOD.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(InitFluids.FLOWING_BLOOD.get(), RenderType.translucent());
         }
 
         @SubscribeEvent
         public static void entityRenderers(EntityRenderersEvent.RegisterRenderers event) {
             //this is where you register renderers for both Entities and BlockEntities
+        }
+
+        @SubscribeEvent
+        public static void RegisterParticleProviders(RegisterParticleProvidersEvent event) {
+            Minecraft.getInstance().particleEngine.register(InitParticles.BLOOD_PARTICLES.get(),
+                    BloodParticle.Provider::new);
         }
     }
 }

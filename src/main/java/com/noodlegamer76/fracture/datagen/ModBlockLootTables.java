@@ -1,6 +1,7 @@
 package com.noodlegamer76.fracture.datagen;
 
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +21,32 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         //some examples for blocks that don't seem to work by normally using the methods
         //all blocks need to be set here due to how ModLootTableProvider is set up
+
+        dropSelf(InitBlocks.FLESH_BLOCK.get());
+        dropSelf(InitBlocks.FLESH_STAIRS.get());
+        dropSelf(InitBlocks.FLESH_WALL.get());
+        this.add(InitBlocks.FLESH_SLAB.get(),
+                block -> createSlabItemTable(InitBlocks.FLESH_SLAB.get()));
+
+        dropSelf(InitBlocks.FLESHY_STONE_BRICKS.get());
+        dropSelf(InitBlocks.FLESHY_STONE_BRICK_STAIRS.get());
+        dropSelf(InitBlocks.FLESHY_STONE_BRICK_WALL.get());
+        this.add(InitBlocks.FLESHY_STONE_BRICK_SLAB.get(),
+                block -> createSlabItemTable(InitBlocks.FLESHY_STONE_BRICK_SLAB.get()));
+
+        this.add(InitBlocks.FLESH_GROWTH.get(),
+                block -> createShearsOnlyDrop(InitItems.FLESH_GROWTH.get()));
+        this.add(InitBlocks.TENDRILS.get(),
+                block -> createShearsOnlyDrop(InitItems.TENDRILS.get()));
+        this.add(InitBlocks.HANGING_FLESH_PLANT.get(),
+                block -> createShearsOnlyDrop(InitItems.TENDRILS.get()));
+        this.add(InitBlocks.HANGING_FLESH.get(),
+                block -> createShearsOnlyDrop(InitItems.TENDRILS.get()));
+
+        dropSelf(InitBlocks.LARGE_FLESH_BULB.get());
+        dropSelf(InitBlocks.SMALL_FLESH_BULB.get());
+        dropSelf(InitBlocks.BLOODY_BOOKSHELF.get());
+        dropSelf(InitBlocks.INTESTINE.get());
 
         //this.add(InitBlocks.WHITE_COSMIC_LEAVES.get(), (block) ->
         //        createLeavesDrops(block, InitBlocks.WHITE_COSMIC_LEAVES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
