@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
+import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
 import com.noodlegamer76.fracture.fluid.InitFluidTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.InitItems;
@@ -51,6 +52,7 @@ public class FractureMod
         InitParticles.PARTICLE_TYPES.register(modEventBus);
         InitFluids.FLUIDS.register(modEventBus);
         InitFluidTypes.FLUID_TYPES.register(modEventBus);
+        InitBlockEntities.BLOCK_ENTITIES.register(modEventBus);
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(new FractureTab());

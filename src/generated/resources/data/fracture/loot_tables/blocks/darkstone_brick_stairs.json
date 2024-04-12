@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "fracture:cracked_darkstone_brick_stairs"
+          "name": "fracture:darkstone_brick_stairs"
         }
       ],
       "rolls": 1.0

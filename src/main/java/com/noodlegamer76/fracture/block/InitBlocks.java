@@ -47,7 +47,7 @@ public class InitBlocks {
     public static final RegistryObject<Block> CHISELED_DARKSTONE_BRICKS = BLOCKS.register("chiseled_darkstone_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> DARKSTONE_PILLAR = BLOCKS.register("darkstone_pillar",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
     //Cracked Darkstone Bricks
     public static final RegistryObject<Block> CRACKED_DARKSTONE_BRICKS = BLOCKS.register("cracked_darkstone_bricks",
@@ -92,6 +92,10 @@ public class InitBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.BOOKSHELF).mapColor(MapColor.COLOR_ORANGE)));
     public static final RegistryObject<Block> INTESTINE = BLOCKS.register("intestine",
             () -> new ChainBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
+
+
+    public static final RegistryObject<Block> FLESHY_GROUP_SPAWNER = BLOCKS.register("fleshy_group_spawner",
+            () -> new FleshyGroupSpawner(BlockBehaviour.Properties.copy(Blocks.SPAWNER).mapColor(DyeColor.RED)));
 
 
     public static final RegistryObject<LiquidBlock> BLOOD_BLOCK = BLOCKS.register("blood_block",

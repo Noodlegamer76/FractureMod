@@ -1,6 +1,5 @@
 {
-  "parent": "minecraft:block/cube_column",
-  "render_type": "minecraft:cutout",
+  "parent": "minecraft:block/cube_column_horizontal",
   "textures": {
     "end": "fracture:block/darkstone_pillar_top",
     "side": "fracture:block/darkstone_pillar_side"

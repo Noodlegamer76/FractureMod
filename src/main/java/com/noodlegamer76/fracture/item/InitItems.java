@@ -13,6 +13,11 @@ public class InitItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, FractureMod.MODID);
 
 
+    //test item for coding stuff
+    public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item",
+            () -> new TestItem(new Item.Properties()));
+
+
     //how to add a block item
     public static final RegistryObject<Item> FLESH_BLOCK = ITEMS.register("flesh_block",
             () -> new BlockItem(InitBlocks.FLESH_BLOCK.get(), new Item.Properties()));
@@ -78,6 +83,9 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.INTESTINE.get(), new Item.Properties()));
     public static final RegistryObject<Item> HANGING_FLESH   = ITEMS.register("hanging_flesh",
             () -> new BlockItem(InitBlocks.HANGING_FLESH.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> FLESHY_GROUP_SPAWNER   = ITEMS.register("fleshy_group_spawner",
+            () -> new BlockItem(InitBlocks.FLESHY_GROUP_SPAWNER.get(), new Item.Properties()));
 
 
     public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket",

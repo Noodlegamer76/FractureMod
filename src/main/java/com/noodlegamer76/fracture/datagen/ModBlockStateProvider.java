@@ -18,8 +18,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
     public static final ResourceLocation FLESHY_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/fleshy_darkstone_bricks");
     public static final ResourceLocation DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/darkstone_bricks");
     public static final ResourceLocation CRACKED_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/cracked_darkstone_bricks");
-    public static final ResourceLocation DARKSTONE_PILLAR_TOP = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_top");
-    public static final ResourceLocation DARKSTONE_PILLAR_SIDE = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_side");
     public static final ResourceLocation DARKSTONE = new ResourceLocation(FractureMod.MODID, "block/darkstone");
     public static final ResourceLocation BLOODY_WOOD = new ResourceLocation(FractureMod.MODID, "block/bloody_wood");
     public static final ResourceLocation BLOODY_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/bloody_bookshelf");
@@ -66,7 +64,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(InitBlocks.CHISELED_DARKSTONE_BRICKS);
 
         cubeColumn(InitBlocks.BLOODY_BOOKSHELF, BLOODY_BOOKSHELF, BLOODY_WOOD);
-        cubeColumn(InitBlocks.DARKSTONE_PILLAR, DARKSTONE_PILLAR_SIDE, DARKSTONE_PILLAR_TOP);
 
     }
     private void cutout(RegistryObject<Block> blockRegistryObject) {
