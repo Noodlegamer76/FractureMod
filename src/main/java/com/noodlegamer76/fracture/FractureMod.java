@@ -29,6 +29,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
+import software.bernie.geckolib.GeckoLib;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(FractureMod.MODID)
@@ -45,6 +46,7 @@ public class FractureMod
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+        GeckoLib.initialize();
 
         //registers DeferredRegisters
         InitBlocks.BLOCKS.register(modEventBus);
