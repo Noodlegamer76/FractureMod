@@ -17,6 +17,9 @@ public class InitItems {
     public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item",
             () -> new TestItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> BROOM = ITEMS.register("broom",
+            () -> new Broom(new Item.Properties()));
+
 
     //how to add a block item
     public static final RegistryObject<Item> FLESH_BLOCK = ITEMS.register("flesh_block",
@@ -65,6 +68,10 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.CHISELED_DARKSTONE_BRICKS.get(), new Item.Properties()));
     public static final RegistryObject<Item> DARKSTONE_PILLAR = ITEMS.register("darkstone_pillar",
             () -> new BlockItem(InitBlocks.DARKSTONE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FLESHY_CHISELED_DARKSTONE_BRICKS = ITEMS.register("fleshy_chiseled_darkstone_bricks",
+            () -> new BlockItem(InitBlocks.FLESHY_CHISELED_DARKSTONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FLESHY_DARKSTONE_PILLAR = ITEMS.register("fleshy_darkstone_pillar",
+            () -> new BlockItem(InitBlocks.FLESHY_DARKSTONE_PILLAR.get(), new Item.Properties()));
 
 
     public static final RegistryObject<Item> FLESH_GROWTH = ITEMS.register("flesh_growth",

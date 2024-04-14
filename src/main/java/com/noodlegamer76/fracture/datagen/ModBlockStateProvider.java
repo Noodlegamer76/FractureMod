@@ -62,6 +62,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         translucentBlockWithItem(InitBlocks.LARGE_FLESH_BULB);
 
         blockWithItem(InitBlocks.CHISELED_DARKSTONE_BRICKS);
+        blockWithItem(InitBlocks.FLESHY_CHISELED_DARKSTONE_BRICKS);
 
         cubeColumn(InitBlocks.BLOODY_BOOKSHELF, BLOODY_BOOKSHELF, BLOODY_WOOD);
 

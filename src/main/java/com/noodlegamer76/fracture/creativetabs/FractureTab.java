@@ -40,6 +40,8 @@ public class FractureTab {
             event.accept(InitItems.CRACKED_DARKSTONE_BRICK_WALL);
             event.accept(InitItems.CHISELED_DARKSTONE_BRICKS);
             event.accept(InitItems.DARKSTONE_PILLAR);
+            event.accept(InitItems.FLESHY_CHISELED_DARKSTONE_BRICKS);
+            event.accept(InitItems.FLESHY_DARKSTONE_PILLAR);
         }
     }
 }

@@ -20,6 +20,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     public static final ResourceLocation CRACKED_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/cracked_darkstone_bricks");
     public static final ResourceLocation DARKSTONE_PILLAR_TOP = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_top");
     public static final ResourceLocation DARKSTONE_PILLAR_SIDE = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_side");
+    public static final ResourceLocation FLESHY_DARKSTONE_PILLAR_TOP = new ResourceLocation(FractureMod.MODID, "block/fleshy_darkstone_pillar_top");
+    public static final ResourceLocation FLESHY_DARKSTONE_PILLAR_SIDE = new ResourceLocation(FractureMod.MODID, "block/fleshy_darkstone_pillar_side");
     public static final ResourceLocation DARKSTONE = new ResourceLocation(FractureMod.MODID, "block/darkstone");
     public static final ResourceLocation BLOODY_WOOD = new ResourceLocation(FractureMod.MODID, "block/bloody_wood");
     public static final ResourceLocation BLOODY_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/bloody_bookshelf");
@@ -56,8 +58,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.INTESTINE);
         simpleItem(InitItems.HANGING_FLESH);
 
+        handHeldItem(InitItems.BROOM);
+
         cubeColumn("bloody_bookshelf", BLOODY_BOOKSHELF, BLOODY_WOOD);
         cubeColumn("darkstone_pillar", DARKSTONE_PILLAR_SIDE, DARKSTONE_PILLAR_TOP);
+        cubeColumn("fleshy_darkstone_pillar", FLESHY_DARKSTONE_PILLAR_SIDE, FLESHY_DARKSTONE_PILLAR_TOP);
 
         //some examples
         //withExistingParent(InitItems.WARDLING_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

@@ -49,6 +49,13 @@ public class InitBlocks {
     public static final RegistryObject<Block> DARKSTONE_PILLAR = BLOCKS.register("darkstone_pillar",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
+
+
+    public static final RegistryObject<Block> FLESHY_CHISELED_DARKSTONE_BRICKS = BLOCKS.register("fleshy_chiseled_darkstone_bricks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> FLESHY_DARKSTONE_PILLAR = BLOCKS.register("fleshy_darkstone_pillar",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
     //Cracked Darkstone Bricks
     public static final RegistryObject<Block> CRACKED_DARKSTONE_BRICKS = BLOCKS.register("cracked_darkstone_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
