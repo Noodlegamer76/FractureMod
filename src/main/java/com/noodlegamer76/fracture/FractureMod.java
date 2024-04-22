@@ -2,8 +2,11 @@ package com.noodlegamer76.fracture;
 
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.client.renderers.entity.AnkleBiterRenderer;
+import com.noodlegamer76.fracture.client.renderers.entity.FleshRattlerRenderer;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
+import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
 import com.noodlegamer76.fracture.fluid.InitFluidTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
@@ -55,6 +58,7 @@ public class FractureMod
         InitFluids.FLUIDS.register(modEventBus);
         InitFluidTypes.FLUID_TYPES.register(modEventBus);
         InitBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        InitEntities.ENTITIES.register(modEventBus);
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(new FractureTab());
@@ -105,6 +109,8 @@ public class FractureMod
         @SubscribeEvent
         public static void entityRenderers(EntityRenderersEvent.RegisterRenderers event) {
             //this is where you register renderers for both Entities and BlockEntities
+            event.registerEntityRenderer(InitEntities.FLESH_RATTLER.get(), FleshRattlerRenderer::new);
+            event.registerEntityRenderer(InitEntities.ANKLE_BITER.get(), AnkleBiterRenderer::new);
         }
 
         @SubscribeEvent

@@ -9,13 +9,13 @@ public class BloodParticle extends TextureSheetParticle {
     protected BloodParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet, double pXSpeed, double pYSpeed, double pZSpeed) {
         super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
 
-        gravity = 1.0F;
+        gravity = 3.0F;
         this.friction = 0.4F;
         this.xd = pXSpeed;
         this.yd = pYSpeed;
         this.zd = pZSpeed;
-        this.quadSize *= 0.85F;
-        this.lifetime = 60;
+        this.quadSize *= 0.4F;
+        this.lifetime = 120;
         this.setSpriteFromAge(spriteSet);
     }
 

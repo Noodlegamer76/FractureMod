@@ -42,6 +42,11 @@ public class FractureTab {
             event.accept(InitItems.DARKSTONE_PILLAR);
             event.accept(InitItems.FLESHY_CHISELED_DARKSTONE_BRICKS);
             event.accept(InitItems.FLESHY_DARKSTONE_PILLAR);
+            event.accept(InitItems.BROOM);
+            event.accept(InitItems.FLESH_CHUNK);
+            event.accept(InitItems.LIVING_FLESH);
+            event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
+            event.accept(InitItems.FLESH_SPRAYER);
         }
     }
 }

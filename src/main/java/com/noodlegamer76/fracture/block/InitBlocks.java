@@ -15,6 +15,12 @@ public class InitBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FractureMod.MODID);
 
+
+
+    public static final RegistryObject<Block> FLESH_SPRAYER = BLOCKS.register("flesh_sprayer",
+            () -> new FleshParticleSpawner(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
+
+
     public static final RegistryObject<Block> FLESH_BLOCK = BLOCKS.register("flesh_block",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
     public static final RegistryObject<Block> FLESH_STAIRS = BLOCKS.register("flesh_stairs",
@@ -99,10 +105,6 @@ public class InitBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.BOOKSHELF).mapColor(MapColor.COLOR_ORANGE)));
     public static final RegistryObject<Block> INTESTINE = BLOCKS.register("intestine",
             () -> new ChainBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
-
-
-    public static final RegistryObject<Block> FLESHY_GROUP_SPAWNER = BLOCKS.register("fleshy_group_spawner",
-            () -> new FleshyGroupSpawner(BlockBehaviour.Properties.copy(Blocks.SPAWNER).mapColor(DyeColor.RED)));
 
 
     public static final RegistryObject<LiquidBlock> BLOOD_BLOCK = BLOCKS.register("blood_block",

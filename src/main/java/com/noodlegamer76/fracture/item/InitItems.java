@@ -2,11 +2,15 @@ package com.noodlegamer76.fracture.item;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import net.minecraft.world.item.*;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.awt.*;
 
 public class InitItems {
 
@@ -19,9 +23,18 @@ public class InitItems {
 
     public static final RegistryObject<Item> BROOM = ITEMS.register("broom",
             () -> new Broom(new Item.Properties()));
+    public static final RegistryObject<Item> LIVING_FLESH = ITEMS.register("living_flesh",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FLESH_CHUNK = ITEMS.register("flesh_chunk",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANKLE_BITER_SPAWN_EGG = ITEMS.register("ankle_biter_spawn_egg",
+            () -> new ForgeSpawnEggItem(InitEntities.ANKLE_BITER, Color.RED.getRGB(), Color.BLACK.getRGB(), new Item.Properties()));
 
 
-    //how to add a block item
+
+    public static final RegistryObject<Item> FLESH_SPRAYER = ITEMS.register("flesh_sprayer",
+            () -> new BlockItem(InitBlocks.FLESH_SPRAYER.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> FLESH_BLOCK = ITEMS.register("flesh_block",
             () -> new BlockItem(InitBlocks.FLESH_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLESH_STAIRS = ITEMS.register("flesh_stairs",
@@ -90,9 +103,6 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.INTESTINE.get(), new Item.Properties()));
     public static final RegistryObject<Item> HANGING_FLESH   = ITEMS.register("hanging_flesh",
             () -> new BlockItem(InitBlocks.HANGING_FLESH.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> FLESHY_GROUP_SPAWNER   = ITEMS.register("fleshy_group_spawner",
-            () -> new BlockItem(InitBlocks.FLESHY_GROUP_SPAWNER.get(), new Item.Properties()));
 
 
     public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket",
