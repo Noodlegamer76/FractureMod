@@ -20,5 +20,11 @@ public class InitEntities {
             () -> EntityType.Builder.of(AnkleBiterEntity::new, MobCategory.CREATURE)
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(8)
-                    .build("flesh_rattler"));
+                    .build("ankle_biter"));
+
+    public static final RegistryObject<EntityType<FleshWalkerEntity>> FLESH_WALKER = ENTITIES.register("flesh_walker",
+            () -> EntityType.Builder.of(FleshWalkerEntity::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.95F)
+                    .clientTrackingRange(8)
+                    .build("flesh_walker"));
 }

@@ -1,0 +1,20 @@
+{
+  "values": [
+    "fracture:darkstone",
+    "fracture:darkstone_pillar",
+    "fracture:darkstone_bricks",
+    "fracture:darkstone_slab",
+    "fracture:darkstone_stairs",
+    "fracture:darkstone_wall",
+    "fracture:darkstone_brick_slab",
+    "fracture:darkstone_brick_stairs",
+    "fracture:darkstone_brick_wall",
+    "fracture:chiseled_darkstone_bricks",
+    "fracture:fleshy_chiseled_darkstone_bricks",
+    "fracture:fleshy_darkstone_pillar",
+    "fracture:fleshy_darkstone_bricks",
+    "fracture:fleshy_darkstone_brick_slab",
+    "fracture:fleshy_darkstone_brick_wall",
+    "fracture:fleshy_darkstone_brick_stairs"
+  ]
+}

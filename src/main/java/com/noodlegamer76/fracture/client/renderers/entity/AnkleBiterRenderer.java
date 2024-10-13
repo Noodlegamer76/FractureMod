@@ -21,11 +21,11 @@ public class AnkleBiterRenderer extends GeoEntityRenderer<AnkleBiterEntity> {
 
     @Override
     public void render(AnkleBiterEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
         if (entity.isBaby()) {
             poseStack.pushPose();
             poseStack.scale(0.5F, 0.5F, 0.5F);
             poseStack.popPose();
         }
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 }

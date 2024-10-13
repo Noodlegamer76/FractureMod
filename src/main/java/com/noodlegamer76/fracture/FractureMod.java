@@ -4,8 +4,10 @@ import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.client.renderers.entity.AnkleBiterRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.FleshRattlerRenderer;
+import com.noodlegamer76.fracture.client.renderers.entity.FleshWalkerRenderer;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
+import com.noodlegamer76.fracture.entity.FleshWalkerEntity;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
 import com.noodlegamer76.fracture.fluid.InitFluidTypes;
@@ -111,6 +113,7 @@ public class FractureMod
             //this is where you register renderers for both Entities and BlockEntities
             event.registerEntityRenderer(InitEntities.FLESH_RATTLER.get(), FleshRattlerRenderer::new);
             event.registerEntityRenderer(InitEntities.ANKLE_BITER.get(), AnkleBiterRenderer::new);
+            event.registerEntityRenderer(InitEntities.FLESH_WALKER.get(), FleshWalkerRenderer::new);
         }
 
         @SubscribeEvent

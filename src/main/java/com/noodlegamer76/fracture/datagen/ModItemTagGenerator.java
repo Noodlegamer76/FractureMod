@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -41,5 +42,14 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(InitItems.FLESHY_DARKSTONE_BRICK_SLAB.get())
                 .add(InitItems.DARKSTONE_BRICK_SLAB.get())
                 .add(InitItems.DARKSTONE_SLAB.get());
+
+        this.tag(ItemTags.STONE_BRICKS)
+                .add(InitItems.DARKSTONE_BRICKS.get())
+                .add(InitItems.CHISELED_DARKSTONE_BRICKS.get())
+                .add(InitItems.FLESHY_DARKSTONE_BRICKS.get())
+                .add(InitItems.CRACKED_DARKSTONE_BRICKS.get());
+
+        this.tag(Tags.Items.STONE)
+                .add(InitItems.DARKSTONE.get());
     }
 }

@@ -29,6 +29,8 @@ public class InitItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ANKLE_BITER_SPAWN_EGG = ITEMS.register("ankle_biter_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.ANKLE_BITER, Color.RED.getRGB(), Color.BLACK.getRGB(), new Item.Properties()));
+    public static final RegistryObject<Item> FLESH_WALKER_SPAWN_EGG = ITEMS.register("flesh_walker_spawn_egg",
+            () -> new ForgeSpawnEggItem(InitEntities.FLESH_WALKER, Color.RED.getRGB(), Color.PINK.getRGB(), new Item.Properties()));
 
 
 

@@ -46,6 +46,7 @@ public class FractureTab {
             event.accept(InitItems.FLESH_CHUNK);
             event.accept(InitItems.LIVING_FLESH);
             event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
+            event.accept(InitItems.FLESH_WALKER_SPAWN_EGG);
             event.accept(InitItems.FLESH_SPRAYER);
         }
     }

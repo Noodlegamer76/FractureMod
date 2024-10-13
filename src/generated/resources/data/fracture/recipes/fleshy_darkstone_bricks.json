@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "fracture:darkstone_bricks"
+    },
+    "-": {
+      "item": "fracture:flesh_block"
+    }
+  },
+  "pattern": [
+    "###",
+    "#-#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "fracture:fleshy_darkstone_bricks"
+  },
+  "show_notification": true
+}

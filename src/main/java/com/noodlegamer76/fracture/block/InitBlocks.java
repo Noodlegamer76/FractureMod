@@ -22,13 +22,13 @@ public class InitBlocks {
 
 
     public static final RegistryObject<Block> FLESH_BLOCK = BLOCKS.register("flesh_block",
-            () -> new Block(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED).strength(0.4F)));
     public static final RegistryObject<Block> FLESH_STAIRS = BLOCKS.register("flesh_stairs",
-            () -> new StairBlock(FLESH_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
+            () -> new StairBlock(FLESH_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED).strength(0.4F)));
     public static final RegistryObject<Block> FLESH_SLAB = BLOCKS.register("flesh_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED)));
     public static final RegistryObject<Block> FLESH_WALL = BLOCKS.register("flesh_wall",
-            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED)));
 
     //Darkstone
     public static final RegistryObject<Block> DARKSTONE = BLOCKS.register("darkstone",
@@ -102,13 +102,13 @@ public class InitBlocks {
     public static final RegistryObject<Block> SMALL_FLESH_BULB = BLOCKS.register("small_flesh_bulb",
             () -> new LanternBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).noOcclusion().lightLevel((blockState) -> 15).strength(0.1F)));
     public static final RegistryObject<Block> BLOODY_BOOKSHELF = BLOCKS.register("bloody_bookshelf",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.BOOKSHELF).mapColor(MapColor.COLOR_ORANGE)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.BOOKSHELF).mapColor(MapColor.COLOR_RED)));
     public static final RegistryObject<Block> INTESTINE = BLOCKS.register("intestine",
-            () -> new ChainBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
+            () -> new ChainBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.1F)));
 
 
     public static final RegistryObject<LiquidBlock> BLOOD_BLOCK = BLOCKS.register("blood_block",
-            () -> new LiquidBlock(InitFluids.SOURCE_BLOOD, BlockBehaviour.Properties.copy(Blocks.WATER)));
+            () -> new LiquidBlock(InitFluids.SOURCE_BLOOD, BlockBehaviour.Properties.copy(Blocks.WATER).mapColor(MapColor.COLOR_RED)));
 
 
 }

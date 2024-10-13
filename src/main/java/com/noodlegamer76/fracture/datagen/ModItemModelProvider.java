@@ -58,6 +58,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.INTESTINE);
         simpleItem(InitItems.HANGING_FLESH);
 
+        simpleItem(InitItems.BLOOD_BUCKET);
+
         handHeldItem(InitItems.BROOM);
 
         cubeColumn("bloody_bookshelf", BLOODY_BOOKSHELF, BLOODY_WOOD);
