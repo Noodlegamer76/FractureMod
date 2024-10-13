@@ -25,12 +25,10 @@ public class InitItems {
             () -> new Broom(new Item.Properties()));
     public static final RegistryObject<Item> LIVING_FLESH = ITEMS.register("living_flesh",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> FLESH_CHUNK = ITEMS.register("flesh_chunk",
-            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ANKLE_BITER_SPAWN_EGG = ITEMS.register("ankle_biter_spawn_egg",
-            () -> new ForgeSpawnEggItem(InitEntities.ANKLE_BITER, Color.RED.getRGB(), Color.BLACK.getRGB(), new Item.Properties()));
+            () -> new ForgeSpawnEggItem(InitEntities.ANKLE_BITER, new Color(74, 10, 3).getRGB(), new Color(74, 3, 3).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> FLESH_WALKER_SPAWN_EGG = ITEMS.register("flesh_walker_spawn_egg",
-            () -> new ForgeSpawnEggItem(InitEntities.FLESH_WALKER, Color.RED.getRGB(), Color.PINK.getRGB(), new Item.Properties()));
+            () -> new ForgeSpawnEggItem(InitEntities.FLESH_WALKER, new Color(74, 10, 3).getRGB(), new Color(207, 95, 110).getRGB(), new Item.Properties()));
 
 
 

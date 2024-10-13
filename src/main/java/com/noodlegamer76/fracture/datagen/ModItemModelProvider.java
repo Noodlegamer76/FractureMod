@@ -57,10 +57,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.SMALL_FLESH_BULB);
         simpleItem(InitItems.INTESTINE);
         simpleItem(InitItems.HANGING_FLESH);
+        simpleItem(InitItems.LIVING_FLESH);
 
         simpleItem(InitItems.BLOOD_BUCKET);
 
         handHeldItem(InitItems.BROOM);
+
+        spawnEggItem(InitItems.ANKLE_BITER_SPAWN_EGG);
+        spawnEggItem(InitItems.FLESH_WALKER_SPAWN_EGG);
+
+
 
         cubeColumn("bloody_bookshelf", BLOODY_BOOKSHELF, BLOODY_WOOD);
         cubeColumn("darkstone_pillar", DARKSTONE_PILLAR_SIDE, DARKSTONE_PILLAR_TOP);
@@ -127,5 +133,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 mcLoc("item/handheld")).texture("layer0",
                 new ResourceLocation(FractureMod.MODID, "item/" + item.getId().getPath()));
+    }
+    private ItemModelBuilder spawnEggItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                mcLoc("item/template_spawn_egg"));
     }
 }
