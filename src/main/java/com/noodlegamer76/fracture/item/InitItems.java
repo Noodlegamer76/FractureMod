@@ -1,9 +1,11 @@
 package com.noodlegamer76.fracture.item;
 
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.block.FogEmitterBlock;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.fluid.InitFluids;
+import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +23,9 @@ public class InitItems {
     public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item",
             () -> new TestItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
+            () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> BROOM = ITEMS.register("broom",
             () -> new Broom(new Item.Properties()));
     public static final RegistryObject<Item> LIVING_FLESH = ITEMS.register("living_flesh",
@@ -29,6 +34,11 @@ public class InitItems {
             () -> new ForgeSpawnEggItem(InitEntities.ANKLE_BITER, new Color(74, 10, 3).getRGB(), new Color(74, 3, 3).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> FLESH_WALKER_SPAWN_EGG = ITEMS.register("flesh_walker_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.FLESH_WALKER, new Color(74, 10, 3).getRGB(), new Color(207, 95, 110).getRGB(), new Item.Properties()));
+    public static final RegistryObject<Item> FLESH_SLIME_SPAWN_EGG = ITEMS.register("flesh_slime_spawn_egg",
+            () -> new ForgeSpawnEggItem(InitEntities.FLESH_WALKER, new Color(74, 10, 3).getRGB(), new Color(15, 50, 15).getRGB(), new Item.Properties()));
+
+    public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
+            () -> new InvertedGlasses(ModArmorMaterials.DENIM, ArmorItem.Type.HELMET, new Item.Properties()));
 
 
 

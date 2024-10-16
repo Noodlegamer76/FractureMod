@@ -71,6 +71,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.FLESHY_DARKSTONE_PILLAR.get());
 
         dropSelf(InitBlocks.FLESH_SPRAYER.get());
+        dropSelf(InitBlocks.FOG_EMITTER.get());
 
         dropOther(InitBlocks.BLOOD_BLOCK.get(), Blocks.BIRCH_DOOR);
 

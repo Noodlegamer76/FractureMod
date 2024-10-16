@@ -27,4 +27,10 @@ public class InitEntities {
                     .sized(0.6F, 1.95F)
                     .clientTrackingRange(8)
                     .build("flesh_walker"));
+
+    public static final RegistryObject<EntityType<FleshSlimeEntity>> FLESH_SLIME = ENTITIES.register("flesh_slime",
+            () -> EntityType.Builder.of(FleshSlimeEntity::new, MobCategory.MONSTER)
+                    .sized(2.04F, 2.04F)
+                    .clientTrackingRange(10)
+                    .build("flesh_slime"));
 }

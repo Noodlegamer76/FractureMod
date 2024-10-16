@@ -1,10 +1,7 @@
 package com.noodlegamer76.fracture.event;
 
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.entity.AnkleBiterEntity;
-import com.noodlegamer76.fracture.entity.FleshWalkerEntity;
-import com.noodlegamer76.fracture.entity.InitEntities;
-import com.noodlegamer76.fracture.entity.FleshRattlerEntity;
+import com.noodlegamer76.fracture.entity.*;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,5 +14,6 @@ public class CreateEntityAttributes {
         event.put(InitEntities.FLESH_RATTLER.get(), FleshRattlerEntity.createAttributes().build());
         event.put(InitEntities.ANKLE_BITER.get(), AnkleBiterEntity.createAttributes().build());
         event.put(InitEntities.FLESH_WALKER.get(), FleshWalkerEntity.createAttributes().build());
+        event.put(InitEntities.FLESH_SLIME.get(), FleshSlimeEntity.createAttributes().build());
     }
 }

@@ -17,6 +17,9 @@ public class InitBlocks {
 
 
 
+    public static final RegistryObject<Block> FOG_EMITTER = BLOCKS.register("fog_emitter",
+            () -> new FogEmitterBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
     public static final RegistryObject<Block> FLESH_SPRAYER = BLOCKS.register("flesh_sprayer",
             () -> new FleshParticleSpawner(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
 

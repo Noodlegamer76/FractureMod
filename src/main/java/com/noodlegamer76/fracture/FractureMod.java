@@ -1,15 +1,20 @@
 package com.noodlegamer76.fracture;
 
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.client.renderers.entity.AnkleBiterRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.FleshRattlerRenderer;
+import com.noodlegamer76.fracture.client.renderers.entity.FleshSlimeRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.FleshWalkerRenderer;
+import com.noodlegamer76.fracture.client.renderers.entity.block.FogEmitterRenderer;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
 import com.noodlegamer76.fracture.entity.FleshWalkerEntity;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
+import com.noodlegamer76.fracture.event.RenderLevelEvent;
+import com.noodlegamer76.fracture.event.ShaderEvents;
 import com.noodlegamer76.fracture.fluid.InitFluidTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.InitItems;
@@ -18,10 +23,13 @@ import com.noodlegamer76.fracture.particles.InitParticles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -64,6 +72,8 @@ public class FractureMod
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(new FractureTab());
+        modEventBus.register(new RenderLevelEvent());
+        modEventBus.register(new ShaderEvents());
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -114,6 +124,9 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.FLESH_RATTLER.get(), FleshRattlerRenderer::new);
             event.registerEntityRenderer(InitEntities.ANKLE_BITER.get(), AnkleBiterRenderer::new);
             event.registerEntityRenderer(InitEntities.FLESH_WALKER.get(), FleshWalkerRenderer::new);
+            event.registerEntityRenderer(InitEntities.FLESH_SLIME.get(), FleshSlimeRenderer::new);
+
+            event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), FogEmitterRenderer::new);
         }
 
         @SubscribeEvent
@@ -121,5 +134,6 @@ public class FractureMod
             Minecraft.getInstance().particleEngine.register(InitParticles.BLOOD_PARTICLES.get(),
                     BloodParticle.Provider::new);
         }
+
     }
 }

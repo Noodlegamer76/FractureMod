@@ -65,6 +65,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         spawnEggItem(InitItems.ANKLE_BITER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_WALKER_SPAWN_EGG);
+        spawnEggItem(InitItems.FLESH_SLIME_SPAWN_EGG);
 
 
 
