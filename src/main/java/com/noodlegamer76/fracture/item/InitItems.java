@@ -35,7 +35,7 @@ public class InitItems {
     public static final RegistryObject<Item> FLESH_WALKER_SPAWN_EGG = ITEMS.register("flesh_walker_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.FLESH_WALKER, new Color(74, 10, 3).getRGB(), new Color(207, 95, 110).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> FLESH_SLIME_SPAWN_EGG = ITEMS.register("flesh_slime_spawn_egg",
-            () -> new ForgeSpawnEggItem(InitEntities.FLESH_WALKER, new Color(74, 10, 3).getRGB(), new Color(15, 50, 15).getRGB(), new Item.Properties()));
+            () -> new ForgeSpawnEggItem(InitEntities.FLESH_SLIME, new Color(74, 10, 3).getRGB(), new Color(15, 50, 15).getRGB(), new Item.Properties()));
 
     public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
             () -> new InvertedGlasses(ModArmorMaterials.DENIM, ArmorItem.Type.HELMET, new Item.Properties()));
