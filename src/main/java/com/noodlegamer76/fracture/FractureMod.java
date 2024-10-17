@@ -3,13 +3,11 @@ package com.noodlegamer76.fracture;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
-import com.noodlegamer76.fracture.client.renderers.entity.AnkleBiterRenderer;
-import com.noodlegamer76.fracture.client.renderers.entity.FleshRattlerRenderer;
-import com.noodlegamer76.fracture.client.renderers.entity.FleshSlimeRenderer;
-import com.noodlegamer76.fracture.client.renderers.entity.FleshWalkerRenderer;
+import com.noodlegamer76.fracture.client.renderers.entity.*;
 import com.noodlegamer76.fracture.client.renderers.entity.block.FogEmitterRenderer;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
+import com.noodlegamer76.fracture.entity.BloodSlimeEntity;
 import com.noodlegamer76.fracture.entity.FleshWalkerEntity;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
@@ -125,6 +123,7 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.ANKLE_BITER.get(), AnkleBiterRenderer::new);
             event.registerEntityRenderer(InitEntities.FLESH_WALKER.get(), FleshWalkerRenderer::new);
             event.registerEntityRenderer(InitEntities.FLESH_SLIME.get(), FleshSlimeRenderer::new);
+            event.registerEntityRenderer(InitEntities.BLOOD_SLIME.get(), BloodSlimeRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), FogEmitterRenderer::new);
         }

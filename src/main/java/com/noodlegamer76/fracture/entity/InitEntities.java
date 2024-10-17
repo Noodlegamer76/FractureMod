@@ -33,4 +33,10 @@ public class InitEntities {
                     .sized(2.04F, 2.04F)
                     .clientTrackingRange(10)
                     .build("flesh_slime"));
+
+    public static final RegistryObject<EntityType<BloodSlimeEntity>> BLOOD_SLIME = ENTITIES.register("blood_slime",
+            () -> EntityType.Builder.of(BloodSlimeEntity::new, MobCategory.MONSTER)
+                    .sized(3F, 3F)
+                    .clientTrackingRange(10)
+                    .build("blood_slime"));
 }

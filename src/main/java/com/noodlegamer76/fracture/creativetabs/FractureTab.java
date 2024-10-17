@@ -41,6 +41,7 @@ public class FractureTab {
             event.accept(InitItems.FLESH_STAIRS);
             event.accept(InitItems.FLESH_WALKER_SPAWN_EGG);
             event.accept(InitItems.FLESH_SLIME_SPAWN_EGG);
+            event.accept(InitItems.BLOOD_SLIME_SPAWN_EGG);
             event.accept(InitItems.FLESH_WALL);
             event.accept(InitItems.FOG_EMITTER);
             event.accept(InitItems.HANGING_FLESH);

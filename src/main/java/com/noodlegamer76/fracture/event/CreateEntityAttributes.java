@@ -15,5 +15,6 @@ public class CreateEntityAttributes {
         event.put(InitEntities.ANKLE_BITER.get(), AnkleBiterEntity.createAttributes().build());
         event.put(InitEntities.FLESH_WALKER.get(), FleshWalkerEntity.createAttributes().build());
         event.put(InitEntities.FLESH_SLIME.get(), FleshSlimeEntity.createAttributes().build());
+        event.put(InitEntities.BLOOD_SLIME.get(), BloodSlimeEntity.createAttributes().build());
     }
 }
