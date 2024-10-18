@@ -32,6 +32,9 @@ public class InitBlocks {
             () -> new CustomizableChair(BlockBehaviour.Properties.of().strength(0.4F)));
 
 
+    public static final RegistryObject<Block> BLOOD_SLIME_BLOCK = BLOCKS.register("blood_slime_block",
+            () -> new BloodSlimeBlock(BlockBehaviour.Properties.of()));
+
     public static final RegistryObject<Block> FLESH_BLOCK = BLOCKS.register("flesh_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED).strength(0.4F)));
     public static final RegistryObject<Block> FLESH_STAIRS = BLOCKS.register("flesh_stairs",

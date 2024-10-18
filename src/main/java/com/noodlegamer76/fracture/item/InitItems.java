@@ -46,6 +46,8 @@ public class InitItems {
             () -> new InvertedGlasses(ModArmorMaterials.DENIM, ArmorItem.Type.HELMET, new Item.Properties()));
 
 
+    public static final RegistryObject<Item> BLOOD_SLIME_BLOCK = ITEMS.register("blood_slime_block",
+            () -> new BlockItem(InitBlocks.BLOOD_SLIME_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> FLESH_SPRAYER = ITEMS.register("flesh_sprayer",
             () -> new BlockItem(InitBlocks.FLESH_SPRAYER.get(), new Item.Properties()));

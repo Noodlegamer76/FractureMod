@@ -70,6 +70,7 @@ public class FractureTab {
             event.accept(InitItems.INKWOOD_HANGING_SIGN_ITEM);
             event.accept(InitItems.INKWOOD_BOAT_ITEM);
             event.accept(InitItems.INKWOOD_CHEST_BOAT_ITEM);
+            event.accept(InitItems.BLOOD_SLIME_BLOCK);
         }
     }
 }

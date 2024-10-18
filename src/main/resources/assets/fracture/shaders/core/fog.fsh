@@ -7,6 +7,8 @@ in vec2 texCoord0;
 uniform sampler2D Depth;
 uniform sampler2D Color;
 uniform mat4 ProjMat;
+uniform mat4 ModelViewMat;
+uniform vec2 ScreenSize;
 
 vec3 projectAndDivide(mat4 projectionMatrix, vec3 position) {
     vec4 homogeneousPos = projectionMatrix * vec4(position, 1.0);
@@ -16,23 +18,45 @@ vec3 projectAndDivide(mat4 projectionMatrix, vec3 position) {
 void main()
 {
     ivec2 coord = ivec2(gl_FragCoord.xy);
-    vec4 depth = texelFetch(Depth, coord, 0);
+    float depth = texelFetch(Depth, coord, 0).r;
     vec3 color = texelFetch(Color, coord, 0).rgb;
-    vec3 fogColor = vec3(1.0, 1.0, 0.0);
+    float z_clip_space = depth * 2.0 - 1.0;
 
-    vec4 ndc = depth * 2 - 1.0;
-    vec3 view = projectAndDivide(inverse(ProjMat), ndc.xyz);
+    vec2 ndc = (gl_FragCoord.xy / ScreenSize) * 2.0 - 1.0;
+    vec4 clipSpacePosition = vec4(ndc, z_clip_space, 1.0);
 
-    float DistanceFromCamera = length(view);
+    vec4 eyeCoords = inverse(ProjMat) * clipSpacePosition;
 
-        float fogMinimum = 0.;
-        float fogMaximum = 5.;
+    float distanceFromCamera = abs(eyeCoords.z);
 
-    float fogStrength = float(max(min((DistanceFromCamera - fogMinimum) / (fogMaximum - fogMinimum), 1.0), 0.0));
+    float fogMinimum = 1.;
+    float fogMaximum = 10.;
 
-    vec3 fogMix = mix(color, fogColor, fogStrength);
+    float fogStrength = float(max(min((distanceFromCamera - fogMinimum) / (fogMaximum - fogMinimum), 1.0), 0.0));
 
-    FragColor = vec4(fogMix, 1.0);
+    vec3 fogMix = mix(color, vec3(1.0, 1.0, 0.0), fogStrength);
+
+     FragColor = vec4(vec3(distanceFromCamera / 10.0), 1.0);
+
+
+   // ivec2 coord = ivec2(gl_FragCoord.xy);
+   // vec4 depth = texelFetch(Depth, coord, 0);
+   // vec3 color = texelFetch(Color, coord, 0).rgb;
+   // vec3 fogColor = vec3(1.0, 1.0, 0.0);
+//
+   // vec4 ndc = depth * 2 - 1.0;
+   // vec3 view = projectAndDivide(inverse(ProjMat), ndc.xyz);
+//
+   // float DistanceFromCamera = length(view);
+//
+   //     float fogMinimum = 0.;
+   //     float fogMaximum = 5.;
+//
+   // float fogStrength = float(max(min((DistanceFromCamera - fogMinimum) / (fogMaximum - fogMinimum), 1.0), 0.0));
+//
+   // vec3 fogMix = mix(color, fogColor, fogStrength);
+//
+   // FragColor = vec4(fogMix, 1.0);
 
 
     //FragColor = depth;
