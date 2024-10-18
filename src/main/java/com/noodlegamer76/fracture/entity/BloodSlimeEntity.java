@@ -3,14 +3,20 @@ package com.noodlegamer76.fracture.entity;
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
 import com.noodlegamer76.fracture.entity.ai.behavior.BounceToWalkTarget;
 import com.noodlegamer76.fracture.entity.ai.behavior.SuperJump;
+import com.noodlegamer76.fracture.particles.InitParticles;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -43,13 +49,17 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, SmartBrainOwner<BloodSlimeEntity> {
+    public static final EntityDataAccessor<Boolean> DATA_EXPLODE = SynchedEntityData.defineId(BloodSlimeEntity.class, EntityDataSerializers.BOOLEAN);
+
     AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
-    public static final RawAnimation JUMP = RawAnimation.begin().thenLoop("jump");
-    public static final RawAnimation SUPER_JUMP = RawAnimation.begin().thenPlay("super_jump");
+    public static final RawAnimation JUMP = RawAnimation.begin().thenPlay("jump");
+    public static final RawAnimation SUPER_JUMP = RawAnimation.begin().thenPlay("charge_jump");
 
     public final int MOVE_JUMP = 1;
     public final int ATTACK_SUPER_JUMP = 2;
+
+    public int animationDelay = 0;
 
     protected BloodSlimeEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -58,7 +68,7 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.125D)
-                .add(Attributes.ATTACK_DAMAGE, 18.0D)
+                .add(Attributes.ATTACK_DAMAGE, 25.0D)
                 .add(Attributes.MAX_HEALTH, 120.0D)
                 .add(Attributes.ARMOR, 6.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D)
@@ -73,6 +83,28 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
     @Override
     public boolean canDrownInFluidType(FluidType type) {
         return false;
+    }
+
+    @Override
+    protected void jumpFromGround() {
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_EXPLODE, false);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if ((entityData.get(DATA_EXPLODE))) {
+            for (int i = 0; i < 100; i++) {
+                Vec3 direction = new Vec3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+                level().addParticle(InitParticles.BLOOD_PARTICLES.get(), position().x, position().y, position().z, direction.x * 5, direction.y * 5, direction.z * 5);
+            }
+        }
+        getEntityData().set(DATA_EXPLODE, false);
     }
 
     @Override
@@ -99,10 +131,12 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
     public BrainActivityGroup<? extends BloodSlimeEntity> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
-                new FirstApplicableBehaviour<BloodSlimeEntity>(
+                new FirstApplicableBehaviour(
                         new BounceToWalkTarget<>().setBounceTimeout(25)
-                                .startCondition((e) -> this.attackNumber == MOVE_JUMP),
-                        new SuperJump().startCondition((e) -> this.attackNumber == ATTACK_SUPER_JUMP)
+                                .startCondition((e) -> this.attackNumber == MOVE_JUMP && e.onGround()),
+                        new SuperJump<BloodSlimeEntity>()
+                                .startCondition((e) -> this.attackNumber == ATTACK_SUPER_JUMP && e.onGround())
+                                .noTimeout()
 
         ));
     }
@@ -132,16 +166,35 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
     }
 
     @Override
+    public double getMeleeAttackRangeSqr(LivingEntity pEntity) {
+        return 7;
+    }
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "jump", this::jump));
         controllers.add(new AnimationController<>(this, "super_jump", this::superJump));
     }
 
-    private <T extends GeoAnimatable> PlayState superJump(AnimationState<T> tAnimationState) {
+    private <T extends GeoAnimatable> PlayState superJump(AnimationState<T> state) {
+        if ((entityData.get(DATA_ATTACK) == 2 || !state.getController().hasAnimationFinished())) {
+            for (int i = 0; i < 50; i++) {
+                Vec3 direction = new Vec3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+                level().addParticle(InitParticles.BLOOD_PARTICLES.get(), position().x, position().y, position().z, direction.x * 5, direction.y * 5, direction.z * 5);
+            }
+            state.setAnimation(SUPER_JUMP);
+            return PlayState.STOP;
+        }
+        state.getController().forceAnimationReset();
         return PlayState.STOP;
     }
 
-    private <T extends GeoAnimatable> PlayState jump(AnimationState<T> tAnimationState) {
+    private <T extends GeoAnimatable> PlayState jump(AnimationState<T> state) {
+        if (onGround() || !state.getController().hasAnimationFinished()) {
+            state.setAnimation(JUMP);
+            return PlayState.CONTINUE;
+        }
+        state.getController().forceAnimationReset();
         return PlayState.STOP;
     }
 

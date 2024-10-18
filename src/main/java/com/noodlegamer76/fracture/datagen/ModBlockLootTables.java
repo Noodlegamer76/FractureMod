@@ -72,8 +72,27 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         dropSelf(InitBlocks.FLESH_SPRAYER.get());
         dropSelf(InitBlocks.FOG_EMITTER.get());
+        dropSelf(InitBlocks.CUSTOMIZABLE_CHAIR.get());
 
         dropOther(InitBlocks.BLOOD_BLOCK.get(), Blocks.BIRCH_DOOR);
+
+        dropSelf(InitBlocks.INKWOOD_LOG_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_WOOD_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_STRIPPED_LOG_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_STRIPPED_WOOD_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_PLANKS_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_STAIRS_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_SLAB_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_FENCE_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_FENCE_GATE_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_DOOR_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_TRAPDOOR_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_PRESSURE_PLATE_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_BUTTON_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_STANDING_SIGN_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get());
 
         //this.add(InitBlocks.WHITE_COSMIC_LEAVES.get(), (block) ->
         //        createLeavesDrops(block, InitBlocks.WHITE_COSMIC_LEAVES.get(), NORMAL_LEAVES_SAPLING_CHANCES));

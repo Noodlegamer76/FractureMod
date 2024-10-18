@@ -4,12 +4,15 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.client.renderers.entity.*;
+import com.noodlegamer76.fracture.client.renderers.entity.block.CustomizableChairRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.block.FogEmitterRenderer;
+import com.noodlegamer76.fracture.client.util.ModWoodTypes;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
 import com.noodlegamer76.fracture.entity.BloodSlimeEntity;
 import com.noodlegamer76.fracture.entity.FleshWalkerEntity;
 import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.ModBoatEntity;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
 import com.noodlegamer76.fracture.event.RenderLevelEvent;
 import com.noodlegamer76.fracture.event.ShaderEvents;
@@ -19,9 +22,15 @@ import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.BloodParticle;
 import com.noodlegamer76.fracture.particles.InitParticles;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -60,8 +69,8 @@ public class FractureMod
         GeckoLib.initialize();
 
         //registers DeferredRegisters
-        InitBlocks.BLOCKS.register(modEventBus);
         InitItems.ITEMS.register(modEventBus);
+        InitBlocks.BLOCKS.register(modEventBus);
         InitParticles.PARTICLE_TYPES.register(modEventBus);
         InitFluids.FLUIDS.register(modEventBus);
         InitFluidTypes.FLUID_TYPES.register(modEventBus);
@@ -114,6 +123,16 @@ public class FractureMod
         public static void onClientSetup(FMLClientSetupEvent event) {
             ItemBlockRenderTypes.setRenderLayer(InitFluids.SOURCE_BLOOD.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(InitFluids.FLOWING_BLOOD.get(), RenderType.translucent());
+
+            Sheets.addWoodType(ModWoodTypes.INKWOOD);
+            EntityRenderers.register(InitEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
+            EntityRenderers.register(InitEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, true));
+        }
+
+        @SubscribeEvent
+        public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(ModBoatRenderer.INKWOOD_BOAT_LAYER, BoatModel::createBodyModel);
+            event.registerLayerDefinition(ModBoatRenderer.INKWOOD_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
         }
 
         @SubscribeEvent
@@ -126,6 +145,9 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.BLOOD_SLIME.get(), BloodSlimeRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), FogEmitterRenderer::new);
+            event.registerBlockEntityRenderer(InitBlockEntities.CUSTOMIZABLE_CHAIR.get(), CustomizableChairRenderer::new);
+            event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);
+            event.registerBlockEntityRenderer(InitBlockEntities.INKWOOD_SIGN.get(), SignRenderer::new);
         }
 
         @SubscribeEvent

@@ -4,11 +4,9 @@ import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -66,7 +64,53 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         cubeColumn(InitBlocks.BLOODY_BOOKSHELF, BLOODY_BOOKSHELF, BLOODY_WOOD);
 
+        final ResourceLocation INKWOOD_PLANKS_TEXTURE = new ResourceLocation(FractureMod.MODID, "block/inkwood_planks");
+        final ResourceLocation INKWOOD_LOG_TEXTURE = new ResourceLocation(FractureMod.MODID, "block/inkwood_log");
+        final ResourceLocation STRIPPED_INKWOOD_WOOD = new ResourceLocation(FractureMod.MODID, "block/inkwood_stripped_log");
+
+        logBlock((RotatedPillarBlock) InitBlocks.INKWOOD_LOG_BLOCK.get());
+        axisBlock((RotatedPillarBlock) InitBlocks.INKWOOD_WOOD_BLOCK.get(), INKWOOD_LOG_TEXTURE, INKWOOD_LOG_TEXTURE);
+        logBlock((RotatedPillarBlock) InitBlocks.INKWOOD_STRIPPED_LOG_BLOCK.get());
+        axisBlock((RotatedPillarBlock) InitBlocks.INKWOOD_STRIPPED_WOOD_BLOCK.get(), STRIPPED_INKWOOD_WOOD, STRIPPED_INKWOOD_WOOD);
+
+        blockWithItem(InitBlocks.INKWOOD_PLANKS_BLOCK);
+
+        slabBlock((SlabBlock) InitBlocks.INKWOOD_SLAB_BLOCK.get(), INKWOOD_PLANKS_TEXTURE,
+                INKWOOD_PLANKS_TEXTURE);
+        stairsBlock((StairBlock) InitBlocks.INKWOOD_STAIRS_BLOCK.get(), INKWOOD_PLANKS_TEXTURE);
+
+        buttonBlock((ButtonBlock) InitBlocks.INKWOOD_BUTTON_BLOCK.get(), INKWOOD_PLANKS_TEXTURE);
+        pressurePlateBlock((PressurePlateBlock) InitBlocks.INKWOOD_PRESSURE_PLATE_BLOCK.get(), INKWOOD_PLANKS_TEXTURE);
+
+        fenceBlock((FenceBlock) InitBlocks.INKWOOD_FENCE_BLOCK.get(), INKWOOD_PLANKS_TEXTURE);
+        fenceGateBlock((FenceGateBlock) InitBlocks.INKWOOD_FENCE_GATE_BLOCK.get(), INKWOOD_PLANKS_TEXTURE);
+
+        doorBlockWithRenderType((DoorBlock) InitBlocks.INKWOOD_DOOR_BLOCK.get(), modLoc("block/inkwood_door_bottom"), modLoc("block/inkwood_door_top"), "cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock) InitBlocks.INKWOOD_TRAPDOOR_BLOCK.get(), modLoc("block/inkwood_trapdoor"), true, "cutout");
+
+        signBlock((StandingSignBlock) InitBlocks.INKWOOD_STANDING_SIGN_BLOCK.get(), (WallSignBlock) InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get(), INKWOOD_PLANKS_TEXTURE);
+
+        hangingSignBlock(InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get(), InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get(), INKWOOD_PLANKS_TEXTURE);
     }
+
+    public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
+        ModelFile sign = models().sign(name(signBlock), texture);
+        hangingSignBlock(signBlock, wallSignBlock, sign);
+    }
+
+    public void hangingSignBlock(Block signBlock, Block wallSignBlock, ModelFile sign) {
+        simpleBlock(signBlock, sign);
+        simpleBlock(wallSignBlock, sign);
+    }
+
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+
+    private ResourceLocation key(Block block) {
+        return ForgeRegistries.BLOCKS.getKey(block);
+    }
+
     private void cutout(RegistryObject<Block> blockRegistryObject) {
         simpleBlock(blockRegistryObject.get(),
                 models().cubeAll(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("cutout"));

@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
@@ -31,7 +32,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
                         InitBlocks.FLESH_STAIRS.get(),
                         InitBlocks.FLESHY_DARKSTONE_BRICK_STAIRS.get(),
                         InitBlocks.DARKSTONE_BRICK_STAIRS.get(),
-                        InitBlocks.DARKSTONE_STAIRS.get()
+                        InitBlocks.DARKSTONE_STAIRS.get(),
+                        InitBlocks.INKWOOD_STAIRS_BLOCK.get()
                 );
 
         this.tag(BlockTags.WALLS)
@@ -47,7 +49,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
                         InitBlocks.FLESH_SLAB.get(),
                         InitBlocks.FLESHY_DARKSTONE_BRICK_SLAB.get(),
                         InitBlocks.DARKSTONE_BRICK_SLAB.get(),
-                        InitBlocks.DARKSTONE_SLAB.get()
+                        InitBlocks.DARKSTONE_SLAB.get(),
+                        InitBlocks.INKWOOD_SLAB_BLOCK.get()
                 );
 
         this.tag(FLESH_SOLID)
@@ -100,12 +103,63 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(
-                        InitBlocks.BLOODY_BOOKSHELF.get()
+                        InitBlocks.BLOODY_BOOKSHELF.get(),
+                        InitBlocks.INKWOOD_LOG_BLOCK.get(),
+                        InitBlocks.INKWOOD_STRIPPED_LOG_BLOCK.get(),
+                        InitBlocks.INKWOOD_WOOD_BLOCK.get(),
+                        InitBlocks.INKWOOD_STRIPPED_WOOD_BLOCK.get(),
+                        InitBlocks.INKWOOD_PLANKS_BLOCK.get(),
+                        InitBlocks.INKWOOD_STAIRS_BLOCK.get(),
+                        InitBlocks.INKWOOD_SLAB_BLOCK.get(),
+                        InitBlocks.INKWOOD_FENCE_BLOCK.get(),
+                        InitBlocks.INKWOOD_FENCE_GATE_BLOCK.get(),
+                        InitBlocks.INKWOOD_DOOR_BLOCK.get(),
+                        InitBlocks.INKWOOD_TRAPDOOR_BLOCK.get(),
+                        InitBlocks.INKWOOD_BUTTON_BLOCK.get(),
+                        InitBlocks.INKWOOD_STANDING_SIGN_BLOCK.get(),
+                        InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get(),
+                        InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get(),
+                        InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get()
                 );
 
         this.tag(Tags.Blocks.STONE)
                 .add(
                         InitBlocks.DARKSTONE.get()
+                );
+
+        this.tag(Tags.Blocks.FENCES)
+                .add(
+                        InitBlocks.INKWOOD_FENCE_BLOCK.get()
+                );
+
+        this.tag(Tags.Blocks.FENCES_WOODEN)
+                .add(
+                        InitBlocks.INKWOOD_FENCE_BLOCK.get()
+                );
+
+        this.tag(Tags.Blocks.FENCE_GATES)
+                .add(
+                        InitBlocks.INKWOOD_FENCE_GATE_BLOCK.get()
+                );
+
+        this.tag(Tags.Blocks.FENCE_GATES_WOODEN)
+                .add(
+                        InitBlocks.INKWOOD_FENCE_GATE_BLOCK.get()
+                );
+
+        this.tag(BlockTags.FENCES)
+                .add(
+                        InitBlocks.INKWOOD_FENCE_BLOCK.get()
+                );
+
+        this.tag(BlockTags.WOODEN_FENCES)
+                .add(
+                        InitBlocks.INKWOOD_FENCE_BLOCK.get()
+                );
+
+        this.tag(BlockTags.FENCE_GATES)
+                .add(
+                        InitBlocks.INKWOOD_FENCE_GATE_BLOCK.get()
                 );
     }
 }

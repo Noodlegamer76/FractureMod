@@ -16,6 +16,6 @@ public class InitCreativeTabs {
     //if you want to add an item to a creative tab, check out FractureTab
     public static RegistryObject<CreativeModeTab> FRACTURE_TAB = CREATIVE_TABS.register("fracture_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("fracture.creative_tab"))
-            .icon(() -> new ItemStack(Items.ACACIA_BOAT))
+            .icon(() -> new ItemStack(InitItems.FLESH_BLOCK.get()))
             .build());
 }

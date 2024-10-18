@@ -25,6 +25,10 @@ public class ModItemModelProvider extends ItemModelProvider {
     public static final ResourceLocation DARKSTONE = new ResourceLocation(FractureMod.MODID, "block/darkstone");
     public static final ResourceLocation BLOODY_WOOD = new ResourceLocation(FractureMod.MODID, "block/bloody_wood");
     public static final ResourceLocation BLOODY_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/bloody_bookshelf");
+    public static final ResourceLocation INKWOOD_PLANKS = new ResourceLocation(FractureMod.MODID, "block/inkwood_planks");
+    final ResourceLocation INKWOOD_LOG_TEXTURE = new ResourceLocation(FractureMod.MODID, "block/inkwood_log");
+    final ResourceLocation INKWOOD_LOG_TOP = new ResourceLocation(FractureMod.MODID, "block/inkwood_log_top");
+    final ResourceLocation STRIPPED_INKWOOD_WOOD = new ResourceLocation(FractureMod.MODID, "block/inkwood_stripped_log");
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, FractureMod.MODID, existingFileHelper);
     }
@@ -68,11 +72,26 @@ public class ModItemModelProvider extends ItemModelProvider {
         spawnEggItem(InitItems.FLESH_SLIME_SPAWN_EGG);
         spawnEggItem(InitItems.BLOOD_SLIME_SPAWN_EGG);
 
-
-
         cubeColumn("bloody_bookshelf", BLOODY_BOOKSHELF, BLOODY_WOOD);
         cubeColumn("darkstone_pillar", DARKSTONE_PILLAR_SIDE, DARKSTONE_PILLAR_TOP);
         cubeColumn("fleshy_darkstone_pillar", FLESHY_DARKSTONE_PILLAR_SIDE, FLESHY_DARKSTONE_PILLAR_TOP);
+
+        cubeColumn("inkwood_log", INKWOOD_LOG_TEXTURE, INKWOOD_LOG_TOP);
+        cubeColumn("inkwood_wood", INKWOOD_LOG_TEXTURE, INKWOOD_LOG_TEXTURE);
+        cubeColumn("inkwood_stripped_log", STRIPPED_INKWOOD_WOOD, INKWOOD_LOG_TOP);
+        cubeColumn("inkwood_stripped_wood", STRIPPED_INKWOOD_WOOD, STRIPPED_INKWOOD_WOOD);
+        stairsItem(InitBlocks.INKWOOD_STAIRS_BLOCK, INKWOOD_PLANKS);
+        slabItem(InitBlocks.INKWOOD_SLAB_BLOCK, INKWOOD_PLANKS);
+        fenceItem(InitBlocks.INKWOOD_FENCE_BLOCK, InitBlocks.INKWOOD_PLANKS_BLOCK);
+        fenceGate("inkwood_fence_gate", INKWOOD_PLANKS);
+        simpleItem(InitItems.INKWOOD_DOOR_ITEM);
+        trapdoorItem(InitBlocks.INKWOOD_TRAPDOOR_BLOCK);
+        pressurePlate("inkwood_pressure_plate", INKWOOD_PLANKS);
+        buttonItem(InitBlocks.INKWOOD_BUTTON_BLOCK, InitBlocks.INKWOOD_PLANKS_BLOCK);
+        simpleItem(InitItems.INKWOOD_SIGN_ITEM);
+        simpleItem(InitItems.INKWOOD_HANGING_SIGN_ITEM);
+        simpleItem(InitItems.INKWOOD_BOAT_ITEM);
+        simpleItem(InitItems.INKWOOD_CHEST_BOAT_ITEM);
 
         //some examples
         //withExistingParent(InitItems.WARDLING_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

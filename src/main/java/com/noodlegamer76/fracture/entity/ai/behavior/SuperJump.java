@@ -2,18 +2,24 @@ package com.noodlegamer76.fracture.entity.ai.behavior;
 
 import com.mojang.datafixers.util.Pair;
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
+import com.noodlegamer76.fracture.entity.BloodSlimeEntity;
+import com.noodlegamer76.fracture.particles.InitParticles;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 
 import java.util.List;
 
+import static com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster.DATA_ATTACK;
+import static com.noodlegamer76.fracture.entity.BloodSlimeEntity.DATA_EXPLODE;
+
 public class SuperJump<E extends MultiAttackMonster> extends ExtendedBehaviour<E> {
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS;
-    private int completionTime = 48;
+    private int completionTime = 45;
     private boolean doGroundPound = true;
 
     @Override
@@ -21,29 +27,39 @@ public class SuperJump<E extends MultiAttackMonster> extends ExtendedBehaviour<E
         return MEMORY_REQUIREMENTS;
     }
 
+
+    @Override
+    protected void start(E entity) {
+        super.start(entity);
+    }
+
     @Override
     protected boolean shouldKeepRunning(E entity) {
-
         return doGroundPound;
     }
 
     @Override
     protected void tick(E entity) {
-        if (completionTime == 25) {
-            entity.setDeltaMovement(0, 2, 0);
+        if (completionTime == 23) {
+            Vec3 direction = entity.getPosition(0).subtract(entity.getNavigation().getTargetPos().getCenter()).normalize().reverse();
+            entity.setDeltaMovement(direction.x, 2, direction.z);
         }
 
-        if (entity.onGround() && doGroundPound && completionTime <= 23) {
-            entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 4f, Level.ExplosionInteraction.MOB);
+        if (entity.onGround() && doGroundPound && completionTime <= 21) {
+            entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 4.5f, Level.ExplosionInteraction.NONE);
             doGroundPound = !doGroundPound;
+            if (entity instanceof BloodSlimeEntity slime) {
+                slime.getEntityData().set(DATA_EXPLODE, true);
+            }
         }
         completionTime--;
     }
 
     @Override
     protected void stop(E entity) {
-        completionTime = 49;
-        entity.attackNumber = 2;
+        completionTime = 45;
+        doGroundPound = true;
+        entity.attackNumber = 0;
     }
 
     static {

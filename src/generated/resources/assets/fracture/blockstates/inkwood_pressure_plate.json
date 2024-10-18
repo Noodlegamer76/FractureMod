@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "fracture:block/inkwood_pressure_plate"
+    },
+    "powered=true": {
+      "model": "fracture:block/inkwood_pressure_plate_down"
+    }
+  }
+}

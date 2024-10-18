@@ -1,11 +1,12 @@
 package com.noodlegamer76.fracture.item;
 
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.block.FogEmitterBlock;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -25,6 +26,8 @@ public class InitItems {
 
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CUSTOMIZABLE_CHAIR = ITEMS.register("customizable_chair",
+            () -> new CustomizableChairItem(InitBlocks.CUSTOMIZABLE_CHAIR.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> BROOM = ITEMS.register("broom",
             () -> new Broom(new Item.Properties()));
@@ -113,12 +116,51 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.BLOODY_BOOKSHELF.get(), new Item.Properties()));
     public static final RegistryObject<Item> INTESTINE = ITEMS.register("intestine",
             () -> new BlockItem(InitBlocks.INTESTINE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> HANGING_FLESH   = ITEMS.register("hanging_flesh",
+    public static final RegistryObject<Item> HANGING_FLESH  = ITEMS.register("hanging_flesh",
             () -> new BlockItem(InitBlocks.HANGING_FLESH.get(), new Item.Properties()));
 
 
     public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket",
             () -> new BucketItem(InitFluids.SOURCE_BLOOD,
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final RegistryObject<Item> INKWOOD_LOG_ITEM = ITEMS.register( "inkwood_log",
+            () -> new BlockItem(InitBlocks.INKWOOD_LOG_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_WOOD_ITEM = ITEMS.register("inkwood_wood",
+            () -> new BlockItem(InitBlocks.INKWOOD_WOOD_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_STRIPPED_LOG_ITEM = ITEMS.register("inkwood_stripped_log",
+            () -> new BlockItem(InitBlocks.INKWOOD_STRIPPED_LOG_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> INKWOOD_STRIPPED_WOOD_ITEM = ITEMS.register("inkwood_stripped_wood",
+            () -> new BlockItem(InitBlocks.INKWOOD_STRIPPED_WOOD_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> INKWOOD_PLANKS_ITEM = ITEMS.register("inkwood_planks",
+            () -> new BlockItem(InitBlocks.INKWOOD_PLANKS_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> INKWOOD_SLAB_ITEM = ITEMS.register("inkwood_slab",
+            () -> new BlockItem(InitBlocks.INKWOOD_SLAB_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_STAIRS_ITEM = ITEMS.register("inkwood_stairs",
+            () -> new BlockItem(InitBlocks.INKWOOD_STAIRS_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_TRAPDOOR_ITEM = ITEMS.register("inkwood_trapdoor",
+            () -> new BlockItem(InitBlocks.INKWOOD_TRAPDOOR_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_DOOR_ITEM = ITEMS.register("inkwood_door",
+            () -> new BlockItem(InitBlocks.INKWOOD_DOOR_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_FENCE_GATE_ITEM = ITEMS.register("inkwood_fence_gate",
+            () -> new BlockItem(InitBlocks.INKWOOD_FENCE_GATE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_FENCE_ITEM = ITEMS.register("inkwood_fence",
+            () -> new BlockItem(InitBlocks.INKWOOD_FENCE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_HANGING_SIGN_ITEM = ITEMS.register("inkwood_hanging_sign",
+            () -> new HangingSignItem(InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get(), InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_SIGN_ITEM = ITEMS.register("inkwood_sign",
+            () -> new SignItem(new Item.Properties(), InitBlocks.INKWOOD_STANDING_SIGN_BLOCK.get(), InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get()));
+    public static final RegistryObject<Item> INKWOOD_BUTTON_ITEM = ITEMS.register("inkwood_button",
+            () -> new BlockItem(InitBlocks.INKWOOD_BUTTON_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_PRESSURE_PLATE_ITEM = ITEMS.register("inkwood_pressure_plate",
+            () -> new BlockItem(InitBlocks.INKWOOD_PRESSURE_PLATE_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> INKWOOD_BOAT_ITEM = ITEMS.register("inkwood_boat",
+            () -> new ModBoatItem(false, ModBoatEntity.Type.INKWOOD , new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_CHEST_BOAT_ITEM = ITEMS.register("inkwood_chest_boat",
+            () -> new ModBoatItem(true, ModBoatEntity.Type.INKWOOD, new Item.Properties()));
 
 }

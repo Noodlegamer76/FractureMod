@@ -18,7 +18,6 @@ public class TestItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-
         if (!level.isClientSide) {
         }
         return super.use(level, player, usedHand);

@@ -1,5 +1,21 @@
 {
   "values": [
-    "fracture:bloody_bookshelf"
+    "fracture:bloody_bookshelf",
+    "fracture:inkwood_log",
+    "fracture:inkwood_stripped_log",
+    "fracture:inkwood_wood",
+    "fracture:inkwood_stripped_wood",
+    "fracture:inkwood_planks",
+    "fracture:inkwood_stairs",
+    "fracture:inkwood_slab",
+    "fracture:inkwood_fence",
+    "fracture:inkwood_fence_gate",
+    "fracture:inkwood_door",
+    "fracture:inkwood_trapdoor",
+    "fracture:inkwood_button",
+    "fracture:inkwood_sign",
+    "fracture:inkwood_wall_sign",
+    "fracture:inkwood_wall_hanging_sign",
+    "fracture:inkwood_hanging_sign"
   ]
 }

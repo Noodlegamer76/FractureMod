@@ -39,4 +39,14 @@ public class InitEntities {
                     .sized(3F, 3F)
                     .clientTrackingRange(10)
                     .build("blood_slime"));
+
+    public static final RegistryObject<EntityType<ModBoatEntity>> MOD_BOAT = ENTITIES.register(("mod_boat"),
+            () -> EntityType.Builder.<ModBoatEntity>of(ModBoatEntity::new, MobCategory.MISC)
+                    .sized(1.375f, 0.5625f)
+                    .build("mod_boat"));
+
+    public static final RegistryObject<EntityType<ModChestBoatEntity>> MOD_CHEST_BOAT = ENTITIES.register(("mod_chest_boat"),
+            () -> EntityType.Builder.<ModChestBoatEntity>of(ModChestBoatEntity::new, MobCategory.MISC)
+                    .sized(1.375f, 0.5625f)
+                    .build("mod_chest_boat"));
 }

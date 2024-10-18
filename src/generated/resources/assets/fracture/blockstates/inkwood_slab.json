@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "fracture:block/inkwood_slab"
+    },
+    "type=double": {
+      "model": "fracture:block/inkwood_planks"
+    },
+    "type=top": {
+      "model": "fracture:block/inkwood_slab_top"
+    }
+  }
+}

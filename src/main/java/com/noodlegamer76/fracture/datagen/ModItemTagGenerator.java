@@ -35,13 +35,15 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(InitItems.FLESH_STAIRS.get())
                 .add(InitItems.FLESHY_DARKSTONE_BRICK_STAIRS.get())
                 .add(InitItems.DARKSTONE_BRICK_STAIRS.get())
-                .add(InitItems.DARKSTONE_STAIRS.get());
+                .add(InitItems.DARKSTONE_STAIRS.get())
+                .add(InitItems.INKWOOD_STAIRS_ITEM.get());
 
         this.tag(ItemTags.SLABS)
                 .add(InitItems.FLESH_SLAB.get())
                 .add(InitItems.FLESHY_DARKSTONE_BRICK_SLAB.get())
                 .add(InitItems.DARKSTONE_BRICK_SLAB.get())
-                .add(InitItems.DARKSTONE_SLAB.get());
+                .add(InitItems.DARKSTONE_SLAB.get())
+                .add(InitItems.INKWOOD_SLAB_ITEM.get());
 
         this.tag(ItemTags.STONE_BRICKS)
                 .add(InitItems.DARKSTONE_BRICKS.get())
@@ -51,5 +53,18 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
         this.tag(Tags.Items.STONE)
                 .add(InitItems.DARKSTONE.get());
+
+
+        this.tag(Tags.Items.FENCES)
+                .add(InitItems.INKWOOD_FENCE_ITEM.get());
+
+        this.tag(Tags.Items.FENCES_WOODEN)
+                .add(InitItems.INKWOOD_FENCE_ITEM.get());
+
+        this.tag(Tags.Items.FENCE_GATES)
+                .add(InitItems.INKWOOD_FENCE_GATE_ITEM.get());
+
+        this.tag(Tags.Items.FENCE_GATES_WOODEN)
+                .add(InitItems.INKWOOD_FENCE_GATE_ITEM.get());
     }
 }

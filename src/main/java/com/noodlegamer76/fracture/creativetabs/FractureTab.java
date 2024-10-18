@@ -1,5 +1,6 @@
 package com.noodlegamer76.fracture.creativetabs;
 
+import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -51,6 +52,24 @@ public class FractureTab {
             event.accept(InitItems.LIVING_FLESH);
             event.accept(InitItems.SMALL_FLESH_BULB);
             event.accept(InitItems.TENDRILS);
+            event.accept(InitItems.CUSTOMIZABLE_CHAIR);
+            event.accept(InitItems.INKWOOD_LOG_ITEM);
+            event.accept(InitItems.INKWOOD_WOOD_ITEM);
+            event.accept(InitItems.INKWOOD_STRIPPED_LOG_ITEM);
+            event.accept(InitItems.INKWOOD_STRIPPED_WOOD_ITEM);
+            event.accept(InitItems.INKWOOD_PLANKS_ITEM);
+            event.accept(InitItems.INKWOOD_STAIRS_ITEM);
+            event.accept(InitItems.INKWOOD_SLAB_ITEM);
+            event.accept(InitItems.INKWOOD_FENCE_ITEM);
+            event.accept(InitItems.INKWOOD_FENCE_GATE_ITEM);
+            event.accept(InitItems.INKWOOD_DOOR_ITEM);
+            event.accept(InitItems.INKWOOD_TRAPDOOR_ITEM);
+            event.accept(InitItems.INKWOOD_PRESSURE_PLATE_ITEM);
+            event.accept(InitItems.INKWOOD_BUTTON_ITEM);
+            event.accept(InitItems.INKWOOD_SIGN_ITEM);
+            event.accept(InitItems.INKWOOD_HANGING_SIGN_ITEM);
+            event.accept(InitItems.INKWOOD_BOAT_ITEM);
+            event.accept(InitItems.INKWOOD_CHEST_BOAT_ITEM);
         }
     }
 }
