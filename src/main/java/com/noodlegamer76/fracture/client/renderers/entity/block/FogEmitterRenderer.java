@@ -52,8 +52,9 @@ public class FogEmitterRenderer extends GeoBlockRenderer<FogEmitterEntity> {
         Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
 
         poseStack.pushPose();
-        poseStack.translate(-animatable.getBlockPos().getX(), -animatable.getBlockPos().getY(), -animatable.getBlockPos().getZ());
-        poseStack.translate(camera.getPosition().x() - 0.5, camera.getPosition().y() - 0.5, camera.getPosition().z() - 0.5);
+        //poseStack.translate(-animatable.getBlockPos().getX(), -animatable.getBlockPos().getY(), -animatable.getBlockPos().getZ());
+        //poseStack.translate(camera.getPosition().x() - 0.5, camera.getPosition().y() - 0.5, camera.getPosition().z() - 0.5);
+        Minecraft.getInstance().getMainRenderTarget().blitToScreen(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight());
         super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         poseStack.popPose();
 

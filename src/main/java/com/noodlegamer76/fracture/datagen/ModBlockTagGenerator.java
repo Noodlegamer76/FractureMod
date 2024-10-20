@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.data.ForgeBlockTagsProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -160,6 +161,108 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
         this.tag(BlockTags.FENCE_GATES)
                 .add(
                         InitBlocks.INKWOOD_FENCE_GATE_BLOCK.get()
+                );
+
+        this.tag(BlockTags.LOGS)
+                .add(
+                        InitBlocks.INKWOOD_LOG_BLOCK.get(),
+                        InitBlocks.INKWOOD_STRIPPED_LOG_BLOCK.get(),
+                        InitBlocks.INKWOOD_WOOD_BLOCK.get(),
+                        InitBlocks.INKWOOD_STRIPPED_WOOD_BLOCK.get()
+                );
+
+        this.tag(BlockTags.LOGS_THAT_BURN)
+                .add(
+                        InitBlocks.INKWOOD_LOG_BLOCK.get(),
+                        InitBlocks.INKWOOD_STRIPPED_LOG_BLOCK.get(),
+                        InitBlocks.INKWOOD_WOOD_BLOCK.get(),
+                        InitBlocks.INKWOOD_STRIPPED_WOOD_BLOCK.get()
+                );
+
+        this.tag(BlockTags.PLANKS)
+                .add(
+                        InitBlocks.INKWOOD_PLANKS_BLOCK.get()
+                );
+
+        this.tag(BlockTags.WOODEN_DOORS)
+                .add(
+                        InitBlocks.INKWOOD_DOOR_BLOCK .get()
+                );
+
+        this.tag(BlockTags.DOORS)
+                .add(
+                        InitBlocks.INKWOOD_DOOR_BLOCK.get()
+                );
+
+        this.tag(BlockTags.BUTTONS)
+                .add(
+                        InitBlocks.INKWOOD_BUTTON_BLOCK.get()
+                );
+
+        this.tag(BlockTags.WOODEN_BUTTONS)
+                .add(
+                        InitBlocks.INKWOOD_BUTTON_BLOCK.get()
+                );
+        this.tag(BlockTags.PRESSURE_PLATES)
+                .add(
+                        InitBlocks.INKWOOD_PRESSURE_PLATE_BLOCK.get()
+                );
+
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES)
+                .add(
+                        InitBlocks.INKWOOD_PRESSURE_PLATE_BLOCK.get()
+                );
+
+        this.tag(Tags.Blocks.BOOKSHELVES)
+                .add(
+                        InitBlocks.BLOODY_BOOKSHELF.get(),
+                        InitBlocks.INKWOOD_BOOKSHELF.get()
+                );
+
+        this.tag(BlockTags.SIGNS)
+                .add(
+                        InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get(),
+                        InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get(),
+                        InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get(),
+                        InitBlocks.INKWOOD_STANDING_SIGN_BLOCK.get()
+                );
+
+        this.tag(BlockTags.ALL_SIGNS)
+                .add(
+                        InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get(),
+                        InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get(),
+                        InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get(),
+                        InitBlocks.INKWOOD_STANDING_SIGN_BLOCK.get()
+                );
+
+        this.tag(BlockTags.ALL_HANGING_SIGNS)
+                .add(
+                        InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get()
+                );
+
+        this.tag(BlockTags.CEILING_HANGING_SIGNS)
+                .add(
+                        InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get()
+                );
+
+        this.tag(BlockTags.WALL_SIGNS)
+                .add(
+                        InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get()
+                );
+
+        this.tag(BlockTags.STANDING_SIGNS)
+                .add(
+                        InitBlocks.INKWOOD_STANDING_SIGN_BLOCK.get()
+                );
+
+        this.tag(BlockTags.SAPLINGS)
+                .add(
+                        InitBlocks.INKWOOD_SAPLING.get()
+                );
+
+        this.tag(BlockTags.LEAVES)
+                .add(
+                        InitBlocks.INWKOOD_LEAVES.get()
                 );
     }
 }

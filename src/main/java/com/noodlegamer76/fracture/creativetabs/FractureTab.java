@@ -11,7 +11,6 @@ public class FractureTab {
         if (event.getTabKey() == InitCreativeTabs.FRACTURE_TAB.getKey()) {
 
             //example of how to add item to creative tab
-            event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
             event.accept(InitItems.BLOODY_BOOKSHELF);
             event.accept(InitItems.BLOOD_BUCKET);
             event.accept(InitItems.BROOM);
@@ -40,11 +39,8 @@ public class FractureTab {
             event.accept(InitItems.FLESH_SLAB);
             event.accept(InitItems.FLESH_SPRAYER);
             event.accept(InitItems.FLESH_STAIRS);
-            event.accept(InitItems.FLESH_WALKER_SPAWN_EGG);
-            event.accept(InitItems.FLESH_SLIME_SPAWN_EGG);
-            event.accept(InitItems.BLOOD_SLIME_SPAWN_EGG);
             event.accept(InitItems.FLESH_WALL);
-            event.accept(InitItems.FOG_EMITTER);
+            event.accept(InitItems.BLOOD_SLIME_BALL);
             event.accept(InitItems.HANGING_FLESH);
             event.accept(InitItems.INTESTINE);
             event.accept(InitItems.INVERTED_GLASSES);
@@ -52,7 +48,8 @@ public class FractureTab {
             event.accept(InitItems.LIVING_FLESH);
             event.accept(InitItems.SMALL_FLESH_BULB);
             event.accept(InitItems.TENDRILS);
-            event.accept(InitItems.CUSTOMIZABLE_CHAIR);
+            event.accept(InitItems.BLOOD_SLIME_BLOCK);
+
             event.accept(InitItems.INKWOOD_LOG_ITEM);
             event.accept(InitItems.INKWOOD_WOOD_ITEM);
             event.accept(InitItems.INKWOOD_STRIPPED_LOG_ITEM);
@@ -70,7 +67,14 @@ public class FractureTab {
             event.accept(InitItems.INKWOOD_HANGING_SIGN_ITEM);
             event.accept(InitItems.INKWOOD_BOAT_ITEM);
             event.accept(InitItems.INKWOOD_CHEST_BOAT_ITEM);
-            event.accept(InitItems.BLOOD_SLIME_BLOCK);
+            event.accept(InitItems.INKWOOD_BOOKSHELF);
+            event.accept(InitItems.INKWOOD_SAPLING);
+            event.accept(InitItems.INKWOOD_LEAVES);
+
+            event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
+            event.accept(InitItems.BLOOD_SLIME_SPAWN_EGG);
+            event.accept(InitItems.FLESH_SLIME_SPAWN_EGG);
+            event.accept(InitItems.FLESH_WALKER_SPAWN_EGG);
         }
     }
 }

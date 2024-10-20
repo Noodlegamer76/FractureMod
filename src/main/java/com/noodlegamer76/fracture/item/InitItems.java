@@ -6,7 +6,6 @@ import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -26,8 +25,14 @@ public class InitItems {
 
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> CUSTOMIZABLE_CHAIR = ITEMS.register("customizable_chair",
-            () -> new CustomizableChairItem(InitBlocks.CUSTOMIZABLE_CHAIR.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLOOD_SLIME_BALL = ITEMS.register("blood_slime_ball",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> INKWOOD_LEAVES = ITEMS.register("inkwood_leaves",
+            () -> new BlockItem(InitBlocks.INWKOOD_LEAVES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INKWOOD_SAPLING = ITEMS.register("inkwood_sapling",
+            () -> new BlockItem(InitBlocks.INKWOOD_SAPLING.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> BROOM = ITEMS.register("broom",
             () -> new Broom(new Item.Properties()));
@@ -43,11 +48,14 @@ public class InitItems {
             () -> new ForgeSpawnEggItem(InitEntities.BLOOD_SLIME, new Color(74, 10, 3).getRGB(), new Color(255, 0, 0).getRGB(), new Item.Properties()));
 
     public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
-            () -> new InvertedGlasses(ModArmorMaterials.DENIM, ArmorItem.Type.HELMET, new Item.Properties()));
+            () -> new InvertedGlasses(ModArmorMaterials.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));
 
 
     public static final RegistryObject<Item> BLOOD_SLIME_BLOCK = ITEMS.register("blood_slime_block",
             () -> new BlockItem(InitBlocks.BLOOD_SLIME_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> INKWOOD_BOOKSHELF = ITEMS.register("inkwood_bookshelf",
+            () -> new BlockItem(InitBlocks.INKWOOD_BOOKSHELF.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> FLESH_SPRAYER = ITEMS.register("flesh_sprayer",
             () -> new BlockItem(InitBlocks.FLESH_SPRAYER.get(), new Item.Properties()));

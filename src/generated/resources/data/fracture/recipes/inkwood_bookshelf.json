@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "fracture:inkwood_planks"
+    },
+    "-": {
+      "item": "minecraft:book"
+    }
+  },
+  "pattern": [
+    "###",
+    "---",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "fracture:inkwood_bookshelf"
+  },
+  "show_notification": true
+}

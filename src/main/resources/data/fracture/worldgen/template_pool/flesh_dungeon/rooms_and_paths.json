@@ -201,6 +201,24 @@
         "projection": "rigid",
         "processors": "minecraft:empty"
       }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "fracture:flesh_dungeon/rooms/mess_hall",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "fracture:flesh_dungeon/rooms/strange_room",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
     }
   ]
 }

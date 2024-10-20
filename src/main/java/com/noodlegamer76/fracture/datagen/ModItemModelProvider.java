@@ -29,6 +29,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     final ResourceLocation INKWOOD_LOG_TEXTURE = new ResourceLocation(FractureMod.MODID, "block/inkwood_log");
     final ResourceLocation INKWOOD_LOG_TOP = new ResourceLocation(FractureMod.MODID, "block/inkwood_log_top");
     final ResourceLocation STRIPPED_INKWOOD_WOOD = new ResourceLocation(FractureMod.MODID, "block/inkwood_stripped_log");
+    final ResourceLocation INKWOOD_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/inkwood_bookshelf");
+    public static final ResourceLocation FLESH_SPRAYER = new ResourceLocation(FractureMod.MODID, "block/flesh_sprayer");
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, FractureMod.MODID, existingFileHelper);
     }
@@ -80,6 +82,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         cubeColumn("inkwood_wood", INKWOOD_LOG_TEXTURE, INKWOOD_LOG_TEXTURE);
         cubeColumn("inkwood_stripped_log", STRIPPED_INKWOOD_WOOD, INKWOOD_LOG_TOP);
         cubeColumn("inkwood_stripped_wood", STRIPPED_INKWOOD_WOOD, STRIPPED_INKWOOD_WOOD);
+        cubeColumn("inkwood_bookshelf", INKWOOD_BOOKSHELF, STRIPPED_INKWOOD_WOOD);
         stairsItem(InitBlocks.INKWOOD_STAIRS_BLOCK, INKWOOD_PLANKS);
         slabItem(InitBlocks.INKWOOD_SLAB_BLOCK, INKWOOD_PLANKS);
         fenceItem(InitBlocks.INKWOOD_FENCE_BLOCK, InitBlocks.INKWOOD_PLANKS_BLOCK);
@@ -92,6 +95,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.INKWOOD_HANGING_SIGN_ITEM);
         simpleItem(InitItems.INKWOOD_BOAT_ITEM);
         simpleItem(InitItems.INKWOOD_CHEST_BOAT_ITEM);
+        simpleItem(InitItems.INVERTED_GLASSES);
+
+        simpleItem(InitItems.BLOOD_SLIME_BALL);
+
+        cubeColumn("flesh_sprayer", FLESH_BLOCK, FLESH_SPRAYER);
+
+        saplingItem(InitBlocks.INKWOOD_SAPLING);
+
 
         //some examples
         //withExistingParent(InitItems.WARDLING_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

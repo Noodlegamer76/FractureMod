@@ -22,14 +22,28 @@ public class FleshParticleSpawner extends Block {
         int y = pos.getY();
         int z = pos.getZ();
 
-        for(int i = 0; i < 14; ++i) {
-            double d0 = (Math.random() * 2 - 1);
-            double d1 = -1;
-            double d2 = (Math.random() * 2 - 1);
-            Vec3 direction = new Vec3(d0, d1, d2).normalize();
-            level.addParticle(InitParticles.BLOOD_PARTICLES.get(),
-                    0.5 + pos.getX() + Math.random() - 0.5, pos.getY() + Math.random() - 0.5, 0.5 + pos.getZ() + Math.random() - 0.5,
-                    direction.x * (Math.random() * 2), direction.y * (Math.random() * 2), direction.z * (Math.random() * 2));
+        if (!level.getBlockState(pos.below()).isSolid()) {
+            for(int i = 0; i < 10; ++i) {
+                double d0 = (Math.random() * 2 - 1);
+                double d1 = -1;
+                double d2 = (Math.random() * 2 - 1);
+                Vec3 direction = new Vec3(d0, d1, d2).normalize();
+                level.addParticle(InitParticles.BLOOD_PARTICLES.get(),
+                        0.5 + pos.getX() + Math.random() - 0.5, pos.getY() + Math.random() - 0.5, 0.5 + pos.getZ() + Math.random() - 0.5,
+                        direction.x * (Math.random() * 2), direction.y * (Math.random() * 2), direction.z * (Math.random() * 2));
+            }
         }
+        if (!level.getBlockState(pos.above()).isSolid()) {
+            for(int i = 0; i < 10; ++i) {
+                double d0 = (Math.random() * 2 - 1);
+                double d1 = 1;
+                double d2 = (Math.random() * 2 - 1);
+                Vec3 direction = new Vec3(d0, d1, d2).normalize();
+                level.addParticle(InitParticles.BLOOD_PARTICLES.get(),
+                        0.5 + pos.getX() + Math.random() - 0.5, pos.getY() + Math.random() + 0.5, 0.5 + pos.getZ() + Math.random() - 0.5,
+                        direction.x * (Math.random() * 2), direction.y * (Math.random() * 6), direction.z * (Math.random() * 2));
+            }
+        }
+
     }
 }

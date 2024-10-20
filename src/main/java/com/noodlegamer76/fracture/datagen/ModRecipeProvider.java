@@ -1,5 +1,6 @@
 package com.noodlegamer76.fracture.datagen;
 
+import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -14,6 +15,8 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import java.util.function.Consumer;
+
+import static com.noodlegamer76.fracture.datagen.ModItemTagGenerator.INKWOOD_LOGS;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
     public ModRecipeProvider(PackOutput pOutput) {
@@ -61,6 +64,25 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         wall(pWriter, RecipeCategory.BUILDING_BLOCKS, InitItems.CRACKED_DARKSTONE_BRICK_WALL.get(), InitItems.CRACKED_DARKSTONE_BRICKS.get());
 
         polished(pWriter, RecipeCategory.BUILDING_BLOCKS, InitItems.FLESH_BLOCK.get(), Items.ROTTEN_FLESH);
+
+        planksFromLogs(pWriter, InitItems.INKWOOD_PLANKS_ITEM.get(), INKWOOD_LOGS, 4);
+        woodFromLogs(pWriter, InitItems.INKWOOD_WOOD_ITEM.get(), InitItems.INKWOOD_LOG_ITEM.get());
+        stairs(pWriter, InitItems.INKWOOD_STAIRS_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        slab(pWriter, RecipeCategory.BUILDING_BLOCKS, InitItems.INKWOOD_SLAB_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        fence(pWriter, InitItems.INKWOOD_FENCE_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        fenceGate(pWriter, InitItems.INKWOOD_FENCE_GATE_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        door(pWriter, InitItems.INKWOOD_DOOR_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        trapdoor(pWriter, InitItems.INKWOOD_TRAPDOOR_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        pressurePlate(pWriter, InitItems.INKWOOD_PRESSURE_PLATE_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        button(pWriter, InitItems.INKWOOD_BUTTON_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        hangingSign(pWriter, InitItems.INKWOOD_HANGING_SIGN_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        sign(pWriter, InitItems.INKWOOD_SIGN_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        woodenBoat(pWriter, InitItems.INKWOOD_BOAT_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        chestBoat(pWriter, InitItems.INKWOOD_CHEST_BOAT_ITEM.get(), InitItems.INKWOOD_PLANKS_ITEM.get());
+        bookshelf(pWriter, Items.BOOK, InitItems.INKWOOD_PLANKS_ITEM.get(), InitItems.INKWOOD_BOOKSHELF.get());
+        surroundWith8(pWriter, InitItems.BLOOD_SLIME_BALL.get(), Items.BOOKSHELF, InitItems.BLOODY_BOOKSHELF.get());
+
+
     }
 
     protected static void surroundWith8(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike middle, ItemLike surround, ItemLike result) {
@@ -75,8 +97,56 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(pFinishedRecipeConsumer);
     }
 
+    protected static void bookshelf(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike book, ItemLike wood, ItemLike result) {
+        ShapedRecipeBuilder
+                .shaped(RecipeCategory.BUILDING_BLOCKS, result, 8)
+                .define('#', Ingredient.of(wood))
+                .define('-', Ingredient.of(book))
+                .pattern("###")
+                .pattern("---")
+                .pattern("###")
+                .unlockedBy(getHasName(book), has(book))
+                .save(pFinishedRecipeConsumer);
+    }
+
     protected static void stairs(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike stairs, ItemLike ingredient) {
         stairBuilder(stairs, Ingredient.of(ingredient))
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(pFinishedRecipeConsumer);
+    }
+
+    protected static void fence(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike fence, ItemLike ingredient) {
+        fenceBuilder(fence, Ingredient.of(ingredient))
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(pFinishedRecipeConsumer);
+    }
+
+    protected static void fenceGate(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike gate, ItemLike ingredient) {
+        fenceGateBuilder(gate, Ingredient.of(ingredient))
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(pFinishedRecipeConsumer);
+    }
+
+    protected static void door(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike door, ItemLike ingredient) {
+        doorBuilder(door, Ingredient.of(ingredient))
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(pFinishedRecipeConsumer);
+    }
+
+    protected static void trapdoor(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike trapdoor, ItemLike ingredient) {
+        trapdoorBuilder(trapdoor, Ingredient.of(ingredient))
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(pFinishedRecipeConsumer);
+    }
+
+    protected static void button(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike button, ItemLike ingredient) {
+        buttonBuilder(button, Ingredient.of(ingredient))
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(pFinishedRecipeConsumer);
+    }
+
+    protected static void sign(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike sign, ItemLike ingredient) {
+        signBuilder(sign, Ingredient.of(ingredient))
                 .unlockedBy(getHasName(ingredient), has(ingredient))
                 .save(pFinishedRecipeConsumer);
     }

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:bookshelf"
+    },
+    "-": {
+      "item": "fracture:blood_slime_ball"
+    }
+  },
+  "pattern": [
+    "###",
+    "#-#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "fracture:bloody_bookshelf"
+  },
+  "show_notification": true
+}

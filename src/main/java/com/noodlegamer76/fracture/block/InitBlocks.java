@@ -7,6 +7,7 @@ import com.noodlegamer76.fracture.block.signs.ModWallHangingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModWallSignBlock;
 import com.noodlegamer76.fracture.client.util.ModWoodTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
+import com.noodlegamer76.fracture.worldgen.tree.InkwoodTreeGrower;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -25,15 +26,20 @@ public class InitBlocks {
     public static final RegistryObject<Block> FOG_EMITTER = BLOCKS.register("fog_emitter",
             () -> new FogEmitterBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryObject<Block> INWKOOD_LEAVES = BLOCKS.register("inkwood_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+    public static final RegistryObject<Block> INKWOOD_SAPLING = BLOCKS.register("inkwood_sapling",
+            () -> new SaplingBlock(new InkwoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
     public static final RegistryObject<Block> FLESH_SPRAYER = BLOCKS.register("flesh_sprayer",
             () -> new FleshParticleSpawner(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
 
-    public static final RegistryObject<Block> CUSTOMIZABLE_CHAIR = BLOCKS.register("customizable_chair",
-            () -> new CustomizableChair(BlockBehaviour.Properties.of().strength(0.4F)));
-
 
     public static final RegistryObject<Block> BLOOD_SLIME_BLOCK = BLOCKS.register("blood_slime_block",
-            () -> new BloodSlimeBlock(BlockBehaviour.Properties.of()));
+            () -> new BloodSlimeBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).noCollission()));
+
+    public static final RegistryObject<Block> INKWOOD_BOOKSHELF = BLOCKS.register("inkwood_bookshelf",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.BOOKSHELF)));
 
     public static final RegistryObject<Block> FLESH_BLOCK = BLOCKS.register("flesh_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED).strength(0.4F)));
@@ -122,13 +128,13 @@ public class InitBlocks {
 
 
     public static final RegistryObject<Block> INKWOOD_LOG_BLOCK = BLOCKS.register("inkwood_log",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+            () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> INKWOOD_WOOD_BLOCK = BLOCKS.register( "inkwood_wood",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+            () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> INKWOOD_STRIPPED_LOG_BLOCK = BLOCKS.register( "inkwood_stripped_log",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+            () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> INKWOOD_STRIPPED_WOOD_BLOCK = BLOCKS.register( "inkwood_stripped_wood",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+            () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
     public static final RegistryObject<Block> INKWOOD_PLANKS_BLOCK = BLOCKS.register( "inkwood_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> INKWOOD_STAIRS_BLOCK = BLOCKS.register( "inkwood_stairs",

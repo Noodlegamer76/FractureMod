@@ -162,6 +162,15 @@
         "projection": "rigid",
         "processors": "minecraft:empty"
       }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "fracture:flesh_dungeon/paths/stairs_2",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
     }
   ]
 }

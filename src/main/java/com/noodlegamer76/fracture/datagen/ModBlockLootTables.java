@@ -4,6 +4,7 @@ import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.RegistryObject;
@@ -72,7 +73,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         dropSelf(InitBlocks.FLESH_SPRAYER.get());
         dropSelf(InitBlocks.FOG_EMITTER.get());
-        dropSelf(InitBlocks.CUSTOMIZABLE_CHAIR.get());
 
         dropOther(InitBlocks.BLOOD_BLOCK.get(), Blocks.BIRCH_DOOR);
 
@@ -85,7 +85,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.INKWOOD_SLAB_BLOCK.get());
         dropSelf(InitBlocks.INKWOOD_FENCE_BLOCK.get());
         dropSelf(InitBlocks.INKWOOD_FENCE_GATE_BLOCK.get());
-        dropSelf(InitBlocks.INKWOOD_DOOR_BLOCK.get());
         dropSelf(InitBlocks.INKWOOD_TRAPDOOR_BLOCK.get());
         dropSelf(InitBlocks.INKWOOD_PRESSURE_PLATE_BLOCK.get());
         dropSelf(InitBlocks.INKWOOD_BUTTON_BLOCK.get());
@@ -94,8 +93,17 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get());
         dropSelf(InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get());
 
-        //this.add(InitBlocks.WHITE_COSMIC_LEAVES.get(), (block) ->
-        //        createLeavesDrops(block, InitBlocks.WHITE_COSMIC_LEAVES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        dropSelf(InitBlocks.BLOOD_SLIME_BLOCK.get());
+        dropSelf(InitBlocks.INKWOOD_BOOKSHELF.get());
+
+        this.add(InitBlocks.INKWOOD_DOOR_BLOCK.get(), (block) ->
+                createDoorTable(InitBlocks.INKWOOD_DOOR_BLOCK.get()));
+
+        dropSelf(InitBlocks.INKWOOD_SAPLING.get());
+
+        this.add(InitBlocks.INWKOOD_LEAVES.get(), (block) ->
+                createLeavesDrops(block, InitBlocks.INWKOOD_LEAVES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
         //dropSelf(BlockInit.CRYSTALLIZED_DIRT.get());
 
         //this.add(BlockInit.RAINBOW_SLAB.get(),

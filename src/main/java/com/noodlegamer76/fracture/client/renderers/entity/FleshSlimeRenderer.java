@@ -24,6 +24,7 @@ public class FleshSlimeRenderer extends GeoEntityRenderer<FleshSlimeEntity> {
     public void render(FleshSlimeEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         this.shadowRadius = 0.25F * (float)entity.getSize();
         float f = 0.999F;
+        poseStack.pushPose();
         poseStack.scale(0.999F, 0.999F, 0.999F);
         poseStack.translate(0.0F, 0.001F, 0.0F);
         float f1 = (float)entity.getSize();
@@ -31,6 +32,7 @@ public class FleshSlimeRenderer extends GeoEntityRenderer<FleshSlimeEntity> {
         float f3 = 1.0F / (f2 + 1.0F);
         poseStack.scale(f3 * f1, 1.0F / f3 * f1, f3 * f1);
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        poseStack.popPose();
     }
 
     @Override

@@ -11,7 +11,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    DENIM("decor", 64, new int[]{1, 1, 2, 1}, 0,
+    TRINKETS("inverted_glasses", 64, new int[]{1, 1, 2, 1}, 0,
             SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(Items.DEBUG_STICK));
 
     private final String name;

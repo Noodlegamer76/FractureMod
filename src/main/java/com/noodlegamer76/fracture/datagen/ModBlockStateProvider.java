@@ -19,6 +19,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
     public static final ResourceLocation DARKSTONE = new ResourceLocation(FractureMod.MODID, "block/darkstone");
     public static final ResourceLocation BLOODY_WOOD = new ResourceLocation(FractureMod.MODID, "block/bloody_wood");
     public static final ResourceLocation BLOODY_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/bloody_bookshelf");
+    public static final ResourceLocation INKWOOD_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/inkwood_bookshelf");
+    public static final ResourceLocation INKWOOD_PLANKS = new ResourceLocation(FractureMod.MODID, "block/inkwood_planks");
+    public static final ResourceLocation FLESH_SPRAYER = new ResourceLocation(FractureMod.MODID, "block/flesh_sprayer");
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, FractureMod.MODID, exFileHelper);
     }
@@ -63,6 +66,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(InitBlocks.FLESHY_CHISELED_DARKSTONE_BRICKS);
 
         cubeColumn(InitBlocks.BLOODY_BOOKSHELF, BLOODY_BOOKSHELF, BLOODY_WOOD);
+        cubeColumn(InitBlocks.INKWOOD_BOOKSHELF, INKWOOD_BOOKSHELF, INKWOOD_PLANKS);
+        cubeColumn(InitBlocks.FLESH_SPRAYER, FLESH_BLOCK, FLESH_SPRAYER);
 
         final ResourceLocation INKWOOD_PLANKS_TEXTURE = new ResourceLocation(FractureMod.MODID, "block/inkwood_planks");
         final ResourceLocation INKWOOD_LOG_TEXTURE = new ResourceLocation(FractureMod.MODID, "block/inkwood_log");
@@ -91,6 +96,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         signBlock((StandingSignBlock) InitBlocks.INKWOOD_STANDING_SIGN_BLOCK.get(), (WallSignBlock) InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get(), INKWOOD_PLANKS_TEXTURE);
 
         hangingSignBlock(InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get(), InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get(), INKWOOD_PLANKS_TEXTURE);
+
+        cutoutBlockWithItem(InitBlocks.INWKOOD_LEAVES);
+        cross(InitBlocks.INKWOOD_SAPLING);
     }
 
     public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {

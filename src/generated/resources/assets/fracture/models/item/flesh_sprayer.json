@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "fracture:block/flesh_sprayer",
+    "side": "fracture:block/flesh_block"
+  }
+}
