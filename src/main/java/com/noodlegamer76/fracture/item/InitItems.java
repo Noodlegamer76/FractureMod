@@ -6,6 +6,8 @@ import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
+import com.noodlegamer76.fracture.util.ArmorTiers;
+import com.noodlegamer76.fracture.util.ToolTiers;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -22,6 +24,9 @@ public class InitItems {
     //test item for coding stuff
     public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item",
             () -> new TestItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> PARASITIC_SWORD = ITEMS.register("parasitic_sword",
+            () -> new ParasiticSword(ToolTiers.ModItemTier.BLOOD, 3, -2.4F, new Item.Properties()));
 
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
@@ -48,7 +53,7 @@ public class InitItems {
             () -> new ForgeSpawnEggItem(InitEntities.BLOOD_SLIME, new Color(74, 10, 3).getRGB(), new Color(255, 0, 0).getRGB(), new Item.Properties()));
 
     public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
-            () -> new InvertedGlasses(ModArmorMaterials.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));
+            () -> new InvertedGlasses(ArmorTiers.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));
 
 
     public static final RegistryObject<Item> BLOOD_SLIME_BLOCK = ITEMS.register("blood_slime_block",

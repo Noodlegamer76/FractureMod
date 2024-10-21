@@ -9,6 +9,7 @@ import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
+import com.noodlegamer76.fracture.event.DamageEvents;
 import com.noodlegamer76.fracture.event.RenderLevelEvent;
 import com.noodlegamer76.fracture.event.ShaderEvents;
 import com.noodlegamer76.fracture.fluid.InitFluidTypes;
@@ -73,6 +74,7 @@ public class FractureMod
         modEventBus.register(new FractureTab());
         modEventBus.register(new RenderLevelEvent());
         modEventBus.register(new ShaderEvents());
+        modEventBus.register(new DamageEvents());
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

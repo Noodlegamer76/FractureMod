@@ -49,6 +49,7 @@ public class FractureTab {
             event.accept(InitItems.SMALL_FLESH_BULB);
             event.accept(InitItems.TENDRILS);
             event.accept(InitItems.BLOOD_SLIME_BLOCK);
+            event.accept(InitItems.PARASITIC_SWORD);
 
             event.accept(InitItems.INKWOOD_LOG_ITEM);
             event.accept(InitItems.INKWOOD_WOOD_ITEM);

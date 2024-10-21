@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.item;
+package com.noodlegamer76.fracture.util;
 
 import com.noodlegamer76.fracture.FractureMod;
 import net.minecraft.sounds.SoundEvent;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum ModArmorMaterials implements ArmorMaterial {
+public enum ArmorTiers implements ArmorMaterial {
     TRINKETS("inverted_glasses", 64, new int[]{1, 1, 2, 1}, 0,
             SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(Items.DEBUG_STICK));
 
@@ -25,7 +25,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     private static final int[] BASE_DURIBILITY = {13, 15, 16, 11};
 
-    ModArmorMaterials(String name, int durabilityMuntiplyer, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngerdient) {
+    ArmorTiers(String name, int durabilityMuntiplyer, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngerdient) {
         this.name = name;
         this.durabilityMuntiplyer = durabilityMuntiplyer;
         this.protectionAmounts = protectionAmounts;
