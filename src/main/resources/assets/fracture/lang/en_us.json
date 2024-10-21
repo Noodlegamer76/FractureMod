@@ -63,6 +63,8 @@
 	"block.fracture.inkwood_bookshelf": "Inkwood Bookshelf",
 	"block.fracture.inkwood_hanging_sign": "Inkwood Hanging Sign",
 	"block.fracture.inkwood_sign": "Inkwood Sign",
+	"block.fracture.inkwood_leaves": "Inkwood Leaves",
+	"block.fracture.inkwood_sapling": "Inkwood Sapling",
 	"block.fracture.blood_block": "Blood",
 
 	"entity.fracture.ankle_biter": "Ankle Biter",
@@ -71,5 +73,7 @@
 	"entity.fracture.blood_slime": "Blood Slime",
 	"entity.fracture.mod_chest_boat": "Boat With Chest",
 
-	"filled_map.flesh_treasure_map": "Fleshy Treasure Map"
+	"filled_map.flesh_treasure_map": "Fleshy Treasure Map",
+
+	"fracture.creative_tab.fracture": "Fracture"
 }

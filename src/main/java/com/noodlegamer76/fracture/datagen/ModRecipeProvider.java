@@ -82,6 +82,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         bookshelf(pWriter, Items.BOOK, InitItems.INKWOOD_PLANKS_ITEM.get(), InitItems.INKWOOD_BOOKSHELF.get());
         surroundWith8(pWriter, InitItems.BLOOD_SLIME_BALL.get(), Items.BOOKSHELF, InitItems.BLOODY_BOOKSHELF.get());
 
+        twoByTwoPacker(pWriter, RecipeCategory.REDSTONE, InitItems.BLOOD_SLIME_BLOCK.get(), InitItems.BLOOD_SLIME_BALL.get());
+
 
     }
 
