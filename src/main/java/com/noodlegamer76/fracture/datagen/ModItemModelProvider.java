@@ -68,6 +68,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.BLOOD_BUCKET);
 
         handHeldItem(InitItems.BROOM);
+        handHeldItem(InitItems.PARASITIC_SWORD);
 
         spawnEggItem(InitItems.ANKLE_BITER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_WALKER_SPAWN_EGG);
@@ -102,6 +103,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         cubeColumn("flesh_sprayer", FLESH_BLOCK, FLESH_SPRAYER);
 
         saplingItem(InitBlocks.INKWOOD_SAPLING);
+
+
 
 
         //some examples
