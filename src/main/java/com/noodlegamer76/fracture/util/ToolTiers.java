@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public class ToolTiers {
     public enum ModItemTier implements Tier {
-        BLOOD(2, 350, 26.0F, 2.0F, 15, () -> {
+        BLOOD(2, 1200, 26.0F, 2.0F, 15, () -> {
             return Ingredient.of(InitItems.LIVING_FLESH.get());
         });
 
