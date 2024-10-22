@@ -1,6 +1,7 @@
 package com.noodlegamer76.fracture.entity;
 
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
+import com.noodlegamer76.fracture.entity.ai.behavior.BloodSlimeSplit;
 import com.noodlegamer76.fracture.entity.ai.behavior.BounceToWalkTarget;
 import com.noodlegamer76.fracture.entity.ai.behavior.SuperJump;
 import com.noodlegamer76.fracture.particles.InitParticles;
@@ -46,7 +47,6 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, SmartBrainOwner<BloodSlimeEntity> {
     public static final EntityDataAccessor<Boolean> DATA_EXPLODE = SynchedEntityData.defineId(BloodSlimeEntity.class, EntityDataSerializers.BOOLEAN);
@@ -58,6 +58,7 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
 
     public final int MOVE_JUMP = 1;
     public final int ATTACK_SUPER_JUMP = 2;
+    public final int ATTACK_SPIT = 3;
 
     public int animationDelay = 0;
 
@@ -68,8 +69,8 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.125D)
-                .add(Attributes.ATTACK_DAMAGE, 25.0D)
-                .add(Attributes.MAX_HEALTH, 120.0D)
+                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.MAX_HEALTH, 250.0D)
                 .add(Attributes.ARMOR, 6.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D)
                 .add(Attributes.FOLLOW_RANGE, 24);
@@ -136,7 +137,10 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
                                 .startCondition((e) -> this.attackNumber == MOVE_JUMP && e.onGround()),
                         new SuperJump<BloodSlimeEntity>()
                                 .startCondition((e) -> this.attackNumber == ATTACK_SUPER_JUMP && e.onGround())
-                                .noTimeout()
+                                .noTimeout(),
+                        new BloodSlimeSplit<BloodSlimeEntity>()
+                                .startCondition((e) -> this.attackNumber == ATTACK_SPIT)
+
 
         ));
     }
@@ -178,9 +182,10 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
 
     private <T extends GeoAnimatable> PlayState superJump(AnimationState<T> state) {
         if ((entityData.get(DATA_ATTACK) == 2 || !state.getController().hasAnimationFinished())) {
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 100; i++) {
                 Vec3 direction = new Vec3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
-                level().addParticle(InitParticles.BLOOD_PARTICLES.get(), position().x, position().y, position().z, direction.x * 5, direction.y * 5, direction.z * 5);
+                level().addParticle(InitParticles.BLOOD_PARTICLES.get(), position().x, position().y, position().z,
+                        direction.x * (Math.random() * 5), direction.y * (Math.random() * 5), direction.z * (Math.random() * 5));
             }
             state.setAnimation(SUPER_JUMP);
             return PlayState.STOP;

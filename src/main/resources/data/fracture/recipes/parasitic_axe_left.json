@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ee",
+    "ea ",
+    " a "
+  ],
+  "key": {
+    "e": {
+      "item": "fracture:living_flesh"
+    },
+    "a": {
+      "item": "fracture:fleshy_bone"
+    }
+  },
+  "result": {
+    "item": "fracture:parasitic_axe",
+    "count": 1
+  }
+}

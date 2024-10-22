@@ -83,8 +83,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         surroundWith8(pWriter, InitItems.BLOOD_SLIME_BALL.get(), Items.BOOKSHELF, InitItems.BLOODY_BOOKSHELF.get());
 
         twoByTwoPacker(pWriter, RecipeCategory.REDSTONE, InitItems.BLOOD_SLIME_BLOCK.get(), InitItems.BLOOD_SLIME_BALL.get());
-
-
     }
 
     protected static void surroundWith8(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike middle, ItemLike surround, ItemLike result) {

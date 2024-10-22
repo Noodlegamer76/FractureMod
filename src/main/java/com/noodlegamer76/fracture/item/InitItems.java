@@ -27,11 +27,19 @@ public class InitItems {
 
     public static final RegistryObject<Item> PARASITIC_SWORD = ITEMS.register("parasitic_sword",
             () -> new ParasiticSword(ToolTiers.ModItemTier.BLOOD, 3, -2.4F, new Item.Properties()));
+    public static final RegistryObject<Item> PARASITIC_PICKAXE = ITEMS.register("parasitic_pickaxe",
+            () -> new ParasiticPickaxe(ToolTiers.ModItemTier.BLOOD, 2, -2.4F, new Item.Properties()));
+    public static final RegistryObject<Item> PARASITIC_AXE = ITEMS.register("parasitic_axe",
+            () -> new ParasiticAxe(ToolTiers.ModItemTier.BLOOD, 6, -1.2F, new Item.Properties()));
+    public static final RegistryObject<Item> PARASITIC_SHOVEL = ITEMS.register("parasitic_shovel",
+            () -> new ParasiticShovel(ToolTiers.ModItemTier.BLOOD, 1, -2.4F, new Item.Properties()));
 
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> BLOOD_SLIME_BALL = ITEMS.register("blood_slime_ball",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FLESHY_BONE = ITEMS.register("fleshy_bone",
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> INKWOOD_LEAVES = ITEMS.register("inkwood_leaves",

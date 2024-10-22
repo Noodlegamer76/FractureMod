@@ -19,7 +19,7 @@ import static com.noodlegamer76.fracture.entity.BloodSlimeEntity.DATA_EXPLODE;
 
 public class SuperJump<E extends MultiAttackMonster> extends ExtendedBehaviour<E> {
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS;
-    private int completionTime = 45;
+    private int completionTime = 40;
     private boolean doGroundPound = true;
 
     @Override
@@ -40,12 +40,12 @@ public class SuperJump<E extends MultiAttackMonster> extends ExtendedBehaviour<E
 
     @Override
     protected void tick(E entity) {
-        if (completionTime == 23) {
+        if (completionTime == 2) {
             Vec3 direction = entity.getPosition(0).subtract(entity.getNavigation().getTargetPos().getCenter()).normalize().reverse();
             entity.setDeltaMovement(direction.x, 2, direction.z);
         }
 
-        if (entity.onGround() && doGroundPound && completionTime <= 21) {
+        if (entity.onGround() && doGroundPound && completionTime <= 0) {
             entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 4.5f, Level.ExplosionInteraction.NONE);
             doGroundPound = !doGroundPound;
             if (entity instanceof BloodSlimeEntity slime) {
@@ -57,7 +57,7 @@ public class SuperJump<E extends MultiAttackMonster> extends ExtendedBehaviour<E
 
     @Override
     protected void stop(E entity) {
-        completionTime = 45;
+        completionTime = 40;
         doGroundPound = true;
         entity.attackNumber = 0;
     }

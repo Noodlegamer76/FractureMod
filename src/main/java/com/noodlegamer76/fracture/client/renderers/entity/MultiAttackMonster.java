@@ -13,6 +13,8 @@ public abstract class MultiAttackMonster extends Monster {
 
     public int attackNumber = 0;
     public int defaultAttacks = 0;
+    public int ticksSinceLastHit = 0;
+    public boolean doMinionAttack = true;
 
     protected MultiAttackMonster(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -20,8 +22,15 @@ public abstract class MultiAttackMonster extends Monster {
 
     @Override
     public void tick() {
+        ticksSinceLastHit++;
+        if (getLastHurtMobTimestamp() == 0) {
+            ticksSinceLastHit = 0;
+        }
         setAttackNumber();
         getEntityData().set(DATA_ATTACK, attackNumber);
+        if (!level().isClientSide) {
+           // System.out.println(defaultAttacks);
+        }
         super.tick();
     }
 
@@ -32,6 +41,11 @@ public abstract class MultiAttackMonster extends Monster {
         if (defaultAttacks % 7 == 0 && defaultAttacks != 0) {
             attackNumber = 2;
             defaultAttacks++;
+        }
+        if (getHealth() <= getMaxHealth() / 2 && doMinionAttack) {
+            attackNumber = 3;
+            defaultAttacks++;
+            doMinionAttack = false;
         }
     }
 

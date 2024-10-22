@@ -64,11 +64,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.INTESTINE);
         simpleItem(InitItems.HANGING_FLESH);
         simpleItem(InitItems.LIVING_FLESH);
+        simpleItem(InitItems.FLESHY_BONE);
 
         simpleItem(InitItems.BLOOD_BUCKET);
 
         handHeldItem(InitItems.BROOM);
         handHeldItem(InitItems.PARASITIC_SWORD);
+        handHeldItem(InitItems.PARASITIC_PICKAXE);
+        handHeldItem(InitItems.PARASITIC_AXE);
+        handHeldItem(InitItems.PARASITIC_SHOVEL);
 
         spawnEggItem(InitItems.ANKLE_BITER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_WALKER_SPAWN_EGG);
