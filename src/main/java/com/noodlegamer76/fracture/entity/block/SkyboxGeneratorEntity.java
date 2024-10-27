@@ -85,13 +85,13 @@ public class SkyboxGeneratorEntity extends BlockEntity {
         }
     }
 
-    @Override
-    public Component getDisplayName() {
-        return Component.translatable("e.e.e");
-    }
-
-    @Override
-    public @Nullable AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return null;
-    }
+    //@Override
+    //public Component getDisplayName() {
+    //    return Component.translatable("e.e.e");
+    //}
+//
+    //@Override
+    //public @Nullable AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+    //    return null;
+    //}
 }
