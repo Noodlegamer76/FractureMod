@@ -34,6 +34,9 @@ public class InitBlocks {
     public static final RegistryObject<Block> FLESH_SPRAYER = BLOCKS.register("flesh_sprayer",
             () -> new FleshParticleSpawner(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
 
+    public static final RegistryObject<Block> SKYBOX_GENERATOR = BLOCKS.register("skybox_generator",
+            () -> new SkyboxGenerator(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
+
 
     public static final RegistryObject<Block> BLOOD_SLIME_BLOCK = BLOCKS.register("blood_slime_block",
             () -> new BloodSlimeBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).noCollission()));

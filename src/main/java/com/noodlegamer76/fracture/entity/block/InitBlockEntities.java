@@ -13,6 +13,9 @@ public class InitBlockEntities {
     public static final RegistryObject<BlockEntityType<FogEmitterEntity>> FOG_EMITTER = BLOCK_ENTITIES.register("fog_emitter",
             () -> BlockEntityType.Builder.of(FogEmitterEntity::new, InitBlocks.FOG_EMITTER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<SkyboxGeneratorEntity>> SKYBOX_GENERATOR = BLOCK_ENTITIES.register("skybox_generator",
+            () -> BlockEntityType.Builder.of(SkyboxGeneratorEntity::new, InitBlocks.SKYBOX_GENERATOR.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<ModHangingSignBlockEntity>> INKWOOK_HANGING_SIGN = BLOCK_ENTITIES.register("inkwood_hanging_sign",
             () -> BlockEntityType.Builder.of(ModHangingSignBlockEntity::new, InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get(), InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<ModSignBlockEntity>> INKWOOD_SIGN = BLOCK_ENTITIES.register("inkwood_sign",

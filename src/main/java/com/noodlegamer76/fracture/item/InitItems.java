@@ -42,6 +42,9 @@ public class InitItems {
     public static final RegistryObject<Item> FLESHY_BONE = ITEMS.register("fleshy_bone",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> SKYBOX_GENERATOR = ITEMS.register("skybox_generator",
+            () -> new BlockItem(InitBlocks.SKYBOX_GENERATOR.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> INKWOOD_LEAVES = ITEMS.register("inkwood_leaves",
             () -> new BlockItem(InitBlocks.INWKOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> INKWOOD_SAPLING = ITEMS.register("inkwood_sapling",
