@@ -55,6 +55,7 @@ public class FractureTab {
             event.accept(InitItems.PARASITIC_AXE);
             event.accept(InitItems.PARASITIC_SHOVEL);
             event.accept(InitItems.SKYBOX_GENERATOR);
+            event.accept(InitItems.COMPACT_TNT);
 
             event.accept(InitItems.INKWOOD_LOG_ITEM);
             event.accept(InitItems.INKWOOD_WOOD_ITEM);

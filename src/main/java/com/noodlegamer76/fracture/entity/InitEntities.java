@@ -50,4 +50,9 @@ public class InitEntities {
             () -> EntityType.Builder.<ModChestBoatEntity>of(ModChestBoatEntity::new, MobCategory.MISC)
                     .sized(1.375f, 0.5625f)
                     .build("mod_chest_boat"));
+
+    public static final RegistryObject<EntityType<CompactPrimedTnt>> COMPACT_TNT = ENTITIES.register(("compact_tnt"),
+            () -> EntityType.Builder.<CompactPrimedTnt>of(CompactPrimedTnt::new, MobCategory.MISC)
+                    .sized(1F, 1F)
+                    .build("compact_tnt"));
 }

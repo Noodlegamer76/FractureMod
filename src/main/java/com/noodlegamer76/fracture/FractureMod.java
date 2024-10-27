@@ -18,6 +18,7 @@ import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.BloodParticle;
 import com.noodlegamer76.fracture.particles.InitParticles;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -29,6 +30,7 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -137,6 +139,7 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.FLESH_WALKER.get(), FleshWalkerRenderer::new);
             event.registerEntityRenderer(InitEntities.FLESH_SLIME.get(), FleshSlimeRenderer::new);
             event.registerEntityRenderer(InitEntities.BLOOD_SLIME.get(), BloodSlimeRenderer::new);
+            event.registerEntityRenderer(InitEntities.COMPACT_TNT.get(), CompactTntRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);
@@ -147,6 +150,11 @@ public class FractureMod
         public static void RegisterParticleProviders(RegisterParticleProvidersEvent event) {
             Minecraft.getInstance().particleEngine.register(InitParticles.BLOOD_PARTICLES.get(),
                     BloodParticle.Provider::new);
+        }
+
+        @SubscribeEvent
+        public static void colors(RegisterColorHandlersEvent event) {
+
         }
 
     }

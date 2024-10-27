@@ -26,6 +26,9 @@ public class InitBlocks {
     public static final RegistryObject<Block> FOG_EMITTER = BLOCKS.register("fog_emitter",
             () -> new FogEmitterBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryObject<Block> COMPACT_TNT = BLOCKS.register("compact_tnt",
+            () -> new CompactTntBlock(BlockBehaviour.Properties.copy(Blocks.TNT)));
+
     public static final RegistryObject<Block> INWKOOD_LEAVES = BLOCKS.register("inkwood_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
     public static final RegistryObject<Block> INKWOOD_SAPLING = BLOCKS.register("inkwood_sapling",

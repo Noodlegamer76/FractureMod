@@ -54,12 +54,16 @@ public class InitItems {
     public static final RegistryObject<Item> INKWOOD_SAPLING = ITEMS.register("inkwood_sapling",
             () -> new BlockItem(InitBlocks.INKWOOD_SAPLING.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> COMPACT_TNT = ITEMS.register("compact_tnt",
+            () -> new BlockItem(InitBlocks.COMPACT_TNT.get(), new Item.Properties()));
+
+
     public static final RegistryObject<Item> BROOM = ITEMS.register("broom",
             () -> new Broom(new Item.Properties()));
     public static final RegistryObject<Item> LIVING_FLESH = ITEMS.register("living_flesh",
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder().nutrition(2).saturationMod(6)
-                            .effect(new MobEffectInstance(MobEffects.POISON, 40, 2), 1).build())));
+                            .effect(new MobEffectInstance(MobEffects.POISON, 100, 2), 1).build())));
     public static final RegistryObject<Item> ANKLE_BITER_SPAWN_EGG = ITEMS.register("ankle_biter_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.ANKLE_BITER, new Color(74, 10, 3).getRGB(), new Color(74, 3, 3).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> FLESH_WALKER_SPAWN_EGG = ITEMS.register("flesh_walker_spawn_egg",
