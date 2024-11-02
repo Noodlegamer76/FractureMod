@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "fracture:block/compact_tnt_bottom",
+    "side": "fracture:block/compact_tnt_side",
+    "top": "fracture:block/compact_tnt_top"
+  }
+}

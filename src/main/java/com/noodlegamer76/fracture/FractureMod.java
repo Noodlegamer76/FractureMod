@@ -14,11 +14,14 @@ import com.noodlegamer76.fracture.event.RenderLevelEvent;
 import com.noodlegamer76.fracture.event.ShaderEvents;
 import com.noodlegamer76.fracture.fluid.InitFluidTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
+import com.noodlegamer76.fracture.gui.InitMenus;
+import com.noodlegamer76.fracture.gui.skyboxgenerator.SkyboxGeneratorScreen;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.BloodParticle;
 import com.noodlegamer76.fracture.particles.InitParticles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -64,27 +67,20 @@ public class FractureMod
         GeckoLib.initialize();
 
         //registers DeferredRegisters
+        InitEntities.ENTITIES.register(modEventBus);
         InitItems.ITEMS.register(modEventBus);
         InitBlocks.BLOCKS.register(modEventBus);
         InitParticles.PARTICLE_TYPES.register(modEventBus);
         InitFluids.FLUIDS.register(modEventBus);
         InitFluidTypes.FLUID_TYPES.register(modEventBus);
         InitBlockEntities.BLOCK_ENTITIES.register(modEventBus);
-        InitEntities.ENTITIES.register(modEventBus);
+        InitMenus.MENU_TYPES.register(modEventBus);
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(new FractureTab());
-        modEventBus.register(new RenderLevelEvent());
-        modEventBus.register(new ShaderEvents());
-        modEventBus.register(new DamageEvents());
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-
-
-        if(Dist.CLIENT.isClient()) {
-
-        }
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -117,12 +113,19 @@ public class FractureMod
     {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+
             ItemBlockRenderTypes.setRenderLayer(InitFluids.SOURCE_BLOOD.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(InitFluids.FLOWING_BLOOD.get(), RenderType.translucent());
 
             Sheets.addWoodType(ModWoodTypes.INKWOOD);
             EntityRenderers.register(InitEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
             EntityRenderers.register(InitEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, true));
+
+            event.enqueueWork(() -> {
+                MenuScreens.register(InitMenus.SKYBOX_GENERATOR.get(), SkyboxGeneratorScreen::new);
+            });
         }
 
         @SubscribeEvent
@@ -140,6 +143,7 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.FLESH_SLIME.get(), FleshSlimeRenderer::new);
             event.registerEntityRenderer(InitEntities.BLOOD_SLIME.get(), BloodSlimeRenderer::new);
             event.registerEntityRenderer(InitEntities.COMPACT_TNT.get(), CompactTntRenderer::new);
+            event.registerEntityRenderer(InitEntities.HANGING_CHAIN.get(), HangingChainRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);

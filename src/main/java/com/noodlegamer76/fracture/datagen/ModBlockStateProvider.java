@@ -22,6 +22,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     public static final ResourceLocation INKWOOD_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/inkwood_bookshelf");
     public static final ResourceLocation INKWOOD_PLANKS = new ResourceLocation(FractureMod.MODID, "block/inkwood_planks");
     public static final ResourceLocation FLESH_SPRAYER = new ResourceLocation(FractureMod.MODID, "block/flesh_sprayer");
+    public static final ResourceLocation SMOKE_STACK_SIDE = new ResourceLocation(FractureMod.MODID, "block/smoke_stack_side");
+    public static final ResourceLocation SMOKE_STACK_TOP = new ResourceLocation(FractureMod.MODID, "block/smoke_stack_top");
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, FractureMod.MODID, exFileHelper);
     }
@@ -99,6 +101,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         cutoutBlockWithItem(InitBlocks.INWKOOD_LEAVES);
         cross(InitBlocks.INKWOOD_SAPLING);
+
+        cubeTop(InitBlocks.SMOKE_STACK, SMOKE_STACK_SIDE, SMOKE_STACK_TOP);
+
+
+    }
+
+    private void cubeTop(RegistryObject<Block> blockRegistryObject, ResourceLocation side, ResourceLocation top) {
+        simpleBlock(blockRegistryObject.get(),
+                models().cubeTop(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), side, top).renderType("cutout"));
     }
 
     public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {

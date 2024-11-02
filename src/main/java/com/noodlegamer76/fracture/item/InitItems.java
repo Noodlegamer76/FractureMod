@@ -29,6 +29,9 @@ public class InitItems {
     public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item",
             () -> new TestItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> HANGING_CHAIN = ITEMS.register("hanging_chain",
+            () -> new HangingEntityItem(InitEntities.HANGING_CHAIN.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> PARASITIC_SWORD = ITEMS.register("parasitic_sword",
             () -> new ParasiticSword(ToolTiers.ModItemTier.BLOOD, 3, -2.4F, new Item.Properties()));
     public static final RegistryObject<Item> PARASITIC_PICKAXE = ITEMS.register("parasitic_pickaxe",
@@ -53,6 +56,9 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.INWKOOD_LEAVES.get(), new Item.Properties()));
     public static final RegistryObject<Item> INKWOOD_SAPLING = ITEMS.register("inkwood_sapling",
             () -> new BlockItem(InitBlocks.INKWOOD_SAPLING.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SMOKE_STACK = ITEMS.register("smoke_stack",
+            () -> new BlockItem(InitBlocks.SMOKE_STACK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> COMPACT_TNT = ITEMS.register("compact_tnt",
             () -> new BlockItem(InitBlocks.COMPACT_TNT.get(), new Item.Properties()));

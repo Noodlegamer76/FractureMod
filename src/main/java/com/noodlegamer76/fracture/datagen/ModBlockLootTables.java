@@ -93,6 +93,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get());
         dropSelf(InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get());
 
+        dropSelf(InitBlocks.SKYBOX_GENERATOR.get());
+        dropSelf(InitBlocks.COMPACT_TNT.get());
+        dropSelf(InitBlocks.SMOKE_STACK.get());
+
         dropSelf(InitBlocks.BLOOD_SLIME_BLOCK.get());
         dropSelf(InitBlocks.INKWOOD_BOOKSHELF.get());
 

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "fracture:block/smoke_stack_side",
+    "top": "fracture:block/smoke_stack_top"
+  }
+}

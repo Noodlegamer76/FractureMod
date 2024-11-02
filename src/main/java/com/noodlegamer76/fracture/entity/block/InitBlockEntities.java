@@ -20,4 +20,9 @@ public class InitBlockEntities {
             () -> BlockEntityType.Builder.of(ModHangingSignBlockEntity::new, InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get(), InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<ModSignBlockEntity>> INKWOOD_SIGN = BLOCK_ENTITIES.register("inkwood_sign",
             () -> BlockEntityType.Builder.of(ModSignBlockEntity::new, InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get(), InitBlocks.INKWOOD_STANDING_SIGN_BLOCK.get()).build(null));
+
+
+    public static final RegistryObject<BlockEntityType<SmokeStackEntity>> SMOKE_STACK = BLOCK_ENTITIES.register("smoke_stack",
+            () -> BlockEntityType.Builder.of(SmokeStackEntity::new, InitBlocks.SMOKE_STACK.get()).build(null));
+
 }

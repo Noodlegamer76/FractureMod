@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.client.renderers.ModRenderTypes;
 import com.noodlegamer76.fracture.client.util.RenderFog;
 import com.noodlegamer76.fracture.entity.block.FogEmitterEntity;
 import com.noodlegamer76.fracture.event.ShaderEvents;
@@ -17,13 +18,13 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
+import org.joml.sampling.UniformSampling;
+import org.lwjgl.opengl.GL33;
 import org.lwjgl.opengl.GL44;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
-
-import static com.noodlegamer76.fracture.event.ShaderEvents.FOG_RENDERTYPE;
 
 public class FogEmitterRenderer extends GeoBlockRenderer<FogEmitterEntity> {
 
@@ -34,16 +35,16 @@ public class FogEmitterRenderer extends GeoBlockRenderer<FogEmitterEntity> {
     @Override
     public void actuallyRender(PoseStack poseStack, FogEmitterEntity animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 
-        RenderSystem.setShader(() -> ShaderEvents.fog);
-        GL44.glUseProgram(ShaderEvents.fog.getId());
+        RenderSystem.setShader(() -> ModRenderTypes.fog);
+        GL44.glUseProgram(ModRenderTypes.fog.getId());
 
         RenderSystem.activeTexture(GL44.GL_TEXTURE0);
         RenderSystem.bindTexture(Minecraft.getInstance().getMainRenderTarget().getDepthTextureId());
-        RenderSystem.glUniform1i(GlStateManager._glGetUniformLocation(ShaderEvents.fog.getId(),  "Depth"), 0);
+        RenderSystem.glUniform1i(GlStateManager._glGetUniformLocation(ModRenderTypes.fog.getId(),  "Depth"), 0);
 
         RenderSystem.activeTexture(GL44.GL_TEXTURE1);
         RenderSystem.bindTexture(Minecraft.getInstance().getMainRenderTarget().getColorTextureId());
-        RenderSystem.glUniform1i(GlStateManager._glGetUniformLocation(ShaderEvents.fog.getId(),  "Color"), 1);
+        RenderSystem.glUniform1i(GlStateManager._glGetUniformLocation(ModRenderTypes.fog.getId(),  "Color"), 1);
 
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
@@ -61,12 +62,11 @@ public class FogEmitterRenderer extends GeoBlockRenderer<FogEmitterEntity> {
         RenderSystem.defaultBlendFunc();
         RenderSystem.disableBlend();
         RenderSystem.depthMask(true);
-
     }
 
     @Override
     public RenderType getRenderType(FogEmitterEntity animatable, ResourceLocation texture, @Nullable MultiBufferSource bufferSource, float partialTick) {
-        return FOG_RENDERTYPE;
+        return ModRenderTypes.FOG_RENDERTYPE;
     }
 
     @Override

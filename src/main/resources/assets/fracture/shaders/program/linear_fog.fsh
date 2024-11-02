@@ -42,4 +42,6 @@ void main() {
     vec3 finalColorBlend = mix(color, fogColorBlend, fogStrength);
 
     fragColor = vec4(vec3(DistanceFromCamera), fogStrength);
+
+    fragColor = vec4(1.0, 0.0, 0.0, fogStrength);
 }

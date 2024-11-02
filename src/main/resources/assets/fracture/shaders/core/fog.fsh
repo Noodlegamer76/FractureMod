@@ -38,6 +38,8 @@ void main()
 
      FragColor = vec4(vec3(distanceFromCamera / 10.0), 1.0);
 
+    FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+
 
    // ivec2 coord = ivec2(gl_FragCoord.xy);
    // vec4 depth = texelFetch(Depth, coord, 0);

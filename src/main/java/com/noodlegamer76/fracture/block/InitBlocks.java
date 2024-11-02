@@ -34,6 +34,9 @@ public class InitBlocks {
     public static final RegistryObject<Block> INKWOOD_SAPLING = BLOCKS.register("inkwood_sapling",
             () -> new SaplingBlock(new InkwoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
+    public static final RegistryObject<Block> SMOKE_STACK = BLOCKS.register("smoke_stack",
+            () -> new SmokeStack(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
     public static final RegistryObject<Block> FLESH_SPRAYER = BLOCKS.register("flesh_sprayer",
             () -> new FleshParticleSpawner(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
 

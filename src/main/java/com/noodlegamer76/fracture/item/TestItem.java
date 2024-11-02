@@ -44,6 +44,7 @@ public class TestItem extends Item {
             tempCamera.setup(level, serverplayer, true, false, Minecraft.getInstance().getPartialTick());
             //Minecraft.getInstance().setCameraEntity(tempCamera.getEntity());
         }
+        System.out.println(Minecraft.getInstance().player.getUUID());
         return super.use(level, player, usedHand);
     }
 }

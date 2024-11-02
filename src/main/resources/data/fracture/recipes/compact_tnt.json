@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#G#",
+        "GTG",
+        "#G#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:paper"
+        },
+        "G": {
+            "item": "minecraft:gunpowder"
+        },
+        "T": {
+            "item": "minecraft:tnt"
+        }
+    },
+    "result": {
+        "item": "fracture:compact_tnt",
+        "count": 1
+    }
+}

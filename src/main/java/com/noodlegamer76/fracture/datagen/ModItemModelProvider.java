@@ -31,6 +31,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     final ResourceLocation STRIPPED_INKWOOD_WOOD = new ResourceLocation(FractureMod.MODID, "block/inkwood_stripped_log");
     final ResourceLocation INKWOOD_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/inkwood_bookshelf");
     public static final ResourceLocation FLESH_SPRAYER = new ResourceLocation(FractureMod.MODID, "block/flesh_sprayer");
+    public static final ResourceLocation SMOKE_STACK_SIDE = new ResourceLocation(FractureMod.MODID, "block/smoke_stack_side");
+    public static final ResourceLocation SMOKE_STACK_TOP = new ResourceLocation(FractureMod.MODID, "block/smoke_stack_top");
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, FractureMod.MODID, existingFileHelper);
     }
@@ -108,7 +110,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         saplingItem(InitBlocks.INKWOOD_SAPLING);
 
-
+        cubeTop("smoke_stack", SMOKE_STACK_SIDE, SMOKE_STACK_TOP);
 
 
         //some examples
