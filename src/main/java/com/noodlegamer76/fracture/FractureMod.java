@@ -143,7 +143,6 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.FLESH_SLIME.get(), FleshSlimeRenderer::new);
             event.registerEntityRenderer(InitEntities.BLOOD_SLIME.get(), BloodSlimeRenderer::new);
             event.registerEntityRenderer(InitEntities.COMPACT_TNT.get(), CompactTntRenderer::new);
-            event.registerEntityRenderer(InitEntities.HANGING_CHAIN.get(), HangingChainRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);

@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class SkyboxGeneratorMenu extends AbstractContainerMenu {
     private final SkyboxGeneratorEntity blockEntity;
     private final ContainerLevelAccess containerLevelAccess;
-    private final ContainerData containerData;
+    public final ContainerData containerData;
 
     public SkyboxGeneratorMenu(int pContainerId, Inventory playerInventory, FriendlyByteBuf additionalData) {
         this(pContainerId, playerInventory, playerInventory.player.level().getBlockEntity(additionalData.readBlockPos()), new SimpleContainerData(7));
@@ -25,6 +25,7 @@ public class SkyboxGeneratorMenu extends AbstractContainerMenu {
         super(InitMenus.SKYBOX_GENERATOR.get(), pContainerId);
         if (entity instanceof SkyboxGeneratorEntity generatorEntity) {
             this.blockEntity = generatorEntity;
+            data = blockEntity.dataAccess;
         } else {
             throw new IllegalStateException("Incorrect block entity class (%s) passed into SkyboxGeneratorMenu!!"
                     .formatted(entity.getClass().getCanonicalName()));
@@ -34,10 +35,6 @@ public class SkyboxGeneratorMenu extends AbstractContainerMenu {
         this.addDataSlots(data);
 
         this.containerData = data;
-    }
-
-    public int getNumber() {
-        return containerData.get(5);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider {
     public SkyboxGeneratorEntity(BlockPos pPos, BlockState pBlockState) {
         super(InitBlockEntities.SKYBOX_GENERATOR.get(), pPos, pBlockState);
         assert level != null;
-        level.sendBlockUpdated(getBlockPos(), pBlockState, pBlockState, 2);
+        //level.sendBlockUpdated(getBlockPos(), pBlockState, pBlockState, 2);
     }
 
     @Override
@@ -49,7 +49,6 @@ public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider {
 
     @Override
     protected void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
         nbt.putInt("skybox", skybox);
         nbt.putInt("rotation_initial", rotationInitial);
         nbt.putInt("rotation_speed", rotationSpeed);
@@ -57,6 +56,7 @@ public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider {
         nbt.putInt("render_priority", renderPriority);
         nbt.putInt("min_render_distance", minRenderDistance);
         nbt.putInt("max_render_distance", maxRenderDistance);
+        super.saveAdditional(nbt);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider {
         return nbt;
     }
 
-    protected final ContainerData dataAccess = new ContainerData() {
+    public final ContainerData dataAccess = new ContainerData() {
         public int get(int index) {
             switch (index) {
                 case 0:
@@ -141,6 +141,7 @@ public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+        System.out.println(minRenderDistance);
         return new SkyboxGeneratorMenu(pContainerId, pPlayerInventory, this, this.dataAccess);
     }
 }

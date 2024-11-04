@@ -40,6 +40,7 @@ public class SkyboxGenerator extends Block implements EntityBlock {
         if (pLevel.getBlockEntity(pPos) instanceof SkyboxGeneratorEntity be) {
             if (pPlayer instanceof ServerPlayer serverPlayer) {
 
+
                 NetworkHooks.openScreen(serverPlayer, new MenuProvider() {
                     @Override
                     public Component getDisplayName() {
@@ -54,9 +55,15 @@ public class SkyboxGenerator extends Block implements EntityBlock {
                     }
                 }, buf -> {
                     buf.writeBlockPos(be.getBlockPos());
+
                 });
             }
+            if (!pLevel.isClientSide) {
+                //be.minRenderDistance += 1;
+                //System.out.println("BAZINGA");
+                //pLevel.sendBlockUpdated(be.getBlockPos(), pState, pState, 2);
+            }
         }
-        return InteractionResult.PASS;
+        return InteractionResult.SUCCESS;
     }
 }

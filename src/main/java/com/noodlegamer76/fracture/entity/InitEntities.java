@@ -1,10 +1,8 @@
 package com.noodlegamer76.fracture.entity;
 
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.entity.decoration.HangingChainEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.block.entity.LecternBlockEntity;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -56,9 +54,4 @@ public class InitEntities {
             () -> EntityType.Builder.<CompactPrimedTnt>of(CompactPrimedTnt::new, MobCategory.MISC)
                     .sized(1F, 1F)
                     .build("compact_tnt"));
-
-    public static final RegistryObject<EntityType<HangingChainEntity>> HANGING_CHAIN = ENTITIES.register(("hanging_chain"),
-            () -> EntityType.Builder.<HangingChainEntity>of(HangingChainEntity::new, MobCategory.MISC)
-                    .sized(0.5F, 0.5F)
-                    .build("hanging_chain"));
 }
