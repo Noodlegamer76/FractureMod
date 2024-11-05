@@ -8,14 +8,18 @@ import com.noodlegamer76.fracture.event.RenderLevelEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.phys.Vec3;
+import org.jline.utils.Colors;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class SkyboxGeneratorRenderer extends GeoBlockRenderer<SkyboxGeneratorEntity> {
@@ -26,8 +30,8 @@ public class SkyboxGeneratorRenderer extends GeoBlockRenderer<SkyboxGeneratorEnt
 
     @Override
     public boolean shouldRender(SkyboxGeneratorEntity pBlockEntity, Vec3 pCameraPos) {
-        float renderDistance = Minecraft.getInstance().gameRenderer.getRenderDistance();
-        return Vec3.atCenterOf(pBlockEntity.getBlockPos()).closerThan(pCameraPos, renderDistance);
+        //float renderDistance = Minecraft.getInstance().gameRenderer.getRenderDistance();
+        return true;
     }
 
     @Override
@@ -48,6 +52,20 @@ public class SkyboxGeneratorRenderer extends GeoBlockRenderer<SkyboxGeneratorEnt
                 return;
             }
         }
+
+        int beamLength = 250;
+        float[] colors = new float[3];
+        colors[0] = 0.1F;
+        colors[1] = 0.1F;
+        colors[2] = 0.1F;
+
+        poseStack.pushPose();
+        poseStack.translate(-0.5, 0.4, -0.5);
+        if (Minecraft.getInstance().level != null) {
+       //     BeaconRenderer.renderBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0F,
+       //             Minecraft.getInstance().level.getGameTime(), 0, beamLength, colors, 0.25F, 0.275F);
+        }
+        poseStack.popPose();
         RenderLevelEvent.positions.add(array);
     }
 

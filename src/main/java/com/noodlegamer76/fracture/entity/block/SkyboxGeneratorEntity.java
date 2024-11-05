@@ -40,15 +40,13 @@ public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider, 
     
     public SkyboxGeneratorEntity(BlockPos pPos, BlockState pBlockState) {
         super(InitBlockEntities.SKYBOX_GENERATOR.get(), pPos, pBlockState);
-        assert level != null;
-        //level.sendBlockUpdated(getBlockPos(), pBlockState, pBlockState, 2);
     }
 
     @Override
     public AABB getRenderBoundingBox() {
         float renderDistance = Minecraft.getInstance().gameRenderer.getRenderDistance();
-        return new AABB(new Vec3(renderDistance, renderDistance, renderDistance),
-                new Vec3(-renderDistance, -renderDistance, -renderDistance));
+        return new AABB(new Vec3(renderDistance + getBlockPos().getX(), renderDistance + getBlockPos().getY(), renderDistance + getBlockPos().getZ()),
+                new Vec3(-renderDistance + getBlockPos().getX(), -renderDistance + getBlockPos().getY(), -renderDistance + getBlockPos().getZ()));
     }
 
     @Override
