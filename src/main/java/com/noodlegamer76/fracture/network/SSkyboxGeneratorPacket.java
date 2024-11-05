@@ -55,6 +55,7 @@ public class SSkyboxGeneratorPacket {
         entity.minRenderDistance = minRenderDistance;
         entity.maxRenderDistance = maxRenderDistance;
         level.sendBlockUpdated(pos, entity.getBlockState(), entity.getBlockState(), 2);
+        entity.setChanged();
 
     }
 }

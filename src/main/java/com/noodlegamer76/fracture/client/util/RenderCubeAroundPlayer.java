@@ -82,6 +82,8 @@ public class RenderCubeAroundPlayer {
         }
     }
 
+
+
     public static void render(PoseStack poseStack, @Nullable ResourceLocation skyboxFolder) {
         if (skyboxFolder == null) {
             renderCube(poseStack, 0, 0, 255, 0,

@@ -1,5 +1,6 @@
 package com.noodlegamer76.fracture.gui.skyboxgenerator;
 
+import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.block.SkyboxGeneratorEntity;
 import com.noodlegamer76.fracture.network.PacketHandler;
 import com.noodlegamer76.fracture.network.SSkyboxGeneratorPacket;
@@ -13,6 +14,7 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
@@ -22,9 +24,11 @@ public class SkyboxGeneratorScreen extends AbstractContainerScreen<SkyboxGenerat
     private SkyboxGeneratorEntity entity;
     private int[] previous;
 
+    private static final ResourceLocation TEXTURE = new ResourceLocation(FractureMod.MODID, "textures/screens/skybox_generator.png");
+
     EditBox rotationSpeed;
     EditBox transparency;
-    EditBox minimumRenderDistance;
+    EditBox skybox;
     EditBox maxRenderDistance;
     EditBox renderpriority;
 
@@ -34,18 +38,7 @@ public class SkyboxGeneratorScreen extends AbstractContainerScreen<SkyboxGenerat
         data = pMenu.containerData;
         entity = pMenu.getBlockEntity();
 
-        if (data == null) {
-            System.out.println("data null");
-        }
-        else {
-            System.out.println("Data not null");
-        }
-        if (entity == null) {
-            System.out.println("entity null");
-        }
-        else {
-            System.out.println("entity not null");
-        }
+
         previous = new int[]{
                 menu.containerData.get(0),
                 menu.containerData.get(1),
@@ -60,6 +53,16 @@ public class SkyboxGeneratorScreen extends AbstractContainerScreen<SkyboxGenerat
     }
 
     @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int pMouseX, int pMouseY) {
+        guiGraphics.drawString(this.font, Component.translatable("gui.fracture.skybox_generator.render_priority"), 29, 136, -12829636, false);
+        guiGraphics.drawString(this.font, Component.translatable("gui.fracture.skybox_generator.max_render_distance"), 29, 107, -12829636, false);
+        guiGraphics.drawString(this.font, Component.translatable("gui.fracture.skybox_generator.skybox"), 29, 78, -12829636, false);
+        guiGraphics.drawString(this.font, Component.translatable("gui.fracture.skybox_generator.transparency"), 29, 49, -12829636, false);
+        guiGraphics.drawString(this.font, Component.translatable("gui.fracture.skybox_generator.rotation_speed"), 29, 20, -12829636, false);
+
+    }
+
+    @Override
     protected void rebuildWidgets() {
         super.rebuildWidgets();
     }
@@ -67,22 +70,22 @@ public class SkyboxGeneratorScreen extends AbstractContainerScreen<SkyboxGenerat
     @Override
     protected void init() {
         super.init();
-        rotationSpeed = new EditBox(this.font, this.leftPos + 30, this.topPos + 5, 118, 18, Component.translatable("gui.fracture.skyboxgenerator.RotationSpeed"));
-        transparency = new EditBox(this.font, this.leftPos + 30, this.topPos + 27, 118, 18, Component.translatable("gui.fracture.skyboxgenerator.Transparency"));
-        renderpriority = new EditBox(this.font, this.leftPos + 30, this.topPos + 49, 118, 18, Component.translatable("gui.fracture.skyboxgenerator.RenderPriority"));
-        minimumRenderDistance = new EditBox(this.font, this.leftPos + 30, this.topPos + 71, 118, 18, Component.translatable("gui.fracture.skyboxgenerator.RotationSpeed"));
-        maxRenderDistance = new EditBox(this.font, this.leftPos + 30, this.topPos + 93, 118, 18, Component.translatable("gui.fracture.skyboxgenerator.RotationSpeed"));
+        rotationSpeed = new EditBox(this.font, this.leftPos + 30, this.topPos + 29, 118, 18, Component.translatable("gui.fracture.skybox_generator.rotation_speed"));
+        transparency = new EditBox(this.font, this.leftPos + 30, this.topPos + 58, 118, 18, Component.translatable("gui.fracture.skybox_generator.transparency"));
+        renderpriority = new EditBox(this.font, this.leftPos + 30, this.topPos + 144, 118, 18, Component.translatable("gui.fracture.skybox_generator.render_priority"));
+        skybox = new EditBox(this.font, this.leftPos + 30, this.topPos + 87, 118, 18, Component.translatable("gui.fracture.skybox_generator.skybox"));
+        maxRenderDistance = new EditBox(this.font, this.leftPos + 30, this.topPos + 116, 118, 18, Component.translatable("gui.fracture.skybox_generator.max_render_distance"));
 
         rotationSpeed.setValue(String.valueOf(data.get(2)));
         transparency.setValue(String.valueOf(data.get(3)));
         renderpriority.setValue(String.valueOf(data.get(4)));
-        minimumRenderDistance.setValue(String.valueOf(data.get(5)));
+        skybox.setValue(String.valueOf(data.get(0)));
         maxRenderDistance.setValue(String.valueOf(data.get(6)));
 
         addRenderableWidget(rotationSpeed);
         addRenderableWidget(transparency);
         addRenderableWidget(renderpriority);
-        addRenderableWidget(minimumRenderDistance);
+        addRenderableWidget(skybox);
         addRenderableWidget(maxRenderDistance);
     }
 
@@ -105,7 +108,7 @@ public class SkyboxGeneratorScreen extends AbstractContainerScreen<SkyboxGenerat
             System.out.println("Invalid number format: " + e.getMessage());
         }
         try {
-            previous[5] = Integer.parseInt(minimumRenderDistance.getValue());
+            previous[0] = Integer.parseInt(skybox.getValue());
         } catch (NumberFormatException e) {
             System.out.println("Invalid number format: " + e.getMessage());
         }
@@ -123,13 +126,13 @@ public class SkyboxGeneratorScreen extends AbstractContainerScreen<SkyboxGenerat
     }
 
     @Override
-    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        pGuiGraphics.drawString(font, String.valueOf(data.get(5)), imageWidth / 2, imageHeight / 2, 0);
+    protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
+        guiGraphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+
     }
 
     @Override
     public void onClose() {
-        previous[5] += 1;
         super.onClose();
 
         PacketHandler.sendToServer(new SSkyboxGeneratorPacket(new int[] {

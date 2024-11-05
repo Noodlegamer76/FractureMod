@@ -3,15 +3,13 @@ package com.noodlegamer76.fracture;
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.client.renderers.entity.*;
+import com.noodlegamer76.fracture.client.renderers.entity.block.SkyboxGeneratorRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.block.TestRenderer;
-import com.noodlegamer76.fracture.client.util.ModWoodTypes;
+import com.noodlegamer76.fracture.util.ModWoodTypes;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
-import com.noodlegamer76.fracture.event.DamageEvents;
-import com.noodlegamer76.fracture.event.RenderLevelEvent;
-import com.noodlegamer76.fracture.event.ShaderEvents;
 import com.noodlegamer76.fracture.fluid.InitFluidTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.gui.InitMenus;
@@ -20,7 +18,6 @@ import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.BloodParticle;
 import com.noodlegamer76.fracture.particles.InitParticles;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
@@ -147,6 +144,7 @@ public class FractureMod
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOD_SIGN.get(), SignRenderer::new);
+            event.registerBlockEntityRenderer(InitBlockEntities.SKYBOX_GENERATOR.get(), SkyboxGeneratorRenderer::new);
         }
 
         @SubscribeEvent

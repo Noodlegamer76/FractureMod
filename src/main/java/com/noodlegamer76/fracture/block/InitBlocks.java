@@ -5,7 +5,7 @@ import com.noodlegamer76.fracture.block.signs.ModHangingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModStandingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModWallHangingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModWallSignBlock;
-import com.noodlegamer76.fracture.client.util.ModWoodTypes;
+import com.noodlegamer76.fracture.util.ModWoodTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.worldgen.tree.InkwoodTreeGrower;
 import net.minecraft.world.item.DyeColor;
@@ -41,7 +41,7 @@ public class InitBlocks {
             () -> new FleshParticleSpawner(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
 
     public static final RegistryObject<Block> SKYBOX_GENERATOR = BLOCKS.register("skybox_generator",
-            () -> new SkyboxGenerator(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
+            () -> new SkyboxGenerator(BlockBehaviour.Properties.of().noOcclusion()));
 
 
     public static final RegistryObject<Block> BLOOD_SLIME_BLOCK = BLOCKS.register("blood_slime_block",

@@ -4,6 +4,7 @@ import com.noodlegamer76.fracture.entity.block.SkyboxGeneratorEntity;
 import com.noodlegamer76.fracture.gui.skyboxgenerator.SkyboxGeneratorMenu;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -18,13 +19,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class SkyboxGenerator extends Block implements EntityBlock {
+public class SkyboxGenerator extends HalfTransparentBlock implements EntityBlock {
     private static final Component TITLE = Component.translatable("gui.fracture.skybox_generator");
     public SkyboxGenerator(Properties pProperties) {
         super(pProperties);
@@ -65,5 +67,10 @@ public class SkyboxGenerator extends Block implements EntityBlock {
             }
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public boolean skipRendering(BlockState pState, BlockState pAdjacentBlockState, Direction pSide) {
+        return true;
     }
 }

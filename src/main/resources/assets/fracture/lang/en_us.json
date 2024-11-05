@@ -81,5 +81,11 @@
 
 	"filled_map.flesh_treasure_map": "Fleshy Treasure Map",
 
-	"fracture.creative_tab.fracture": "Fracture"
+	"fracture.creative_tab.fracture": "Fracture",
+
+	"gui.fracture.skybox_generator.rotation_speed": "Rotation Speed",
+	"gui.fracture.skybox_generator.transparency": "Transparency",
+	"gui.fracture.skybox_generator.render_priority": "Render Priority",
+	"gui.fracture.skybox_generator.skybox": "Skybox (1-3)",
+	"gui.fracture.skybox_generator.max_render_distance": "Maximum Render Distance"
 }

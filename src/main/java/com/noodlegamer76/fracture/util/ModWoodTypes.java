@@ -1,7 +1,6 @@
-package com.noodlegamer76.fracture.client.util;
+package com.noodlegamer76.fracture.util;
 
 import com.noodlegamer76.fracture.FractureMod;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 

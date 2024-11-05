@@ -1,6 +1,7 @@
 package com.noodlegamer76.fracture.entity.block;
 
 import com.noodlegamer76.fracture.gui.skyboxgenerator.SkyboxGeneratorMenu;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -16,9 +17,15 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider {
+public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider, GeoAnimatable {
     private static final Component TITLE = Component.translatable("gui.fracture.skybox_generator");
     public int skybox = 10;
     public int rotationInitial = 1;
@@ -27,12 +34,21 @@ public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider {
     public int renderPriority = 10; //order of skybox rendering
     public int minRenderDistance = 48;
     public int maxRenderDistance = 64;
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     
     
     public SkyboxGeneratorEntity(BlockPos pPos, BlockState pBlockState) {
         super(InitBlockEntities.SKYBOX_GENERATOR.get(), pPos, pBlockState);
         assert level != null;
         //level.sendBlockUpdated(getBlockPos(), pBlockState, pBlockState, 2);
+    }
+
+    @Override
+    public AABB getRenderBoundingBox() {
+        float renderDistance = Minecraft.getInstance().gameRenderer.getRenderDistance();
+        return new AABB(new Vec3(renderDistance, renderDistance, renderDistance),
+                new Vec3(-renderDistance, -renderDistance, -renderDistance));
     }
 
     @Override
@@ -143,5 +159,20 @@ public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider {
     public @Nullable AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
         System.out.println(minRenderDistance);
         return new SkyboxGeneratorMenu(pContainerId, pPlayerInventory, this, this.dataAccess);
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
+    @Override
+    public double getTick(Object object) {
+        return 0;
     }
 }
