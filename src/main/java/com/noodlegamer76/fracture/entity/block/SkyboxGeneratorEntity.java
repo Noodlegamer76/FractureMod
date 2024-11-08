@@ -27,13 +27,13 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class SkyboxGeneratorEntity extends BlockEntity implements MenuProvider, GeoAnimatable {
     private static final Component TITLE = Component.translatable("gui.fracture.skybox_generator");
-    public int skybox = 10;
+    public int skybox = 0;
     public int rotationInitial = 1;
-    public int rotationSpeed = 10;
-    public int transparency = 10; //max 255
-    public int renderPriority = 10; //order of skybox rendering
-    public int minRenderDistance = 48;
-    public int maxRenderDistance = 64;
+    public int rotationSpeed = 0;
+    public int transparency = 0; //max 255
+    public int renderPriority = 1; //order of skybox rendering (lower is higher priority)
+    public int minRenderDistance = 0;
+    public int maxRenderDistance = 512;
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     

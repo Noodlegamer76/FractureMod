@@ -37,21 +37,6 @@ public class SkyboxGeneratorRenderer extends GeoBlockRenderer<SkyboxGeneratorEnt
     @Override
     public void actuallyRender(PoseStack poseStack, SkyboxGeneratorEntity animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-        ArrayList<Integer> array = new ArrayList<>();
-        array.add(animatable.skybox);
-        array.add(animatable.rotationSpeed);
-        array.add(animatable.transparency);
-        array.add(animatable.minRenderDistance);
-        array.add(animatable.maxRenderDistance);
-        array.add(animatable.renderPriority);
-
-        for(int i = 0; i < RenderLevelEvent.positions.size(); i++) {
-            int current = RenderLevelEvent.positions.get(i).get(5);
-            if (current <= animatable.renderPriority) {
-                RenderLevelEvent.positions.add(i, array);
-                return;
-            }
-        }
 
         int beamLength = 250;
         float[] colors = new float[3];
@@ -66,7 +51,29 @@ public class SkyboxGeneratorRenderer extends GeoBlockRenderer<SkyboxGeneratorEnt
        //             Minecraft.getInstance().level.getGameTime(), 0, beamLength, colors, 0.25F, 0.275F);
         }
         poseStack.popPose();
-        RenderLevelEvent.positions.add(array);
+        Vec3 player = Minecraft.getInstance().player.getPosition(partialTick);
+        Vec3 blockPosition = animatable.getBlockPos().getCenter();
+
+
+        if (player.closerThan(blockPosition, animatable.maxRenderDistance)) {
+            ArrayList<Integer> array = new ArrayList<>();
+            array.add(animatable.skybox);
+            array.add(animatable.rotationSpeed);
+            array.add(animatable.transparency);
+            array.add(animatable.minRenderDistance);
+            array.add(animatable.maxRenderDistance);
+            array.add(animatable.renderPriority);
+
+            for(int i = 0; i < RenderLevelEvent.positions.size(); i++) {
+                int current = RenderLevelEvent.positions.get(i).get(5);
+                if (current <= animatable.renderPriority) {
+                    RenderLevelEvent.positions.add(i, array);
+                    return;
+                }
+            }
+            RenderLevelEvent.positions.add(array);
+
+        }
     }
 
     @Override

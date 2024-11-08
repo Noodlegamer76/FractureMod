@@ -83,6 +83,7 @@ public class SkyBoxRenderer {
     public static void render(PoseStack poseStack, int ticks, float partialTick, int alpha, float speed, int skybox, int maxDistance, ResourceLocation folder) {
 
         switch (skybox) {
+            case 0: alpha = 0;
             case 2: folder = TEXTURE2; break;
             case 3: folder = TEXTURE_EEE; break;
         }
