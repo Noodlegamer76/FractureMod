@@ -2,10 +2,8 @@ package com.noodlegamer76.fracture.entity.ai.behavior;
 
 import com.mojang.datafixers.util.Pair;
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
-import com.noodlegamer76.fracture.entity.BloodSlimeEntity;
-import com.noodlegamer76.fracture.particles.InitParticles;
+import com.noodlegamer76.fracture.entity.monster.BloodSlimeEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.Level;
@@ -14,8 +12,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 
 import java.util.List;
 
-import static com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster.DATA_ATTACK;
-import static com.noodlegamer76.fracture.entity.BloodSlimeEntity.DATA_EXPLODE;
+import static com.noodlegamer76.fracture.entity.monster.BloodSlimeEntity.DATA_EXPLODE;
 
 public class SuperJump<E extends MultiAttackMonster> extends ExtendedBehaviour<E> {
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS;

@@ -2,7 +2,7 @@ package com.noodlegamer76.fracture.client.renderers.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.entity.AnkleBiterEntity;
+import com.noodlegamer76.fracture.entity.monster.AnkleBiterEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;

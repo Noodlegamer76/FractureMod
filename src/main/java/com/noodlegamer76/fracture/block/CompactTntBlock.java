@@ -1,11 +1,10 @@
 package com.noodlegamer76.fracture.block;
 
-import com.noodlegamer76.fracture.entity.CompactPrimedTnt;
+import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;

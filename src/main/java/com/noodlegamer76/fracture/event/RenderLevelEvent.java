@@ -27,7 +27,7 @@ public class RenderLevelEvent {
 
     @SubscribeEvent
     public static void renderLevelEvent(RenderLevelStageEvent event) {
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
             assert Minecraft.getInstance().player != null;
             ItemStack item = Minecraft.getInstance().player.getItemBySlot(EquipmentSlot.HEAD);
 

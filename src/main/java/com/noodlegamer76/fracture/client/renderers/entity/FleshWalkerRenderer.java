@@ -1,8 +1,7 @@
 package com.noodlegamer76.fracture.client.renderers.entity;
 
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.entity.AnkleBiterEntity;
-import com.noodlegamer76.fracture.entity.FleshWalkerEntity;
+import com.noodlegamer76.fracture.entity.monster.FleshWalkerEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;

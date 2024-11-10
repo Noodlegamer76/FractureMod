@@ -2,8 +2,7 @@ package com.noodlegamer76.fracture.client.renderers.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.entity.FleshSlimeEntity;
-import com.noodlegamer76.fracture.entity.FleshWalkerEntity;
+import com.noodlegamer76.fracture.entity.monster.FleshSlimeEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -11,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class FleshSlimeRenderer extends GeoEntityRenderer<FleshSlimeEntity> {

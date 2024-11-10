@@ -2,7 +2,7 @@ package com.noodlegamer76.fracture.entity.ai.behavior;
 
 import com.mojang.datafixers.util.Pair;
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
-import com.noodlegamer76.fracture.entity.FleshSlimeEntity;
+import com.noodlegamer76.fracture.entity.monster.FleshSlimeEntity;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;

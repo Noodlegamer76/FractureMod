@@ -1,6 +1,7 @@
-package com.noodlegamer76.fracture.entity;
+package com.noodlegamer76.fracture.entity.vehicle;
 
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -13,7 +14,6 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.IntFunction;
 

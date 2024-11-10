@@ -1,5 +1,6 @@
-package com.noodlegamer76.fracture.entity;
+package com.noodlegamer76.fracture.entity.vehicle;
 
+import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;

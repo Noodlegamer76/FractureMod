@@ -1,7 +1,7 @@
 package com.noodlegamer76.fracture.client.models.geomodels;
 
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.entity.FleshRattlerEntity;
+import com.noodlegamer76.fracture.entity.monster.FleshRattlerEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

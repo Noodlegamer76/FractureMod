@@ -1,21 +1,13 @@
 package com.noodlegamer76.fracture.entity.ai.behavior;
 
-import com.mojang.datafixers.util.Pair;
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
-import com.noodlegamer76.fracture.entity.BloodSlimeEntity;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.phys.Vec3;
-import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.util.BrainUtils;
-
-import java.util.List;
 
 public class BounceToWalkTarget<E extends MultiAttackMonster> extends MoveToWalkTarget<E> {
 

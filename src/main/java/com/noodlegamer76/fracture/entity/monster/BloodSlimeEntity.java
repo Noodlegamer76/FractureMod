@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.entity;
+package com.noodlegamer76.fracture.entity.monster;
 
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
 import com.noodlegamer76.fracture.entity.ai.behavior.BloodSlimeSplit;
@@ -62,7 +62,7 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
 
     public int animationDelay = 0;
 
-    protected BloodSlimeEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+    public BloodSlimeEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

@@ -1,7 +1,7 @@
 package com.noodlegamer76.fracture.client.renderers.entity;
 
 import com.noodlegamer76.fracture.client.models.geomodels.FleshRattlerModel;
-import com.noodlegamer76.fracture.entity.FleshRattlerEntity;
+import com.noodlegamer76.fracture.entity.monster.FleshRattlerEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

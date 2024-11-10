@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.entity;
+package com.noodlegamer76.fracture.entity.monster;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;

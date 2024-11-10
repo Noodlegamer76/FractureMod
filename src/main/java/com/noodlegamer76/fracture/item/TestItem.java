@@ -18,12 +18,15 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.FakePlayer;
 
 import java.util.UUID;
@@ -35,16 +38,30 @@ public class TestItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        Zombie serverplayer = new Zombie(EntityType.ZOMBIE, level);
-        serverplayer.setPos(player.getX(), player.getY(), player.getZ());
-        level.addFreshEntity(serverplayer);
         if (!level.isClientSide) {
-            Camera oldCamera = Minecraft.getInstance().gameRenderer.getMainCamera();
-            Camera tempCamera = new Camera();
-            tempCamera.setup(level, serverplayer, true, false, Minecraft.getInstance().getPartialTick());
-            //Minecraft.getInstance().setCameraEntity(tempCamera.getEntity());
+            //UUID uuid = UUID.randomUUID();
+            //FakePlayer serverplayer = new FakePlayer(level.getServer().overworld(),new GameProfile(uuid, "test"));
+            //        //new ServerPlayer(level.getServer().overworld(), new GameProfile(UUID.randomUUID(), "test"), );
+            //serverplayer.setPos(player.getX(), player.getY(), player.getZ());
+            //serverplayer.setUUID(uuid);
+            //level.getServer().getLevel(player.level().dimension()).addNewPlayer(serverplayer);
+            //System.out.println(level.getServer().overworld().players());
+
+
+            //level.addFreshEntity(serverplayer);
+            //if (!level.isClientSide) {
         }
-        System.out.println(Minecraft.getInstance().player.getUUID());
+        player.setDeltaMovement(new Vec3(0.0, 0, 0.0));
+        player.resetFallDistance();
+        if (level.isClientSide) {
+
+           // Camera oldCamera = Minecraft.getInstance().gameRenderer.getMainCamera();
+           // Camera tempCamera = new Camera();
+           // tempCamera.setup(level, , true, false, Minecraft.getInstance().getPartialTick());
+           // Minecraft.getInstance().setCameraEntity(tempCamera.getEntity());
+        }
+            //Minecraft.getInstance().setCameraEntity(tempCamera.getEntity());
         return super.use(level, player, usedHand);
     }
+
 }

@@ -3,12 +3,11 @@ package com.noodlegamer76.fracture.item;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.entity.InitEntities;
-import com.noodlegamer76.fracture.entity.ModBoatEntity;
+import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -47,7 +46,7 @@ public class InitItems {
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> SKYBOX_GENERATOR = ITEMS.register("skybox_generator",
-            () -> new BlockItem(InitBlocks.SKYBOX_GENERATOR.get(), new Item.Properties()));
+            () -> new SkyboxGeneratorItem(InitBlocks.SKYBOX_GENERATOR.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> INKWOOD_LEAVES = ITEMS.register("inkwood_leaves",
             () -> new BlockItem(InitBlocks.INWKOOD_LEAVES.get(), new Item.Properties()));
