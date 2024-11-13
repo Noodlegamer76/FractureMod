@@ -25,4 +25,8 @@ public class InitBlockEntities {
     public static final RegistryObject<BlockEntityType<SmokeStackEntity>> SMOKE_STACK = BLOCK_ENTITIES.register("smoke_stack",
             () -> BlockEntityType.Builder.of(SmokeStackEntity::new, InitBlocks.SMOKE_STACK.get()).build(null));
 
+
+    public static final RegistryObject<BlockEntityType<VoidBlockEntity>> VOID_BLOCK_ENTITY = BLOCK_ENTITIES.register("void_block",
+            () -> BlockEntityType.Builder.of(VoidBlockEntity::new, InitBlocks.VOID_BLOCK.get()).build(null));
+
 }

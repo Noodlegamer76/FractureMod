@@ -1,11 +1,8 @@
 package com.noodlegamer76.fracture.event;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.client.renderers.ModRenderTypes;
-import net.minecraft.client.renderer.RenderStateShard;
-import net.minecraft.client.renderer.RenderType;
+import com.noodlegamer76.fracture.client.util.ModRenderTypes;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,6 +21,10 @@ public class ShaderEvents {
                         new ResourceLocation(FractureMod.MODID, "fog"),
                         DefaultVertexFormat.POSITION),
                 (e) -> ModRenderTypes.fog = e);
+        event.registerShader(new ShaderInstance(event.getResourceProvider(),
+                        new ResourceLocation(FractureMod.MODID, "skybox"),
+                        DefaultVertexFormat.POSITION),
+                (e) -> ModRenderTypes.skybox = e);
     }
 
     @SubscribeEvent

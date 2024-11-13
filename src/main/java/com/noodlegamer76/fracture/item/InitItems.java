@@ -6,6 +6,7 @@ import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
+import com.noodlegamer76.fracture.spellcrafting.Wand;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -37,8 +38,15 @@ public class InitItems {
     public static final RegistryObject<Item> PARASITIC_SHOVEL = ITEMS.register("parasitic_shovel",
             () -> new ParasiticShovel(ToolTiers.ModItemTier.BLOOD, 1, -2.4F, new Item.Properties()));
 
+    public static final RegistryObject<Item> WAND = ITEMS.register("wand",
+            () -> new Wand(new Item.Properties()));
+
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> VOID_BLOCK = ITEMS.register("void_block",
+            () -> new VoidBlockItem(InitBlocks.VOID_BLOCK.get(), new Item.Properties()));
+
 
     public static final RegistryObject<Item> BLOOD_SLIME_BALL = ITEMS.register("blood_slime_ball",
             () -> new Item(new Item.Properties()));

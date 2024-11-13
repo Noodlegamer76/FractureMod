@@ -26,6 +26,9 @@ public class InitBlocks {
     public static final RegistryObject<Block> FOG_EMITTER = BLOCKS.register("fog_emitter",
             () -> new FogEmitterBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryObject<Block> VOID_BLOCK = BLOCKS.register("void_block",
+            () -> new VoidBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(DyeColor.BLACK).noOcclusion()));
+
     public static final RegistryObject<Block> COMPACT_TNT = BLOCKS.register("compact_tnt",
             () -> new CompactTntBlock(BlockBehaviour.Properties.copy(Blocks.TNT)));
 

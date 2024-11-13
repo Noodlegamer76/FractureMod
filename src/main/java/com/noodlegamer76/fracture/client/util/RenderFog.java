@@ -3,11 +3,8 @@ package com.noodlegamer76.fracture.client.util;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.noodlegamer76.fracture.client.renderers.ModRenderTypes;
-import com.noodlegamer76.fracture.event.ShaderEvents;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import org.lwjgl.opengl.GL44;
 

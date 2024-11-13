@@ -5,25 +5,18 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.client.renderers.ModRenderTypes;
-import com.noodlegamer76.fracture.client.util.RenderFog;
+import com.noodlegamer76.fracture.client.util.ModRenderTypes;
 import com.noodlegamer76.fracture.entity.block.FogEmitterEntity;
-import com.noodlegamer76.fracture.event.ShaderEvents;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
-import org.joml.sampling.UniformSampling;
-import org.lwjgl.opengl.GL33;
 import org.lwjgl.opengl.GL44;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
-import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 public class FogEmitterRenderer extends GeoBlockRenderer<FogEmitterEntity> {

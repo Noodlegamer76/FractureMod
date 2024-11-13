@@ -67,6 +67,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.HANGING_FLESH);
         simpleItem(InitItems.LIVING_FLESH);
         simpleItem(InitItems.FLESHY_BONE);
+        simpleItem(InitItems.WAND);
 
         simpleItem(InitItems.BLOOD_BUCKET);
 

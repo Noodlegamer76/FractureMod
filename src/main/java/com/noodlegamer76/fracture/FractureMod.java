@@ -5,6 +5,8 @@ import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.client.renderers.entity.*;
 import com.noodlegamer76.fracture.client.renderers.entity.block.SkyboxGeneratorRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.block.TestRenderer;
+import com.noodlegamer76.fracture.client.renderers.entity.block.VoidBlockRenderer;
+import com.noodlegamer76.fracture.gui.wand.WandScreen;
 import com.noodlegamer76.fracture.util.ModWoodTypes;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
@@ -123,6 +125,9 @@ public class FractureMod
             event.enqueueWork(() -> {
                 MenuScreens.register(InitMenus.SKYBOX_GENERATOR.get(), SkyboxGeneratorScreen::new);
             });
+            event.enqueueWork(() -> {
+                MenuScreens.register(InitMenus.WAND_MENU.get(), WandScreen::new);
+            });
         }
 
         @SubscribeEvent
@@ -145,6 +150,7 @@ public class FractureMod
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOD_SIGN.get(), SignRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.SKYBOX_GENERATOR.get(), SkyboxGeneratorRenderer::new);
+            event.registerBlockEntityRenderer(InitBlockEntities.VOID_BLOCK_ENTITY.get(), VoidBlockRenderer::new);
         }
 
         @SubscribeEvent

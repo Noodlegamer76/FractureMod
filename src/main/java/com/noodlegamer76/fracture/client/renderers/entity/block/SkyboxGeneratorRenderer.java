@@ -76,6 +76,8 @@ public class SkyboxGeneratorRenderer extends GeoBlockRenderer<SkyboxGeneratorEnt
         }
     }
 
+
+
     @Override
     public boolean shouldRenderOffScreen(SkyboxGeneratorEntity pBlockEntity) {
         return true;
