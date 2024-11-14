@@ -30,7 +30,6 @@ public class RenderCube {
         // Enable necessary OpenGL states
         RenderSystem.depthMask(true);
         RenderSystem.enableDepthTest();
-        RenderSystem.enableBlend();
 
         // Set the shader once for the entire batch
         RenderSystem.setShader(() -> ModRenderTypes.skybox);
@@ -67,10 +66,10 @@ public class RenderCube {
                 Matrix4f matrix4f = poseStack.last().pose();
 
                 // Add the 4 vertices for this quad to the buffer
-                bufferBuilder.vertex(matrix4f, -1, 0, -1).color(255, 255, 255, 100).uv(0, 0).uv2(0, 0).normal(0, 0, 0).endVertex();
-                bufferBuilder.vertex(matrix4f, 1, 0, -1).color(255, 255, 255, 100).uv(1, 0).uv2(1, 0).normal(0, 0, 0).endVertex();
-                bufferBuilder.vertex(matrix4f, 1, 0, 1).color(255, 255, 255, 100).uv(1, 1).uv2(1, 1).normal(0, 0, 0).endVertex();
-                bufferBuilder.vertex(matrix4f, -1, 0, 1).color(255, 255, 255, 100).uv(0, 1).uv2(0, 1).normal(0, 0, 0).endVertex();
+                bufferBuilder.vertex(matrix4f, -1, 0, -1).endVertex();
+                bufferBuilder.vertex(matrix4f, 1, 0, -1).endVertex();
+                bufferBuilder.vertex(matrix4f, 1, 0, 1).endVertex();
+                bufferBuilder.vertex(matrix4f, -1, 0, 1).endVertex();
 
                 poseStack.popPose();  // Restore the original pose
             }
@@ -80,8 +79,6 @@ public class RenderCube {
         tesselator.end();
 
         // Disable unnecessary OpenGL states after the batch is rendered
-        RenderSystem.disableBlend();
-        //GL44.glDisable(GL44.GL_STENCIL_TEST);
         positions.clear();
     }
 

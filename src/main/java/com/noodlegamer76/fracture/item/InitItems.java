@@ -7,6 +7,8 @@ import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
 import com.noodlegamer76.fracture.spellcrafting.Wand;
+import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
+import com.noodlegamer76.fracture.spellcrafting.spells.item.VoidBallSpellItem;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -40,6 +42,9 @@ public class InitItems {
 
     public static final RegistryObject<Item> WAND = ITEMS.register("wand",
             () -> new Wand(new Item.Properties()));
+
+    public static final RegistryObject<Item> VOID_BALL_SPELL_ITEM = ITEMS.register("void_ball_spell",
+            () -> new VoidBallSpellItem(new Item.Properties()));
 
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));

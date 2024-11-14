@@ -1,16 +1,15 @@
-#version 150
-
+#version 330 core
 
 in vec3 Position;
-in vec2 UV0;
-in vec2 UV1;
 
-out vec2 texCoord0;
+uniform mat4 ModelViewMat;  // Combined model-view matrix
+uniform mat4 ProjMat;  // Projection matrix
 
-uniform mat4 ProjMat;
-uniform mat4 ModelViewMat;
+void main()
+{
+    // Calculate the position in view space
+    fragPos = (ModelViewMat * vec4(Position, 1.0)).xyz;
 
-void main() {
-    gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-    texCoord0 = UV1;
+    // Transform the position to clip space
+    gl_Position = ProjMat * vec4(fragPos, 1.0);
 }

@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.client.util.ModRenderTypes;
+import com.noodlegamer76.fracture.client.util.RenderCubeAroundPlayer;
 import com.noodlegamer76.fracture.entity.block.FogEmitterEntity;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -39,22 +40,17 @@ public class FogEmitterRenderer extends GeoBlockRenderer<FogEmitterEntity> {
         RenderSystem.bindTexture(Minecraft.getInstance().getMainRenderTarget().getColorTextureId());
         RenderSystem.glUniform1i(GlStateManager._glGetUniformLocation(ModRenderTypes.fog.getId(),  "Color"), 1);
 
-        RenderSystem.depthMask(false);
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
         Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
 
         poseStack.pushPose();
         //poseStack.translate(-animatable.getBlockPos().getX(), -animatable.getBlockPos().getY(), -animatable.getBlockPos().getZ());
         //poseStack.translate(camera.getPosition().x() - 0.5, camera.getPosition().y() - 0.5, camera.getPosition().z() - 0.5);
-        Minecraft.getInstance().getMainRenderTarget().blitToScreen(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight());
-        super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        //Minecraft.getInstance().getMainRenderTarget().blitToScreen(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight());
+        //super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        RenderCubeAroundPlayer.renderFog(poseStack, null);
         poseStack.popPose();
 
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.disableBlend();
-        RenderSystem.depthMask(true);
     }
 
     @Override
