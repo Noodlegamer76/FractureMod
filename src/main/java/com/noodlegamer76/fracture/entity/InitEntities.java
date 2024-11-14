@@ -3,6 +3,7 @@ package com.noodlegamer76.fracture.entity;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
 import com.noodlegamer76.fracture.entity.monster.*;
+import com.noodlegamer76.fracture.entity.projectile.VoidBall;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.entity.vehicle.ModChestBoatEntity;
 import net.minecraft.world.entity.EntityType;
@@ -59,8 +60,8 @@ public class InitEntities {
                     .sized(1F, 1F)
                     .build("compact_tnt"));
 
-   // public static final RegistryObject<EntityType<MimicPlayer>> MIMIC_PLAYER = ENTITIES.register(("mimic_player"),
-   //         () -> EntityType.Builder.<MimicPlayer>of(MimicPlayer::new, MobCategory.MONSTER)
-   //                 .sized(0.6F, 1.8F).clientTrackingRange(32).updateInterval(2)
-   //                 .build("mimic_player"));
+    public static final RegistryObject<EntityType<VoidBall>> VOID_BALL = ENTITIES.register(("void_ball"),
+            () -> EntityType.Builder.<VoidBall>of(VoidBall::new, MobCategory.MISC)
+                    .sized(0.375f, 0.375f)
+                    .build("void_ball"));
 }

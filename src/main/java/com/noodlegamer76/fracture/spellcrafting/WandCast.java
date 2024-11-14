@@ -5,6 +5,7 @@ import com.noodlegamer76.fracture.spellcrafting.modifiers.item.ModifierItem;
 import com.noodlegamer76.fracture.spellcrafting.modifiers.modifier.Modifier;
 import com.noodlegamer76.fracture.spellcrafting.spells.SpellTypes;
 import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
+import com.noodlegamer76.fracture.spellcrafting.spells.spell.Spell;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -72,11 +73,12 @@ public class WandCast {
             }
 
             if (current.getItem() instanceof SpellItem spellItem) {
-                SpellTypes.getSpellTypes(spellItem, modifiers);
-                //add spell cast class with that takes in modifiers
+                Spell spell = SpellTypes.getSpellTypes(current, modifiers);
+                spell.cast();
+                //add spell cast class with thaspellItemt takes in modifiers
                 casts -= 1;
             }
-            if (casts == 0) {
+            if (casts <= 0) {
                 shouldCast = false;
                 System.out.println("NO CASTS REMAINING");
             }
