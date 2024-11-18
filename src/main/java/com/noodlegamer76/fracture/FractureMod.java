@@ -7,7 +7,10 @@ import com.noodlegamer76.fracture.client.renderers.entity.block.FogEmitterRender
 import com.noodlegamer76.fracture.client.renderers.entity.block.SkyboxGeneratorRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.block.TestRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.block.VoidBlockRenderer;
+import com.noodlegamer76.fracture.entity.block.ModificationStationEntity;
+import com.noodlegamer76.fracture.gui.modificationstation.ModificationStationScreen;
 import com.noodlegamer76.fracture.gui.wand.WandScreen;
+import com.noodlegamer76.fracture.particles.VoidParticle;
 import com.noodlegamer76.fracture.util.ModWoodTypes;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
@@ -30,6 +33,7 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -129,6 +133,9 @@ public class FractureMod
             event.enqueueWork(() -> {
                 MenuScreens.register(InitMenus.WAND_MENU.get(), WandScreen::new);
             });
+            event.enqueueWork(() -> {
+                MenuScreens.register(InitMenus.MODIFICATION_STATION_MENU.get(), ModificationStationScreen::new);
+            });
         }
 
         @SubscribeEvent
@@ -159,6 +166,9 @@ public class FractureMod
         public static void RegisterParticleProviders(RegisterParticleProvidersEvent event) {
             Minecraft.getInstance().particleEngine.register(InitParticles.BLOOD_PARTICLES.get(),
                     BloodParticle.Provider::new);
+
+            Minecraft.getInstance().particleEngine.register(InitParticles.VOID_PARTICLES.get(),
+                    VoidParticle.Provider::new);
         }
 
         @SubscribeEvent

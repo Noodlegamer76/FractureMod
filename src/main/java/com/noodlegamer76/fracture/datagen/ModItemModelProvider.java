@@ -70,6 +70,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItem(InitItems.BLOOD_BUCKET);
 
+        simpleBlockItem(InitBlocks.BOREAS_PORTAL_FRAME);
+        simpleBlockItem(InitBlocks.BOREAS_PORTAL_LOCK);
+
         handHeldItem(InitItems.BROOM);
         handHeldItem(InitItems.PARASITIC_SWORD);
         handHeldItem(InitItems.PARASITIC_PICKAXE);
@@ -155,9 +158,9 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
     private ItemModelBuilder simpleBlockItem(RegistryObject<Block> block) {
         return withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
-                mcLoc("item/generated"))
+                mcLoc("fracture:block/" + block.getId().getPath()))
                 .texture("layer0",
-                        new ResourceLocation(FractureMod.MODID, "item/" + block.getId().getPath()));
+                        new ResourceLocation(FractureMod.MODID, "block/" + block.getId().getPath()));
     }
     private ItemModelBuilder slabItem(RegistryObject<Block> block, ResourceLocation texture) {
         return withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),

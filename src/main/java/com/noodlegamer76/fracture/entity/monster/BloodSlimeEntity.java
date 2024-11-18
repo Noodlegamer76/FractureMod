@@ -109,6 +109,15 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
     }
 
     @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return false;
+    }
+
+    @Override
+    public void checkDespawn() {
+    }
+
+    @Override
     protected Brain.Provider<?> brainProvider() {
         return new SmartBrainProvider<>(this);
     }

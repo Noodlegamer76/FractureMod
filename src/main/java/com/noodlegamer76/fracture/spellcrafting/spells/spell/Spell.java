@@ -1,20 +1,27 @@
 package com.noodlegamer76.fracture.spellcrafting.spells.spell;
 
-import com.noodlegamer76.fracture.spellcrafting.modifiers.modifier.Modifier;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 
 public class Spell {
     ItemStack stack;
-    ArrayList<Modifier>  modifiers;
+    Player player;
+    Level level;
 
-    Spell(ItemStack stack, ArrayList<Modifier> modifiers) {
+    Spell(ItemStack stack,Player player) {
         this.stack = stack;
-        this.modifiers = modifiers;
+        this.player = player;
+        this.level = player.level();
     }
 
     public void cast() {
+    }
 
+    public Component getName() {
+        return Component.literal("spell not detected when cast, please report this to the mod dev");
     }
 }

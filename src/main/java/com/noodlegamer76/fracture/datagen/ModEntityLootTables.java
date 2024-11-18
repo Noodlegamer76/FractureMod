@@ -19,5 +19,6 @@ public class ModEntityLootTables extends EntityLootSubProvider {
 
     @Override
     public void generate() {
+        
     }
 }

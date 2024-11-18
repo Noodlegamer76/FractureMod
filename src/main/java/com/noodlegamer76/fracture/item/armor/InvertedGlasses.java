@@ -2,6 +2,7 @@ package com.noodlegamer76.fracture.item.armor;
 
 import com.noodlegamer76.fracture.FractureMod;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +19,6 @@ public class InvertedGlasses extends ArmorItem {
     public InvertedGlasses(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
         super(pMaterial, pType, pProperties);
     }
-
 
     @Override
     public boolean onDroppedByPlayer(ItemStack item, Player player) {

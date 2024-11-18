@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.spellcrafting;
+package com.noodlegamer76.fracture.spellcrafting.wand;
 
 import com.noodlegamer76.fracture.gui.wand.WandScreen;
 import com.noodlegamer76.fracture.item.InitItems;

@@ -39,6 +39,7 @@ public class RenderLevelEvent {
                 }
             }
         }
+
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY) {
 
             //ArrayList<ArrayList<Integer>> integer = new ArrayList<>();

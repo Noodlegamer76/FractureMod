@@ -1,6 +1,5 @@
 package com.noodlegamer76.fracture.gui.wand;
 
-import com.noodlegamer76.fracture.spellcrafting.modifiers.item.ModifierItem;
 import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -20,7 +19,7 @@ public class SpellAndModifierSlot extends SlotItemHandler {
     }
     @Override
     public boolean mayPlace(@NotNull ItemStack stack) {
-        return stack.getItem() instanceof ModifierItem || stack.getItem() instanceof SpellItem;
+        return stack.getItem() instanceof SpellItem;
 
     }
 }

@@ -54,6 +54,7 @@ public class FractureTab {
             event.accept(InitItems.PARASITIC_PICKAXE);
             event.accept(InitItems.PARASITIC_AXE);
             event.accept(InitItems.PARASITIC_SHOVEL);
+            event.accept(InitItems.BLOODY_SKULL);
 
             event.accept(InitItems.WAND);
             event.accept(InitItems.VOID_BALL_SPELL_ITEM);
@@ -65,6 +66,10 @@ public class FractureTab {
             event.accept(InitItems.COMPACT_TNT);
             event.accept(InitItems.SMOKE_STACK);
             event.accept(InitItems.VOID_BLOCK);
+            event.accept(InitItems.BOREAS_KEY);
+            event.accept(InitItems.BOREAS_PORTAL_LOCK);
+            event.accept(InitItems.BOREAS_PORTAL_FRAME);
+            event.accept(InitItems.MODIFICATION_STATION);
 
             event.accept(InitItems.INKWOOD_LOG_ITEM);
             event.accept(InitItems.INKWOOD_WOOD_ITEM);

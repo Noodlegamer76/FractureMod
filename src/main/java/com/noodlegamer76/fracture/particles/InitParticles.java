@@ -13,4 +13,7 @@ public class InitParticles {
 
     public static final RegistryObject<SimpleParticleType> BLOOD_PARTICLES =
             PARTICLE_TYPES.register("blood", () -> new SimpleParticleType(true));
+
+    public static final RegistryObject<SimpleParticleType> VOID_PARTICLES =
+            PARTICLE_TYPES.register("void", () -> new SimpleParticleType(true));
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "fracture:block/boreas_portal_frame",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "fracture:block/boreas_portal_frame"
+    },
+    "facing=south": {
+      "model": "fracture:block/boreas_portal_frame",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fracture:block/boreas_portal_frame",
+      "y": 270
+    }
+  }
+}

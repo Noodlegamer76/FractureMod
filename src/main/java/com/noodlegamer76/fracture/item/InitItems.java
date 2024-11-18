@@ -6,8 +6,7 @@ import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
-import com.noodlegamer76.fracture.spellcrafting.Wand;
-import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
+import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
 import com.noodlegamer76.fracture.spellcrafting.spells.item.VoidBallSpellItem;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
@@ -30,6 +29,16 @@ public class InitItems {
     //test item for coding stuff
     public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item",
             () -> new TestItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BOREAS_KEY = ITEMS.register("boreas_key",
+            () -> new BoreasKey(new Item.Properties()));
+    public static final RegistryObject<Item> BOREAS_PORTAL_LOCK = ITEMS.register("boreas_portal_lock",
+            () -> new BlockItem(InitBlocks.BOREAS_PORTAL_LOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> BOREAS_PORTAL_FRAME = ITEMS.register("boreas_portal_frame",
+            () -> new BlockItem(InitBlocks.BOREAS_PORTAL_FRAME.get(), new Item.Properties()));
+    public static final RegistryObject<Item> MODIFICATION_STATION = ITEMS.register("modification_station",
+            () -> new BlockItem(InitBlocks.MODIFICATION_STATION.get(), new Item.Properties()));
+
 
     public static final RegistryObject<Item> PARASITIC_SWORD = ITEMS.register("parasitic_sword",
             () -> new ParasiticSword(ToolTiers.ModItemTier.BLOOD, 3, -2.4F, new Item.Properties()));
@@ -90,6 +99,8 @@ public class InitItems {
 
     public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
             () -> new InvertedGlasses(ArmorTiers.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> BLOODY_SKULL = ITEMS.register("bloody_skull",
+            () -> new ArmorItem(ArmorTiers.BLOOD_HELMET, ArmorItem.Type.HELMET, new Item.Properties()));
 
 
     public static final RegistryObject<Item> BLOOD_SLIME_BLOCK = ITEMS.register("blood_slime_block",

@@ -1,9 +1,11 @@
-package com.noodlegamer76.fracture.spellcrafting;
+package com.noodlegamer76.fracture.spellcrafting.wand;
 
-import com.noodlegamer76.fracture.client.renderers.item.VoidBlockItemRenderer;
 import com.noodlegamer76.fracture.client.renderers.item.wand.WandRenderer;
 import com.noodlegamer76.fracture.gui.wand.WandMenu;
+import com.noodlegamer76.fracture.spellcrafting.CreateWand;
+import com.noodlegamer76.fracture.spellcrafting.WandCast;
 import io.netty.buffer.Unpooled;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -12,6 +14,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -33,9 +36,18 @@ import java.util.function.Consumer;
 
 public class Wand extends Item implements GeoAnimatable {
     AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    public double spinTime = 0;
 
     public Wand(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+       spinTime /= 1.025;
+       if (spinTime <= 0) {
+           spinTime = 0;
+       }
     }
 
     @Override
@@ -45,6 +57,11 @@ public class Wand extends Item implements GeoAnimatable {
         double x = player.getX();
         double y = player.getY();
         double z = player.getZ();
+        if (player instanceof LocalPlayer localPlayer) {
+            if (!localPlayer.isCrouching()) {
+                spinTime += 250;
+            }
+        }
         if (player instanceof ServerPlayer serverPlayer) {
             ItemStack item = player.getItemInHand(hand);
 
@@ -78,6 +95,7 @@ public class Wand extends Item implements GeoAnimatable {
 
             if (!serverPlayer.isCrouching()) {
                     new WandCast(level, (ServerPlayer)  player, item);
+
             }
         }
 

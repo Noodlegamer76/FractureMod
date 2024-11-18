@@ -109,6 +109,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(InitBlocks.INWKOOD_LEAVES.get(), (block) ->
                 createLeavesDrops(block, InitBlocks.INWKOOD_LEAVES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
+        dropSelf(InitBlocks.BOREAS_PORTAL_LOCK.get());
+        dropSelf(InitBlocks.BOREAS_PORTAL_FRAME.get());
+
         //dropSelf(BlockInit.CRYSTALLIZED_DIRT.get());
 
         //this.add(BlockInit.RAINBOW_SLAB.get(),

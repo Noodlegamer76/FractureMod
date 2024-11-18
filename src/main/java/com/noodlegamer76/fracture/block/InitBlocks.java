@@ -26,6 +26,14 @@ public class InitBlocks {
     public static final RegistryObject<Block> FOG_EMITTER = BLOCKS.register("fog_emitter",
             () -> new FogEmitterBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryObject<Block> MODIFICATION_STATION = BLOCKS.register("modification_station",
+            () -> new ModificationStationBlock(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE)));
+
+    public static final RegistryObject<Block> BOREAS_PORTAL_LOCK = BLOCKS.register("boreas_portal_lock",
+            () -> new BoreasPortalLock(BlockBehaviour.Properties.copy(Blocks.BEDROCK).noOcclusion()));
+    public static final RegistryObject<Block> BOREAS_PORTAL_FRAME = BLOCKS.register("boreas_portal_frame",
+            () -> new BoreasPortalFrame(BlockBehaviour.Properties.copy(Blocks.BEDROCK).noOcclusion()));
+
     public static final RegistryObject<Block> VOID_BLOCK = BLOCKS.register("void_block",
             () -> new VoidBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(DyeColor.BLACK).noOcclusion()));
 

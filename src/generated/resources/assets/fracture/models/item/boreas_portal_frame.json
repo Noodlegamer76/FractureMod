@@ -1,0 +1,6 @@
+{
+  "parent": "fracture:block/boreas_portal_frame",
+  "textures": {
+    "layer0": "fracture:block/boreas_portal_frame"
+  }
+}

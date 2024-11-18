@@ -1,6 +1,7 @@
 package com.noodlegamer76.fracture.util;
 
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
@@ -12,7 +13,12 @@ import java.util.function.Supplier;
 
 public enum ArmorTiers implements ArmorMaterial {
     TRINKETS("inverted_glasses", 64, new int[]{1, 1, 2, 1}, 0,
-            SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(Items.DEBUG_STICK));
+            SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(Items.DEBUG_STICK)),
+
+    BLOOD_HELMET("blood_helmet", 64, new int[]{2, 1, 2, 1}, 0,
+            SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(InitItems.LIVING_FLESH.get()));;
+
+
 
     private final String name;
     private final int durabilityMuntiplyer;

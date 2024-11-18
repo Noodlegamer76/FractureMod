@@ -13,8 +13,8 @@ import net.minecraftforge.common.util.FakePlayer;
 
 import java.util.UUID;
 
-    public class MimicPlayer extends ServerPlayer {
-        public MimicPlayer(MinecraftServer pServer, ServerLevel pLevel, GameProfile pGameProfile) {
-            super(pServer, pLevel, pGameProfile);
+    public class MimicPlayer extends PathfinderMob {
+        protected MimicPlayer(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
+            super(pEntityType, pLevel);
         }
     }
