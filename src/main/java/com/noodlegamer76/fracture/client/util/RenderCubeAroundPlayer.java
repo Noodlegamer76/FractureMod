@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import com.noodlegamer76.fracture.event.RenderLevelEventsForFog;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
@@ -92,94 +93,33 @@ public class RenderCubeAroundPlayer {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
 
-        Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(ModRenderTypes.FOG_RENDERTYPE);
 
-        RenderSystem.depthMask(false);
-        RenderSystem.disableDepthTest();
 
         RenderSystem.setShader(() -> ModRenderTypes.fog);
-
-        for(int i = 0; i < 6; ++i) {
-            if (frontTexture != null) {
-                switch (i) {
-                    case 0:
-                        RenderSystem.setShaderTexture(0, frontTexture);
-                        break;
-                    case 1:
-                        RenderSystem.setShaderTexture(0, rightTexture);
-                        break;
-                    case 2:
-                        RenderSystem.setShaderTexture(0, leftTexture);
-                        break;
-                    case 3:
-                        RenderSystem.setShaderTexture(0, backTexture);
-                        break;
-                    case 4:
-                        RenderSystem.setShaderTexture(0, bottomTexture);
-                        break;
-                    case 5:
-                        RenderSystem.setShaderTexture(0, topTexture);
-                        break;
-                }
-            }
-            poseStack.pushPose();
+        RenderSystem.disableDepthTest();
 
 
-            poseStack.mulPose(Axis.YN.rotationDegrees((ticks + partialTick) * speed));
-            if (i == 0) {
+        poseStack.pushPose();
 
-                poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
-                poseStack.mulPose(Axis.YN.rotationDegrees(180));
-            }
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
+        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
 
-            if (i == 1) {
+        Matrix4f matrix4f = poseStack.last().pose();
+        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+        Camera.NearPlane near = Minecraft.getInstance().gameRenderer.getMainCamera().getNearPlane();
+        bufferbuilder.vertex(matrix4f, (float) near.getTopLeft().x() + -10, (float) near.getTopLeft().y() + -1, (float) near.getTopLeft().z() + -10).endVertex();
+        bufferbuilder.vertex(matrix4f, (float) near.getTopRight().x() + -10, (float) near.getTopRight().y() + -1, (float) near.getTopRight().z() + 10).endVertex();
+        bufferbuilder.vertex(matrix4f, (float) near.getBottomRight().x() + 10, (float) near.getBottomRight().y() + -1, (float) near.getBottomRight().z() + 10).endVertex();
+        bufferbuilder.vertex(matrix4f, (float) near.getBottomLeft().x() + 10, (float) near.getBottomLeft().y() + -1, (float) near.getBottomLeft().z() + -10).endVertex();
+        tesselator.end();
 
-                poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                poseStack.mulPose(Axis.YN.rotationDegrees(-90));
-            }
+        poseStack.popPose();
 
-            if (i == 2) {
-
-                poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
-                poseStack.mulPose(Axis.YN.rotationDegrees(90));
-            }
-
-            if (i == 3) {
-
-                poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
-            }
-
-            if (i == 4) {
-
-                poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
-                poseStack.mulPose(Axis.YN.rotationDegrees(180));
-            }
-
-            if (i == 5) {
-
-                poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
-                poseStack.mulPose(Axis.YN.rotationDegrees(180));
-            }
-            Matrix4f matrix4f = poseStack.last().pose();
-            bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-            float near = (float) Minecraft.getInstance().gameRenderer.getRenderDistance();
-            bufferbuilder.vertex(matrix4f, -near, -near, -near).uv(0.0F, 0.0F).color(255, 255, 255, alpha).endVertex();
-            bufferbuilder.vertex(matrix4f, -near, -near, near).uv(0.0F, 1.0F).color(255, 255, 255, alpha).endVertex();
-            bufferbuilder.vertex(matrix4f, near, -near, near).uv(1.0F, 1.0F).color(255, 255, 255, alpha).endVertex();
-            bufferbuilder.vertex(matrix4f, near, -near, -near).uv(1.0F, 0.0F).color(255, 255, 255, alpha).endVertex();
-            tesselator.end();
-            poseStack.popPose();
-        }
         RenderSystem.enableDepthTest();
-        RenderSystem.depthMask(true);
         RenderLevelEventsForFog.positions.clear();
     }
+
 
     public static void renderFullscreenQuad(PoseStack poseStack, int ticks, float partialTick, int alpha, float speed,
                                             ResourceLocation frontTexture, ResourceLocation backTexture,

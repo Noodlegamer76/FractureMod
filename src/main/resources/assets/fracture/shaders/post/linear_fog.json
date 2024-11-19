@@ -1,12 +1,12 @@
 {
     "targets": [
-        "linear_fog"
+        "fog"
     ],
     "passes": [
         {
-            "name": "denim:linear_fog",
+            "name": "fracture:linear_fog",
             "intarget": "minecraft:main",
-            "outtarget": "linear_fog",
+            "outtarget": "fog",
             "auxtargets": [
                 {
                     "name": "DiffuseDepthSampler",
@@ -16,7 +16,7 @@
         },
         {
             "name": "blit",
-            "intarget": "linear_fog",
+            "intarget": "fog",
             "outtarget": "minecraft:main"
         }
     ]

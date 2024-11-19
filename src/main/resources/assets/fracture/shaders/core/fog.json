@@ -1,14 +1,12 @@
 {
     "blend": {
         "func": "add",
-        "srcrgb": "srcalpha",
-        "dstrgb": "1-srcalpha"
+        "srcrgb": "one",
+        "dstrgb": "zero"
     },
-    "vertex": "position_tex",
+    "vertex": "fracture:fog",
     "fragment": "fracture:fog",
-    "attributes": [ "Position",
-    "UV0",
-        "UV1"],
+    "attributes": [ "Position" ],
     "samplers": [
         { "name": "Depth" },
         { "name": "Color" }

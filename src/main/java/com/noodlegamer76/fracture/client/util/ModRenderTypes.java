@@ -1,5 +1,6 @@
 package com.noodlegamer76.fracture.client.util;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.noodlegamer76.fracture.FractureMod;
@@ -14,7 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
-public class ModRenderTypes {
+public class ModRenderTypes extends RenderStateShard{
     public static ShaderInstance fog;
     public static ShaderInstance skybox;
 
@@ -23,13 +24,17 @@ public class ModRenderTypes {
             "fog",
             DefaultVertexFormat.POSITION,
             VertexFormat.Mode.QUADS,
-            100000,
+            256,
             true,
             true,
             RenderType.CompositeState.builder()
                     .setShaderState(new RenderStateShard.ShaderStateShard(() -> fog))
-                    .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
-                    .createCompositeState(true)
+                    .setTextureState(NO_TEXTURE) // No texture required
+                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY) // Use translucent
+                    .setCullState(NO_CULL) // Disable culling for visibility
+                    .setDepthTestState(NO_DEPTH_TEST) // No depth test
+                    .setWriteMaskState(COLOR_WRITE)
+                    .createCompositeState(false)
     );
 
     public static final RenderType SKYBOX = RenderType.create(
@@ -43,4 +48,8 @@ public class ModRenderTypes {
                     .setShaderState(new RenderStateShard.ShaderStateShard(() -> skybox))
                     .createCompositeState(true)
     );
+
+    public ModRenderTypes(String pName, Runnable pSetupState, Runnable pClearState) {
+        super(pName, pSetupState, pClearState);
+    }
 }

@@ -8,7 +8,7 @@ uniform mat4 ProjMat;  // Projection matrix
 void main()
 {
     // Calculate the position in view space
-    fragPos = (ModelViewMat * vec4(Position, 1.0)).xyz;
+    vec3 fragPos = (ModelViewMat * vec4(Position, 1.0)).xyz;
 
     // Transform the position to clip space
     gl_Position = ProjMat * vec4(fragPos, 1.0);

@@ -7,8 +7,6 @@ uniform sampler2D Color;
 uniform vec2 ScreenSize;
 uniform mat4 ProjMat;
 
-in vec2 texCoord0;
-
 vec3 projectAndDivide(mat4 projectionMatrix, vec3 position) {
     vec4 homogeneousPos = projectionMatrix * vec4(position, 1.0);
     return homogeneousPos.xyz / homogeneousPos.w;
@@ -39,7 +37,7 @@ void main() {
     FragColor = vec4(final, 1.0);
 
     if (gl_FragCoord.z == 1.0) {
-       FragColor = vec4(color, 1.0);
+       FragColor = vec4(final, 1.0);
     }
 
     //FragColor = vec4(distanceFromCamera, distanceFromCamera, distanceFromCamera, 1.0);
