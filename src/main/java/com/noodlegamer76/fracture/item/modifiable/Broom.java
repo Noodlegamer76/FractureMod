@@ -1,7 +1,5 @@
-package com.noodlegamer76.fracture.item;
+package com.noodlegamer76.fracture.item.modifiable;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -16,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import org.joml.Vector3f;
 
 import java.util.List;
 

@@ -4,6 +4,7 @@ import com.noodlegamer76.fracture.entity.block.ModificationStationEntity;
 import com.noodlegamer76.fracture.entity.block.SkyboxGeneratorEntity;
 import com.noodlegamer76.fracture.gui.InitMenus;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -19,6 +20,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.Nullable;
 
+import javax.print.DocFlavor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -123,6 +125,15 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
                 return this.boundEntity.isAlive();
         }
         return true;
+    }
+
+    public void insertDataIntoItem() {
+        ItemStack result = getSlot(0).getItem();
+        for (int i = 1; i < 10; i++) {
+            if (getSlot(i).hasItem()) {
+
+            }
+        }
     }
 
     @Override
@@ -236,6 +247,7 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
     @Override
     public void removed(Player playerIn) {
         super.removed(playerIn);
+
         if (!bound && playerIn instanceof ServerPlayer serverPlayer) {
             if (!serverPlayer.isAlive() || serverPlayer.hasDisconnected()) {
                 for (int j = 0; j < internal.getSlots(); ++j) {
@@ -248,6 +260,10 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
             }
         }
     }
+
+
+
+
 
     public Map<Integer, Slot> get() {
         return customSlots;

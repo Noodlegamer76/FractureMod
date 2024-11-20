@@ -6,6 +6,7 @@ import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
+import com.noodlegamer76.fracture.item.modifiable.Broom;
 import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
 import com.noodlegamer76.fracture.spellcrafting.spells.item.VoidBallSpellItem;
 import com.noodlegamer76.fracture.util.ArmorTiers;
