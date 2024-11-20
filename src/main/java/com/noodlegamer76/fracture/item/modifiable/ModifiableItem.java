@@ -27,7 +27,7 @@ public class ModifiableItem extends Item implements GeoAnimatable {
 
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag compound) {
-        WandInventoryCapability capability = new WandInventoryCapability();
+        ModifiableItemCapability capability = new ModifiableItemCapability();
         return capability;
     }
 

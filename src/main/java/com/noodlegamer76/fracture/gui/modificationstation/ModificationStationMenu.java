@@ -127,6 +127,7 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
         return true;
     }
 
+    public void extractDataFromItem
     public void insertDataIntoItem() {
         ItemStack result = getSlot(0).getItem();
         for (int i = 1; i < 10; i++) {
