@@ -116,7 +116,6 @@ public class RenderEventsForFbos {
 
             GlStateManager._deleteTexture(skyboxTexture);
 
-            System.out.println("resize");
             skyboxTexture = GlStateManager._genTexture();
             RenderSystem.bindTexture(skyboxTexture);
 

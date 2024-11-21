@@ -1,10 +1,10 @@
 package com.noodlegamer76.fracture.gui.modificationstation;
 
-import com.noodlegamer76.fracture.entity.block.ModificationStationEntity;
-import com.noodlegamer76.fracture.entity.block.SkyboxGeneratorEntity;
 import com.noodlegamer76.fracture.gui.InitMenus;
+import com.noodlegamer76.fracture.item.modifiable.ModifiableItem;
+import com.noodlegamer76.fracture.item.modifiable.ModifierItemSlot;
+import com.noodlegamer76.fracture.item.modifiable.BroomPartSlot;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -15,12 +15,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
-import javax.print.DocFlavor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -37,6 +35,8 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
     private Supplier<Boolean> boundItemMatcher = null;
     private Entity boundEntity = null;
     private BlockEntity boundBlockEntity = null;
+    IItemHandler handler;
+    boolean extractData = true;
 
     public ModificationStationMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         super(InitMenus.MODIFICATION_STATION_MENU.get(), id);
@@ -77,34 +77,34 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
                     });
             }
         }
-        this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 124, 35) {
+        this.customSlots.put(0, this.addSlot(new ModifierItemSlot(internal, 0, 124, 35, this) {
             private final int slot = 0;
         }));
-        this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 25, 8) {
+        this.customSlots.put(1, this.addSlot(new BroomPartSlot(internal, 1, 25, 8, this) {
             private final int slot = 1;
         }));
-        this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 52, 8) {
+        this.customSlots.put(2, this.addSlot(new BroomPartSlot(internal, 2, 52, 8, this) {
             private final int slot = 2;
         }));
-        this.customSlots.put(3, this.addSlot(new SlotItemHandler(internal, 3, 79, 8) {
+        this.customSlots.put(3, this.addSlot(new BroomPartSlot(internal, 3, 79, 8, this) {
             private final int slot = 3;
         }));
-        this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 25, 35) {
+        this.customSlots.put(4, this.addSlot(new BroomPartSlot(internal, 4, 25, 35, this) {
             private final int slot = 4;
         }));
-        this.customSlots.put(5, this.addSlot(new SlotItemHandler(internal, 5, 52, 35) {
+        this.customSlots.put(5, this.addSlot(new BroomPartSlot(internal, 5, 52, 35, this) {
             private final int slot = 5;
         }));
-        this.customSlots.put(6, this.addSlot(new SlotItemHandler(internal, 6, 79, 35) {
+        this.customSlots.put(6, this.addSlot(new BroomPartSlot(internal, 6, 79, 35, this) {
             private final int slot = 6;
         }));
-        this.customSlots.put(7, this.addSlot(new SlotItemHandler(internal, 7, 25, 62) {
+        this.customSlots.put(7, this.addSlot(new BroomPartSlot(internal, 7, 25, 62, this) {
             private final int slot = 7;
         }));
-        this.customSlots.put(8, this.addSlot(new SlotItemHandler(internal, 8, 52, 62) {
+        this.customSlots.put(8, this.addSlot(new BroomPartSlot(internal, 8, 52, 62, this) {
             private final int slot = 8;
         }));
-        this.customSlots.put(9, this.addSlot(new SlotItemHandler(internal, 9, 79, 62) {
+        this.customSlots.put(9, this.addSlot(new BroomPartSlot(internal, 9, 79, 62, this) {
             private final int slot = 9;
         }));
         for (int si = 0; si < 3; ++si)
@@ -112,6 +112,7 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
                 this.addSlot(new Slot(inv, sj + (si + 1) * 9, 0 + 8 + sj * 18, 0 + 84 + si * 18));
         for (int si = 0; si < 9; ++si)
             this.addSlot(new Slot(inv, si, 0 + 8 + si * 18, 0 + 142));
+
     }
 
     @Override
@@ -127,13 +128,39 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
         return true;
     }
 
-    public void extractDataFromItem
-    public void insertDataIntoItem() {
+    public void extractDataFromItem() {
+        if (!extractData) {
+            return;
+        }
+        if (getSlot(0).getItem().getItem() instanceof ModifiableItem) {
+            extractData = false;
+        }
         ItemStack result = getSlot(0).getItem();
+        LazyOptional<IItemHandler> iItemHandler = result.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+        if (!iItemHandler.isPresent()) {
+            System.out.println("ERROR: no item handler in itemstack in modification station, item: " + result.getItem().toString());
+            return;
+        }
+        iItemHandler.ifPresent((e) -> this.handler = e);
         for (int i = 1; i < 10; i++) {
-            if (getSlot(i).hasItem()) {
+            ItemStack current = handler.extractItem(i - 1, handler.getStackInSlot(i - 1).getCount(), false);
+            setItem(i, i, current);
+        }
+    }
 
-            }
+    public void insertDataToItem(ItemStack result) {
+        extractData = true;
+
+        LazyOptional<IItemHandler> iItemHandler = result.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+        if (!iItemHandler.isPresent()) {
+            System.out.println("ERROR: no item handler in itemstack in modification station, item: " + result.getItem().toString());
+            return;
+        }
+        iItemHandler.ifPresent((e) -> this.handler = e);
+        for (int i = 1; i < 10; i++) {
+            ItemStack current = getSlot(i).getItem();
+            ItemStack remainder = handler.insertItem(i - 1, current, false);
+            setItem(i, 2, ItemStack.EMPTY);
         }
     }
 
@@ -148,7 +175,7 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
                 if (!this.moveItemStackTo(itemstack1, 10, this.slots.size(), true))
                     return ItemStack.EMPTY;
                 slot.onQuickCraft(itemstack1, itemstack);
-            } else if (!this.moveItemStackTo(itemstack1, 0, 10, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 10, 10, false)) {
                 if (index < 10 + 27) {
                     if (!this.moveItemStackTo(itemstack1, 10 + 27, this.slots.size(), true))
                         return ItemStack.EMPTY;
@@ -172,6 +199,9 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
     @Override
     protected boolean moveItemStackTo(ItemStack p_38904_, int p_38905_, int p_38906_, boolean p_38907_) {
         boolean flag = false;
+         if (p_38904_.getItem() instanceof ModifiableItem) {
+             insertDataToItem(p_38904_);
+         }
         int i = p_38905_;
         if (p_38907_) {
             i = p_38906_ - 1;
@@ -246,25 +276,29 @@ public class ModificationStationMenu extends AbstractContainerMenu implements Su
     }
 
     @Override
+    public void clicked(int pSlotId, int pButton, ClickType pClickType, Player pPlayer) {
+        super.clicked(pSlotId, pButton, pClickType, pPlayer);
+        extractDataFromItem();
+    }
+
+    @Override
     public void removed(Player playerIn) {
         super.removed(playerIn);
 
         if (!bound && playerIn instanceof ServerPlayer serverPlayer) {
+            insertDataToItem(getSlot(0).getItem());
             if (!serverPlayer.isAlive() || serverPlayer.hasDisconnected()) {
+
                 for (int j = 0; j < internal.getSlots(); ++j) {
                     playerIn.drop(internal.extractItem(j, internal.getStackInSlot(j).getCount(), false), false);
                 }
             } else {
-                for (int i = 0; i < internal.getSlots(); ++i) {
-                    playerIn.getInventory().placeItemBackInInventory(internal.extractItem(i, internal.getStackInSlot(i).getCount(), false));
-                }
+                playerIn.getInventory().placeItemBackInInventory(internal.extractItem(0, internal.getStackInSlot(0).getCount(), false));
+
+
             }
         }
     }
-
-
-
-
 
     public Map<Integer, Slot> get() {
         return customSlots;

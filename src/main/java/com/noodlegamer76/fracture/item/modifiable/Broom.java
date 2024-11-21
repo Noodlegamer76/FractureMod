@@ -17,7 +17,7 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
-public class Broom extends Item {
+public class Broom extends ModifiableItem {
     public Broom(Properties pProperties) {
         super(pProperties);
     }
@@ -64,6 +64,11 @@ public class Broom extends Item {
             }
         }
         return super.use(level, player, usedHand);
+    }
+
+    @Override
+    public int getMaxStackSize(ItemStack stack) {
+        return 1;
     }
 
     @Override

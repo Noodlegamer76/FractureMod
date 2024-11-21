@@ -1,17 +1,25 @@
 package com.noodlegamer76.fracture.client.util;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import com.noodlegamer76.fracture.event.RenderLevelEventsForFog;
 import net.minecraft.client.Camera;
+import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.lwjgl.opengl.GL33;
+import org.lwjgl.opengl.GL44;
 
 import javax.annotation.Nullable;
+import java.nio.FloatBuffer;
 
 public class RenderCubeAroundPlayer {
     public static float near = (float) Minecraft.getInstance().gameRenderer.getMainCamera().getNearPlane().getBottomLeft().length();
@@ -93,30 +101,95 @@ public class RenderCubeAroundPlayer {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
 
-        VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(ModRenderTypes.FOG_RENDERTYPE);
-
+        Vec3 pos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        float[] cameraPos = {(float) pos.x, (float) pos.y, (float) pos.z};
 
         RenderSystem.setShader(() -> ModRenderTypes.fog);
+        GlStateManager._glUseProgram(ModRenderTypes.fog.getId());
+
+        if (ModRenderTypes.fog.getUniform("CameraPos") != null) {
+            ModRenderTypes.fog.getUniform("CameraPos").set(cameraPos);
+        }
+        Matrix4f matrix4f2 = poseStack.last().pose();
+        if (ModRenderTypes.fog.getUniform("ModelView2") != null) {
+            ModRenderTypes.fog.getUniform("ModelView2").set(matrix4f2);
+        }
+
+        if (Minecraft.getInstance().options.graphicsMode().get().getId() == GraphicsStatus.FABULOUS.getId()) {
+            GlStateManager.glActiveTexture(GL44.GL_TEXTURE0);
+            GlStateManager._bindTexture(Minecraft.getInstance().levelRenderer.getTranslucentTarget().getDepthTextureId());
+            GlStateManager._glUniform1i(GL44.glGetUniformLocation(ModRenderTypes.fog.getId(), "Depth"), 0);
+        }
+        else {
+            GlStateManager.glActiveTexture(GL44.GL_TEXTURE0);
+            GlStateManager._bindTexture(Minecraft.getInstance().getMainRenderTarget().getDepthTextureId());
+            GlStateManager._glUniform1i(GL44.glGetUniformLocation(ModRenderTypes.fog.getId(), "Depth"), 0);
+        }
+        RenderSystem.setShaderTexture(0, Minecraft.getInstance().getMainRenderTarget().getDepthTextureId());
         RenderSystem.disableDepthTest();
+        RenderSystem.enableBlend();
+
+        for(int i = 0; i < 6; i++) {
+
+            poseStack.pushPose();
+
+            poseStack.translate(0, 2,0);
+
+            if (i == 0) {
+
+                poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
+                poseStack.mulPose(Axis.YN.rotationDegrees(180));
+            }
+
+            if (i == 1) {
+
+                poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
+                poseStack.mulPose(Axis.YN.rotationDegrees(-90));
+            }
+
+            if (i == 2) {
+
+                poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
+                poseStack.mulPose(Axis.YN.rotationDegrees(90));
+            }
+
+            if (i == 3) {
+
+                poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
+            }
+
+            if (i == 4) {
+
+                poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
+                poseStack.mulPose(Axis.YN.rotationDegrees(180));
+            }
+
+            if (i == 5) {
+
+                poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
+                poseStack.mulPose(Axis.YN.rotationDegrees(180));
+            }
+
+            bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+            Matrix4f matrix4f = poseStack.last().pose();
+            bufferbuilder.vertex(matrix4f, -10, -10, -10).endVertex();
+            bufferbuilder.vertex(matrix4f, -10, -10, 10).endVertex();
+            bufferbuilder.vertex(matrix4f, 10, -10, 10).endVertex();
+            bufferbuilder.vertex(matrix4f, 10,  -10, -10).endVertex();
+            tesselator.end();
 
 
-        poseStack.pushPose();
-
-        poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-
-        Matrix4f matrix4f = poseStack.last().pose();
-        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-        Camera.NearPlane near = Minecraft.getInstance().gameRenderer.getMainCamera().getNearPlane();
-        bufferbuilder.vertex(matrix4f, (float) near.getTopLeft().x() + -10, (float) near.getTopLeft().y() + -1, (float) near.getTopLeft().z() + -10).endVertex();
-        bufferbuilder.vertex(matrix4f, (float) near.getTopRight().x() + -10, (float) near.getTopRight().y() + -1, (float) near.getTopRight().z() + 10).endVertex();
-        bufferbuilder.vertex(matrix4f, (float) near.getBottomRight().x() + 10, (float) near.getBottomRight().y() + -1, (float) near.getBottomRight().z() + 10).endVertex();
-        bufferbuilder.vertex(matrix4f, (float) near.getBottomLeft().x() + 10, (float) near.getBottomLeft().y() + -1, (float) near.getBottomLeft().z() + -10).endVertex();
-        tesselator.end();
-
-        poseStack.popPose();
-
+            poseStack.popPose();
+        }
+        RenderSystem.disableBlend();
         RenderSystem.enableDepthTest();
+        GL44.glMemoryBarrier(GL44.GL_FRAMEBUFFER_BARRIER_BIT);
         RenderLevelEventsForFog.positions.clear();
     }
 

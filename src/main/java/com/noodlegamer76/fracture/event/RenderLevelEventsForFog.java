@@ -20,10 +20,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.joml.Matrix4f;
+import org.lwjgl.opengl.GL44;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,16 +39,16 @@ public class RenderLevelEventsForFog {
     @SubscribeEvent
     public static void renderLevelEvent(RenderLevelStageEvent event) throws IOException {
 
-        //I HATE THIS
+
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY) {
-            ModRenderTypes.fog.setSampler("Depth", Minecraft.getInstance().getMainRenderTarget().getDepthTextureId());
-            ModRenderTypes.fog.setSampler("Color", Minecraft.getInstance().getMainRenderTarget().getColorTextureId());
+
 
         }
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
             for (int i = 0; i < positions.size(); i++) {
-                RenderCubeAroundPlayer.renderFog(new PoseStack(), null);
+
             }
+            RenderCubeAroundPlayer.renderFog(event.getPoseStack(), null);
         }
         //if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER && Minecraft.useFancyGraphics()) {
         //    for (int i = 0; i < positions.size(); i++) {
