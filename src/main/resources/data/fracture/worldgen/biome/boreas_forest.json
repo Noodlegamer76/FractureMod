@@ -35,6 +35,9 @@
   "features": [
     [
       "fracture:inkwood_placed"
+    ],
+    [
+      "fracture:frozen_grass"
     ]
   ]
 }
