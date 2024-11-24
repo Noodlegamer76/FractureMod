@@ -23,6 +23,8 @@ public class RenderEventsForFbos {
     public static final ResourceLocation TEXTURE = new ResourceLocation(FractureMod.MODID, "textures/environment/layer1/nebula");
     private static boolean fboSetup = false;
     public static int Fbo;
+    public static int postFbo;
+    public static int postTexture;
     public static int skyboxTexture;
     public static int stencilBufferTexture;
     public static int width;
@@ -62,8 +64,23 @@ public class RenderEventsForFbos {
             GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MAG_FILTER, GL44.GL_NEAREST);
 
             GlStateManager._glFramebufferTexture2D(GL44.GL_FRAMEBUFFER, GL44.GL_DEPTH_STENCIL_ATTACHMENT, GL44.GL_TEXTURE_2D, stencilBufferTexture, 0);
-            GlStateManager._glBindFramebuffer(GL44.GL_FRAMEBUFFER, current);
 
+
+            //SETUP FOR NORMALS MAP
+            postFbo = GlStateManager.glGenFramebuffers();
+            GlStateManager._glBindFramebuffer(GL44.GL_FRAMEBUFFER, postFbo);
+
+            postTexture = GlStateManager._genTexture();
+            RenderSystem.bindTexture(postTexture);
+
+            GlStateManager._texImage2D(GL44.GL_TEXTURE_2D, 0, GL44.GL_RGB16F,
+                    width, height,
+                    0, GL44.GL_RGB, GL44.GL_FLOAT, null);
+            GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MIN_FILTER, GL44.GL_NEAREST);
+            GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MAG_FILTER, GL44.GL_NEAREST);
+            GlStateManager._glFramebufferTexture2D(GL44.GL_FRAMEBUFFER, GL44.GL_COLOR_ATTACHMENT0, GL44.GL_TEXTURE_2D, postTexture, 0);
+
+            GlStateManager._glBindFramebuffer(GL44.GL_FRAMEBUFFER, current);
         }
 
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY) {
@@ -139,6 +156,26 @@ public class RenderEventsForFbos {
             GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MAG_FILTER, GL44.GL_NEAREST);
 
             GlStateManager._glFramebufferTexture2D(GL44.GL_FRAMEBUFFER, GL44.GL_DEPTH_STENCIL_ATTACHMENT, GL44.GL_TEXTURE_2D, stencilBufferTexture, 0);
+
+            //RESIZE FOR NORMALS
+
+            GlStateManager._glDeleteFramebuffers(postFbo);
+            postFbo = GlStateManager.glGenFramebuffers();
+
+
+            GlStateManager._glBindFramebuffer(GL44.GL_FRAMEBUFFER, postFbo);
+
+            GlStateManager._deleteTexture(postTexture);
+
+            postTexture = GlStateManager._genTexture();
+            RenderSystem.bindTexture(postTexture);
+
+            GlStateManager._texImage2D(GL44.GL_TEXTURE_2D, 0, GL44.GL_RGB16F,
+                    width, height,
+                    0, GL44.GL_RGB, GL44.GL_FLOAT, null);
+            GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MIN_FILTER, GL44.GL_NEAREST);
+            GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MAG_FILTER, GL44.GL_NEAREST);
+            GlStateManager._glFramebufferTexture2D(GL44.GL_FRAMEBUFFER, GL44.GL_COLOR_ATTACHMENT0, GL44.GL_TEXTURE_2D, postTexture, 0);
 
             GlStateManager._glBindFramebuffer(GL44.GL_FRAMEBUFFER, current);
         }

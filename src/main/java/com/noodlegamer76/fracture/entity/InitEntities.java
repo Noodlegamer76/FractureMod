@@ -3,6 +3,7 @@ package com.noodlegamer76.fracture.entity;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
 import com.noodlegamer76.fracture.entity.monster.*;
+import com.noodlegamer76.fracture.entity.projectile.BloodBombEntity;
 import com.noodlegamer76.fracture.entity.projectile.VoidBall;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.entity.vehicle.ModChestBoatEntity;
@@ -64,4 +65,9 @@ public class InitEntities {
             () -> EntityType.Builder.<VoidBall>of(VoidBall::new, MobCategory.MISC)
                     .sized(0.375f, 0.375f)
                     .build("void_ball"));
+
+    public static final RegistryObject<EntityType<BloodBombEntity>> BLOOD_BOMB = ENTITIES.register(("blood_bomb"),
+            () -> EntityType.Builder.<BloodBombEntity>of(BloodBombEntity::new, MobCategory.MISC)
+                    .sized(0.375f, 0.375f)
+                    .build("blood_bomb"));
 }

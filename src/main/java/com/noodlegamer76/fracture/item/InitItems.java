@@ -39,6 +39,8 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.BOREAS_PORTAL_FRAME.get(), new Item.Properties()));
     public static final RegistryObject<Item> MODIFICATION_STATION = ITEMS.register("modification_station",
             () -> new BlockItem(InitBlocks.MODIFICATION_STATION.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PERMAFROST = ITEMS.register("permafrost",
+            () -> new BlockItem(InitBlocks.PERMAFROST.get(), new Item.Properties()));
 
 
     public static final RegistryObject<Item> PARASITIC_SWORD = ITEMS.register("parasitic_sword",
@@ -59,6 +61,9 @@ public class InitItems {
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> FROZEN_GRASS = ITEMS.register("frozen_grass",
+            () -> new BlockItem(InitBlocks.FROZEN_GRASS.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> VOID_BLOCK = ITEMS.register("void_block",
             () -> new VoidBlockItem(InitBlocks.VOID_BLOCK.get(), new Item.Properties()));
 
@@ -67,6 +72,8 @@ public class InitItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLESHY_BONE = ITEMS.register("fleshy_bone",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_BOMB = ITEMS.register("blood_bomb",
+            () -> new BloodBomb(new Item.Properties()));
 
     public static final RegistryObject<Item> SKYBOX_GENERATOR = ITEMS.register("skybox_generator",
             () -> new SkyboxGeneratorItem(InitBlocks.SKYBOX_GENERATOR.get(), new Item.Properties()));
@@ -89,6 +96,7 @@ public class InitItems {
             () -> new Item(new Item.Properties()
                     .food(new FoodProperties.Builder().nutrition(2).saturationMod(6)
                             .effect(new MobEffectInstance(MobEffects.POISON, 100, 2), 1).build())));
+
     public static final RegistryObject<Item> ANKLE_BITER_SPAWN_EGG = ITEMS.register("ankle_biter_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.ANKLE_BITER, new Color(74, 10, 3).getRGB(), new Color(74, 3, 3).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> FLESH_WALKER_SPAWN_EGG = ITEMS.register("flesh_walker_spawn_egg",

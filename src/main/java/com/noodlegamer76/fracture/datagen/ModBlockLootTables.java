@@ -62,6 +62,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(InitBlocks.HANGING_FLESH.get(),
                 block -> createShearsOnlyDrop(InitItems.TENDRILS.get()));
 
+        this.add(InitBlocks.FROZEN_GRASS.get(),
+                block -> createShearsOnlyDrop(InitItems.FROZEN_GRASS.get()));
+
         dropSelf(InitBlocks.LARGE_FLESH_BULB.get());
         dropSelf(InitBlocks.SMALL_FLESH_BULB.get());
         dropSelf(InitBlocks.BLOODY_BOOKSHELF.get());
@@ -112,6 +115,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         dropSelf(InitBlocks.BOREAS_PORTAL_LOCK.get());
         dropSelf(InitBlocks.BOREAS_PORTAL_FRAME.get());
+        dropSelf(InitBlocks.PERMAFROST.get());
 
         //dropSelf(BlockInit.CRYSTALLIZED_DIRT.get());
 

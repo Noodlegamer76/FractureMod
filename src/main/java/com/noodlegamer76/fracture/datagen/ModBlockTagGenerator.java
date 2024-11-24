@@ -88,7 +88,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
                         InitBlocks.FLESHY_DARKSTONE_BRICKS.get(),
                         InitBlocks.FLESHY_DARKSTONE_BRICK_SLAB.get(),
                         InitBlocks.FLESHY_DARKSTONE_BRICK_WALL.get(),
-                        InitBlocks.FLESHY_DARKSTONE_BRICK_STAIRS.get()
+                        InitBlocks.FLESHY_DARKSTONE_BRICK_STAIRS.get(),
+                        InitBlocks.SKYBOX_GENERATOR.get(),
+                        InitBlocks.SMOKE_STACK.get(),
+                        InitBlocks.VOID_BLOCK.get()
                         );
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)
@@ -121,6 +124,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
                         InitBlocks.INKWOOD_WALL_SIGN_BLOCK.get(),
                         InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get(),
                         InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get()
+                );
+
+        this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(
+                        InitBlocks.PERMAFROST.get()
                 );
 
         this.tag(Tags.Blocks.STONE)
@@ -263,6 +271,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
         this.tag(BlockTags.LEAVES)
                 .add(
                         InitBlocks.INWKOOD_LEAVES.get()
+                );
+
+        this.tag(BlockTags.DIRT)
+                .add(
+                        InitBlocks.PERMAFROST.get()
                 );
     }
 }

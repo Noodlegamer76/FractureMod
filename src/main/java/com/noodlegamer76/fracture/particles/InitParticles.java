@@ -16,4 +16,7 @@ public class InitParticles {
 
     public static final RegistryObject<SimpleParticleType> VOID_PARTICLES =
             PARTICLE_TYPES.register("void", () -> new SimpleParticleType(true));
+
+    public static final RegistryObject<SimpleParticleType> CONFETTI_PARTICLES =
+            PARTICLE_TYPES.register("confetti", () -> new SimpleParticleType(true));
 }

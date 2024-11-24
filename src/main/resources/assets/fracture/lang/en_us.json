@@ -18,6 +18,7 @@
 	"item.fracture.parasitic_shovel": "Parasitic Shovel",
 	"item.fracture.fleshy_bone": "Fleshy Bone",
 	"item.fracture.bloody_skull": "Bloody Skull",
+	"item.fracture.boreas_key": "Boreas Key",
 
 	"block.fracture.flesh_sprayer": "Blood Sprayer",
 	"block.fracture.compact_tnt": "Compact Tnt",
@@ -76,6 +77,7 @@
 	"block.fracture.skybox_generator": "Skybox Generator",
 	"block.fracture.boreas_portal_lock": "Boreas Portal Lock",
 	"block.fracture.boreas_portal_frame": "Boreas Portal Frame",
+	"block.fracture.smoke_stack": "Smoke Stack",
 
 	"entity.fracture.ankle_biter": "Ankle Biter",
 	"entity.fracture.flesh_walker": "Flesh Walker",

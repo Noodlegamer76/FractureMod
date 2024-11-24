@@ -23,6 +23,9 @@ public class InitBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FractureMod.MODID);
 
+    public static final RegistryObject<Block> FROZEN_GRASS = BLOCKS.register("frozen_grass",
+            () -> new FrozenGrass(BlockBehaviour.Properties.copy(Blocks.GRASS)));
+
     public static final RegistryObject<Block> FOG_EMITTER = BLOCKS.register("fog_emitter",
             () -> new FogEmitterBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
@@ -33,6 +36,8 @@ public class InitBlocks {
             () -> new BoreasPortalLock(BlockBehaviour.Properties.copy(Blocks.BEDROCK).noOcclusion()));
     public static final RegistryObject<Block> BOREAS_PORTAL_FRAME = BLOCKS.register("boreas_portal_frame",
             () -> new BoreasPortalFrame(BlockBehaviour.Properties.copy(Blocks.BEDROCK).noOcclusion()));
+    public static final RegistryObject<Block> PERMAFROST = BLOCKS.register("permafrost",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
 
     public static final RegistryObject<Block> VOID_BLOCK = BLOCKS.register("void_block",
             () -> new VoidBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(DyeColor.BLACK).noOcclusion()));
@@ -43,7 +48,7 @@ public class InitBlocks {
     public static final RegistryObject<Block> INWKOOD_LEAVES = BLOCKS.register("inkwood_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
     public static final RegistryObject<Block> INKWOOD_SAPLING = BLOCKS.register("inkwood_sapling",
-            () -> new SaplingBlock(new InkwoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+            () -> new InkwoodSapling(new InkwoodTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
     public static final RegistryObject<Block> SMOKE_STACK = BLOCKS.register("smoke_stack",
             () -> new SmokeStack(BlockBehaviour.Properties.copy(Blocks.STONE)));

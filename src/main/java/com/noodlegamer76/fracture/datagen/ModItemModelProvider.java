@@ -68,6 +68,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.LIVING_FLESH);
         simpleItem(InitItems.FLESHY_BONE);
         simpleItem(InitItems.BOREAS_KEY);
+        simpleItem(InitItems.BLOOD_BOMB);
 
         simpleItem(InitItems.BLOOD_BUCKET);
 
@@ -109,6 +110,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.INVERTED_GLASSES);
 
         simpleItem(InitItems.BLOOD_SLIME_BALL);
+        simpleItem(InitItems.FROZEN_GRASS);
 
         cubeColumn("flesh_sprayer", FLESH_BLOCK, FLESH_SPRAYER);
 
@@ -160,6 +162,13 @@ public class ModItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder simpleBlockItem(RegistryObject<Block> block) {
         return withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
                 mcLoc("fracture:block/" + block.getId().getPath()))
+                .texture("layer0",
+                        new ResourceLocation(FractureMod.MODID, "block/" + block.getId().getPath()));
+    }
+
+    private ItemModelBuilder cubeBlockItem(RegistryObject<Block> block) {
+        return withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
+                mcLoc("minecraft:block/cube_all" + block.getId().getPath()))
                 .texture("layer0",
                         new ResourceLocation(FractureMod.MODID, "block/" + block.getId().getPath()));
     }

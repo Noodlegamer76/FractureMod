@@ -18,6 +18,7 @@ import java.io.IOException;
 public class ModRenderTypes extends RenderStateShard{
     public static ShaderInstance fog;
     public static ShaderInstance skybox;
+    public static ShaderInstance normal;
 
 
     public static final RenderType FOG_RENDERTYPE = RenderType.create(

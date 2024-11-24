@@ -8,10 +8,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.client.util.ModRenderTypes;
-import com.noodlegamer76.fracture.client.util.RenderCubeAroundPlayer;
-import com.noodlegamer76.fracture.client.util.RenderFog;
-import com.noodlegamer76.fracture.client.util.SkyBoxRenderer;
+import com.noodlegamer76.fracture.client.util.*;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.PostPass;
@@ -19,6 +16,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
@@ -27,6 +25,7 @@ import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL44;
 
 import java.io.IOException;
@@ -37,24 +36,15 @@ public class RenderLevelEventsForFog {
     public static ArrayList<ArrayList<Integer>> positions = new ArrayList<>();
 
     @SubscribeEvent
-    public static void renderLevelEvent(RenderLevelStageEvent event) throws IOException {
+    public static void renderLevelEvent(RenderLevelStageEvent event) {
 
-
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY) {
-
-
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES) {
+            RenderCubeAroundPlayer.renderCubeFog(event.getPoseStack(), 7.5f, 40, new Vector3f(0.45f, 0.45f, 0.45f), 0);
         }
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
-            for (int i = 0; i < positions.size(); i++) {
+            RenderCubeAroundPlayer.renderCubeFog(event.getPoseStack(), 7.5f, 40, new Vector3f(0.45f, 0.45f, 0.45f), 0);
 
-            }
-            RenderCubeAroundPlayer.renderFog(event.getPoseStack(), null);
         }
-        //if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER && Minecraft.useFancyGraphics()) {
-        //    for (int i = 0; i < positions.size(); i++) {
-        //        RenderCubeAroundPlayer.renderFog(new PoseStack(), null);
-        //    }
-        //}
 
     }
 }

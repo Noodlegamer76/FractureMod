@@ -25,6 +25,10 @@ public class ShaderEvents {
                         new ResourceLocation(FractureMod.MODID, "skybox"),
                         DefaultVertexFormat.POSITION),
                 (e) -> ModRenderTypes.skybox = e);
+        event.registerShader(new ShaderInstance(event.getResourceProvider(),
+                        new ResourceLocation(FractureMod.MODID, "normal"),
+                        DefaultVertexFormat.POSITION),
+                (e) -> ModRenderTypes.normal = e);
     }
 
     @SubscribeEvent

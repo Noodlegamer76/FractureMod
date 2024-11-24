@@ -10,6 +10,7 @@ import com.noodlegamer76.fracture.client.renderers.entity.block.VoidBlockRendere
 import com.noodlegamer76.fracture.entity.block.ModificationStationEntity;
 import com.noodlegamer76.fracture.gui.modificationstation.ModificationStationScreen;
 import com.noodlegamer76.fracture.gui.wand.WandScreen;
+import com.noodlegamer76.fracture.particles.ConfettiParticle;
 import com.noodlegamer76.fracture.particles.VoidParticle;
 import com.noodlegamer76.fracture.util.ModWoodTypes;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
@@ -33,6 +34,7 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -64,6 +66,7 @@ public class FractureMod
 
     public FractureMod()
     {
+
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Register the commonSetup method for modloading
@@ -154,8 +157,9 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.BLOOD_SLIME.get(), BloodSlimeRenderer::new);
             event.registerEntityRenderer(InitEntities.COMPACT_TNT.get(), CompactTntRenderer::new);
             event.registerEntityRenderer(InitEntities.VOID_BALL.get(), VoidBallRenderer::new);
+            event.registerEntityRenderer(InitEntities.BLOOD_BOMB.get(), ThrownItemRenderer::new);
 
-            event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), FogEmitterRenderer::new);
+            event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOD_SIGN.get(), SignRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.SKYBOX_GENERATOR.get(), SkyboxGeneratorRenderer::new);
@@ -169,6 +173,9 @@ public class FractureMod
 
             Minecraft.getInstance().particleEngine.register(InitParticles.VOID_PARTICLES.get(),
                     VoidParticle.Provider::new);
+
+            Minecraft.getInstance().particleEngine.register(InitParticles.CONFETTI_PARTICLES.get(),
+                    ConfettiParticle.Provider::new);
         }
 
         @SubscribeEvent

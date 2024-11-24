@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "s-s",
+    "s-s",
+    "scs"
+  ],
+  "key": {
+    "-": {
+      "item": "minecraft:campfire"
+    },
+    "s": {
+      "item": "fracture:darkstone"
+    },
+    "c": {
+      "item": "minecraft:coal_block"
+    }
+  },
+  "result": {
+    "item": "fracture:smoke_stack"
+  }
+}

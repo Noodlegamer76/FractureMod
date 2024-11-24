@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " w ",
+    "s-s",
+    "scs"
+  ],
+  "key": {
+    "-": {
+      "item": "minecraft:black_stained_glass"
+    },
+    "s": {
+      "item": "fracture:darkstone_brick_slab"
+    },
+    "c": {
+      "item": "minecraft:beacon"
+    },
+    "w": {
+      "item": "fracture:large_flesh_bulb"
+    }
+  },
+  "result": {
+    "item": "fracture:skybox_generator"
+  }
+}

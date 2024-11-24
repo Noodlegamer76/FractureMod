@@ -3,6 +3,7 @@ package com.noodlegamer76.fracture.client.renderers.entity.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.client.util.LightningRenderer;
 import com.noodlegamer76.fracture.entity.block.FogEmitterEntity;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -23,7 +24,7 @@ public class TestRenderer extends GeoBlockRenderer<FogEmitterEntity> {
 
     @Override
     public void actuallyRender(PoseStack poseStack, FogEmitterEntity animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-
+        LightningRenderer.positions.add(animatable.getBlockPos());
         super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

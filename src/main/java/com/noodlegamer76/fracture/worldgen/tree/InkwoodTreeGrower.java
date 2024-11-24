@@ -13,4 +13,5 @@ public class InkwoodTreeGrower extends AbstractTreeGrower {
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource pRandom, boolean pHasFlowers) {
         return ModConfiguredFeatures.INKWOOD_KEY;
     }
+
 }
