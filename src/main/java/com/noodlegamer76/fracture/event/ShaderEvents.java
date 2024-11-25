@@ -3,9 +3,11 @@ package com.noodlegamer76.fracture.event;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.client.util.ModRenderTypes;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterDimensionSpecialEffectsEvent;
 import net.minecraftforge.client.event.RegisterNamedRenderTypesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,7 +34,7 @@ public class ShaderEvents {
     }
 
     @SubscribeEvent
-    public static void registerNamedRenderTypes(RegisterNamedRenderTypesEvent event) {
+    public static void dimensionSpecialEffect(RegisterDimensionSpecialEffectsEvent event) {
 
     }
 }
