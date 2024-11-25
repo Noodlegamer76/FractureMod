@@ -85,6 +85,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         spawnEggItem(InitItems.FLESH_WALKER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_SLIME_SPAWN_EGG);
         spawnEggItem(InitItems.BLOOD_SLIME_SPAWN_EGG);
+        spawnEggItem(InitItems.ABDOMINAL_SNOWMAN_SPAWN_EGG);
 
         cubeColumn("bloody_bookshelf", BLOODY_BOOKSHELF, BLOODY_WOOD);
         cubeColumn("darkstone_pillar", DARKSTONE_PILLAR_SIDE, DARKSTONE_PILLAR_TOP);

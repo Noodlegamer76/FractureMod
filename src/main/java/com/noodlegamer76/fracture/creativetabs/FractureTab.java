@@ -1,6 +1,5 @@
 package com.noodlegamer76.fracture.creativetabs;
 
-import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -94,12 +93,15 @@ public class FractureTab {
             event.accept(InitItems.INKWOOD_LEAVES);
 
             event.accept(InitItems.PERMAFROST);
+            event.accept(InitItems.ICE_CRYSTAL_BLOCK);
+            event.accept(InitItems.RADIANT_ICE);
             event.accept(InitItems.FROZEN_GRASS);
 
             event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
             event.accept(InitItems.BLOOD_SLIME_SPAWN_EGG);
             event.accept(InitItems.FLESH_SLIME_SPAWN_EGG);
             event.accept(InitItems.FLESH_WALKER_SPAWN_EGG);
+            event.accept(InitItems.ABDOMINAL_SNOWMAN_SPAWN_EGG);
         }
     }
 }

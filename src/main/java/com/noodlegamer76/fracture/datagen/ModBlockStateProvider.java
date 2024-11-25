@@ -105,6 +105,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         cubeTop(InitBlocks.SMOKE_STACK, SMOKE_STACK_SIDE, SMOKE_STACK_TOP);
 
         blockWithItem(InitBlocks.PERMAFROST);
+        blockWithItem(InitBlocks.ICE_CRYSTAL_BLOCK);
+        blockWithItem(InitBlocks.RADIANT_ICE);
         cross(InitBlocks.FROZEN_GRASS);
 
 

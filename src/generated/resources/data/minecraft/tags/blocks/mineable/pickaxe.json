@@ -18,6 +18,8 @@
     "fracture:fleshy_darkstone_brick_stairs",
     "fracture:skybox_generator",
     "fracture:smoke_stack",
-    "fracture:void_block"
+    "fracture:void_block",
+    "fracture:ice_crystal_block",
+    "fracture:radiant_ice"
   ]
 }

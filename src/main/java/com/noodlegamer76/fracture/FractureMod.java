@@ -24,6 +24,7 @@ import com.noodlegamer76.fracture.gui.skyboxgenerator.SkyboxGeneratorScreen;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.BloodParticle;
 import com.noodlegamer76.fracture.particles.InitParticles;
+import com.noodlegamer76.fracture.worldgen.features.InitFeatures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.BoatModel;
@@ -82,6 +83,7 @@ public class FractureMod
         InitFluidTypes.FLUID_TYPES.register(modEventBus);
         InitBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         InitMenus.MENU_TYPES.register(modEventBus);
+        InitFeatures.FEATURES.register(modEventBus);
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(new FractureTab());
@@ -158,6 +160,7 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.COMPACT_TNT.get(), CompactTntRenderer::new);
             event.registerEntityRenderer(InitEntities.VOID_BALL.get(), VoidBallRenderer::new);
             event.registerEntityRenderer(InitEntities.BLOOD_BOMB.get(), ThrownItemRenderer::new);
+            event.registerEntityRenderer(InitEntities.ABDOMINAL_SNOWMAN.get(), AbdominalSnowmanRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);

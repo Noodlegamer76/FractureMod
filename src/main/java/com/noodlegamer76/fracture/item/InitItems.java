@@ -41,6 +41,11 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.MODIFICATION_STATION.get(), new Item.Properties()));
     public static final RegistryObject<Item> PERMAFROST = ITEMS.register("permafrost",
             () -> new BlockItem(InitBlocks.PERMAFROST.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ICE_CRYSTAL_BLOCK = ITEMS.register("ice_crystal_block",
+            () -> new BlockItem(InitBlocks.ICE_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RADIANT_ICE = ITEMS.register("radiant_ice",
+            () -> new BlockItem(InitBlocks.RADIANT_ICE.get(), new Item.Properties()));
+
 
 
     public static final RegistryObject<Item> PARASITIC_SWORD = ITEMS.register("parasitic_sword",
@@ -105,6 +110,8 @@ public class InitItems {
             () -> new ForgeSpawnEggItem(InitEntities.FLESH_SLIME, new Color(74, 10, 3).getRGB(), new Color(15, 50, 15).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> BLOOD_SLIME_SPAWN_EGG = ITEMS.register("blood_slime_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.BLOOD_SLIME, new Color(74, 10, 3).getRGB(), new Color(255, 0, 0).getRGB(), new Item.Properties()));
+    public static final RegistryObject<Item> ABDOMINAL_SNOWMAN_SPAWN_EGG = ITEMS.register("abdominal_snowman_spawn_egg",
+            () -> new ForgeSpawnEggItem(InitEntities.ABDOMINAL_SNOWMAN, new Color(Color.WHITE.getRGB()).getRGB(), new Color(Color.LIGHT_GRAY.getRGB()).getRGB(), new Item.Properties()));
 
     public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
             () -> new InvertedGlasses(ArmorTiers.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));

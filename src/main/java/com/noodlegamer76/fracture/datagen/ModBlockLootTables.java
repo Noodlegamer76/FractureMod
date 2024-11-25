@@ -4,7 +4,6 @@ import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.RegistryObject;
@@ -64,6 +63,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         this.add(InitBlocks.FROZEN_GRASS.get(),
                 block -> createShearsOnlyDrop(InitItems.FROZEN_GRASS.get()));
+        dropSelf(InitBlocks.ICE_CRYSTAL_BLOCK.get());
+        dropSelf(InitBlocks.RADIANT_ICE.get());
 
         dropSelf(InitBlocks.LARGE_FLESH_BULB.get());
         dropSelf(InitBlocks.SMALL_FLESH_BULB.get());

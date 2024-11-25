@@ -40,6 +40,11 @@ public class InitEntities {
                     .clientTrackingRange(10)
                     .build("flesh_slime"));
 
+    public static final RegistryObject<EntityType<AbdominalSnowman>> ABDOMINAL_SNOWMAN = ENTITIES.register("abdominal_snowman",
+            () -> EntityType.Builder.of(AbdominalSnowman::new, MobCategory.MONSTER)
+                    .sized(2.04F, 2.04F)
+                    .build("abdominal_snowman"));
+
     public static final RegistryObject<EntityType<BloodSlimeEntity>> BLOOD_SLIME = ENTITIES.register("blood_slime",
             () -> EntityType.Builder.of(BloodSlimeEntity::new, MobCategory.MONSTER)
                     .sized(2.99F, 2.99F)

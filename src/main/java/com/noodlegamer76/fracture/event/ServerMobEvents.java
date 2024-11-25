@@ -19,6 +19,7 @@ public class ServerMobEvents {
         event.put(InitEntities.FLESH_WALKER.get(), FleshWalkerEntity.createAttributes().build());
         event.put(InitEntities.FLESH_SLIME.get(), FleshSlimeEntity.createAttributes().build());
         event.put(InitEntities.BLOOD_SLIME.get(), BloodSlimeEntity.createAttributes().build());
+        event.put(InitEntities.ABDOMINAL_SNOWMAN.get(), AbdominalSnowman.createAttributes().build());
     }
 
     @SubscribeEvent
