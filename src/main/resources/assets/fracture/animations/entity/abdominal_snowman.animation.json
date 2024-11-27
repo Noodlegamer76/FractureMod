@@ -204,10 +204,10 @@
 						},
 						"0.25": {
 							"vector": [-155, 0, 0],
-							"easing": "linear"
+							"easing": "easeOutExpo"
 						},
 						"0.5": {
-							"vector": [20, 0, 0],
+							"vector": [0, 0, 0],
 							"easing": "linear"
 						}
 					}
@@ -220,10 +220,10 @@
 						},
 						"0.25": {
 							"vector": [-155, 0, 0],
-							"easing": "linear"
+							"easing": "easeOutExpo"
 						},
 						"0.5": {
-							"vector": [-20, 0, 0],
+							"vector": [0, 0, 0],
 							"easing": "linear"
 						}
 					}

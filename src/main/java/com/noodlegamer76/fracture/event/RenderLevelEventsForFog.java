@@ -38,13 +38,10 @@ public class RenderLevelEventsForFog {
     @SubscribeEvent
     public static void renderLevelEvent(RenderLevelStageEvent event) {
 
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES) {
-            //RenderCubeAroundPlayer.renderCubeFog(event.getPoseStack(), 7.5f, 40, new Vector3f(0.45f, 0.45f, 0.45f), 0);
+        if ((event.getStage() == RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES ||
+                event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) &&
+                Minecraft.getInstance().level.dimension().location().toString().equals("fracture:boreas_dimension")) {
+            RenderCubeAroundPlayer.renderCubeFog(event.getPoseStack(), 7.5f, 40, new Vector3f(0.45f, 0.45f, 0.45f), 0);
         }
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
-            //RenderCubeAroundPlayer.renderCubeFog(event.getPoseStack(), 7.5f, 40, new Vector3f(0.45f, 0.45f, 0.45f), 0);
-
-        }
-
     }
 }

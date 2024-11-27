@@ -5,6 +5,8 @@ import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
+import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.event.RenderEventsForFbos;
 import com.noodlegamer76.fracture.event.RenderLevelEventsForFog;
 import net.minecraft.client.Camera;
 import net.minecraft.client.GraphicsStatus;
@@ -25,6 +27,8 @@ import static com.noodlegamer76.fracture.event.RenderEventsForFbos.postFbo;
 
 public class RenderCubeAroundPlayer {
     public static float near = (float) Minecraft.getInstance().gameRenderer.getMainCamera().getNearPlane().getBottomLeft().length();
+    public static final ResourceLocation FOG_TEXTURE = new ResourceLocation(FractureMod.MODID, "textures/environment/fog_noise.png");
+    public static final ResourceLocation FOG_TEXTURE2 = new ResourceLocation(FractureMod.MODID, "textures/environment/fog_noise2.png");
 
     public static void renderCube(PoseStack poseStack, int ticks, float partialTick, int alpha, float speed,
                                   ResourceLocation frontTexture, ResourceLocation backTexture, ResourceLocation leftTexture,
@@ -141,6 +145,13 @@ public class RenderCubeAroundPlayer {
             GlStateManager._bindTexture(Minecraft.getInstance().getMainRenderTarget().getDepthTextureId());
             GlStateManager._glUniform1i(GL44.glGetUniformLocation(ModRenderTypes.fog.getId(), "Depth"), 0);
         }
+        RenderSystem.setShaderTexture(1, FOG_TEXTURE);
+        RenderSystem.setShaderTexture(2, FOG_TEXTURE2);
+
+        GlStateManager.glActiveTexture(GL44.GL_TEXTURE3);
+        GlStateManager._bindTexture(RenderEventsForFbos.postTexture);
+        GlStateManager._glUniform1i(GL44.glGetUniformLocation(ModRenderTypes.fog.getId(), "Normal"), 3);
+
         RenderSystem.disableDepthTest();
         RenderSystem.enableBlend();
 

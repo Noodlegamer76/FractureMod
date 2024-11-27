@@ -19,6 +19,7 @@
 	"item.fracture.fleshy_bone": "Fleshy Bone",
 	"item.fracture.bloody_skull": "Bloody Skull",
 	"item.fracture.boreas_key": "Boreas Key",
+	"item.fracture.abdominal_snowman_spawn_egg": "Abdominal Snowman Spawn Egg",
 
 	"block.fracture.flesh_sprayer": "Blood Sprayer",
 	"block.fracture.compact_tnt": "Compact Tnt",
@@ -84,6 +85,7 @@
 	"entity.fracture.flesh_slime": "Flesh Slime",
 	"entity.fracture.blood_slime": "Blood Slime",
 	"entity.fracture.mod_chest_boat": "Boat With Chest",
+	"entity.fracture.abdominal_snowman": "Abdominal Snowman",
 
 	"filled_map.flesh_treasure_map": "Fleshy Treasure Map",
 
