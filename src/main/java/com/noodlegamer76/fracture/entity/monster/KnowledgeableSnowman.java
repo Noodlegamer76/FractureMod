@@ -1,7 +1,8 @@
 package com.noodlegamer76.fracture.entity.monster;
 
-import com.noodlegamer76.fracture.util.ModVectors;
-import net.minecraft.world.entity.Entity;
+import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
+import com.noodlegamer76.fracture.entity.ai.behavior.GiantSnowballLaunch;
+import com.noodlegamer76.fracture.entity.ai.behavior.GiantSnowballSpreadLaunch;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -9,13 +10,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
@@ -39,13 +38,25 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class AbdominalSnowman extends Monster implements GeoEntity, SmartBrainOwner<AbdominalSnowman> {
+public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntity, SmartBrainOwner<KnowledgeableSnowman> {
     AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
-    public static final RawAnimation WALK = RawAnimation.begin().thenLoop("walk");
-    public static final RawAnimation ATTACK = RawAnimation.begin().thenPlay("attack");
+    public static final RawAnimation CASTING = RawAnimation.begin().thenPlay("casting");
 
-    public AbdominalSnowman(EntityType<? extends Monster> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    public final int SNOWBALL_LAUNCH = 1;
+    public final int SNOWBALL_SPREAD_LAUNCH = 2;
+    public final int FROST_BEAM = 3;
+    public final int ICE_CICLE = 4;
+
+    public KnowledgeableSnowman(EntityType<? extends Monster> entityType, Level level) {
+        super(entityType, level);
+    }
+
+    @Override
+    public void setAttackNumber() {
+        if (attackTimeout > 0 || attackNumber != 0) {
+            return;
+        }
+        attackNumber = SNOWBALL_LAUNCH;
     }
 
     public static AttributeSupplier.Builder  createAttributes() {
@@ -69,17 +80,17 @@ public class AbdominalSnowman extends Monster implements GeoEntity, SmartBrainOw
     }
 
     @Override
-    public List<? extends ExtendedSensor<? extends AbdominalSnowman>> getSensors() {
+    public List<? extends ExtendedSensor<? extends KnowledgeableSnowman>> getSensors() {
         return List.of(
                 new NearbyPlayersSensor<>(),
-                new NearbyLivingEntitySensor<AbdominalSnowman>()
+                new NearbyLivingEntitySensor<KnowledgeableSnowman>()
                         .setPredicate((target, entity) ->
                                 target instanceof Player)
         );
     }
 
     @Override
-    public BrainActivityGroup<? extends AbdominalSnowman> getCoreTasks() {
+    public BrainActivityGroup<? extends KnowledgeableSnowman> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
                 new MoveToWalkTarget<>()
@@ -87,9 +98,9 @@ public class AbdominalSnowman extends Monster implements GeoEntity, SmartBrainOw
     }
 
     @Override
-    public BrainActivityGroup<? extends AbdominalSnowman> getIdleTasks() {
+    public BrainActivityGroup<? extends KnowledgeableSnowman> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<>(
+                new FirstApplicableBehaviour<KnowledgeableSnowman>(
                         new TargetOrRetaliate<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()
@@ -102,40 +113,30 @@ public class AbdominalSnowman extends Monster implements GeoEntity, SmartBrainOw
     }
 
     @Override
-    public BrainActivityGroup<? extends AbdominalSnowman> getFightTasks() {
+    public BrainActivityGroup<? extends KnowledgeableSnowman> getFightTasks() {
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>().stopTryingToPathAfter(10),
                 new SetWalkTargetToAttackTarget<>(),
-                new AnimatableMeleeAttack<>(0).whenStarting(entity -> setAggressive(true)).whenStarting(entity -> setAggressive(false))
+                new FirstApplicableBehaviour<>(
+                        new GiantSnowballLaunch<>()
+                                .startCondition((e) -> e.attackNumber == SNOWBALL_LAUNCH),
+                        new GiantSnowballSpreadLaunch<>()
+                                .startCondition((e) -> e.attackNumber == SNOWBALL_SPREAD_LAUNCH)
+                )
         );
     }
 
     @Override
-    public boolean doHurtTarget(Entity pEntity) {
-        Vec3 forward = ModVectors.getForwardVector(this);
-        pEntity.addDeltaMovement(forward.scale(2.0));
-        return super.doHurtTarget(pEntity);
-    }
-
-    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "walk", this::walk));
-        controllers.add(new AnimationController<>(this, "attack", this::attack));
+        controllers.add(new AnimationController<>(this, "casting", this::casting));
     }
 
-    private PlayState attack(AnimationState<AbdominalSnowman> state) {
-        if (swinging || !state.getController().hasAnimationFinished()) {
-            state.setAnimation(ATTACK);
+    private PlayState casting(AnimationState<KnowledgeableSnowman> state) {
+        if (entityData.get(DATA_ATTACK) != 0) {
+            state.setAnimation(CASTING);
             return PlayState.CONTINUE;
         }
-        state.getController().forceAnimationReset();
-        return PlayState.STOP;
-    }
-
-    private PlayState walk(AnimationState<AbdominalSnowman> state) {
-        if (state.isMoving()) {
-            return state.setAndContinue(WALK);
-        }
+        state.resetCurrentAnimation();
         return PlayState.STOP;
     }
 

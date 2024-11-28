@@ -3,7 +3,7 @@ package com.noodlegamer76.fracture.entity;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
 import com.noodlegamer76.fracture.entity.monster.*;
-import com.noodlegamer76.fracture.entity.projectile.BloodBombEntity;
+import com.noodlegamer76.fracture.entity.projectile.GiantSnowballProjectile;
 import com.noodlegamer76.fracture.entity.projectile.VoidBall;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.entity.vehicle.ModChestBoatEntity;
@@ -45,6 +45,11 @@ public class InitEntities {
                     .sized(1.5F, 2.3F)
                     .build("abdominal_snowman"));
 
+    public static final RegistryObject<EntityType<KnowledgeableSnowman>> KNOWLEDGEABLE_SNOWMAN = ENTITIES.register("knowledgeable_snowman",
+            () -> EntityType.Builder.of(KnowledgeableSnowman::new, MobCategory.MONSTER)
+                    .sized(0.7F, 1.9F)
+                    .build("knowledgeable_snowman"));
+
     public static final RegistryObject<EntityType<BloodSlimeEntity>> BLOOD_SLIME = ENTITIES.register("blood_slime",
             () -> EntityType.Builder.of(BloodSlimeEntity::new, MobCategory.MONSTER)
                     .sized(2.99F, 2.99F)
@@ -71,8 +76,8 @@ public class InitEntities {
                     .sized(0.375f, 0.375f)
                     .build("void_ball"));
 
-    public static final RegistryObject<EntityType<BloodBombEntity>> BLOOD_BOMB = ENTITIES.register(("blood_bomb"),
-            () -> EntityType.Builder.<BloodBombEntity>of(BloodBombEntity::new, MobCategory.MISC)
+    public static final RegistryObject<EntityType<GiantSnowballProjectile>> GIANT_SLOWBALL = ENTITIES.register(("giant_snowball"),
+            () -> EntityType.Builder.<GiantSnowballProjectile>of(GiantSnowballProjectile::new, MobCategory.MISC)
                     .sized(0.375f, 0.375f)
-                    .build("blood_bomb"));
+                    .build("giant_snowball"));
 }

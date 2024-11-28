@@ -54,7 +54,6 @@ public class FractureTab {
             event.accept(InitItems.PARASITIC_AXE);
             event.accept(InitItems.PARASITIC_SHOVEL);
             event.accept(InitItems.BLOODY_SKULL);
-            event.accept(InitItems.BLOOD_BOMB);
 
             //event.accept(InitItems.WAND);
             //event.accept(InitItems.VOID_BALL_SPELL_ITEM);
@@ -102,6 +101,7 @@ public class FractureTab {
             event.accept(InitItems.FLESH_SLIME_SPAWN_EGG);
             event.accept(InitItems.FLESH_WALKER_SPAWN_EGG);
             event.accept(InitItems.ABDOMINAL_SNOWMAN_SPAWN_EGG);
+            event.accept(InitItems.KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG);
         }
     }
 }

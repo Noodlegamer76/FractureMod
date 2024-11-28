@@ -109,6 +109,22 @@ public class BloodSlimeEntity extends MultiAttackMonster implements GeoEntity, S
     }
 
     @Override
+    public void setAttackNumber() {
+        if (attackNumber == 0) {
+            attackNumber = 1;
+        }
+        if (defaultAttacks % 7 == 0 && defaultAttacks != 0) {
+            attackNumber = 2;
+            defaultAttacks++;
+        }
+        if (getHealth() <= getMaxHealth() / 2 && doMinionAttack) {
+            attackNumber = 3;
+            defaultAttacks++;
+            doMinionAttack = false;
+        }
+    }
+
+    @Override
     protected boolean shouldDespawnInPeaceful() {
         return false;
     }

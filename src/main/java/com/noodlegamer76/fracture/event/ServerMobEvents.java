@@ -20,6 +20,7 @@ public class ServerMobEvents {
         event.put(InitEntities.FLESH_SLIME.get(), FleshSlimeEntity.createAttributes().build());
         event.put(InitEntities.BLOOD_SLIME.get(), BloodSlimeEntity.createAttributes().build());
         event.put(InitEntities.ABDOMINAL_SNOWMAN.get(), AbdominalSnowman.createAttributes().build());
+        event.put(InitEntities.KNOWLEDGEABLE_SNOWMAN.get(), KnowledgeableSnowman.createAttributes().build());
     }
 
     @SubscribeEvent

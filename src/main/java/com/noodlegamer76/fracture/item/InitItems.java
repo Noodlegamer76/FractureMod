@@ -77,8 +77,6 @@ public class InitItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLESHY_BONE = ITEMS.register("fleshy_bone",
             () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> BLOOD_BOMB = ITEMS.register("blood_bomb",
-            () -> new BloodBomb(new Item.Properties()));
 
     public static final RegistryObject<Item> SKYBOX_GENERATOR = ITEMS.register("skybox_generator",
             () -> new SkyboxGeneratorItem(InitBlocks.SKYBOX_GENERATOR.get(), new Item.Properties()));
@@ -112,6 +110,8 @@ public class InitItems {
             () -> new ForgeSpawnEggItem(InitEntities.BLOOD_SLIME, new Color(74, 10, 3).getRGB(), new Color(255, 0, 0).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> ABDOMINAL_SNOWMAN_SPAWN_EGG = ITEMS.register("abdominal_snowman_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.ABDOMINAL_SNOWMAN, new Color(Color.WHITE.getRGB()).getRGB(), new Color(Color.LIGHT_GRAY.getRGB()).getRGB(), new Item.Properties()));
+    public static final RegistryObject<Item> KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG = ITEMS.register("knowledgeable_snowman_spawn_egg",
+            () -> new ForgeSpawnEggItem(InitEntities.KNOWLEDGEABLE_SNOWMAN, new Color(Color.WHITE.getRGB()).getRGB(), new Color(Color.gray.getRGB()).getRGB(), new Item.Properties()));
 
     public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
             () -> new InvertedGlasses(ArmorTiers.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));

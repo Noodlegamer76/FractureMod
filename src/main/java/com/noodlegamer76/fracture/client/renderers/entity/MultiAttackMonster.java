@@ -11,6 +11,9 @@ import net.minecraft.world.level.Level;
 public abstract class MultiAttackMonster extends Monster {
     public static final EntityDataAccessor<Integer> DATA_ATTACK = SynchedEntityData.defineId(MultiAttackMonster.class, EntityDataSerializers.INT);
 
+    public int attackTimeout = 0;
+    public int attacks = 0;
+
     public int attackNumber = 0;
     public int defaultAttacks = 0;
     public int ticksSinceLastHit = 0;
@@ -20,34 +23,25 @@ public abstract class MultiAttackMonster extends Monster {
         super(pEntityType, pLevel);
     }
 
+
     @Override
     public void tick() {
         ticksSinceLastHit++;
         if (getLastHurtMobTimestamp() == 0) {
             ticksSinceLastHit = 0;
         }
+        attackTimeout--;
         setAttackNumber();
         getEntityData().set(DATA_ATTACK, attackNumber);
         if (!level().isClientSide) {
-           // System.out.println(defaultAttacks);
+           //System.out.println(attackTimeout);
         }
+
         super.tick();
+
     }
 
-    public void setAttackNumber() {
-        if (attackNumber == 0) {
-            attackNumber = 1;
-        }
-        if (defaultAttacks % 7 == 0 && defaultAttacks != 0) {
-            attackNumber = 2;
-            defaultAttacks++;
-        }
-        if (getHealth() <= getMaxHealth() / 2 && doMinionAttack) {
-            attackNumber = 3;
-            defaultAttacks++;
-            doMinionAttack = false;
-        }
-    }
+    public abstract void setAttackNumber();
 
     @Override
     protected void defineSynchedData() {
