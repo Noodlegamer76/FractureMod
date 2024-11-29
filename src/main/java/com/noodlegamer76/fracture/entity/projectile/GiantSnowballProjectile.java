@@ -1,6 +1,7 @@
 package com.noodlegamer76.fracture.entity.projectile;
 
 import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.monster.KnowledgeableSnowman;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.util.ModVectors;
 import net.minecraft.world.effect.MobEffect;
@@ -44,11 +45,16 @@ public class GiantSnowballProjectile extends AbstractHurtingProjectile implement
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-            if (pResult.getEntity() instanceof LivingEntity livingEntity) {
+            if (pResult.getEntity() instanceof LivingEntity livingEntity && !(livingEntity instanceof KnowledgeableSnowman)) {
                 livingEntity.hurt(level().damageSources().flyIntoWall(), 6);
                 livingEntity.addDeltaMovement(ModVectors.getForwardVector(livingEntity).reverse().scale(2.0));
             }
         super.onHitEntity(pResult);
+    }
+
+    @Override
+    protected float getInertia() {
+        return 1.0f;
     }
 
     @Override
@@ -60,10 +66,16 @@ public class GiantSnowballProjectile extends AbstractHurtingProjectile implement
     public void tick() {
         super.tick();
         life++;
-        if (life > 1000) {
+        if (life > 500) {
             discard();
         }
     }
+
+    @Override
+    public boolean isOnFire() {
+        return false;
+    }
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return animatableInstanceCache;

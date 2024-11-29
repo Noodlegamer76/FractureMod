@@ -26,13 +26,13 @@ public class GiantSnowballSpreadLaunch<E extends MultiAttackMonster> extends Ext
 
     @Override
     protected void start(E entity) {
-         for (int i = 0; i < 8; i++) {
+         for (int i = 0; i < 12; i++) {
              Vec3 position = new Vec3(Math.random(), 0, Math.random()).normalize()
-                     .add(new Vec3(entity.getX(), entity.getY() + entity.getEyeHeight() * 2, entity.getZ()));
+                     .add(entity.getEyePosition());
 
              GiantSnowballProjectile snowball = new GiantSnowballProjectile(InitEntities.GIANT_SLOWBALL.get(), entity.level());
              snowball.setPos(position);
-             snowball.addDeltaMovement(new Vec3(entity.level().random.nextDouble(), entity.level().random.nextDouble(), entity.level().random.nextDouble()).normalize());
+             snowball.addDeltaMovement(new Vec3(entity.level().random.nextDouble() - 0.5, ModVectors.getForwardVector(entity).y() - 0.05, entity.level().random.nextDouble() - 0.5).normalize());
              entity.level().addFreshEntity(snowball);
          }
     }

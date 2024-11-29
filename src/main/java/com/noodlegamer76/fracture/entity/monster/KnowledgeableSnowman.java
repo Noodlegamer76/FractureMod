@@ -56,7 +56,7 @@ public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntit
         if (attackTimeout > 0 || attackNumber != 0) {
             return;
         }
-        attackNumber = SNOWBALL_LAUNCH;
+        attackNumber = random.nextInt(1, 3);
     }
 
     public static AttributeSupplier.Builder  createAttributes() {
