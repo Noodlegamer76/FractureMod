@@ -106,7 +106,9 @@ public class RenderCubeAroundPlayer {
         BufferBuilder bufferbuilder = tesselator.getBuilder();
 
         Vec3 pos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
-        float[] cameraPos = {(float) pos.x, (float) pos.y, (float) pos.z};
+        //mod fixes noise texture sampling at high distances, set this to 1 / noise texture scale that's in the fragment shader
+        double mod = 13.3333333333;
+        float[] cameraPos = {(float) (pos.x % mod), (float) (pos.y % mod), (float) (pos.z % mod)};
 
         RenderSystem.setShader(() -> ModRenderTypes.fog);
         GlStateManager._glUseProgram(ModRenderTypes.fog.getId());
