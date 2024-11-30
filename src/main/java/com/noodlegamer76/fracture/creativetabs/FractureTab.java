@@ -55,8 +55,6 @@ public class FractureTab {
             event.accept(InitItems.PARASITIC_SHOVEL);
             event.accept(InitItems.BLOODY_SKULL);
 
-            //event.accept(InitItems.WAND);
-            //event.accept(InitItems.VOID_BALL_SPELL_ITEM);
 
 
 
@@ -95,6 +93,11 @@ public class FractureTab {
             event.accept(InitItems.ICE_CRYSTAL_BLOCK);
             event.accept(InitItems.RADIANT_ICE);
             event.accept(InitItems.FROZEN_GRASS);
+
+
+            event.accept(InitItems.WAND);
+            event.accept(InitItems.VOID_BALL_SPELL_ITEM);
+            event.accept(InitItems.GIANT_SNOWBALL_SPELL_ITEM);
 
             event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
             event.accept(InitItems.BLOOD_SLIME_SPAWN_EGG);

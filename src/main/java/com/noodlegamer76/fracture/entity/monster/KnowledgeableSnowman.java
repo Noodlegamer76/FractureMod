@@ -56,7 +56,7 @@ public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntit
         if (attackTimeout > 0 || attackNumber != 0) {
             return;
         }
-        attackNumber = random.nextInt(1, 3);
+        attackNumber = random.nextInt(1, 2);
     }
 
     public static AttributeSupplier.Builder  createAttributes() {
@@ -132,12 +132,12 @@ public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntit
     }
 
     private PlayState casting(AnimationState<KnowledgeableSnowman> state) {
-        if (entityData.get(DATA_ATTACK) != 0) {
-            state.setAnimation(CASTING);
-            return PlayState.CONTINUE;
+        if (entityData.get(DATA_ATTACK) == 0) {
+            state.resetCurrentAnimation();
+            return PlayState.STOP;
         }
-        state.resetCurrentAnimation();
-        return PlayState.STOP;
+        state.setAnimation(CASTING);
+        return PlayState.CONTINUE;
     }
 
     @Override

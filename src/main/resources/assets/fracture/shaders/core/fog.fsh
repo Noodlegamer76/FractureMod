@@ -33,8 +33,8 @@ void main() {
     vec3 worldPos = eyePlayerPos + eyeCameraPosition;
     float distanceFromCamera = length(viewPos);
 
-    float noise = texture(Sampler1, (vec2((worldPos.x + worldPos.y) + GameTime * 500, (worldPos.z + worldPos.y) + GameTime * 500) * 0.075)).r * 0.5;
-    noise += texture(Sampler2, (vec2((worldPos.x + worldPos.y) + GameTime * 255, (worldPos.z + worldPos.y) + GameTime * 255) * 0.075)).r * 0.5;
+    float noise = texture(Sampler1, (vec2((worldPos.x + worldPos.y), (worldPos.z + worldPos.y)) * 0.075)).r * 0.5;
+    noise += texture(Sampler2, (vec2((worldPos.x + worldPos.y), (worldPos.z + worldPos.y)) * 0.075)).r * 0.5;
 
     float fogStrength = float(max(min((distanceFromCamera - MinFogDistance) / (MaxFogDistance - MinFogDistance), 1.0), 0.));
 
