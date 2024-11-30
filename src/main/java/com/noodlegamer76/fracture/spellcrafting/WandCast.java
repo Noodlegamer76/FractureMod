@@ -45,6 +45,10 @@ public class WandCast {
 
     CastState state;
 
+    //implementation notes:
+    //capacity, added
+    //casts, added
+    //4 more to go
 
     public WandCast(Level level, ServerPlayer player, ItemStack castItem) {
         //inventory slots index starts at 0
@@ -55,7 +59,7 @@ public class WandCast {
         this.caster = player;
         nbt = castItem.getTag();
         manager = new CardHolderManager();
-        state = new CastState();
+        state = new CastState(castItem);
         wand = castItem;
 
         capacity = nbt.getInt("capacity");
@@ -79,7 +83,7 @@ public class WandCast {
 
             //set the slot to the next spell
             int slotSet = slot;
-            for (int i = slot + 1; i < handler.getSlots(); i++) {
+            for (int i = slot + 1; i < capacity; i++) {
                 ItemStack stack = handler.extractItem(i, 1, true);
                 if (stack.getItem() instanceof SpellItem) {
                     slotSet = i;
@@ -120,7 +124,7 @@ public class WandCast {
 
     private void reconstructCardPositions() {
         manager.clearAll();
-        for (int i = 0; i < handler.getSlots(); i++) {
+        for (int i = 0; i < capacity; i++) {
             Item item = handler.extractItem(i, 1, true).getItem();
             if (item instanceof SpellItem spellItem) {
                 Spell spell = spellItem.getSpell(wand, caster);

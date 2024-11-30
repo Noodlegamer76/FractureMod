@@ -25,4 +25,9 @@ public class VoidBallSpell extends Spell {
     public Component getName() {
         return Component.literal("Void Ball");
     }
+
+    @Override
+    public float getManaCost() {
+        return 10;
+    }
 }

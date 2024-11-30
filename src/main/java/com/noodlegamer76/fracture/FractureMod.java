@@ -2,6 +2,7 @@ package com.noodlegamer76.fracture;
 
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.client.WandOverlay;
 import com.noodlegamer76.fracture.client.renderers.entity.*;
 import com.noodlegamer76.fracture.client.renderers.entity.block.SkyboxGeneratorRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.block.TestRenderer;
@@ -37,6 +38,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -179,8 +181,8 @@ public class FractureMod
         }
 
         @SubscribeEvent
-        public static void colors(RegisterColorHandlersEvent event) {
-
+        public static void guiOverlays(RegisterGuiOverlaysEvent event) {
+        event.registerAboveAll("mana", WandOverlay.HUD_MANA);
         }
 
     }

@@ -13,12 +13,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3d;
+import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class VoidBall extends AbstractArrow implements GeoAnimatable {
+public class VoidBall extends AbstractProjectileSpell implements GeoEntity {
     AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
     public VoidBall(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -33,13 +34,8 @@ public class VoidBall extends AbstractArrow implements GeoAnimatable {
         this(pEntityType, pShooter.getX(), pShooter.getEyeY() - (double)0.1F, pShooter.getZ(), pLevel);
         this.setOwner(pShooter);
         if (pShooter instanceof Player) {
-            this.pickup = AbstractArrow.Pickup.ALLOWED;
+            this.pickup = Pickup.DISALLOWED;
         }
-    }
-
-    @Override
-    protected void tickDespawn() {
-        this.discard();
     }
 
     @Override
@@ -59,10 +55,7 @@ public class VoidBall extends AbstractArrow implements GeoAnimatable {
         }
     }
 
-    @Override
-    protected ItemStack getPickupItem() {
-        return Items.AIR.getDefaultInstance();
-    }
+
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
@@ -72,10 +65,5 @@ public class VoidBall extends AbstractArrow implements GeoAnimatable {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return animatableInstanceCache;
-    }
-
-    @Override
-    public double getTick(Object o) {
-        return 0;
     }
 }

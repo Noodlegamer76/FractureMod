@@ -48,6 +48,17 @@ public class Wand extends Item implements GeoAnimatable {
        if (spinTime <= 0) {
            spinTime = 0;
        }
+       if (pStack.getOrCreateTag().getBoolean("isCreated")) {
+           float currentMana = pStack.getTag().getFloat("currentMana");
+           float manaRechargeSpeed = pStack.getTag().getFloat("manaRechargeSpeed");
+           float maxMana = pStack.getTag().getFloat("maxMana");
+           if (currentMana + manaRechargeSpeed >= maxMana) {
+               pStack.getTag().putFloat("currentMana", maxMana);
+           }
+           else {
+               pStack.getTag().putFloat("currentMana", currentMana + manaRechargeSpeed);
+           }
+       }
     }
 
     @Override

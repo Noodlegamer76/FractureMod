@@ -36,6 +36,9 @@ public class CreateWand {
         nbt.putFloat("manaRechargeSpeed", manaRechargeSpeed);
         nbt.putFloat("capacity", capacity);
         nbt.putInt("casts", casts);
+
+        nbt.putFloat("currentMana", maxMana);
+
         return nbt;
     }
 }

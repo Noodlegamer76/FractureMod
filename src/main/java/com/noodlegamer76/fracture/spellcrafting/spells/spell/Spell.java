@@ -22,4 +22,6 @@ public abstract class Spell {
     public abstract void cast();
 
     public abstract Component getName();
+
+    public abstract float getManaCost();
 }
