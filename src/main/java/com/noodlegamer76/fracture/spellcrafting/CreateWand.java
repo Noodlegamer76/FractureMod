@@ -38,6 +38,8 @@ public class CreateWand {
         nbt.putInt("casts", casts);
 
         nbt.putFloat("currentMana", maxMana);
+        nbt.putFloat("currentCastDelay", 0);
+        nbt.putFloat("lastRechargeTime", 0);
 
         return nbt;
     }

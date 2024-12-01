@@ -25,7 +25,7 @@ public class WandCast {
     //how many spells are cast every time the players activates the spell
 
     float castDelay = 20;
-    //measured in ticks, how long it takes to case the next spell in the wand queue
+    //measured in ticks, how long it takes to cast the next spell in the wand queue
 
     float rechargeTime = 20;
     //measured in ticks, when the spell queue reaches the end, the wand much charge this long in seconds to refresh the spell queue
@@ -44,10 +44,14 @@ public class WandCast {
     int startSlot;
 
     CastState state;
+    boolean resetting = false;
 
     //implementation notes:
     //capacity, added
     //casts, added
+    //mana recharge speed, added
+    //max mana, added
+
     //4 more to go
 
     public WandCast(Level level, ServerPlayer player, ItemStack castItem) {
@@ -79,6 +83,11 @@ public class WandCast {
 
 
         while (shouldCast) {
+
+            if (wand.getTag().getFloat("currentCastDelay") > 0) {
+                return;
+            }
+
             int slot = nbt.getInt("slot");
 
             //set the slot to the next spell
@@ -106,6 +115,7 @@ public class WandCast {
             if (manager.getDeck().spells.isEmpty()) {
                 System.out.println("resetting");
                 nbt.putInt("slot", -1);
+                resetting = true;
                 shouldCast = false;
             }
 
@@ -119,7 +129,26 @@ public class WandCast {
         }
 
         state.cast();
+        if (resetting) {
+            float rechargeTime = getRechargeTime();
+            wand.getTag().putFloat("currentCastDelay", rechargeTime);
+            wand.getTag().putFloat("lastRechargeTime", rechargeTime);
+        }
 
+    }
+
+    private float getRechargeTime() {
+        float rechargeTime = 0;
+        for (Spell spell: manager.getDiscard().spells) {
+            rechargeTime += spell.getRechargeTime();
+        }
+        for (Spell spell: manager.getHand().spells) {
+            rechargeTime += spell.getRechargeTime();
+        }
+        for (Spell spell: manager.getDeck().spells) {
+            rechargeTime += spell.getRechargeTime();
+        }
+        return rechargeTime;
     }
 
     private void reconstructCardPositions() {

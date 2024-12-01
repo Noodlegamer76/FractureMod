@@ -30,4 +30,14 @@ public class VoidBallSpell extends Spell {
     public float getManaCost() {
         return 10;
     }
+
+    @Override
+    public float getRechargeTime() {
+        return 20;
+    }
+
+    @Override
+    public float getCastDelay() {
+        return 20;
+    }
 }

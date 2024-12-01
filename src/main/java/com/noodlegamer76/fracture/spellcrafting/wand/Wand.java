@@ -58,6 +58,10 @@ public class Wand extends Item implements GeoAnimatable {
            else {
                pStack.getTag().putFloat("currentMana", currentMana + manaRechargeSpeed);
            }
+           float currentCastDelay = pStack.getTag().getFloat("currentCastDelay");
+           if (currentCastDelay > 0) {
+               pStack.getTag().putFloat("currentCastDelay", currentCastDelay - 1);
+           }
        }
     }
 

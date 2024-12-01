@@ -24,4 +24,8 @@ public abstract class Spell {
     public abstract Component getName();
 
     public abstract float getManaCost();
+
+    public abstract float getRechargeTime();
+
+    public abstract float getCastDelay();
 }

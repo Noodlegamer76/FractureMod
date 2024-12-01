@@ -31,4 +31,14 @@ public class GiantSnowballSpell extends Spell {
     public float getManaCost() {
         return 10;
     }
+
+    @Override
+    public float getRechargeTime() {
+        return 10;
+    }
+
+    @Override
+    public float getCastDelay() {
+        return 20;
+    }
 }

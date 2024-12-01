@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 public class CastState {
     float currentMana;
     float maxMana;
+    float rechargeTime = 0;
     private CardHolder stateSpells = new CardHolder();
     ItemStack wand;
 
@@ -24,8 +25,12 @@ public class CastState {
             else {
                 System.out.println("no mana");
             }
+
+            rechargeTime += spell.getCastDelay();
         }
         wand.getTag().putFloat("currentMana", currentMana);
+        wand.getTag().putFloat("currentCastDelay", rechargeTime);
+        wand.getTag().putFloat("lastRechargeTime", rechargeTime);
 
     }
 
