@@ -80,6 +80,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         handHeldItem(InitItems.PARASITIC_AXE);
         handHeldItem(InitItems.PARASITIC_SHOVEL);
 
+        handHeldItem(InitItems.DOUBLE_CAST_SPELL_ITEM);
+
         spawnEggItem(InitItems.ANKLE_BITER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_WALKER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_SLIME_SPAWN_EGG);

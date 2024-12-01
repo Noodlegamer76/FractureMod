@@ -44,8 +44,22 @@ public class CardHolderManager {
         return spell;
     }
 
+    public Spell grabFromDiscard(int slot) {
+        if (discard.spells.size() < slot + 1) {
+            return null;
+        }
+        Spell spell = discard.spells.get(slot);
+        discard.spells.remove(slot);
+        hand.spells.add(spell);
+        return spell;
+    }
+
     public Spell grabFromDeck() {
         return grabFromDeck(0);
+    }
+
+    public Spell grabFromDiscard() {
+        return grabFromDiscard(0);
     }
 
     public Spell discardHandSlot(int slot) {

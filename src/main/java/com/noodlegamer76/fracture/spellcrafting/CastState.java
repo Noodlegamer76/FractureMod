@@ -34,7 +34,8 @@ public class CastState {
 
     }
 
-    public void addSpell(Spell spell) {
+    public void addSpell(Spell spell, WandCast cast) {
         stateSpells.addCard(spell);
+        spell.applyCastEffects(this, cast);
     }
 }

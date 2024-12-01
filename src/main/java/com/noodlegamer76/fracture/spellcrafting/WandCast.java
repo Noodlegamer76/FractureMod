@@ -1,6 +1,5 @@
 package com.noodlegamer76.fracture.spellcrafting;
 
-import com.noodlegamer76.fracture.spellcrafting.spells.SpellTypes;
 import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
 import com.noodlegamer76.fracture.spellcrafting.spells.spell.Spell;
 import net.minecraft.nbt.CompoundTag;
@@ -12,8 +11,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 
-import java.util.ArrayList;
-
 public class WandCast {
     IItemHandler handler;
     CompoundTag nbt;
@@ -21,31 +18,29 @@ public class WandCast {
     ServerPlayer caster;
     ItemStack wand;
 
-    int casts = 1;
+    public int casts = 1;
     //how many spells are cast every time the players activates the spell
 
-    float castDelay = 20;
+    public float castDelay = 20;
     //measured in ticks, how long it takes to cast the next spell in the wand queue
 
-    float rechargeTime = 20;
+    public float rechargeTime = 20;
     //measured in ticks, when the spell queue reaches the end, the wand much charge this long in seconds to refresh the spell queue
 
-    int maxMana = 100;
+    public int maxMana = 100;
     //how much mana the wand holds when full
 
-    float manaRechargeSpeed = 1;
+    public float manaRechargeSpeed = 1;
     //a flat number representing how much mana is regenerated per tick
 
-    int capacity = 27;
+    public int capacity = 27;
     //how many slots are available to put spells and modifiers into
 
-    boolean shouldCast = true;
+    public boolean resetting = false;
 
-    int startSlot;
+    public int startSlot;
 
     CastState state;
-    boolean resetting = false;
-
     //implementation notes:
     //capacity, added
     //casts, added
@@ -81,12 +76,13 @@ public class WandCast {
 
     public void castSpell(Level level, ServerPlayer caster, ItemStack castItem) {
 
+        if (wand.getTag().getFloat("currentCastDelay") > 0) {
+            return;
+        }
 
-        while (shouldCast) {
+        while (casts > 0) {
 
-            if (wand.getTag().getFloat("currentCastDelay") > 0) {
-                return;
-            }
+
 
             int slot = nbt.getInt("slot");
 
@@ -104,7 +100,14 @@ public class WandCast {
             Spell spell = manager.grabFromDeck();
             if (spell != null) {
                 System.out.println(spell.getName().getString());
-                state.addSpell(spell);
+                state.addSpell(spell, this);
+            }
+            else {
+                Spell discardedSpell = manager.grabFromDiscard();
+                if (discardedSpell != null) {
+                    System.out.println(discardedSpell.getName().getString() + " got, wrapping");
+                    state.addSpell(discardedSpell, this);
+                }
             }
 
 
@@ -116,7 +119,6 @@ public class WandCast {
                 System.out.println("resetting");
                 nbt.putInt("slot", -1);
                 resetting = true;
-                shouldCast = false;
             }
 
 
@@ -167,44 +169,6 @@ public class WandCast {
             }
 
         }
-    }
-
-    //check if there are any spells remaining, including wrapping.
-    //returns -1 if there isn't, else returns the closest slot that has it
-    //this doesn't pass the initial slot the wand was on when the spell was cast
-    private int hasSpellsLeft(int slot) {
-        for (int i = slot; i < capacity; i++) {
-            if (handler.getStackInSlot(i).getItem() instanceof SpellItem) {
-                System.out.println("spell remaining, before wrapping");
-                return i;
-            }
-        }
-        for (int i = 0; i < startSlot; i++) {
-            if (handler.getStackInSlot(i).getItem() instanceof SpellItem) {
-                System.out.println("spell remaining, wrapping");
-                return i;
-            }
-        }
-        System.out.println("no spells remaining, resetting");
-        return -1;
-    }
-
-    //updates or resets which slot the wand should start on
-    //includes wrapping
-    private void setSlot(int slot) {
-        //either resets wand queue or goes to the next slot
-        if (slot + 1 >= capacity) {
-            nbt.putInt("slot", 0);
-            shouldCast = false;
-            shouldCast = hasSpellsLeft(slot) < startSlot && hasSpellsLeft(slot) != -1;
-
-            System.out.println("RESET");
-        }
-        else {
-            nbt.putInt("slot", slot + 1);
-            System.out.println("ADD 1");
-        }
-
     }
 
     public void setHandler(IItemHandler handler) {

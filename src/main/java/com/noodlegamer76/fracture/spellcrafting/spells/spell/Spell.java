@@ -1,5 +1,7 @@
 package com.noodlegamer76.fracture.spellcrafting.spells.spell;
 
+import com.noodlegamer76.fracture.spellcrafting.CastState;
+import com.noodlegamer76.fracture.spellcrafting.WandCast;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -28,4 +30,8 @@ public abstract class Spell {
     public abstract float getRechargeTime();
 
     public abstract float getCastDelay();
+
+    public WandCast applyCastEffects(CastState state, WandCast cast) {
+        return cast;
+    }
 }

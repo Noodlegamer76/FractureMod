@@ -2,6 +2,8 @@ package com.noodlegamer76.fracture.spellcrafting.spells.spell;
 
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.projectile.VoidBall;
+import com.noodlegamer76.fracture.spellcrafting.CastState;
+import com.noodlegamer76.fracture.spellcrafting.WandCast;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -40,4 +42,6 @@ public class VoidBallSpell extends Spell {
     public float getCastDelay() {
         return 20;
     }
+
+
 }
