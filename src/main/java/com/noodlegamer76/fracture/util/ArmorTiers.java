@@ -8,6 +8,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
@@ -16,35 +17,35 @@ public enum ArmorTiers implements ArmorMaterial {
             SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(Items.DEBUG_STICK)),
 
     BLOOD_HELMET("blood_helmet", 64, new int[]{2, 1, 2, 1}, 0,
-            SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(InitItems.LIVING_FLESH.get()));;
+            SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, () -> Ingredient.of(InitItems.LIVING_FLESH.get()));
 
 
 
     private final String name;
-    private final int durabilityMuntiplyer;
+    private final int durabilityMultiplayer;
     private final int[] protectionAmounts;
     private final int enchantmentValue;
     private final SoundEvent equipSound;
     private final float toughness;
     private final float knockbackResistance;
-    private final Supplier<Ingredient> repairIngerdient;
+    private final Supplier<Ingredient> repairIngredient;
 
-    private static final int[] BASE_DURIBILITY = {13, 15, 16, 11};
+    private static final int[] BASE_DURABILITY = {13, 15, 16, 11};
 
-    ArmorTiers(String name, int durabilityMuntiplyer, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngerdient) {
+    ArmorTiers(String name, int durabilityMultiplayer, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
         this.name = name;
-        this.durabilityMuntiplyer = durabilityMuntiplyer;
+        this.durabilityMultiplayer = durabilityMultiplayer;
         this.protectionAmounts = protectionAmounts;
         this.enchantmentValue = enchantmentValue;
         this.equipSound = equipSound;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
-        this.repairIngerdient = repairIngerdient;
+        this.repairIngredient = repairIngredient;
     }
 
     @Override
     public int getDurabilityForType(ArmorItem.Type pType) {
-        return BASE_DURIBILITY[pType.ordinal()] * durabilityMuntiplyer;
+        return BASE_DURABILITY[pType.ordinal()] * durabilityMultiplayer;
     }
 
     @Override
@@ -58,17 +59,17 @@ public enum ArmorTiers implements ArmorMaterial {
     }
 
     @Override
-    public SoundEvent getEquipSound() {
+    public @NotNull SoundEvent getEquipSound() {
         return equipSound;
     }
 
     @Override
-    public Ingredient getRepairIngredient() {
-        return repairIngerdient.get();
+    public @NotNull Ingredient getRepairIngredient() {
+        return repairIngredient.get();
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return FractureMod.MODID + ":" + name;
     }
 

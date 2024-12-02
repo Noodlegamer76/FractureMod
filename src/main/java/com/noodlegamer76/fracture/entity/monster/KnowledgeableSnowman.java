@@ -1,15 +1,26 @@
 package com.noodlegamer76.fracture.entity.monster;
 
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
-import com.noodlegamer76.fracture.entity.ai.behavior.GiantSnowballLaunch;
+import com.noodlegamer76.fracture.entity.ai.behavior.KnowledgeableSnowmanSpellCast;
 import com.noodlegamer76.fracture.entity.ai.behavior.GiantSnowballSpreadLaunch;
+import com.noodlegamer76.fracture.item.InitItems;
+import com.noodlegamer76.fracture.spellcrafting.CreateWand;
+import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -27,6 +38,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliat
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -52,11 +64,29 @@ public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntit
     }
 
     @Override
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+        setItemInHand(InteractionHand.MAIN_HAND, InitItems.WAND.get().getDefaultInstance());
+        if (getMainHandItem().getItem() instanceof Wand) {
+            CompoundTag nbt = getMainHandItem().getOrCreateTag();
+            if (!nbt.contains("isCreated")) {
+                new CreateWand().createStats(nbt);
+            }
+        }
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+    }
+
+    @Override
+    protected float getEquipmentDropChance(EquipmentSlot pSlot) {
+        return 0.0f;
+    }
+
+    @Override
     public void setAttackNumber() {
-        if (attackTimeout > 0 || attackNumber != 0) {
+        if (!resettingSpells) {
             return;
         }
-        attackNumber = random.nextInt(1, 2);
+        resettingSpells = false;
+        attackNumber = random.nextInt(1, 3);
     }
 
     public static AttributeSupplier.Builder  createAttributes() {
@@ -117,12 +147,7 @@ public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntit
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>().stopTryingToPathAfter(10),
                 new SetWalkTargetToAttackTarget<>(),
-                new FirstApplicableBehaviour<>(
-                        new GiantSnowballLaunch<>()
-                                .startCondition((e) -> e.attackNumber == SNOWBALL_LAUNCH),
-                        new GiantSnowballSpreadLaunch<>()
-                                .startCondition((e) -> e.attackNumber == SNOWBALL_SPREAD_LAUNCH)
-                )
+                new KnowledgeableSnowmanSpellCast<>()
         );
     }
 
@@ -138,6 +163,31 @@ public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntit
         }
         state.setAnimation(CASTING);
         return PlayState.CONTINUE;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        ItemStack wand = getMainHandItem();
+        if (getMainHandItem().getItem() instanceof Wand) {
+            CompoundTag nbt = getMainHandItem().getOrCreateTag();
+                if (wand.getOrCreateTag().getBoolean("isCreated")) {
+                    float currentMana = wand.getTag().getFloat("currentMana");
+                    float manaRechargeSpeed = wand.getTag().getFloat("manaRechargeSpeed");
+                    float maxMana = wand.getTag().getFloat("maxMana");
+                    if (currentMana + manaRechargeSpeed >= maxMana) {
+                        wand.getTag().putFloat("currentMana", maxMana);
+                    }
+                    else {
+                        wand.getTag().putFloat("currentMana", currentMana + manaRechargeSpeed);
+                    }
+                    float currentCastDelay = wand.getTag().getFloat("currentCastDelay");
+                    if (currentCastDelay > 0) {
+                        wand.getTag().putFloat("currentCastDelay", currentCastDelay - 1);
+                    }
+            }
+        }
     }
 
     @Override

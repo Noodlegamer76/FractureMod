@@ -78,6 +78,6 @@ public class InitEntities {
 
     public static final RegistryObject<EntityType<GiantSnowballProjectile>> GIANT_SLOWBALL = ENTITIES.register(("giant_snowball"),
             () -> EntityType.Builder.<GiantSnowballProjectile>of(GiantSnowballProjectile::new, MobCategory.MISC)
-                    .sized(0.375f, 0.375f)
+                    .sized(1f, 1f)
                     .build("giant_snowball"));
 }

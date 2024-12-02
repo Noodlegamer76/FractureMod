@@ -2,11 +2,13 @@ package com.noodlegamer76.fracture.spellcrafting.spells.spell;
 
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.projectile.VoidBall;
+import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.spellcrafting.CastState;
 import com.noodlegamer76.fracture.spellcrafting.WandCast;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class VoidBallSpell extends Spell {
     @Override
     public void cast() {
         VoidBall ball = new VoidBall(InitEntities.VOID_BALL.get(), caster, level);
-        ball.shootFromRotation(caster, caster.getXRot(), caster.getYRot(), 0, 1.0f, 0.0f);
+        ball.shootFromRotation(caster, caster.getXRot(), caster.getYRot(), 0, 2.0f, 10.0f);
         level.addFreshEntity(ball);
     }
 
@@ -41,6 +43,11 @@ public class VoidBallSpell extends Spell {
     @Override
     public float getCastDelay() {
         return 20;
+    }
+
+    @Override
+    public Item getCastItem() {
+        return InitItems.VOID_BALL_SPELL_ITEM.get();
     }
 
 

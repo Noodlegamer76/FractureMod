@@ -1,5 +1,6 @@
 package com.noodlegamer76.fracture.client.renderers.entity;
 
+import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -13,6 +14,7 @@ public abstract class MultiAttackMonster extends Monster {
 
     public int attackTimeout = 0;
     public int attacks = 0;
+    public boolean resettingSpells = false;
 
     public int attackNumber = 0;
     public int defaultAttacks = 0;
@@ -26,6 +28,7 @@ public abstract class MultiAttackMonster extends Monster {
 
     @Override
     public void tick() {
+        isResettingSpells();
         ticksSinceLastHit++;
         if (getLastHurtMobTimestamp() == 0) {
             ticksSinceLastHit = 0;
@@ -39,6 +42,14 @@ public abstract class MultiAttackMonster extends Monster {
 
         super.tick();
 
+    }
+
+    private void isResettingSpells() {
+        if (getMainHandItem().getItem() instanceof Wand) {
+            if (getMainHandItem().getTag().getInt("slot") == -1) {
+                resettingSpells = true;
+            }
+        }
     }
 
     public abstract void setAttackNumber();

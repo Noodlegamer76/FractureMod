@@ -34,19 +34,20 @@ public class WandOverlay {
             return;
         }
 
-        guiGraphics.blit(MANA_EMPTY, x - 120, 0, 0, 0, 120, 12, 120, 12);
+        guiGraphics.blit(MANA_EMPTY, x - 148, 8, 0, 0, 140, 16, 140, 16);
 
         float maxMana = wand.getTag().getFloat("maxMana");
         float currentMana = wand.getTag().getFloat("currentMana");
         float totalMana = currentMana / maxMana * 100;
-        guiGraphics.blit(MANA_FULL, x - 120, 0, 0, 0, (int) (totalMana * 1.2), 12, 120, 12);
+        guiGraphics.blit(MANA_FULL, x - 137, 8, 0, 0, (int) (totalMana * 1.18), 16, 118, 16);
 
-        guiGraphics.blit(RECHARGE_EMPTY, x - 120, 15, 0, 0, 120, 12, 120, 12);
+
+        guiGraphics.blit(RECHARGE_EMPTY, x - 148, 32, 0, 0, 140, 16, 140, 16);
 
         float rechargeTime = wand.getTag().getFloat("currentCastDelay");
         float lastRechargeTime = wand.getTag().getFloat("lastRechargeTime");
         float totalRecharge = rechargeTime / lastRechargeTime * 100;
-        guiGraphics.blit(RECHARGE_FULL, x - 120, 15, 0, 0, (int) (totalRecharge * 1.2), 12, 120, 12);
+        guiGraphics.blit(RECHARGE_FULL, x - 143, 32, 0, 0, (int) (totalRecharge * 1.18), 16, 118, 16);
 
 
     });

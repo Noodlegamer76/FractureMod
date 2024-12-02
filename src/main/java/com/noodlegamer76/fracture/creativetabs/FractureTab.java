@@ -99,6 +99,7 @@ public class FractureTab {
             event.accept(InitItems.VOID_BALL_SPELL_ITEM);
             event.accept(InitItems.GIANT_SNOWBALL_SPELL_ITEM);
             event.accept(InitItems.DOUBLE_CAST_SPELL_ITEM);
+            event.accept(InitItems.ICE_SHATTER_SPELL_ITEM);
 
             event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
             event.accept(InitItems.BLOOD_SLIME_SPAWN_EGG);

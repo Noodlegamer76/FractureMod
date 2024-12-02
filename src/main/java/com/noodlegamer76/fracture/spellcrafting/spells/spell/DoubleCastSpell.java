@@ -1,9 +1,11 @@
 package com.noodlegamer76.fracture.spellcrafting.spells.spell;
 
+import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.spellcrafting.CastState;
 import com.noodlegamer76.fracture.spellcrafting.WandCast;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class DoubleCastSpell extends Spell {
@@ -20,6 +22,11 @@ public class DoubleCastSpell extends Spell {
     public WandCast applyCastEffects(CastState state, WandCast cast) {
         cast.casts += 2;
         return super.applyCastEffects(state, cast);
+    }
+
+    @Override
+    public Item getCastItem() {
+        return InitItems.DOUBLE_CAST_SPELL_ITEM.get();
     }
 
     @Override

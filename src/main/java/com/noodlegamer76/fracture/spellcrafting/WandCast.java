@@ -4,6 +4,7 @@ import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
 import com.noodlegamer76.fracture.spellcrafting.spells.spell.Spell;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -15,7 +16,7 @@ public class WandCast {
     IItemHandler handler;
     CompoundTag nbt;
     CardHolderManager manager;
-    ServerPlayer caster;
+    LivingEntity caster;
     ItemStack wand;
 
     public int casts = 1;
@@ -49,13 +50,13 @@ public class WandCast {
 
     //4 more to go
 
-    public WandCast(Level level, ServerPlayer player, ItemStack castItem) {
+    public WandCast(Level level, LivingEntity caster, ItemStack castItem) {
         //inventory slots index starts at 0
 
         //make handler and nbt
         LazyOptional<IItemHandler> iItemHandler = castItem.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
         iItemHandler.ifPresent(this::setHandler);
-        this.caster = player;
+        this.caster = caster;
         nbt = castItem.getTag();
         manager = new CardHolderManager();
         state = new CastState(castItem);
@@ -70,11 +71,11 @@ public class WandCast {
         startSlot = nbt.getInt("slot");
 
         reconstructCardPositions();
-        castSpell(level, player, castItem);
+        castSpell(level, caster, castItem);
 
     }
 
-    public void castSpell(Level level, ServerPlayer caster, ItemStack castItem) {
+    public void castSpell(Level level, LivingEntity caster, ItemStack castItem) {
 
         if (wand.getTag().getFloat("currentCastDelay") > 0) {
             return;
