@@ -8,8 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class DoubleCastSpell extends Spell {
-    public DoubleCastSpell(ItemStack stack, LivingEntity caster) {
+public class TripleCastSpell extends Spell {
+    public TripleCastSpell(ItemStack stack, LivingEntity caster) {
         super(stack, caster);
     }
 
@@ -20,32 +20,32 @@ public class DoubleCastSpell extends Spell {
 
     @Override
     public WandCast applyCastEffects(CastState state, WandCast cast) {
-        cast.casts += 2;
+        cast.casts += 3;
         return super.applyCastEffects(state, cast);
     }
 
     @Override
-    public Item getCastItem() {
-        return InitItems.DOUBLE_CAST_SPELL_ITEM.get();
-    }
-
-    @Override
     public Component getName() {
-        return Component.literal("Double Cast");
+        return Component.literal("Triple Cast");
     }
 
     @Override
     public float getManaCost() {
-        return 5f;
+        return 7.5f;
     }
 
     @Override
     public float getRechargeTime() {
-        return 3f;
+        return 5f;
     }
 
     @Override
     public float getCastDelay() {
-        return 3f;
+        return 5f;
+    }
+
+    @Override
+    public Item getCastItem() {
+        return InitItems.TRIPLE_CAST_SPELL_ITEM.get();
     }
 }

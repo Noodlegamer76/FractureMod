@@ -100,13 +100,13 @@ public class WandCast {
             //get the next spell from the deck
             Spell spell = manager.grabFromDeck();
             if (spell != null) {
-                System.out.println(spell.getName().getString());
+                //System.out.println(spell.getName().getString());
                 state.addSpell(spell, this);
             }
             else {
                 Spell discardedSpell = manager.grabFromDiscard();
                 if (discardedSpell != null) {
-                    System.out.println(discardedSpell.getName().getString() + " got, wrapping");
+                    //System.out.println(discardedSpell.getName().getString() + " got, wrapping");
                     state.addSpell(discardedSpell, this);
                 }
             }
@@ -117,7 +117,7 @@ public class WandCast {
 
             //reset if there's no more spells
             if (manager.getDeck().spells.isEmpty()) {
-                System.out.println("resetting");
+                //System.out.println("resetting");
                 nbt.putInt("slot", -1);
                 resetting = true;
             }

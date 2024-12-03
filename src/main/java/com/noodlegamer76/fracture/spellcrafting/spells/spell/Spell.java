@@ -15,11 +15,20 @@ public abstract class Spell {
     ItemStack stack;
     LivingEntity caster;
     Level level;
+    public int life = 0;
 
     Spell(ItemStack stack, LivingEntity caster) {
         this.stack = stack;
         this.caster = caster;
         this.level = caster.level();
+    }
+
+    public int getMaxLife() {
+        return 0;
+    }
+
+    public int getLife() {
+        return life;
     }
 
     public abstract void cast();

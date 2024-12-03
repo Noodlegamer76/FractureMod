@@ -1,5 +1,6 @@
 package com.noodlegamer76.fracture.spellcrafting;
 
+import com.noodlegamer76.fracture.spellcrafting.spells.SpellTicker;
 import com.noodlegamer76.fracture.spellcrafting.spells.spell.Spell;
 import net.minecraft.world.item.ItemStack;
 
@@ -19,7 +20,8 @@ public class CastState {
     public void cast() {
         for (Spell spell: stateSpells.spells) {
             if (currentMana >= spell.getManaCost()) {
-                spell.cast();
+                //add spells to SpellTicker
+                SpellTicker.addSpellToTicker(spell);
                 currentMana -= spell.getManaCost();
             }
             else {

@@ -7,11 +7,8 @@ import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
 import com.noodlegamer76.fracture.item.modifiable.Broom;
-import com.noodlegamer76.fracture.spellcrafting.spells.item.DoubleCastSpellItem;
-import com.noodlegamer76.fracture.spellcrafting.spells.item.GiantSnowBallSpellItem;
-import com.noodlegamer76.fracture.spellcrafting.spells.item.IceShatterSpellItem;
+import com.noodlegamer76.fracture.spellcrafting.spells.item.*;
 import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
-import com.noodlegamer76.fracture.spellcrafting.spells.item.VoidBallSpellItem;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -69,6 +66,8 @@ public class InitItems {
             () -> new GiantSnowBallSpellItem(new Item.Properties()));
     public static final RegistryObject<Item> DOUBLE_CAST_SPELL_ITEM = ITEMS.register("double_cast_spell",
             () -> new DoubleCastSpellItem(new Item.Properties()));
+    public static final RegistryObject<Item> TRIPLE_CAST_SPELL_ITEM = ITEMS.register("triple_cast_spell",
+            () -> new TripleCastSpellItem(new Item.Properties()));
     public static final RegistryObject<Item> ICE_SHATTER_SPELL_ITEM = ITEMS.register("ice_shatter_spell",
             () -> new IceShatterSpellItem(new Item.Properties()));
 
