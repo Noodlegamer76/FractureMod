@@ -15,11 +15,6 @@ public class DoubleCastSpell extends Spell {
     }
 
     @Override
-    public WandCast applyCastEffects(CastState state, WandCast cast) {
-        return super.applyCastEffects(state, cast);
-    }
-
-    @Override
     public int draws() {
         return 2;
     }

@@ -111,6 +111,7 @@ public class FractureTab {
             event.accept(InitItems.FLESH_WALKER_SPAWN_EGG);
             event.accept(InitItems.ABDOMINAL_SNOWMAN_SPAWN_EGG);
             event.accept(InitItems.KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG);
+            event.accept(InitItems.MOOSICLE);
         }
     }
 }

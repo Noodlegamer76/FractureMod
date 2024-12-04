@@ -44,8 +44,7 @@ public abstract class Spell {
     public void preTicker() {}
 
     //change the state of the wand cast when adding the spell to the CastState
-    public WandCast applyCastEffects(CastState state, WandCast cast) {
-        return cast;
+    public void applyCastEffects(CastState state) {
     }
 
     public boolean createsCastStates() {

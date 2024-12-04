@@ -34,9 +34,10 @@ public class AbstractProjectileSpellEntity extends AbstractArrow {
     }
 
     public void trigger() {
-        if (triggerState != null) {
+        if (triggerState != null && !isTrigger) {
+            isTrigger = true;
             triggerState.cast();
-            System.out.println("triggering");
+            System.out.println("triggering" + triggerState.stateLevel);
         }
     }
 

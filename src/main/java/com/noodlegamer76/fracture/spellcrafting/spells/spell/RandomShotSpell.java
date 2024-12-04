@@ -15,9 +15,8 @@ public class RandomShotSpell extends Spell {
     }
 
     @Override
-    public WandCast applyCastEffects(CastState state, WandCast cast) {
+    public void applyCastEffects(CastState state) {
         state.inaccuracyMultiplier += 1000;
-        return super.applyCastEffects(state, cast);
     }
 
     @Override

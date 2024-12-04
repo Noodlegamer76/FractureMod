@@ -160,6 +160,7 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.ABDOMINAL_SNOWMAN.get(), AbdominalSnowmanRenderer::new);
             event.registerEntityRenderer(InitEntities.KNOWLEDGEABLE_SNOWMAN.get(), KnowledgeableSnowmanRenderer::new);
             event.registerEntityRenderer(InitEntities.ICE_SPIKE.get(), IceSpikeRenderer::new);
+            event.registerEntityRenderer(InitEntities.MOOSICLE.get(), MoosicleRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);

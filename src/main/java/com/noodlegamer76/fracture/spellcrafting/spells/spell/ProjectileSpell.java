@@ -31,26 +31,28 @@ public abstract class ProjectileSpell extends Spell {
     }
 
     public void shootProjectileFromRotation() {
-        if (projectile == null) {
+        if (projectile == null || lastShooterPos == null) {
             return;
         }
-        if (triggerCastState != null && triggerCastState.stateLevel != 1) {
-            shootWithBounce(lastShooterDelta, 1.0f);
-        }
-        else {
-            projectile.shootFromRotation(caster, caster.getXRot(), caster.getYRot(), 0, 2.0f, 2.75f * inaccuracyMultiplier);
-        }
+        projectile.shootFromRotation(caster, caster.getXRot(), caster.getYRot(), 0,
+                2.0f, 2.75f * inaccuracyMultiplier);
+
         projectile.setPos(lastShooterPos);
+        if (caster != null) {
+            projectile.setPos(lastShooterPos.x, lastShooterPos.y + caster.getEyeHeight(), lastShooterPos.z);
+        }
         level.addFreshEntity(projectile);
     }
 
     public void shootWithBounce(Vec3 delta, float elasticity) {
-        projectile.setDeltaMovement(-delta.x, -delta.y, -delta.z);
+            Vec3 projectDelta = new Vec3(delta.x, -delta.y, delta.z);
+            projectile.setDeltaMovement(projectDelta);
     }
 
     @Override
     public void setTriggerCastState(CastState state) {
         super.setTriggerCastState(state);
+        System.out.println("Setting trigger cast state with level: " + state.stateLevel);
         projectile.setTriggerState(triggerCastState);
     }
 }

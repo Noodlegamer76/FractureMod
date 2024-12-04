@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class GiantSnowballWithTriggerSpell extends ProjectileSpell {
+    boolean casted = false;
     public GiantSnowballWithTriggerSpell(ItemStack stack, Entity caster) {
         super(stack, caster);
         projectile = new GiantSnowballProjectile(InitEntities.GIANT_SLOWBALL.get(), caster, level);
@@ -17,7 +18,10 @@ public class GiantSnowballWithTriggerSpell extends ProjectileSpell {
 
     @Override
     public void cast() {
-        shootProjectileFromRotation();
+        if (!casted) {
+            shootProjectileFromRotation();
+        }
+        casted = true;
     }
 
     @Override

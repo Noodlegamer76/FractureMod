@@ -53,8 +53,8 @@ public class CastState {
                 else {
                     addSpellStats(spell);
                     currentSpells.addCard(spell);
+                    spell.setStateSpells(currentSpells);
                 }
-                spell.setStateSpells(currentSpells);
                 spell.preTicker();
 
                 //add spells to SpellTicker
@@ -76,29 +76,34 @@ public class CastState {
     private CastState createNewCastState(CardHolder spells, int start) {
         start += 1;
 
-        // Return early if starting index is already out of bounds.
         if (start >= spells.spells.size()) {
             System.err.println("Starting index out of bounds: No spells to process.");
-            return null; // or null, based on your design needs.
+            return null;
         }
 
         CastState castState = new CastState(wand);
+        castState.stateLevel = stateLevel;
         castState.addStateLevel();
+        System.out.println("Added state level: " + castState.stateLevel);
 
-        // Number of draws should not exceed list size minus current position.
         int availableSpells = spells.spells.size() - start;
         int draws = Math.min(spells.spells.get(start - 1).triggerDraws(), availableSpells);
 
         for (int i = 0; i < draws && start < spells.spells.size(); i++) {
             Spell spell = spells.spells.remove(start);
             castState.stateSpells.addCard(spell);
-            if (spell instanceof ProjectileSpell projectileSpell && spells.spells.get(start - 1) instanceof ProjectileSpell projectileSpell2) {
+            spell.applyCastEffects(castState);
+
+            if (spell instanceof ProjectileSpell projectileSpell &&
+                    spells.spells.get(start - 1) instanceof ProjectileSpell projectileSpell2) {
                 projectileSpell.caster = projectileSpell2.getProjectile();
                 projectileSpell.getProjectile().setOwner(projectileSpell2.getProjectile());
             }
+
             draws += spell.draws();
             draws += spell.triggerDraws();
         }
+
         return castState;
     }
 
@@ -112,6 +117,6 @@ public class CastState {
         stateSpells.addCard(spell);
         cast.casts += spell.draws();
         cast.casts += spell.triggerDraws();
-        spell.applyCastEffects(this, cast);
+        spell.applyCastEffects(this);
     }
 }

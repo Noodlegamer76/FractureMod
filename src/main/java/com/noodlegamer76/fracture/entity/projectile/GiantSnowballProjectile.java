@@ -61,6 +61,9 @@ public class GiantSnowballProjectile extends AbstractProjectileSpellEntity imple
             Vec3 direction = ModVectors.getForwardVector(this);
             Vec3 direction2 = new Vec3(direction.x, direction.y, -direction.z);
             livingEntity.setDeltaMovement(direction2.reverse().scale(2.0));
+            if (level().getEntity(this.getId()) != null) {
+                trigger();
+            }
         }
 
 
@@ -69,6 +72,9 @@ public class GiantSnowballProjectile extends AbstractProjectileSpellEntity imple
 
     @Override
     protected void onHit(@NotNull HitResult pResult) {
+        if (level().getEntity(this.getId()) != null) {
+            trigger();
+        }
         super.onHit(pResult);
         if (level().isClientSide) {
             for (int i = 0; i < 30; i++) {
@@ -76,7 +82,7 @@ public class GiantSnowballProjectile extends AbstractProjectileSpellEntity imple
                 level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SNOW_BLOCK.defaultBlockState()), getX(), getY() + 0.5, getZ(), direction.x, direction.y, direction.z);
             }
         }
-        trigger();
+
     }
 
     @Override

@@ -16,9 +16,13 @@ public class DoubleCastInaccurateSpell extends Spell {
     }
 
     @Override
-    public WandCast applyCastEffects(CastState state, WandCast cast) {
+    public void applyCastEffects(CastState state) {
         state.inaccuracyMultiplier += 1f;
-        return super.applyCastEffects(state, cast);
+    }
+
+    @Override
+    public void preTicker() {
+        triggerCastState.inaccuracyMultiplier += 1f;
     }
 
     @Override

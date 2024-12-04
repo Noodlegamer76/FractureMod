@@ -46,7 +46,7 @@ public abstract class MultiAttackMonster extends Monster {
 
     private void isResettingSpells() {
         if (getMainHandItem().getItem() instanceof Wand) {
-            if (getMainHandItem().getTag().getInt("slot") == -1) {
+            if (getMainHandItem().getTag() != null && getMainHandItem().getTag().getInt("slot") == -1) {
                 resettingSpells = true;
             }
         }
