@@ -5,11 +5,12 @@ import com.noodlegamer76.fracture.entity.projectile.GiantSnowballProjectile;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class GiantSnowballSpell extends ProjectileSpell {
-    public GiantSnowballSpell(ItemStack stack, Entity caster) {
+public class GiantSnowballWithTriggerSpell extends ProjectileSpell {
+    public GiantSnowballWithTriggerSpell(ItemStack stack, Entity caster) {
         super(stack, caster);
         projectile = new GiantSnowballProjectile(InitEntities.GIANT_SLOWBALL.get(), caster, level);
     }
@@ -20,27 +21,37 @@ public class GiantSnowballSpell extends ProjectileSpell {
     }
 
     @Override
+    public int triggerDraws() {
+        return 1;
+    }
+
+    @Override
+    public boolean createsCastStates() {
+        return true;
+    }
+
+    @Override
     public Component getName() {
-        return Component.literal("Giant Snowball");
+        return Component.literal("Giant Snowball with Trigger");
     }
 
     @Override
     public float getManaCost() {
-        return 10;
+        return 20;
     }
 
     @Override
     public float getRechargeTime() {
-        return 15;
+        return 20;
     }
 
     @Override
     public float getCastDelay() {
-        return 7.5f;
+        return 10;
     }
 
     @Override
     public Item getCastItem() {
-        return InitItems.GIANT_SNOWBALL_SPELL_ITEM.get();
+        return InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM.get();
     }
 }

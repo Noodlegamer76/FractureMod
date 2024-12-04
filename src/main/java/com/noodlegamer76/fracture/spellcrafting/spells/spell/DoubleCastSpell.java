@@ -4,24 +4,24 @@ import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.spellcrafting.CastState;
 import com.noodlegamer76.fracture.spellcrafting.WandCast;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class DoubleCastSpell extends Spell {
-    public DoubleCastSpell(ItemStack stack, LivingEntity caster) {
+    public DoubleCastSpell(ItemStack stack, Entity caster) {
         super(stack, caster);
     }
 
     @Override
-    public void cast() {
-
+    public WandCast applyCastEffects(CastState state, WandCast cast) {
+        return super.applyCastEffects(state, cast);
     }
 
     @Override
-    public WandCast applyCastEffects(CastState state, WandCast cast) {
-        cast.casts += 2;
-        return super.applyCastEffects(state, cast);
+    public int draws() {
+        return 2;
     }
 
     @Override

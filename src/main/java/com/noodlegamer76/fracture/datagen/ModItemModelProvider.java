@@ -83,6 +83,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         handHeldItem(InitItems.DOUBLE_CAST_SPELL_ITEM);
         handHeldItem(InitItems.TRIPLE_CAST_SPELL_ITEM);
         handHeldItem(InitItems.GIANT_SNOWBALL_SPELL_ITEM);
+        handHeldItem(InitItems.DOUBLE_CAST_INACCURATE_SPELL_ITEM);
+        handHeldItem(InitItems.RANDOM_SHOT_SPELL_ITEM);
+        handHeldItem(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM);
 
         spawnEggItem(InitItems.ANKLE_BITER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_WALKER_SPAWN_EGG);

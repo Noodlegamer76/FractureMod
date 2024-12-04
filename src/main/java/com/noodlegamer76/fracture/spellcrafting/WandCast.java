@@ -4,6 +4,7 @@ import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
 import com.noodlegamer76.fracture.spellcrafting.spells.spell.Spell;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,11 +13,16 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 
+/**
+ * Represents a wand casting system that allows a living entity to cast spells using a wand.
+ * The system organizes spells into a queue and handles the scheduling of spell casting based on
+ * various wand configurations such as mana capacity, cast delay, and recharge time.
+ */
 public class WandCast {
     IItemHandler handler;
     CompoundTag nbt;
     CardHolderManager manager;
-    LivingEntity caster;
+    Entity caster;
     ItemStack wand;
 
     public int casts = 1;
@@ -42,15 +48,8 @@ public class WandCast {
     public int startSlot;
 
     CastState state;
-    //implementation notes:
-    //capacity, added
-    //casts, added
-    //mana recharge speed, added
-    //max mana, added
 
-    //4 more to go
-
-    public WandCast(Level level, LivingEntity caster, ItemStack castItem) {
+    public WandCast(Level level, Entity caster, ItemStack castItem) {
         //inventory slots index starts at 0
 
         //make handler and nbt
@@ -75,7 +74,7 @@ public class WandCast {
 
     }
 
-    public void castSpell(Level level, LivingEntity caster, ItemStack castItem) {
+    public void castSpell(Level level, Entity caster, ItemStack castItem) {
 
         if (wand.getTag().getFloat("currentCastDelay") > 0) {
             return;

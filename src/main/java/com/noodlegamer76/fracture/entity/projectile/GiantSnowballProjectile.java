@@ -6,6 +6,7 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -21,7 +22,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class GiantSnowballProjectile extends AbstractProjectileSpell implements GeoEntity {
+public class GiantSnowballProjectile extends AbstractProjectileSpellEntity implements GeoEntity {
     AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
     public GiantSnowballProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
@@ -33,7 +34,7 @@ public class GiantSnowballProjectile extends AbstractProjectileSpell implements 
         this.setPos(pX, pY, pZ);
     }
 
-    public GiantSnowballProjectile(EntityType<? extends AbstractArrow> pEntityType, LivingEntity pShooter, Level pLevel) {
+    public GiantSnowballProjectile(EntityType<? extends AbstractArrow> pEntityType, Entity pShooter, Level pLevel) {
         this(pEntityType, pShooter.getX(), pShooter.getEyeY() - (double)0.1F, pShooter.getZ(), pLevel);
         this.setOwner(pShooter);
         if (pShooter instanceof Player) {
@@ -75,6 +76,7 @@ public class GiantSnowballProjectile extends AbstractProjectileSpell implements 
                 level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SNOW_BLOCK.defaultBlockState()), getX(), getY() + 0.5, getZ(), direction.x, direction.y, direction.z);
             }
         }
+        trigger();
     }
 
     @Override

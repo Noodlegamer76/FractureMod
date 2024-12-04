@@ -2,12 +2,13 @@ package com.noodlegamer76.fracture.spellcrafting.spells.spell;
 
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class IceShatterSpell extends Spell {
-    public IceShatterSpell(ItemStack stack, LivingEntity caster) {
+public class IceSpikeScatterSpell extends Spell {
+    public IceSpikeScatterSpell(ItemStack stack, Entity caster) {
         super(stack, caster);
     }
 
@@ -38,6 +39,6 @@ public class IceShatterSpell extends Spell {
 
     @Override
     public Item getCastItem() {
-        return InitItems.ICE_SHATTER_SPELL_ITEM.get();
+        return InitItems.ICE_SPIKE_SCATTER_SPELL_ITEM.get();
     }
 }

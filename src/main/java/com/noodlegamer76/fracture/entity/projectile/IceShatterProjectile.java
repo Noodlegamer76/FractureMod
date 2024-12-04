@@ -4,7 +4,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
 
-public class IceShatterProjectile extends AbstractProjectileSpell {
+public class IceShatterProjectile extends AbstractProjectileSpellEntity {
     public IceShatterProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }

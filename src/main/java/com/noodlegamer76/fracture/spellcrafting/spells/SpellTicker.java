@@ -10,6 +10,11 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * The SpellTicker class manages the lifecycle of spells within a game server context.
+ * It maintains a list of spells currently active and ensures each spell is cast
+ * and its lifecycle is updated at each tick event.
+ */
 @Mod.EventBusSubscriber(modid = FractureMod.MODID)
 public class SpellTicker {
     private static final ArrayList<Spell> spells = new ArrayList<>();
@@ -20,6 +25,7 @@ public class SpellTicker {
         Iterator<Spell> iterator = spells.iterator();
         while (iterator.hasNext()) {
             Spell spell = iterator.next();
+            spell.tick();
             spell.cast();
             spell.life += 1;
             if (spell.getLife() > spell.getMaxLife()) {

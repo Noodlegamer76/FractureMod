@@ -2,7 +2,6 @@ package com.noodlegamer76.fracture.entity.monster;
 
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
 import com.noodlegamer76.fracture.entity.ai.behavior.KnowledgeableSnowmanSpellCast;
-import com.noodlegamer76.fracture.entity.ai.behavior.GiantSnowballSpreadLaunch;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.spellcrafting.CreateWand;
 import com.noodlegamer76.fracture.spellcrafting.wand.Wand;

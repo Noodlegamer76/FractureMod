@@ -1,25 +1,20 @@
 package com.noodlegamer76.fracture.entity.projectile;
 
 import com.noodlegamer76.fracture.particles.InitParticles;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3d;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class VoidBall extends AbstractProjectileSpell implements GeoEntity {
+public class VoidBall extends AbstractProjectileSpellEntity implements GeoEntity {
     AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
     public VoidBall(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -30,7 +25,7 @@ public class VoidBall extends AbstractProjectileSpell implements GeoEntity {
         this.setPos(pX, pY, pZ);
     }
 
-    public VoidBall(EntityType<? extends AbstractArrow> pEntityType, LivingEntity pShooter, Level pLevel) {
+    public VoidBall(EntityType<? extends AbstractArrow> pEntityType, Entity pShooter, Level pLevel) {
         this(pEntityType, pShooter.getX(), pShooter.getEyeY() - (double)0.1F, pShooter.getZ(), pLevel);
         this.setOwner(pShooter);
         if (pShooter instanceof Player) {

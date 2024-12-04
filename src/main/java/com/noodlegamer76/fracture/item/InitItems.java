@@ -68,8 +68,14 @@ public class InitItems {
             () -> new DoubleCastSpellItem(new Item.Properties()));
     public static final RegistryObject<Item> TRIPLE_CAST_SPELL_ITEM = ITEMS.register("triple_cast_spell",
             () -> new TripleCastSpellItem(new Item.Properties()));
-    public static final RegistryObject<Item> ICE_SHATTER_SPELL_ITEM = ITEMS.register("ice_shatter_spell",
-            () -> new IceShatterSpellItem(new Item.Properties()));
+    public static final RegistryObject<Item> ICE_SPIKE_SCATTER_SPELL_ITEM = ITEMS.register("ice_spike_scatter_spell",
+            () -> new IceSpikeScatterSpellItem(new Item.Properties()));
+    public static final RegistryObject<Item> DOUBLE_CAST_INACCURATE_SPELL_ITEM = ITEMS.register("double_cast_inaccurate_spell",
+            () -> new DoubleCastInaccurateSpellItem(new Item.Properties()));
+    public static final RegistryObject<Item> RANDOM_SHOT_SPELL_ITEM = ITEMS.register("random_shot_spell",
+            () -> new RandomShotSpellItem(new Item.Properties()));
+    public static final RegistryObject<Item> GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM = ITEMS.register("giant_snowball_with_trigger_spell",
+            () -> new GiantSnowballWithTriggerSpellItem(new Item.Properties()));
 
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));

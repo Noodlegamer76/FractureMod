@@ -5,6 +5,12 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.swing.*;
 
+/**
+ * Manages the card holders for a spellcasting system.
+ * It includes three main areas to hold cards: deck, hand, and discard.
+ * Provides functionalities to move spells between these areas
+ * and clear them as needed.
+ */
 public class CardHolderManager {
     private CardHolder deck;
     private CardHolder hand;

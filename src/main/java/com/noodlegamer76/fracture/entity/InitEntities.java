@@ -4,6 +4,7 @@ import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
 import com.noodlegamer76.fracture.entity.monster.*;
 import com.noodlegamer76.fracture.entity.projectile.GiantSnowballProjectile;
+import com.noodlegamer76.fracture.entity.projectile.IceSpikeEntity;
 import com.noodlegamer76.fracture.entity.projectile.VoidBall;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.entity.vehicle.ModChestBoatEntity;
@@ -80,4 +81,10 @@ public class InitEntities {
             () -> EntityType.Builder.<GiantSnowballProjectile>of(GiantSnowballProjectile::new, MobCategory.MISC)
                     .sized(1f, 1f)
                     .build("giant_snowball"));
+
+
+    public static final RegistryObject<EntityType<IceSpikeEntity>> ICE_SPIKE = ENTITIES.register(("ice_spike"),
+            () -> EntityType.Builder.<IceSpikeEntity>of(IceSpikeEntity::new, MobCategory.MISC)
+                    .sized(0.8f, 0.8f)
+                    .build("ice_spike"));
 }

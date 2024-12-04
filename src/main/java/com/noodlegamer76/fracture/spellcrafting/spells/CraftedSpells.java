@@ -9,6 +9,10 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 
+/**
+ * The CraftedSpells class is responsible for creating and managing spell cards for a magic wand.
+ * It provides methods to generate specific spell combinations and to set these spells onto a wand.
+ */
 public class CraftedSpells {
 
     public CardHolder getSnowballLaunch(ItemStack wand, LivingEntity caster) {
