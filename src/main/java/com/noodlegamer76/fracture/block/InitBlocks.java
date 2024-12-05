@@ -25,6 +25,8 @@ public class InitBlocks {
 
     public static final RegistryObject<Block> FROZEN_GRASS = BLOCKS.register("frozen_grass",
             () -> new FrozenGrass(BlockBehaviour.Properties.copy(Blocks.GRASS)));
+    public static final RegistryObject<Block> FROSTED_ICE_CRYSTALS = BLOCKS.register("frosted_ice_crystals",
+            () -> new FrostedIceCrystals(BlockBehaviour.Properties.copy(Blocks.GLASS)));
     public static final RegistryObject<Block> ICE_CRYSTAL_BLOCK = BLOCKS.register("ice_crystal_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
     public static final RegistryObject<Block> RADIANT_ICE = BLOCKS.register("radiant_ice",

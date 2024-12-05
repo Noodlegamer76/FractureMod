@@ -17,6 +17,7 @@ import java.io.IOException;
 @OnlyIn(Dist.CLIENT)
 public class ModRenderTypes extends RenderStateShard{
     public static ShaderInstance fog;
+    public static ShaderInstance frostedGlass;
     public static ShaderInstance skybox;
     public static ShaderInstance normal;
 
@@ -47,6 +48,18 @@ public class ModRenderTypes extends RenderStateShard{
             true,
             RenderType.CompositeState.builder()
                     .setShaderState(new RenderStateShard.ShaderStateShard(() -> skybox))
+                    .createCompositeState(true)
+    );
+
+    public static final RenderType FROSTED_GLASS = RenderType.create(
+            "test",
+            DefaultVertexFormat.POSITION,
+            VertexFormat.Mode.QUADS,
+            100000,
+            true,
+            true,
+            RenderType.CompositeState.builder()
+                    .setShaderState(new RenderStateShard.ShaderStateShard(() -> frostedGlass))
                     .createCompositeState(true)
     );
 

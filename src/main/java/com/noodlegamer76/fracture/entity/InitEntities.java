@@ -89,7 +89,8 @@ public class InitEntities {
                     .build("ice_spike"));
 
     public static final RegistryObject<EntityType<Moosicle>> MOOSICLE = ENTITIES.register(("moosicle"),
-            () -> EntityType.Builder.<Moosicle>of(Moosicle::new, MobCategory.MISC)
-                    .sized(0.8f, 0.8f)
+            () -> EntityType.Builder.<Moosicle>of(Moosicle::new, MobCategory.CREATURE)
+                    .sized(0.9F, 1.4F)
+                    .clientTrackingRange(10)
                     .build("moosicle"));
 }

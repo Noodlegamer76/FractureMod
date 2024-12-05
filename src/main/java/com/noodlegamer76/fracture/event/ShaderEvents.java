@@ -23,14 +23,21 @@ public class ShaderEvents {
                         new ResourceLocation(FractureMod.MODID, "fog"),
                         DefaultVertexFormat.POSITION),
                 (e) -> ModRenderTypes.fog = e);
+
         event.registerShader(new ShaderInstance(event.getResourceProvider(),
                         new ResourceLocation(FractureMod.MODID, "skybox"),
                         DefaultVertexFormat.POSITION),
                 (e) -> ModRenderTypes.skybox = e);
+
         event.registerShader(new ShaderInstance(event.getResourceProvider(),
                         new ResourceLocation(FractureMod.MODID, "normal"),
                         DefaultVertexFormat.POSITION),
                 (e) -> ModRenderTypes.normal = e);
+
+        event.registerShader(new ShaderInstance(event.getResourceProvider(),
+                        new ResourceLocation(FractureMod.MODID, "frosted_glass"),
+                        DefaultVertexFormat.POSITION),
+                (e) -> ModRenderTypes.frostedGlass = e);
     }
 
     @SubscribeEvent

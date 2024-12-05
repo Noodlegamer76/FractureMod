@@ -1,6 +1,7 @@
 package com.noodlegamer76.fracture.entity.block;
 
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.block.FrostedIceCrystals;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.block.ModificationStationBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -29,6 +30,9 @@ public class InitBlockEntities {
 
     public static final RegistryObject<BlockEntityType<VoidBlockEntity>> VOID_BLOCK_ENTITY = BLOCK_ENTITIES.register("void_block",
             () -> BlockEntityType.Builder.of(VoidBlockEntity::new, InitBlocks.VOID_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<FrostedIceCrystalsEntity>> FROSTED_ICE_CRYSTALS = BLOCK_ENTITIES.register("frosted_ice_crystals",
+            () -> BlockEntityType.Builder.of(FrostedIceCrystalsEntity::new, InitBlocks.FROSTED_ICE_CRYSTALS.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<ModificationStationEntity>> MODIFICATION_STATION = BLOCK_ENTITIES.register("modification_station",
             () -> BlockEntityType.Builder.of(ModificationStationEntity::new, InitBlocks.MODIFICATION_STATION.get()).build(null));

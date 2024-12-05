@@ -2,6 +2,7 @@ package com.noodlegamer76.fracture;
 
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.client.renderers.entity.block.FrostedIceCrystalsRenderer;
 import com.noodlegamer76.fracture.gui.WandOverlay;
 import com.noodlegamer76.fracture.client.renderers.entity.*;
 import com.noodlegamer76.fracture.client.renderers.entity.block.SkyboxGeneratorRenderer;
@@ -167,6 +168,7 @@ public class FractureMod
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOD_SIGN.get(), SignRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.SKYBOX_GENERATOR.get(), SkyboxGeneratorRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.VOID_BLOCK_ENTITY.get(), VoidBlockRenderer::new);
+            event.registerBlockEntityRenderer(InitBlockEntities.FROSTED_ICE_CRYSTALS.get(), FrostedIceCrystalsRenderer::new);
         }
 
         @SubscribeEvent

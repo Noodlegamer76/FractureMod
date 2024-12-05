@@ -67,6 +67,7 @@ public class FractureTab {
             event.accept(InitItems.BOREAS_PORTAL_LOCK);
             event.accept(InitItems.BOREAS_PORTAL_FRAME);
             event.accept(InitItems.MODIFICATION_STATION);
+            event.accept(InitItems.ICE_CREAM);
 
             event.accept(InitItems.INKWOOD_LOG_ITEM);
             event.accept(InitItems.INKWOOD_WOOD_ITEM);
@@ -91,6 +92,7 @@ public class FractureTab {
 
             event.accept(InitItems.PERMAFROST);
             event.accept(InitItems.ICE_CRYSTAL_BLOCK);
+            event.accept(InitItems.FROSTED_ICE_CRYSTALS);
             event.accept(InitItems.RADIANT_ICE);
             event.accept(InitItems.FROZEN_GRASS);
 

@@ -1,11 +1,15 @@
 package com.noodlegamer76.fracture.event;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.client.util.ModRenderTypes;
 import com.noodlegamer76.fracture.client.util.RenderCubeAroundPlayer;
 import com.noodlegamer76.fracture.client.util.RenderFog;
 import com.noodlegamer76.fracture.client.util.SkyBoxRenderer;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
+import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -16,9 +20,12 @@ import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.lwjgl.opengl.GL44;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static com.noodlegamer76.fracture.client.util.RenderCubeAroundPlayer.FOG_TEXTURE;
 
 @Mod.EventBusSubscriber(modid = FractureMod.MODID, value = Dist.CLIENT)
 public class RenderLevelEvent {
@@ -48,14 +55,19 @@ public class RenderLevelEvent {
             //}
 
 
+            {
+                //FOR FROSTED GLASS
+            }
+
+
 
             for (ArrayList<Integer> array: positions) {
                 ArrayList<Integer> current = array;
                 int skybox = current.get(0);
-                int rotationSpeed = current.get(1);;
-                int transparency = current.get(2);; //max 255
-                int minRenderDistance = current.get(3);;
-                int maxRenderDistance = current.get(4);;
+                int rotationSpeed = current.get(1);
+                int transparency = current.get(2); //max 255
+                int minRenderDistance = current.get(3);
+                int maxRenderDistance = current.get(4);
                 int renderPriority = current.get(4); //order of skybox rendering
 
                 SkyBoxRenderer.render(event.getPoseStack(), event.getRenderTick(), event.getPartialTick(),

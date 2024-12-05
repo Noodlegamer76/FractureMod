@@ -120,6 +120,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItem(InitItems.BLOOD_SLIME_BALL);
         simpleItem(InitItems.FROZEN_GRASS);
+        simpleItem(InitItems.ICE_CREAM);
 
         cubeColumn("flesh_sprayer", FLESH_BLOCK, FLESH_SPRAYER);
 

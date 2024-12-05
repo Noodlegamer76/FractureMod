@@ -21,6 +21,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.awt.*;
+import java.awt.color.ColorSpace;
 
 public class InitItems {
 
@@ -82,6 +83,8 @@ public class InitItems {
 
     public static final RegistryObject<Item> FROZEN_GRASS = ITEMS.register("frozen_grass",
             () -> new BlockItem(InitBlocks.FROZEN_GRASS.get(), new Item.Properties()));
+    public static final RegistryObject<Item> FROSTED_ICE_CRYSTALS = ITEMS.register("frosted_ice_crystals",
+            () -> new BlockItem(InitBlocks.FROSTED_ICE_CRYSTALS.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> VOID_BLOCK = ITEMS.register("void_block",
             () -> new VoidBlockItem(InitBlocks.VOID_BLOCK.get(), new Item.Properties()));
@@ -114,6 +117,11 @@ public class InitItems {
                     .food(new FoodProperties.Builder().nutrition(2).saturationMod(6)
                             .effect(new MobEffectInstance(MobEffects.POISON, 100, 2), 1).build())));
 
+
+    public static final RegistryObject<Item> ICE_CREAM = ITEMS.register("ice_cream",
+            () -> new Item(new Item.Properties()
+            .food(new FoodProperties.Builder().nutrition(4).saturationMod(6).build()).stacksTo(16)));
+
     public static final RegistryObject<Item> ANKLE_BITER_SPAWN_EGG = ITEMS.register("ankle_biter_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.ANKLE_BITER, new Color(74, 10, 3).getRGB(), new Color(74, 3, 3).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> FLESH_WALKER_SPAWN_EGG = ITEMS.register("flesh_walker_spawn_egg",
@@ -127,7 +135,7 @@ public class InitItems {
     public static final RegistryObject<Item> KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG = ITEMS.register("knowledgeable_snowman_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.KNOWLEDGEABLE_SNOWMAN, new Color(Color.WHITE.getRGB()).getRGB(), new Color(Color.gray.getRGB()).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> MOOSICLE = ITEMS.register("moosicle_spawn_egg",
-            () -> new ForgeSpawnEggItem(InitEntities.MOOSICLE, new Color(Color.CYAN.getRGB()).getRGB(), new Color(75, 17, 6).getRGB(), new Item.Properties()));
+            () -> new ForgeSpawnEggItem(InitEntities.MOOSICLE, new Color(0, 80, 203).getRGB(), new Color(42, 8, 3).getRGB(), new Item.Properties()));
 
     public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
             () -> new InvertedGlasses(ArmorTiers.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));

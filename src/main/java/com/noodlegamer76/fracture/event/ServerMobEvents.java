@@ -4,6 +4,7 @@ import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.*;
 import com.noodlegamer76.fracture.entity.monster.*;
 import com.noodlegamer76.fracture.network.PacketHandler;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +22,7 @@ public class ServerMobEvents {
         event.put(InitEntities.BLOOD_SLIME.get(), BloodSlimeEntity.createAttributes().build());
         event.put(InitEntities.ABDOMINAL_SNOWMAN.get(), AbdominalSnowman.createAttributes().build());
         event.put(InitEntities.KNOWLEDGEABLE_SNOWMAN.get(), KnowledgeableSnowman.createAttributes().build());
+        event.put(InitEntities.MOOSICLE.get(), Cow.createAttributes().build());
     }
 
     @SubscribeEvent

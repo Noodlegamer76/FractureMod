@@ -101,6 +101,8 @@ public class RenderEventsForFbos {
             ModRenderTypes.skybox.setSampler("Skybox", skyboxTexture);
             ModRenderTypes.skybox.setSampler("SkyboxDepth", stencilBufferTexture);
             ModRenderTypes.skybox.setSampler("MainDepth", Minecraft.getInstance().getMainRenderTarget().getDepthTextureId());
+
+            ModRenderTypes.frostedGlass.setSampler("Color", Minecraft.getInstance().getMainRenderTarget().getColorTextureId());
         }
 
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES) {
