@@ -126,8 +126,8 @@ public class InitItems {
             () -> new ForgeSpawnEggItem(InitEntities.ABDOMINAL_SNOWMAN, new Color(Color.WHITE.getRGB()).getRGB(), new Color(Color.LIGHT_GRAY.getRGB()).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG = ITEMS.register("knowledgeable_snowman_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.KNOWLEDGEABLE_SNOWMAN, new Color(Color.WHITE.getRGB()).getRGB(), new Color(Color.gray.getRGB()).getRGB(), new Item.Properties()));
-    public static final RegistryObject<Item> MOOSICLE = ITEMS.register("knowledgeable_snowman_spawn_egg",
-            () -> new ForgeSpawnEggItem(InitEntities.KNOWLEDGEABLE_SNOWMAN, new Color(Color.CYAN.getRGB()).getRGB(), new Color(75, 17, 6).getRGB(), new Item.Properties()));
+    public static final RegistryObject<Item> MOOSICLE = ITEMS.register("moosicle_spawn_egg",
+            () -> new ForgeSpawnEggItem(InitEntities.MOOSICLE, new Color(Color.CYAN.getRGB()).getRGB(), new Color(75, 17, 6).getRGB(), new Item.Properties()));
 
     public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
             () -> new InvertedGlasses(ArmorTiers.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));

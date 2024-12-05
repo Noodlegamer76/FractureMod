@@ -15,6 +15,7 @@ public class CastState {
     float maxMana;
     float rechargeTime = 0;
     public float inaccuracyMultiplier = 1;
+    public float damageMultiplier = 1;
     private CardHolder stateSpells = new CardHolder();
     private CardHolder currentSpells = new CardHolder();
     ItemStack wand;
@@ -110,6 +111,7 @@ public class CastState {
     private void addSpellStats(Spell spell) {
         if (spell instanceof ProjectileSpell projectileSpell) {
             projectileSpell.inaccuracyMultiplier = inaccuracyMultiplier;
+            projectileSpell.damageMultiplier = damageMultiplier;
         }
     }
 

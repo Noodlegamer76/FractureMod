@@ -23,6 +23,11 @@ public abstract class ProjectileSpell extends Spell {
 
     @Override
     public void tick() {
+        if (life == 0) {
+            System.out.println("baseDamage " + damageMultiplier + " " + projectile.getBaseDamage());
+            projectile.setBaseDamage(projectile.getBaseDamage() * damageMultiplier);
+            System.out.println("baseDamage " + damageMultiplier + " " + projectile.getBaseDamage());
+        }
         super.tick();
         if (projectile != null && projectile.getOwner() != null) {
             lastShooterPos = projectile.getOwner().position();

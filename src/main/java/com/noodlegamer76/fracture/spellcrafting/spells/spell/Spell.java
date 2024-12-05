@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
  * casting, retrieving spell details, and applying casting effects.
  */
 public abstract class Spell {
+    public float damageMultiplier = 1;
     CardHolder stateSpells;
     ItemStack stack;
     public Entity caster;
