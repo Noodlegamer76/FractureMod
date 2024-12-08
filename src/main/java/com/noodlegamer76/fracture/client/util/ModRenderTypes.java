@@ -52,14 +52,17 @@ public class ModRenderTypes extends RenderStateShard{
     );
 
     public static final RenderType FROSTED_GLASS = RenderType.create(
-            "test",
+            "frosted_glass",
             DefaultVertexFormat.POSITION,
             VertexFormat.Mode.QUADS,
             100000,
             true,
             true,
             RenderType.CompositeState.builder()
-                    .setShaderState(new RenderStateShard.ShaderStateShard(() -> frostedGlass))
+                    .setShaderState(new ShaderStateShard(() -> frostedGlass))
+                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                    .setCullState(NO_CULL).setLightmapState(LIGHTMAP)
+                    .setOverlayState(OVERLAY)
                     .createCompositeState(true)
     );
 

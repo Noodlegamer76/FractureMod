@@ -102,6 +102,7 @@ public class Wand extends Item implements GeoAnimatable {
                         packetBuffer.writeByte(hand == InteractionHand.MAIN_HAND ? 0 : 1);
                         return new WandMenu(id, inventory, packetBuffer);
                     }
+
                 }, buf -> {
                     buf.writeBlockPos(player.blockPosition());
                     buf.writeByte(hand == InteractionHand.MAIN_HAND ? 0 : 1);

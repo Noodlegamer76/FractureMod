@@ -20,6 +20,5 @@ public class SpellAndModifierSlot extends SlotItemHandler {
     @Override
     public boolean mayPlace(@NotNull ItemStack stack) {
         return stack.getItem() instanceof SpellItem;
-
     }
 }

@@ -1,7 +1,9 @@
 package com.noodlegamer76.fracture.gui.wand;
 
+import com.ibm.icu.text.ListFormatter;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.noodlegamer76.fracture.FractureMod;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -14,22 +16,32 @@ import java.util.HashMap;
 
 public class WandScreen extends AbstractContainerScreen<WandMenu> {
     private final static HashMap<String, Object> guistate = WandMenu.guistate;
-    private final Level world;
+    private final Level level;
     private final int x, y, z;
     private final Player entity;
+    private int guiScale = Minecraft.getInstance().options.guiScale().get();
 
     public WandScreen(WandMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
-        this.world = container.world;
+        this.level = container.level;
         this.x = container.x;
         this.y = container.y;
         this.z = container.z;
         this.entity = container.entity;
-        this.imageWidth = 176;
-        this.imageHeight = 166;
+
+        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        int height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
+
+        int[] clampedDimensions = clampTo16x9(width, height);
+        System.out.println("Clamped Width: " + clampedDimensions[0]);
+        System.out.println("Clamped Height: " + clampedDimensions[1]);
+
+
+        imageWidth = clampedDimensions[0] - 20;
+        imageHeight = clampedDimensions[1] - 20;
     }
 
-    private static final ResourceLocation WAND_TEXTURE = new ResourceLocation(FractureMod.MODID, "textures/screens/wand_screen.png");
+    private static final ResourceLocation SQUARE_PANEL = new ResourceLocation(FractureMod.MODID, "textures/screens/wand/square_panel.png");
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
@@ -40,12 +52,21 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int gx, int gy) {
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.setShaderTexture(0, WAND_TEXTURE);
-        guiGraphics.blit(WAND_TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
-        RenderSystem.disableBlend();
+        int availableHeight = imageHeight - (int) (imageHeight * 0.0925);
+        int smallGap = topPos + (int) Math.round(imageHeight * 0.025);
+        int imageSizeSquare = (availableHeight / 3);
+
+        guiGraphics.blit(SQUARE_PANEL, this.leftPos, topPos, 0, 0, imageSizeSquare, imageSizeSquare, imageSizeSquare, imageSizeSquare);
+        guiGraphics.blit(SQUARE_PANEL, this.leftPos, topPos + imageSizeSquare + smallGap / 2, 0, 0, imageSizeSquare, imageSizeSquare, imageSizeSquare, imageSizeSquare);
+        guiGraphics.blit(SQUARE_PANEL, this.leftPos, topPos + (imageSizeSquare * 2) + smallGap, 0, 0, imageSizeSquare, imageSizeSquare, imageSizeSquare, imageSizeSquare);
+
+        guiGraphics.blit(SQUARE_PANEL, leftPos + (int) (imageSizeSquare + (imageWidth * 0.025)), topPos, 0, 0,
+                (int) (imageHeight - smallGap),
+                (int) (imageHeight - smallGap),
+                (int) (imageHeight - smallGap),
+                (int) (imageHeight - smallGap));
+
+        //guiGraphics.blit(SQUARE_PANEL, imageSizeSquare + 20, topPos, 0, 0, imageSizeSquare, imageSizeSquare, imageSizeSquare, imageSizeSquare);
     }
 
     @Override
@@ -74,5 +95,18 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
     public void init() {
         super.init();
         //this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
+    }
+
+    public static int[] clampTo16x9(int screenWidth, int screenHeight) {
+        int width = screenWidth;
+        int height = (int) (width * 9.0 / 16.0); // Calculate height based on 16:9 ratio
+
+        // If height exceeds screen bounds, adjust width instead
+        if (height > screenHeight) {
+            height = screenHeight;
+            width = (int) (height * 16.0 / 9.0); // Recalculate width based on height
+        }
+
+        return new int[]{width, height};
     }
 }

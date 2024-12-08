@@ -10,6 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
+import software.bernie.geckolib.renderer.GeoRenderer;
+import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
+
+import java.util.List;
 
 public class FrostedIceCrystalsRenderer extends GeoBlockRenderer<FrostedIceCrystalsEntity> {
     public FrostedIceCrystalsRenderer(BlockEntityRendererProvider.Context context) {
@@ -18,6 +22,6 @@ public class FrostedIceCrystalsRenderer extends GeoBlockRenderer<FrostedIceCryst
 
     @Override
     public RenderType getRenderType(FrostedIceCrystalsEntity animatable, ResourceLocation texture, @Nullable MultiBufferSource bufferSource, float partialTick) {
-        return ModRenderTypes.FROSTED_GLASS;
+        return RenderType.translucentMovingBlock();
     }
 }
