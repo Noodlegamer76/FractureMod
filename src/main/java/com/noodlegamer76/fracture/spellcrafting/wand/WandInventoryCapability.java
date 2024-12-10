@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 public class WandInventoryCapability implements ICapabilitySerializable<CompoundTag> {
     boolean isCreated;
     CompoundTag stats;
+    public int capacity;
 
     public static final Capability<WandInventoryCapability> WAND_INVENTORY_CAPABILITY =
             CapabilityManager.get(new CapabilityToken<WandInventoryCapability>(){});
@@ -35,7 +36,8 @@ public class WandInventoryCapability implements ICapabilitySerializable<Compound
             }
         }
     }
-    public WandInventoryCapability() {
+    public WandInventoryCapability(int capacity) {
+        this.capacity = capacity;
     }
 
     private final LazyOptional<ItemStackHandler> inventory = LazyOptional.of(this::createItemHandler);
@@ -58,7 +60,7 @@ public class WandInventoryCapability implements ICapabilitySerializable<Compound
     }
 
     private ItemStackHandler createItemHandler() {
-        return new ItemStackHandler(27) {
+        return new ItemStackHandler(capacity) {
             @Override
             public int getSlotLimit(int slot) {
                 return 1;
@@ -67,10 +69,6 @@ public class WandInventoryCapability implements ICapabilitySerializable<Compound
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 return stack.getItem() != InitItems.WAND.get();
-            }
-
-            @Override
-            public void setSize(int size) {
             }
 
         };

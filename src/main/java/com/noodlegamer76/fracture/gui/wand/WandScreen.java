@@ -1,8 +1,9 @@
 package com.noodlegamer76.fracture.gui.wand;
 
-import com.ibm.icu.text.ListFormatter;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.gui.wand.widgets.WandInvPanel;
+import com.noodlegamer76.fracture.gui.wand.widgets.WandStatsWidget;
+import com.noodlegamer76.fracture.mixin.MixinSlot;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -10,8 +11,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 public class WandScreen extends AbstractContainerScreen<WandMenu> {
@@ -19,7 +22,15 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
     private final Level level;
     private final int x, y, z;
     private final Player entity;
-    private int guiScale = Minecraft.getInstance().options.guiScale().get();
+    public WandStatsWidget wandStatsWidget;
+    public WandInvPanel wandInvPanel;
+
+    private int scaledWidth;
+    private int scaledHeight;
+    private double guiScale;
+
+    private static final ResourceLocation SQUARE_PANEL = new ResourceLocation(FractureMod.MODID, "textures/screens/basic_background.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(FractureMod.MODID, "textures/screens/slot.png");
 
     public WandScreen(WandMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
@@ -29,19 +40,26 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
         this.z = container.z;
         this.entity = container.entity;
 
-        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
-        int height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
+        // Get initial screen dimensions
+        int screenWidth = Minecraft.getInstance().getWindow().getScreenWidth();
+        int screenHeight = Minecraft.getInstance().getWindow().getScreenHeight();
 
-        int[] clampedDimensions = clampTo16x9(width, height);
-        System.out.println("Clamped Width: " + clampedDimensions[0]);
-        System.out.println("Clamped Height: " + clampedDimensions[1]);
+        int[] clampedDimensions = clampTo16x9(screenWidth, screenHeight);
+        scaledWidth = clampedDimensions[0];
+        scaledHeight = clampedDimensions[1];
 
+        this.guiScale = Minecraft.getInstance().getWindow().getGuiScale();
+        this.imageWidth = (int) Math.round(scaledWidth / guiScale);
+        this.imageHeight = (int) Math.round(scaledHeight / guiScale);
 
-        imageWidth = clampedDimensions[0] - 20;
-        imageHeight = clampedDimensions[1] - 20;
+        this.leftPos = (screenWidth - imageWidth) / 2;
+        this.topPos = (screenHeight - imageHeight) / 2;
+
+        //System.out.println("Initial Screen dimensions: " + screenWidth + "x" + screenHeight);
+        //System.out.println("Initial GUI Scale: " + guiScale);
+        //System.out.println("Clamped dimensions: " + imageWidth + "x" + imageHeight);
+        //System.out.println("Initial Position: " + leftPos + ", " + topPos);
     }
-
-    private static final ResourceLocation SQUARE_PANEL = new ResourceLocation(FractureMod.MODID, "textures/screens/wand/square_panel.png");
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
@@ -50,23 +68,116 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
+
+
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int gx, int gy) {
-        int availableHeight = imageHeight - (int) (imageHeight * 0.0925);
-        int smallGap = topPos + (int) Math.round(imageHeight * 0.025);
-        int imageSizeSquare = (availableHeight / 3);
+    protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+        int smallGapTop = (int) Math.round(imageHeight * 0.025);
+        int smallGapLeft = (int) Math.round(imageWidth * 0.025);
+        int widthThird = (imageWidth / 3) - (smallGapLeft * 3);
+        int availableHeight = imageHeight - (int) (imageHeight * 0.1);
+        int imageSizeSquare = availableHeight / 3;
 
-        guiGraphics.blit(SQUARE_PANEL, this.leftPos, topPos, 0, 0, imageSizeSquare, imageSizeSquare, imageSizeSquare, imageSizeSquare);
-        guiGraphics.blit(SQUARE_PANEL, this.leftPos, topPos + imageSizeSquare + smallGap / 2, 0, 0, imageSizeSquare, imageSizeSquare, imageSizeSquare, imageSizeSquare);
-        guiGraphics.blit(SQUARE_PANEL, this.leftPos, topPos + (imageSizeSquare * 2) + smallGap, 0, 0, imageSizeSquare, imageSizeSquare, imageSizeSquare, imageSizeSquare);
+        wandStatsWidget.render(guiGraphics, mouseX, mouseY, partialTicks, menu.getWand().getTag().getFloat("currentMana"));
 
-        guiGraphics.blit(SQUARE_PANEL, leftPos + (int) (imageSizeSquare + (imageWidth * 0.025)), topPos, 0, 0,
-                (int) (imageHeight - smallGap),
-                (int) (imageHeight - smallGap),
-                (int) (imageHeight - smallGap),
-                (int) (imageHeight - smallGap));
+        wandInvPanel.render(guiGraphics, mouseX, mouseY, partialTicks);
 
-        //guiGraphics.blit(SQUARE_PANEL, imageSizeSquare + 20, topPos, 0, 0, imageSizeSquare, imageSizeSquare, imageSizeSquare, imageSizeSquare);
+
+        guiGraphics.blit(SQUARE_PANEL, leftPos + smallGapLeft, topPos + imageSizeSquare + smallGapTop * 2, 0, 0, widthThird, imageSizeSquare, widthThird, imageSizeSquare);
+        guiGraphics.blit(SQUARE_PANEL, leftPos + smallGapLeft, topPos + (imageSizeSquare * 2) + smallGapTop * 3, 0, 0, widthThird, imageSizeSquare, widthThird, imageSizeSquare);
+
+        guiGraphics.blit(SQUARE_PANEL, leftPos + widthThird + smallGapLeft * 2, topPos + smallGapTop * 5, 0, 0,
+                widthThird + smallGapLeft * 5,
+                imageHeight - smallGapTop * 6,
+                widthThird + smallGapLeft * 5,
+                imageHeight - smallGapTop * 6);
+
+        guiGraphics.blit(SQUARE_PANEL, leftPos + widthThird * 2 + smallGapLeft * 8, topPos + smallGapTop, 0, 0,
+                widthThird,
+                (int) ((double) imageHeight / 2 - smallGapTop * 1.5),
+                widthThird,
+                (int) ((double) imageHeight / 2 - smallGapTop * 1.5));
+
+        guiGraphics.blit(SQUARE_PANEL, leftPos + widthThird * 2 + smallGapLeft * 8, topPos + (imageHeight / 2) + (smallGapTop / 2), 0, 0,
+                widthThird,
+                (int) ((double) imageHeight / 2 - smallGapTop * 1.5),
+                widthThird,
+                (int) ((double) imageHeight / 2 - smallGapTop * 1.5));
+
+        for (int i = 0; i < 36 + menu.customSlots.size(); i++) {
+            Slot slot = this.menu.getSlot(i);
+            final int x = leftPos + slot.x - 1;
+            final int y = topPos + slot.y - 1;
+            guiGraphics.blit(TEXTURE, x, y, 0, 0, 18, 18, 18, 18);
+        }
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        setupWidgets();
+        setInventorySlots();
+    }
+
+    public void setInventorySlots() {
+        float smallGapTop = (int) Math.round(imageHeight * 0.025);
+        float smallGapLeft = (int) Math.round(imageWidth * 0.025);
+        float widthThird = (imageWidth / 3) - (smallGapLeft * 3);
+        float heightThird = (imageHeight / 3) - (smallGapTop * 3);
+
+
+        setSlotPositions(
+                (int) (imageWidth - widthThird - smallGapLeft),
+                (int) (imageHeight - imageHeight / 2 + smallGapTop / 2),
+                (int) widthThird,
+                (int) ((double) imageHeight / 2 - smallGapTop * 1.5));
+
+
+        wandInvPanel.setSlotPositions(
+                (int) (imageWidth - widthThird - smallGapLeft * 2 - (smallGapLeft * 5) - widthThird),
+                (int) (imageHeight - (smallGapTop * 4) - (heightThird * 3) + smallGapTop * 0.25),
+                (int) (widthThird + smallGapLeft * 5),
+                (int) (imageHeight - smallGapTop * 6));
+
+
+    }
+
+    public void setSlotPositions(int startX, int startY, int slotAreaWidth, int slotAreaHeight) {
+        int slotWidth = 18;
+        int slotHeight = 18;
+
+        int slotsX = slotAreaWidth / slotWidth;
+        int slotsY = slotAreaHeight / slotHeight;
+        int widthOffset = slotAreaWidth % 18 / 2;
+        int heightOffset = slotAreaHeight % 18 / 2;
+
+        try {
+            Field xField = Slot.class.getDeclaredField("x");
+            Field yField = Slot.class.getDeclaredField("y");
+            xField.setAccessible(true);
+            yField.setAccessible(true);
+
+            int slotsSet = 0;
+            for (int row = 0; row < slotsY; row++) {
+                for (int col = 0; col < slotsX; col++) {
+                    int xPos = startX + col * slotWidth + widthOffset;
+                    int yPos = startY + row * slotHeight + heightOffset;
+
+                    if (slotsSet < this.menu.slots.size()) {
+                        Slot slot = this.menu.getSlot(slotsSet);
+                        xField.setInt(slot, xPos);
+                        yField.setInt(slot, yPos);
+                    }
+
+                    slotsSet++;
+
+                    if (slotsSet >= 36)
+                        return;
+                }
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -92,21 +203,80 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
     }
 
     @Override
-    public void init() {
-        super.init();
-        //this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
+    public void resize(Minecraft pMinecraft, int pWidth, int pHeight) {
+        super.resize(pMinecraft, pWidth, pHeight);
+        //setInventorySlots();
+
+        int screenWidth = pMinecraft.getWindow().getWidth();
+        int screenHeight = pMinecraft.getWindow().getHeight();
+
+        int[] clampedDimensions = clampTo16x9(screenWidth, screenHeight);
+        scaledWidth = clampedDimensions[0];
+        scaledHeight = clampedDimensions[1];
+
+        guiScale = pMinecraft.getWindow().getGuiScale();
+        imageWidth = (int) Math.round(scaledWidth / guiScale);
+        imageHeight = (int) Math.round(scaledHeight / guiScale);
+
+        leftPos = (width - imageWidth) / 2;
+        topPos = (height - imageHeight) / 2;
+
+
+        clearWidgets();
+        setupWidgets();
+
+        setInventorySlots();
+    }
+
+    private void setupWidgets() {
+        int availableHeight = imageHeight - (int) (imageHeight * 0.1);
+        int smallGapTop = (int) Math.round(imageHeight * 0.025);
+        int smallGapLeft = (int) Math.round(imageWidth * 0.025);
+        int imageSizeSquare = availableHeight / 3;
+        int widthThird = (imageWidth / 3) - (smallGapLeft * 3);
+
+        wandStatsWidget = new WandStatsWidget(
+                leftPos + smallGapLeft,
+                topPos + smallGapTop,
+                widthThird,
+                imageSizeSquare,
+                Component.literal(""),
+                SQUARE_PANEL,
+                font,
+                menu
+        );
+
+        wandInvPanel = new WandInvPanel(
+                leftPos + widthThird + smallGapLeft * 2,
+                topPos + smallGapTop * 5,
+                widthThird + smallGapLeft * 5,
+                imageHeight - smallGapTop * 6,
+                Component.literal(""),
+                SQUARE_PANEL,
+                font,
+                menu
+        );
+
     }
 
     public static int[] clampTo16x9(int screenWidth, int screenHeight) {
-        int width = screenWidth;
-        int height = (int) (width * 9.0 / 16.0); // Calculate height based on 16:9 ratio
+        double targetAspectRatio = 16.0 / 9.0;
 
-        // If height exceeds screen bounds, adjust width instead
-        if (height > screenHeight) {
-            height = screenHeight;
-            width = (int) (height * 16.0 / 9.0); // Recalculate width based on height
+        // Calculate the aspect ratio of the current screen dimensions
+        double currentAspectRatio = (double) screenWidth / screenHeight;
+
+        if (currentAspectRatio > targetAspectRatio) {
+            // Screen is wider than 16:9, clamp width based on height
+            screenWidth = (int) (screenHeight * targetAspectRatio);
+        } else if (currentAspectRatio < targetAspectRatio) {
+            // Screen is taller than 16:9, clamp height based on width
+            screenHeight = (int) (screenWidth / targetAspectRatio);
         }
 
-        return new int[]{width, height};
+        return new int[]{screenWidth, screenHeight};
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
     }
 }

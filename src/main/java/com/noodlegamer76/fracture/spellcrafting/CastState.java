@@ -18,6 +18,7 @@ public class CastState {
     public float damageMultiplier = 1;
     private CardHolder stateSpells = new CardHolder();
     private CardHolder currentSpells = new CardHolder();
+    private CardHolder positiveManaSpells = new CardHolder();
     ItemStack wand;
     public int stateLevel = 0;
 
@@ -42,36 +43,48 @@ public class CastState {
      * that spell is skipped without affecting the recharge time or current mana.
      */
     public void cast() {
-        for (int i = 0; i < stateSpells.spells.size(); i++) {
-            Spell spell = stateSpells.spells.get(i);
-            if (currentMana >= spell.getManaCost()) {
-                if (spell.createsCastStates()) {
-                    CastState state = createNewCastState(stateSpells, i);
-                    if (state != null) {
-                        spell.setTriggerCastState(state);
-                    }
-                }
-                else {
-                    addSpellStats(spell);
-                    currentSpells.addCard(spell);
-                    spell.setStateSpells(currentSpells);
-                }
-                spell.preTicker();
+        calculateManaCost();
 
-                //add spells to SpellTicker
-                SpellTicker.addSpellToTicker(spell);
-
-                currentMana -= spell.getManaCost();
+        for (int i = 0; i < positiveManaSpells.spells.size(); i++) {
+            Spell spell = positiveManaSpells.spells.get(i);
+            if (spell.createsCastStates()) {
+                CastState state = createNewCastState(positiveManaSpells, i);
+                if (state != null) {
+                    spell.setTriggerCastState(state);
+                }
             }
+            else {
+                addSpellStats(spell);
+                currentSpells.addCard(spell);
+                spell.setStateSpells(currentSpells);
+            }
+            spell.preTicker();
+
+            //add spells to SpellTicker
+            SpellTicker.addSpellToTicker(spell);
+
 
             rechargeTime += spell.getCastDelay();
         }
         if (stateLevel == 0) {
-            wand.getTag().putFloat("currentMana", currentMana);
             wand.getTag().putFloat("currentCastDelay", rechargeTime);
             wand.getTag().putFloat("lastRechargeTime", rechargeTime);
         }
+    }
 
+    private void calculateManaCost() {
+        if (stateLevel != 0) {
+            return; // Only process mana cost at the base cast state level
+        }
+
+        for (int i = 0; i < stateSpells.spells.size(); i++) {
+            Spell spell = stateSpells.spells.get(i);
+            if (currentMana >= spell.getManaCost()) {
+                currentMana -= spell.getManaCost();
+                positiveManaSpells.addCard(spell); // Correctly add the current spell
+            }
+        }
+        wand.getTag().putFloat("currentMana", currentMana);
     }
 
     private CastState createNewCastState(CardHolder spells, int start) {
@@ -92,7 +105,7 @@ public class CastState {
 
         for (int i = 0; i < draws && start < spells.spells.size(); i++) {
             Spell spell = spells.spells.remove(start);
-            castState.stateSpells.addCard(spell);
+            castState.positiveManaSpells.addCard(spell);
             spell.applyCastEffects(castState);
 
             if (spell instanceof ProjectileSpell projectileSpell &&

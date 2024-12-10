@@ -48,7 +48,5 @@ public class WandOverlay {
         float lastRechargeTime = wand.getTag().getFloat("lastRechargeTime");
         float totalRecharge = rechargeTime / lastRechargeTime * 100;
         guiGraphics.blit(RECHARGE_FULL, x - 143, 32, 0, 0, (int) (totalRecharge * 1.18), 16, 118, 16);
-
-
     });
 }

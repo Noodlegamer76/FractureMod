@@ -80,11 +80,7 @@ public class Wand extends Item implements GeoAnimatable {
         if (player instanceof ServerPlayer serverPlayer) {
             ItemStack item = player.getItemInHand(hand);
 
-            CompoundTag nbt = item.getOrCreateTag();
-            if (!nbt.contains("isCreated")) {
-               new CreateWand().createStats(nbt);
 
-            }
 
 
 
@@ -120,7 +116,13 @@ public class Wand extends Item implements GeoAnimatable {
 
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag compound) {
-        WandInventoryCapability capability = new WandInventoryCapability();
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (!nbt.contains("isCreated")) {
+            new CreateWand().createStats(nbt, stack);
+        }
+        int capacity = stack.getTag().getInt("capacity");
+
+        WandInventoryCapability capability = new WandInventoryCapability(capacity);
         return capability;
     }
 

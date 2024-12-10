@@ -1,8 +1,7 @@
-package com.noodlegamer76.fracture.gui.wand;
+package com.noodlegamer76.fracture.gui.guibuilder;
 
 import com.noodlegamer76.fracture.gui.InitMenus;
-import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
-import net.minecraft.client.Minecraft;
+import com.noodlegamer76.fracture.gui.wand.SpellAndModifierSlot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,23 +19,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class WandMenu extends AbstractContainerMenu implements Supplier<Map<Integer, Slot>> {
+public class GuiBuilderMenu extends AbstractContainerMenu implements Supplier<Map<Integer, Slot>> {
     public final static HashMap<String, Object> guistate = new HashMap<>();
     public final Level level;
     public final Player entity;
     public int x, y, z;
     private IItemHandler itemHandler;
-    public final Map<Integer, Slot> customSlots = new HashMap<>();
-    private Inventory inv;
+    private final Map<Integer, Slot> customSlots = new HashMap<>();
     private boolean bound = false;
 
-    public WandMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        super(InitMenus.WAND_MENU.get(), id);
+    public GuiBuilderMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+        super(InitMenus.GUI_BUILDER.get(), id);
         this.entity = inv.player;
         this.level = inv.player.level();
-        this.inv = inv;
-        int capacity = getWand().getTag().getInt("capacity");
-        this.itemHandler = new ItemStackHandler(capacity);
+        this.itemHandler = new ItemStackHandler(27);
         BlockPos pos = null;
         if (extraData != null) {
             pos = extraData.readBlockPos();
@@ -58,26 +54,67 @@ public class WandMenu extends AbstractContainerMenu implements Supplier<Map<Inte
                 });
             }
         }
+       // this.customSlots.put(0, this.addSlot(new SpellAndModifierSlot(itemHandler, 0, 7, 8) {
+       // }));
+       // this.customSlots.put(1, this.addSlot(new SpellAndModifierSlot(itemHandler, 1, 25, 8) {
+       // }));
+       // this.customSlots.put(2, this.addSlot(new SpellAndModifierSlot(itemHandler, 2, 43, 8) {
+       // }));
+       // this.customSlots.put(3, this.addSlot(new SpellAndModifierSlot(itemHandler, 3, 61, 8) {
+       // }));
+       // this.customSlots.put(4, this.addSlot(new SpellAndModifierSlot(itemHandler, 4, 79, 8) {
+       // }));
+       // this.customSlots.put(5, this.addSlot(new SpellAndModifierSlot(itemHandler, 5, 97, 8) {
+       // }));
+       // this.customSlots.put(6, this.addSlot(new SpellAndModifierSlot(itemHandler, 6, 115, 8) {
+       // }));
+       // this.customSlots.put(7, this.addSlot(new SpellAndModifierSlot(itemHandler, 7, 133, 8) {
+       // }));
+       // this.customSlots.put(8, this.addSlot(new SpellAndModifierSlot(itemHandler, 8, 151, 8) {
+       // }));
+       // this.customSlots.put(9, this.addSlot(new SpellAndModifierSlot(itemHandler, 9, 7, 35) {
+       // }));
+       // this.customSlots.put(10, this.addSlot(new SpellAndModifierSlot(itemHandler, 10, 25, 35) {
+       // }));
+       // this.customSlots.put(11, this.addSlot(new SpellAndModifierSlot(itemHandler, 11, 43, 35) {
+       // }));
+       // this.customSlots.put(12, this.addSlot(new SpellAndModifierSlot(itemHandler, 12, 61, 35) {
+       // }));
+       // this.customSlots.put(13, this.addSlot(new SpellAndModifierSlot(itemHandler, 13, 79, 35) {
+       // }));
+       // this.customSlots.put(14, this.addSlot(new SpellAndModifierSlot(itemHandler, 14, 97, 35) {
+       // }));
+       // this.customSlots.put(15, this.addSlot(new SpellAndModifierSlot(itemHandler, 15, 115, 35) {
+       // }));
+       // this.customSlots.put(16, this.addSlot(new SpellAndModifierSlot(itemHandler, 16, 133, 35) {
+       // }));
+       // this.customSlots.put(17, this.addSlot(new SpellAndModifierSlot(itemHandler, 17, 151, 35) {
+       // }));
+       // this.customSlots.put(18, this.addSlot(new SpellAndModifierSlot(itemHandler, 18, 7, 62) {
+       // }));
+       // this.customSlots.put(19, this.addSlot(new SpellAndModifierSlot(itemHandler, 19, 25, 62) {
+       // }));
+       // this.customSlots.put(20, this.addSlot(new SpellAndModifierSlot(itemHandler, 20, 43, 62) {
+       // }));
+       // this.customSlots.put(21, this.addSlot(new SpellAndModifierSlot(itemHandler, 21, 61, 62) {
+       // }));
+       // this.customSlots.put(22, this.addSlot(new SpellAndModifierSlot(itemHandler, 22, 79, 62) {
+       // }));
+       // this.customSlots.put(23, this.addSlot(new SpellAndModifierSlot(itemHandler, 23, 97, 62) {
+       // }));
+       // this.customSlots.put(24, this.addSlot(new SpellAndModifierSlot(itemHandler, 24, 115, 62) {
+       // }));
+       // this.customSlots.put(25, this.addSlot(new SpellAndModifierSlot(itemHandler, 25, 133, 62) {
+       // }));
+       // this.customSlots.put(26, this.addSlot(new SpellAndModifierSlot(itemHandler, 26, 151, 62) {
+       // }));
+       // for (int si = 0; si < 3; ++si)
+       //     for (int sj = 0; sj < 9; ++sj)
+       //         this.addSlot(new Slot(inv, sj + (si + 1) * 9, 8 + sj * 18, 84 + si * 18));
+       // for (int si = 0; si < 9; ++si)
+       //     this.addSlot(new Slot(inv, si, 8 + si * 18, 142));
 
-        for (int i = 0; i < 36; ++i) {
-            addSlot(new Slot(inv, i, 8, 8));
-        }
-        for (int i = 0; i < capacity; i++) {
-            this.customSlots.put(i, this.addSlot(new SpellAndModifierSlot(itemHandler, i, 0, 0)));
-        }
-    }
 
-    public ItemStack getWand() {
-        ItemStack item = null;
-        if (entity.getOffhandItem().getItem() instanceof Wand) {
-            assert Minecraft.getInstance().player != null;
-            item = Minecraft.getInstance().player.getOffhandItem();
-        }
-        else if (entity.getMainHandItem().getItem() instanceof Wand) {
-            assert Minecraft.getInstance().player != null;
-            item = Minecraft.getInstance().player.getMainHandItem();
-        }
-        return item;
     }
 
     @Override

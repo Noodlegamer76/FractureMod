@@ -98,6 +98,7 @@ public class FractureTab {
 
 
             event.accept(InitItems.WAND);
+            event.accept(InitItems.FROZEN_SPELLBOOK);
             event.accept(InitItems.VOID_BALL_SPELL_ITEM);
             event.accept(InitItems.GIANT_SNOWBALL_SPELL_ITEM);
             event.accept(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM);

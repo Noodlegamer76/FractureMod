@@ -1,6 +1,7 @@
 package com.noodlegamer76.fracture.gui;
 
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderMenu;
 import com.noodlegamer76.fracture.gui.modificationstation.ModificationStationMenu;
 import com.noodlegamer76.fracture.gui.skyboxgenerator.SkyboxGeneratorMenu;
 import com.noodlegamer76.fracture.gui.wand.WandMenu;
@@ -23,4 +24,7 @@ public class InitMenus {
 
     public static final RegistryObject<MenuType<ModificationStationMenu>> MODIFICATION_STATION_MENU =
             MENU_TYPES.register("modification_station", () -> IForgeMenuType.create(ModificationStationMenu::new));
+
+    public static final RegistryObject<MenuType<GuiBuilderMenu>> GUI_BUILDER =
+            MENU_TYPES.register("gui_builder", () -> IForgeMenuType.create(GuiBuilderMenu::new));
 }

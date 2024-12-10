@@ -8,6 +8,7 @@ import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
 import com.noodlegamer76.fracture.item.modifiable.Broom;
 import com.noodlegamer76.fracture.spellcrafting.spells.item.*;
+import com.noodlegamer76.fracture.spellcrafting.wand.FrozenSpellBook;
 import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
@@ -60,6 +61,8 @@ public class InitItems {
 
     public static final RegistryObject<Item> WAND = ITEMS.register("wand",
             () -> new Wand(new Item.Properties()));
+    public static final RegistryObject<Item> FROZEN_SPELLBOOK = ITEMS.register("frozen_spellbook",
+            () -> new FrozenSpellBook(new Item.Properties()));
 
     public static final RegistryObject<Item> VOID_BALL_SPELL_ITEM = ITEMS.register("void_ball_spell",
             () -> new VoidBallSpellItem(new Item.Properties()));

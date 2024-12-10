@@ -8,7 +8,10 @@ import com.noodlegamer76.fracture.client.renderers.entity.*;
 import com.noodlegamer76.fracture.client.renderers.entity.block.SkyboxGeneratorRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.block.TestRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.block.VoidBlockRenderer;
+import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderMenu;
+import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderScreen;
 import com.noodlegamer76.fracture.gui.modificationstation.ModificationStationScreen;
+import com.noodlegamer76.fracture.gui.wand.WandMenu;
 import com.noodlegamer76.fracture.gui.wand.WandScreen;
 import com.noodlegamer76.fracture.particles.ConfettiParticle;
 import com.noodlegamer76.fracture.particles.VoidParticle;
@@ -133,11 +136,13 @@ public class FractureMod
             event.enqueueWork(() -> {
                 MenuScreens.register(InitMenus.SKYBOX_GENERATOR.get(), SkyboxGeneratorScreen::new);
             });
-            event.enqueueWork(() -> {
-                MenuScreens.register(InitMenus.WAND_MENU.get(), WandScreen::new);
-            });
+            event.enqueueWork(
+                    () -> MenuScreens.register(InitMenus.WAND_MENU.get(), WandScreen::new));
             event.enqueueWork(() -> {
                 MenuScreens.register(InitMenus.MODIFICATION_STATION_MENU.get(), ModificationStationScreen::new);
+            });
+            event.enqueueWork(() -> {
+                MenuScreens.register(InitMenus.GUI_BUILDER.get(), GuiBuilderScreen::new);
             });
         }
 

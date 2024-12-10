@@ -68,7 +68,7 @@ public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntit
         if (getMainHandItem().getItem() instanceof Wand) {
             CompoundTag nbt = getMainHandItem().getOrCreateTag();
             if (!nbt.contains("isCreated")) {
-                new CreateWand().createStats(nbt);
+                new CreateWand().createStats(nbt, getMainHandItem());
             }
         }
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);

@@ -14,6 +14,7 @@ public class SpellAndModifierSlot extends SlotItemHandler {
         super(itemHandler, index, xPosition, yPosition);
         this.validator = validator;
     }
+
     public SpellAndModifierSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         this(itemHandler, index, xPosition, yPosition, itemStack -> false);
     }
