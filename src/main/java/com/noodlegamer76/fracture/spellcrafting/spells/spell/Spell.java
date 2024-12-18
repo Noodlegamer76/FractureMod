@@ -20,11 +20,12 @@ public abstract class Spell {
     CardHolder stateSpells;
     ItemStack stack;
     public Entity caster;
+    public Entity originalCaster;
     Level level;
     CastState triggerCastState;
     public int life = 0;
 
-    Spell(ItemStack stack, Entity caster) {
+    public Spell(ItemStack stack, Entity caster) {
         this.stack = stack;
         this.caster = caster;
         this.level = caster.level();

@@ -47,6 +47,7 @@ public class CastState {
 
         for (int i = 0; i < positiveManaSpells.spells.size(); i++) {
             Spell spell = positiveManaSpells.spells.get(i);
+            spell.applyCastEffects(this);
             if (spell.createsCastStates()) {
                 CastState state = createNewCastState(positiveManaSpells, i);
                 if (state != null) {
@@ -54,10 +55,9 @@ public class CastState {
                 }
             }
             else {
-                addSpellStats(spell);
-                currentSpells.addCard(spell);
                 spell.setStateSpells(currentSpells);
             }
+            currentSpells.addCard(spell);
             spell.preTicker();
 
             //add spells to SpellTicker
@@ -66,9 +66,15 @@ public class CastState {
 
             rechargeTime += spell.getCastDelay();
         }
+        for (int i = 0; i < currentSpells.spells.size(); i++) {
+            Spell spell = currentSpells.spells.get(i);
+            addSpellStats(spell);
+        }
         if (stateLevel == 0) {
-            wand.getTag().putFloat("currentCastDelay", rechargeTime);
-            wand.getTag().putFloat("lastRechargeTime", rechargeTime);
+            wand.getTag().putFloat("currentCastDelay", rechargeTime +
+                    wand.getTag().getFloat("castDelay"));
+            wand.getTag().putFloat("lastRechargeTime", rechargeTime +
+                    wand.getTag().getFloat("castDelay"));
         }
     }
 
@@ -108,11 +114,15 @@ public class CastState {
             castState.positiveManaSpells.addCard(spell);
             spell.applyCastEffects(castState);
 
+            if (spells.spells.get(start - 1) instanceof ProjectileSpell projectileSpell2) {
+                spell.caster = projectileSpell2.getProjectile();
+            }
             if (spell instanceof ProjectileSpell projectileSpell &&
                     spells.spells.get(start - 1) instanceof ProjectileSpell projectileSpell2) {
                 projectileSpell.caster = projectileSpell2.getProjectile();
                 projectileSpell.getProjectile().setOwner(projectileSpell2.getProjectile());
             }
+
 
             draws += spell.draws();
             draws += spell.triggerDraws();
@@ -132,6 +142,5 @@ public class CastState {
         stateSpells.addCard(spell);
         cast.casts += spell.draws();
         cast.casts += spell.triggerDraws();
-        spell.applyCastEffects(this);
     }
 }

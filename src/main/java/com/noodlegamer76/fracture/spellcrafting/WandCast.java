@@ -133,8 +133,10 @@ public class WandCast {
         state.cast();
         if (resetting) {
             float rechargeTime = getRechargeTime();
-            wand.getTag().putFloat("currentCastDelay", rechargeTime);
-            wand.getTag().putFloat("lastRechargeTime", rechargeTime);
+            wand.getTag().putFloat("currentCastDelay", rechargeTime +
+                    wand.getTag().getFloat("rechargeTime"));
+            wand.getTag().putFloat("lastRechargeTime", rechargeTime +
+                    wand.getTag().getFloat("rechargeTime"));
         }
 
     }

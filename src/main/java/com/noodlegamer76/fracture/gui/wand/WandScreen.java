@@ -77,7 +77,9 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
         int widthThird = (imageWidth / 3) - (smallGapLeft * 3);
         int availableHeight = imageHeight - (int) (imageHeight * 0.1);
         int imageSizeSquare = availableHeight / 3;
-
+        if (menu.getWand() == null) {
+            return;
+        }
         wandStatsWidget.render(guiGraphics, mouseX, mouseY, partialTicks, menu.getWand().getTag().getFloat("currentMana"));
 
         wandInvPanel.render(guiGraphics, mouseX, mouseY, partialTicks);
@@ -199,7 +201,6 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
     @Override
     public void onClose() {
         super.onClose();
-        //Minecraft.getInstance().keyboardHandler.setSendRepeatsToGui(false);
     }
 
     @Override

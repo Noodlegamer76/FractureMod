@@ -2,9 +2,7 @@ package com.noodlegamer76.fracture.entity.projectile;
 
 import com.noodlegamer76.fracture.spellcrafting.CardHolder;
 import com.noodlegamer76.fracture.spellcrafting.CastState;
-import com.noodlegamer76.fracture.spellcrafting.spells.spell.Spell;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class AbstractProjectileSpellEntity extends AbstractArrow {
-    boolean isTrigger = false;
+    boolean isTriggered = false;
     public CastState triggerState;
     CardHolder spells;
 
@@ -34,8 +32,8 @@ public class AbstractProjectileSpellEntity extends AbstractArrow {
     }
 
     public void trigger() {
-        if (triggerState != null && !isTrigger) {
-            isTrigger = true;
+        if (triggerState != null && !isTriggered) {
+            isTriggered = true;
             triggerState.cast();
             System.out.println("triggering" + triggerState.stateLevel);
         }

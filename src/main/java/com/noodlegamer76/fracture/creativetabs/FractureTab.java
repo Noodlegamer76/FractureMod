@@ -92,21 +92,19 @@ public class FractureTab {
 
             event.accept(InitItems.PERMAFROST);
             event.accept(InitItems.ICE_CRYSTAL_BLOCK);
-            event.accept(InitItems.FROSTED_ICE_CRYSTALS);
             event.accept(InitItems.RADIANT_ICE);
             event.accept(InitItems.FROZEN_GRASS);
 
 
             event.accept(InitItems.WAND);
             event.accept(InitItems.FROZEN_SPELLBOOK);
-            event.accept(InitItems.VOID_BALL_SPELL_ITEM);
             event.accept(InitItems.GIANT_SNOWBALL_SPELL_ITEM);
             event.accept(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM);
             event.accept(InitItems.DOUBLE_CAST_SPELL_ITEM);
             event.accept(InitItems.DOUBLE_CAST_INACCURATE_SPELL_ITEM);
             event.accept(InitItems.TRIPLE_CAST_SPELL_ITEM);
             event.accept(InitItems.RANDOM_SHOT_SPELL_ITEM);
-            event.accept(InitItems.ICE_SPIKE_SCATTER_SPELL_ITEM);
+            event.accept(InitItems.EXPLOSION_SPELL_ITEM);
 
             event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
             event.accept(InitItems.BLOOD_SLIME_SPAWN_EGG);

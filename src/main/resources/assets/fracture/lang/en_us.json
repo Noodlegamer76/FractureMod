@@ -20,6 +20,17 @@
 	"item.fracture.bloody_skull": "Bloody Skull",
 	"item.fracture.boreas_key": "Boreas Key",
 	"item.fracture.abdominal_snowman_spawn_egg": "Abdominal Snowman Spawn Egg",
+	"item.fracture.knowledgeable_snowman_spawn_egg": "Knowledgeable Snowman Spawn Egg",
+	"item.fracture.moosicle_spawn_egg": "Moosicle Spawn Egg",
+	"item.fracture.explosion_spell": "Explosion Spell",
+	"item.fracture.random_shot_spell": "Random Shot Spell Spell",
+	"item.fracture.triple_cast_spell": "Triple Cast Spell",
+	"item.fracture.double_cast_inaccurate_spell": "Inaccurate Double Cast Spell",
+	"item.fracture.double_cast_spell": "Double Cast Spell",
+	"item.fracture.giant_snowball_with_trigger_spell": "Giant Snowball With Trigger Spell",
+	"item.fracture.giant_snowball_spell": "Giant Snowball Spell",
+	"item.fracture.frozen_spellbook": "Frozen Spellbook",
+	"item.fracture.wand": "Creative Wand",
 
 	"block.fracture.flesh_sprayer": "Blood Sprayer",
 	"block.fracture.compact_tnt": "Compact Tnt",
@@ -79,6 +90,10 @@
 	"block.fracture.boreas_portal_lock": "Boreas Portal Lock",
 	"block.fracture.boreas_portal_frame": "Boreas Portal Frame",
 	"block.fracture.smoke_stack": "Smoke Stack",
+	"block.fracture.permafrost": "Permafrost",
+	"block.fracture.ice_crystal_block": "Ice Crystal Block",
+	"block.fracture.radiant_ice": "Radiant Ice",
+	"block.fracture.frozen_grass": "Frozen Grass",
 
 	"entity.fracture.ankle_biter": "Ankle Biter",
 	"entity.fracture.flesh_walker": "Flesh Walker",
@@ -86,6 +101,8 @@
 	"entity.fracture.blood_slime": "Blood Slime",
 	"entity.fracture.mod_chest_boat": "Boat With Chest",
 	"entity.fracture.abdominal_snowman": "Abdominal Snowman",
+	"entity.fracture.knowledgeable_snowman": "Knowledgeable Snowman",
+	"entity.fracture.moosicle": "Moosicle",
 
 	"filled_map.flesh_treasure_map": "Fleshy Treasure Map",
 

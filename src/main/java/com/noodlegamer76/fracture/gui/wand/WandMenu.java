@@ -82,7 +82,7 @@ public class WandMenu extends AbstractContainerMenu implements Supplier<Map<Inte
 
     @Override
     public boolean stillValid(Player player) {
-        return true;
+        return player.getMainHandItem().getItem() instanceof Wand || player.getOffhandItem().getItem() instanceof Wand;
     }
 
     @Override
@@ -196,18 +196,11 @@ public class WandMenu extends AbstractContainerMenu implements Supplier<Map<Inte
     @Override
     public void removed(Player playerIn) {
         super.removed(playerIn);
-        if (!bound && playerIn instanceof ServerPlayer serverPlayer) {
-            if (!serverPlayer.isAlive() || serverPlayer.hasDisconnected()) {
-                for (int j = 0; j < itemHandler.getSlots(); ++j) {
-                    if (j == 0)
-                        continue;
-                    playerIn.drop(itemHandler.extractItem(j, itemHandler.getStackInSlot(j).getCount(), false), false);
-                }
-            } else {
-                for (int i = 0; i < itemHandler.getSlots(); ++i) {
-                    if (i == 0)
-                        continue;
-                    playerIn.getInventory().placeItemBackInInventory(itemHandler.extractItem(i, itemHandler.getStackInSlot(i).getCount(), false));
+        if (!this.bound && this.entity instanceof ServerPlayer) {
+            for (int i = 0; i < this.itemHandler.getSlots(); i++) {
+                ItemStack itemStack = this.itemHandler.getStackInSlot(i);
+                if (!itemStack.isEmpty()) {
+                    playerIn.getInventory().placeItemBackInInventory(itemStack);
                 }
             }
         }

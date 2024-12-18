@@ -57,15 +57,13 @@ public class GiantSnowballProjectile extends AbstractProjectileSpellEntity imple
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
+
         if (pResult.getEntity() instanceof LivingEntity livingEntity && !(livingEntity instanceof KnowledgeableSnowman)) {
             Vec3 direction = ModVectors.getForwardVector(this);
-            Vec3 direction2 = new Vec3(direction.x, direction.y, -direction.z);
+            Vec3 direction2 = new Vec3(-direction.x, direction.y, -direction.z);
             livingEntity.setDeltaMovement(direction2.reverse().scale(2.0));
-            if (level().getEntity(this.getId()) != null) {
-                trigger();
-            }
         }
-
+        isTriggered = false;
 
         super.onHitEntity(pResult);
     }

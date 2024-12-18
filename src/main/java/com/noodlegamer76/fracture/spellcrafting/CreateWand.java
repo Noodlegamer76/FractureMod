@@ -39,7 +39,7 @@ public class CreateWand {
 
     private void createFrozenSpellbook() {
         castDelay = 10;
-        rechargeTime = 10;
+        rechargeTime = 30;
         maxMana = new Random().nextInt(50, 151);
         manaRechargeSpeed = (float) (new Random().nextFloat(0.5f, 1.25f));
         capacity = new Random().nextInt(2, 6);

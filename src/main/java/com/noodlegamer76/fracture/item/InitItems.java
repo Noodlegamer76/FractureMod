@@ -80,12 +80,15 @@ public class InitItems {
             () -> new RandomShotSpellItem(new Item.Properties()));
     public static final RegistryObject<Item> GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM = ITEMS.register("giant_snowball_with_trigger_spell",
             () -> new GiantSnowballWithTriggerSpellItem(new Item.Properties()));
+    public static final RegistryObject<Item> EXPLOSION_SPELL_ITEM = ITEMS.register("explosion_spell",
+            () -> new ExplosionSpellItem(new Item.Properties()));
 
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> FROZEN_GRASS = ITEMS.register("frozen_grass",
             () -> new BlockItem(InitBlocks.FROZEN_GRASS.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> FROSTED_ICE_CRYSTALS = ITEMS.register("frosted_ice_crystals",
             () -> new BlockItem(InitBlocks.FROSTED_ICE_CRYSTALS.get(), new Item.Properties()));
 
