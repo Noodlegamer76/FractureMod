@@ -6,7 +6,6 @@
   "mixins": [
   ],
   "client": [
-    "MixinSlot"
   ],
   "minVersion": "0.8"
 }
