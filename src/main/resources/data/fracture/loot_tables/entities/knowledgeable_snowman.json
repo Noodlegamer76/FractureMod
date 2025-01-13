@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [],
+          "name": "fracture:permafrost_core"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

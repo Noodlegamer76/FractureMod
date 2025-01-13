@@ -2,12 +2,9 @@ package com.noodlegamer76.fracture;
 
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
-import com.noodlegamer76.fracture.client.renderers.entity.block.FrostedIceCrystalsRenderer;
+import com.noodlegamer76.fracture.client.renderers.entity.block.*;
 import com.noodlegamer76.fracture.gui.WandOverlay;
 import com.noodlegamer76.fracture.client.renderers.entity.*;
-import com.noodlegamer76.fracture.client.renderers.entity.block.SkyboxGeneratorRenderer;
-import com.noodlegamer76.fracture.client.renderers.entity.block.TestRenderer;
-import com.noodlegamer76.fracture.client.renderers.entity.block.VoidBlockRenderer;
 import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderMenu;
 import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderScreen;
 import com.noodlegamer76.fracture.gui.modificationstation.ModificationStationScreen;
@@ -165,6 +162,7 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.GIANT_SLOWBALL.get(), GiantSnowballRenderer::new);
             event.registerEntityRenderer(InitEntities.ABDOMINAL_SNOWMAN.get(), AbdominalSnowmanRenderer::new);
             event.registerEntityRenderer(InitEntities.KNOWLEDGEABLE_SNOWMAN.get(), KnowledgeableSnowmanRenderer::new);
+            event.registerEntityRenderer(InitEntities.COMPARABLE_SNOWMAN.get(), ComparableSnowmanRenderer::new);
             event.registerEntityRenderer(InitEntities.ICE_SPIKE.get(), IceSpikeRenderer::new);
             event.registerEntityRenderer(InitEntities.MOOSICLE.get(), MoosicleRenderer::new);
 
@@ -174,6 +172,7 @@ public class FractureMod
             event.registerBlockEntityRenderer(InitBlockEntities.SKYBOX_GENERATOR.get(), SkyboxGeneratorRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.VOID_BLOCK_ENTITY.get(), VoidBlockRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.FROSTED_ICE_CRYSTALS.get(), FrostedIceCrystalsRenderer::new);
+            event.registerBlockEntityRenderer(InitBlockEntities.BOREAS_PORTAL.get(), BoreasPortalRenderer::new);
         }
 
         @SubscribeEvent

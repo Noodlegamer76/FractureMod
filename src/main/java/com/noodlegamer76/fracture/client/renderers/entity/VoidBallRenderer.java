@@ -12,7 +12,7 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class VoidBallRenderer extends GeoEntityRenderer<VoidBall> {
+public class VoidBallRenderer extends SpellRenderer<VoidBall> {
     public VoidBallRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new DefaultedEntityGeoModel<VoidBall>(new ResourceLocation(FractureMod.MODID, "void_ball"), false));
     }

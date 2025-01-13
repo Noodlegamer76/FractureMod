@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " e ",
+    " e ",
+    " a "
+  ],
+  "key": {
+    "e": {
+      "item": "fracture:permafrost_shard"
+    },
+    "a": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "fracture:permafrost_sword",
+    "count": 1
+  }
+}

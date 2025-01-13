@@ -1,5 +1,9 @@
 package com.noodlegamer76.fracture.block;
 
+import com.noodlegamer76.fracture.entity.monster.AnkleBiterEntity;
+import com.noodlegamer76.fracture.entity.monster.BloodSlimeEntity;
+import com.noodlegamer76.fracture.entity.monster.FleshSlimeEntity;
+import com.noodlegamer76.fracture.entity.monster.FleshWalkerEntity;
 import com.noodlegamer76.fracture.particles.BloodParticle;
 import com.noodlegamer76.fracture.particles.InitParticles;
 import net.minecraft.core.BlockPos;
@@ -51,6 +55,12 @@ public class FleshParticleSpawner extends Block {
 
     @Override
     public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
+        if (pEntity instanceof BloodSlimeEntity ||
+                pEntity instanceof FleshSlimeEntity ||
+                pEntity instanceof AnkleBiterEntity ||
+                pEntity instanceof FleshWalkerEntity) {
+            return;
+        }
         pEntity.hurt(pLevel.damageSources().generic(), 1);
     }
 }

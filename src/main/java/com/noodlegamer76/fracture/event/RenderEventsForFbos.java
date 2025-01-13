@@ -26,7 +26,6 @@ public class RenderEventsForFbos {
     public static int postFbo;
     public static int postTexture;
     public static int skyboxTexture;
-    public static int stencilBufferTexture;
     public static int width;
     public static int height;
 
@@ -53,17 +52,6 @@ public class RenderEventsForFbos {
             GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MIN_FILTER, GL44.GL_LINEAR);
             GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MAG_FILTER, GL44.GL_LINEAR);
             GlStateManager._glFramebufferTexture2D(GL44.GL_FRAMEBUFFER, GL44.GL_COLOR_ATTACHMENT0, GL44.GL_TEXTURE_2D, skyboxTexture, 0);
-
-            stencilBufferTexture = GlStateManager._genTexture();
-            GlStateManager._bindTexture(stencilBufferTexture);
-
-            GlStateManager._texImage2D(GL44.GL_TEXTURE_2D, 0, GL44.GL_DEPTH24_STENCIL8,
-                    width, height,
-                    0, GL44.GL_DEPTH_STENCIL, GL44.GL_UNSIGNED_INT_24_8, null);
-            GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MIN_FILTER, GL44.GL_NEAREST);
-            GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MAG_FILTER, GL44.GL_NEAREST);
-
-            GlStateManager._glFramebufferTexture2D(GL44.GL_FRAMEBUFFER, GL44.GL_DEPTH_STENCIL_ATTACHMENT, GL44.GL_TEXTURE_2D, stencilBufferTexture, 0);
 
 
             //SETUP FOR NORMALS MAP
@@ -99,8 +87,6 @@ public class RenderEventsForFbos {
             SkyBoxRenderer.renderBlockSkybox(event.getPoseStack(), TEXTURE);
             GlStateManager._glBindFramebuffer(GL44.GL_FRAMEBUFFER, current);
             ModRenderTypes.skybox.setSampler("Skybox", skyboxTexture);
-            ModRenderTypes.skybox.setSampler("SkyboxDepth", stencilBufferTexture);
-            ModRenderTypes.skybox.setSampler("MainDepth", Minecraft.getInstance().getMainRenderTarget().getDepthTextureId());
 
             ModRenderTypes.frostedGlass.setSampler("Color", Minecraft.getInstance().getMainRenderTarget().getColorTextureId());
         }
@@ -110,10 +96,6 @@ public class RenderEventsForFbos {
 
             RenderCube.createCubeWithShader(event.getPoseStack(), positions, event.getPartialTick());
 
-        }
-
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
-            //SkyBoxRenderer.renderSimple4(event.getPoseStack(), TEXTURE);
         }
 
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
@@ -144,20 +126,6 @@ public class RenderEventsForFbos {
             GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MIN_FILTER, GL44.GL_LINEAR);
             GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MAG_FILTER, GL44.GL_LINEAR);
             GlStateManager._glFramebufferTexture2D(GL44.GL_FRAMEBUFFER, GL44.GL_COLOR_ATTACHMENT0, GL44.GL_TEXTURE_2D, skyboxTexture, 0);
-
-            GlStateManager._deleteTexture(stencilBufferTexture);
-
-            stencilBufferTexture = GlStateManager._genTexture();
-            RenderSystem.bindTexture(stencilBufferTexture);
-
-
-            GlStateManager._texImage2D(GL44.GL_TEXTURE_2D, 0, GL44.GL_DEPTH24_STENCIL8,
-                    width, height,
-                    0, GL44.GL_DEPTH_STENCIL, GL44.GL_UNSIGNED_INT_24_8, null);
-            GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MIN_FILTER, GL44.GL_NEAREST);
-            GlStateManager._texParameter(GL44.GL_TEXTURE_2D, GL44.GL_TEXTURE_MAG_FILTER, GL44.GL_NEAREST);
-
-            GlStateManager._glFramebufferTexture2D(GL44.GL_FRAMEBUFFER, GL44.GL_DEPTH_STENCIL_ATTACHMENT, GL44.GL_TEXTURE_2D, stencilBufferTexture, 0);
 
             //RESIZE FOR NORMALS
 

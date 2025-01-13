@@ -1,6 +1,7 @@
 package com.noodlegamer76.fracture.event;
 
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.entity.projectile.AbstractProjectileSpellEntity;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.InitParticles;
 import com.noodlegamer76.fracture.spellcrafting.spells.SpellTicker;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -59,5 +61,21 @@ public class DamageEvents {
                 event.getItemStack().is(InitItems.PARASITIC_SHOVEL.get())) {
             event.getToolTip().add(1, Component.literal("§4Mines quickly at the cost of your health"));
         }
+        else if (event.getItemStack().is(InitItems.PERMAFROST_SWORD.get())) {
+            event.getToolTip().add(1, Component.literal("§bFreezes enemies for a short amount of time"));
+        }
+        else if (event.getItemStack().is(InitItems.PERMAFROST_PICKAXE.get())) {
+            event.getToolTip().add(1, Component.literal("§bRight click to place blue ice"));
+        }
+        else if (event.getItemStack().is(InitItems.PERMAFROST_AXE.get())) {
+            event.getToolTip().add(1, Component.literal("§bSlows enemies for a short time"));
+        }
+        else if (event.getItemStack().is(InitItems.PERMAFROST_SHOVEL.get())) {
+            event.getToolTip().add(1, Component.literal("§btba"));
+        }
+        else if (event.getItemStack().is(InitItems.PERMAFROST_HOE.get())) {
+            event.getToolTip().add(1, Component.literal("§btba"));
+        }
+
     }
 }

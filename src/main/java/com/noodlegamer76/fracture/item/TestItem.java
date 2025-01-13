@@ -54,24 +54,26 @@ public class TestItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level.isClientSide) {
-            Vec3 forwardVector = ModVectors.getForwardVector(player);
-            for(int i = 0; i < 100; i++) {
-                double random = Math.random() + 0.5;
-                Vec3 vec = forwardVector.scale(2.0).multiply(random, random, random).add(new Vec3(
-                        Math.random() - 0.5,
-                        Math.random() - 0.5,
-                        Math.random() - 0.5)
-                        .normalize().scale(Math.random()));
-
-                level.addParticle(InitParticles.CONFETTI_PARTICLES.get(),
-                        player.getX(),
-                        player.getY() + player.getEyeHeight(),
-                        player.getZ(),
-                        vec.x,
-                        vec.y,
-                        vec.z
-                );
-            }
+            //Vec3 forwardVector = ModVectors.getForwardVector(player);
+            //for(int i = 0; i < 100; i++) {
+            //    double random = Math.random() + 0.5;
+            //    Vec3 vec = forwardVector.scale(2.0).multiply(random, random, random).add(new Vec3(
+            //            Math.random() - 0.5,
+            //            Math.random() - 0.5,
+            //            Math.random() - 0.5)
+            //            .normalize().scale(Math.random()));
+//
+            //    level.addParticle(InitParticles.CONFETTI_PARTICLES.get(),
+            //            player.getX(),
+            //            player.getY() + player.getEyeHeight(),
+            //            player.getZ(),
+            //            vec.x,
+            //            vec.y,
+            //            vec.z
+            //    );
+            //}
+            System.out.println(player.getPortalCooldown());
+            System.out.println(player.isOnPortalCooldown());
         }
 
         if (player instanceof ServerPlayer serverPlayer && serverPlayer.isCrouching()) {

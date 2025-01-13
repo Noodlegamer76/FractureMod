@@ -47,12 +47,12 @@ public class InvertedGlasses extends ArmorItem {
 
     public void startEffect(Level level) {
         if(level.isClientSide) {
-            System.out.println("EARY LOAD");
+            //System.out.println("EARY LOAD");
             if (Minecraft.getInstance().gameRenderer.currentEffect() == null ||
                     !(Minecraft.getInstance().gameRenderer.currentEffect().getName().equals("minecraft:shaders/post/flip.json"))) {
 
                 Minecraft.getInstance().gameRenderer.loadEffect(new ResourceLocation("minecraft", "shaders/post/flip.json"));
-                System.out.println("LOADING");
+                //System.out.println("LOADING");
             }
         }
     }

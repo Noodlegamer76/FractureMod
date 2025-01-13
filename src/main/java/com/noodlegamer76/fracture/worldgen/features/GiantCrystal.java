@@ -34,10 +34,18 @@ public class GiantCrystal extends Feature<NoneFeatureConfiguration> {
             ).normalize();
 
             for (int j = 0; j < 100; j++) {
+                double offsetX = direction.x * j;
+                double offsetY = direction.y * j;
+                double offsetZ = direction.z * j;
+
+                // Constrain horizontal distance to 16 blocks
+                double clampedX = Math.min(Math.max(offsetX, -16), 16);
+                double clampedZ = Math.min(Math.max(offsetZ, -16), 16);
+
                 current.set(
-                        origin.getX() + Math.round(direction.x * j),
-                        origin.getY() + Math.round(direction.y * j),
-                        origin.getZ() + Math.round(direction.z * j)
+                        origin.getX() + Math.round(clampedX),
+                        origin.getY() + Math.round(offsetY),
+                        origin.getZ() + Math.round(clampedZ)
                 );
 
                 for (int dx = -1; dx <= 1; dx++) {
@@ -59,4 +67,5 @@ public class GiantCrystal extends Feature<NoneFeatureConfiguration> {
 
         return true;
     }
+
 }

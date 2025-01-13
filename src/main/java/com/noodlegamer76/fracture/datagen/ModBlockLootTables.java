@@ -116,6 +116,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         dropSelf(InitBlocks.BOREAS_PORTAL_LOCK.get());
         dropSelf(InitBlocks.BOREAS_PORTAL_FRAME.get());
+        dropSelf(InitBlocks.BOREAS_PORTAL.get());
         dropSelf(InitBlocks.PERMAFROST.get());
 
         dropWhenSilkTouch(InitBlocks.FROSTED_ICE_CRYSTALS.get());

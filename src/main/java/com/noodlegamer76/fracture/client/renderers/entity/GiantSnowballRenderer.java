@@ -8,7 +8,7 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class GiantSnowballRenderer extends GeoEntityRenderer<GiantSnowballProjectile> {
+public class GiantSnowballRenderer extends SpellRenderer<GiantSnowballProjectile> {
     public GiantSnowballRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new DefaultedEntityGeoModel<>(new ResourceLocation(FractureMod.MODID, "giant_snowball")));
     }

@@ -22,7 +22,7 @@ public abstract class Spell {
     public Entity caster;
     public Entity originalCaster;
     Level level;
-    CastState triggerCastState;
+    public CastState triggerCastState;
     public int life = 0;
 
     public Spell(ItemStack stack, Entity caster) {
@@ -33,6 +33,12 @@ public abstract class Spell {
 
     public void setTriggerCastState(CastState state) {
         this.triggerCastState = state;
+    }
+
+    public void trigger() {
+        if (triggerCastState != null) {
+            triggerCastState.cast();
+        }
     }
 
     public void tick() {

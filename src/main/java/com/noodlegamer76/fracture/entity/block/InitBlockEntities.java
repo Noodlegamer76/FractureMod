@@ -37,4 +37,7 @@ public class InitBlockEntities {
     public static final RegistryObject<BlockEntityType<ModificationStationEntity>> MODIFICATION_STATION = BLOCK_ENTITIES.register("modification_station",
             () -> BlockEntityType.Builder.of(ModificationStationEntity::new, InitBlocks.MODIFICATION_STATION.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<BoreasPortalEntity>> BOREAS_PORTAL = BLOCK_ENTITIES.register("boreas_portal",
+            () -> BlockEntityType.Builder.of(BoreasPortalEntity::new, InitBlocks.BOREAS_PORTAL.get()).build(null));
+
 }

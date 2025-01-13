@@ -54,6 +54,13 @@ public class FractureTab {
             event.accept(InitItems.PARASITIC_AXE);
             event.accept(InitItems.PARASITIC_SHOVEL);
             event.accept(InitItems.BLOODY_SKULL);
+            event.accept(InitItems.PERMAFROST_SHARD);
+            event.accept(InitItems.PERMAFROST_CORE);
+            event.accept(InitItems.PERMAFROST_SWORD);
+            event.accept(InitItems.PERMAFROST_PICKAXE);
+            event.accept(InitItems.PERMAFROST_AXE);
+            event.accept(InitItems.PERMAFROST_SHOVEL);
+            event.accept(InitItems.PERMAFROST_HOE);
 
 
 
@@ -62,11 +69,11 @@ public class FractureTab {
             event.accept(InitItems.SKYBOX_GENERATOR);
             event.accept(InitItems.COMPACT_TNT);
             event.accept(InitItems.SMOKE_STACK);
-            event.accept(InitItems.VOID_BLOCK);
+            //event.accept(InitItems.VOID_BLOCK);
             event.accept(InitItems.BOREAS_KEY);
             event.accept(InitItems.BOREAS_PORTAL_LOCK);
             event.accept(InitItems.BOREAS_PORTAL_FRAME);
-            event.accept(InitItems.MODIFICATION_STATION);
+            //event.accept(InitItems.MODIFICATION_STATION);
             event.accept(InitItems.ICE_CREAM);
 
             event.accept(InitItems.INKWOOD_LOG_ITEM);
@@ -105,7 +112,9 @@ public class FractureTab {
             event.accept(InitItems.TRIPLE_CAST_SPELL_ITEM);
             event.accept(InitItems.RANDOM_SHOT_SPELL_ITEM);
             event.accept(InitItems.EXPLOSION_SPELL_ITEM);
+            //event.accept(InitItems.SUMMON_MAGIC_SWORD_SPELL_ITEM);
 
+            //event.accept(InitItems.MAGIC_SWORD);
             event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
             event.accept(InitItems.BLOOD_SLIME_SPAWN_EGG);
             event.accept(InitItems.FLESH_SLIME_SPAWN_EGG);
@@ -113,6 +122,7 @@ public class FractureTab {
             event.accept(InitItems.ABDOMINAL_SNOWMAN_SPAWN_EGG);
             event.accept(InitItems.KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG);
             event.accept(InitItems.MOOSICLE);
+            event.accept(InitItems.COMPARABLE_SNOWMAN_SPAWN_EGG);
         }
     }
 }

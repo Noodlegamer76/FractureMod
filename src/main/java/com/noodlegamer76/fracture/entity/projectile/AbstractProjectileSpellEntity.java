@@ -1,42 +1,97 @@
 package com.noodlegamer76.fracture.entity.projectile;
 
+import com.google.common.collect.Lists;
 import com.noodlegamer76.fracture.spellcrafting.CardHolder;
 import com.noodlegamer76.fracture.spellcrafting.CastState;
+import com.noodlegamer76.fracture.spellcrafting.spells.spell.ProjectileSpell;
+import com.noodlegamer76.fracture.spellcrafting.spells.spell.Spell;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
 
 public class AbstractProjectileSpellEntity extends AbstractArrow {
-    boolean isTriggered = false;
-    public CastState triggerState;
-    CardHolder spells;
+    public ProjectileSpell spell;
 
     public AbstractProjectileSpellEntity(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public void setSpells(CardHolder spells) {
-        this.spells = spells;
-    }
-
-    public void setTriggerState(CastState triggerState) {
-        this.triggerState = triggerState;
-    }
-
-    public CardHolder getSpells() {
-        return spells;
-    }
-
     public void trigger() {
-        if (triggerState != null && !isTriggered) {
-            isTriggered = true;
-            triggerState.cast();
-            System.out.println("triggering" + triggerState.stateLevel);
+        if (spell == null) {
+            //System.out.println("PROJECTILE TRIGGER SPELL IS NULL");
+            return;
         }
+        if (spell.triggerCastState != null) {
+            spell.trigger();
+            System.out.println("Triggering spell with level: " + spell.triggerCastState.stateLevel);
+            spell.triggerCastState = null;
+        }
+    }
+
+    public void setSpell(ProjectileSpell spell) {
+        this.spell = spell;
+    }
+
+    @Override
+    public void onRemovedFromWorld() {
+        trigger();
+        super.onRemovedFromWorld();
+    }
+
+
+    @Override
+    protected void onHit(@NotNull HitResult pResult) {
+        super.onHit(pResult);
+    }
+
+    protected void onHitEntity(EntityHitResult pResult) {
+        trigger();
+        Entity entity = pResult.getEntity();
+        float f = (float)this.getDeltaMovement().length();
+        int i = Mth.ceil(Mth.clamp((double)f * getBaseDamage(), 0.0D, (double)Integer.MAX_VALUE));
+
+        if (this.isCritArrow()) {
+            long j = (long)this.random.nextInt(i / 2 + 2);
+            i = (int)Math.min(j + (long)i, 2147483647L);
+        }
+
+        Entity entity1 = this.getOwner();
+        DamageSource damagesource;
+        if (entity1 == null) {
+            damagesource = this.damageSources().arrow(this, this);
+        } else {
+            damagesource = this.damageSources().arrow(this, entity1);
+            if (entity1 instanceof LivingEntity) {
+                ((LivingEntity)entity1).setLastHurtMob(entity);
+            }
+        }
+
+        boolean flag = entity.getType() == EntityType.ENDERMAN;
+        int k = entity.getRemainingFireTicks();
+        if (this.isOnFire() && !flag) {
+            entity.setSecondsOnFire(5);
+        }
+
+        entity.hurt(damagesource, (float)i);
     }
 
     @Override
@@ -69,6 +124,9 @@ public class AbstractProjectileSpellEntity extends AbstractArrow {
 
     @Override
     public void tick() {
+        if (isRemoved()) {
+            trigger();
+        }
         super.tick();
         faceMovementDirection();
     }

@@ -31,6 +31,15 @@
 	"item.fracture.giant_snowball_spell": "Giant Snowball Spell",
 	"item.fracture.frozen_spellbook": "Frozen Spellbook",
 	"item.fracture.wand": "Creative Wand",
+	"item.fracture.ice_cream": "Ice Cream",
+	"item.fracture.comparable_snowman_spawn_egg": "Comparable Snowman Spawn Egg",
+	"item.fracture.permafrost_shard": "Permafrost Shard",
+	"item.fracture.permafrost_core": "Permafrost Core",
+	"item.fracture.permafrost_sword": "Permafrost Sword",
+	"item.fracture.permafrost_pickaxe": "Permafrost Pickaxe",
+	"item.fracture.permafrost_axe": "Permafrost Axe",
+	"item.fracture.permafrost_shovel": "Permafrost Shovel",
+	"item.fracture.permafrost_hoe": "Permafrost Hoe",
 
 	"block.fracture.flesh_sprayer": "Blood Sprayer",
 	"block.fracture.compact_tnt": "Compact Tnt",
@@ -103,6 +112,7 @@
 	"entity.fracture.abdominal_snowman": "Abdominal Snowman",
 	"entity.fracture.knowledgeable_snowman": "Knowledgeable Snowman",
 	"entity.fracture.moosicle": "Moosicle",
+	"entity.fracture.comparable_snowman": "Comparable Snowman",
 
 	"filled_map.flesh_treasure_map": "Fleshy Treasure Map",
 

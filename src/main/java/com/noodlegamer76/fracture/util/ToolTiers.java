@@ -6,13 +6,17 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class ToolTiers {
     public enum ModItemTier implements Tier {
-        BLOOD(2, 1200, 26.0F, 2.0F, 15, () -> {
-            return Ingredient.of(InitItems.LIVING_FLESH.get());
-        });
+        BLOOD(2, 1200, 26.0F, 2.0F, 15, () -> Ingredient.of(InitItems.LIVING_FLESH.get())),
+
+        MAGIC(1, 1, 1, 2, 0, () -> Ingredient.EMPTY),
+
+        PERMAFROST(3, 2500, 8.0F, 3.0F, 20,
+                () -> Ingredient.of(Items.DIAMOND));
 
         private final int level;
         private final int uses;

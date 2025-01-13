@@ -67,6 +67,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.HANGING_FLESH);
         simpleItem(InitItems.LIVING_FLESH);
         simpleItem(InitItems.FLESHY_BONE);
+        simpleItem(InitItems.PERMAFROST_CORE);
+        simpleItem(InitItems.PERMAFROST_SHARD);
         simpleItem(InitItems.BOREAS_KEY);
 
         simpleItem(InitItems.BLOOD_BUCKET);
@@ -79,6 +81,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         handHeldItem(InitItems.PARASITIC_PICKAXE);
         handHeldItem(InitItems.PARASITIC_AXE);
         handHeldItem(InitItems.PARASITIC_SHOVEL);
+        handHeldItem(InitItems.PERMAFROST_SWORD);
+        handHeldItem(InitItems.PERMAFROST_PICKAXE);
+        handHeldItem(InitItems.PERMAFROST_AXE);
+        handHeldItem(InitItems.PERMAFROST_SHOVEL);
+        handHeldItem(InitItems.PERMAFROST_HOE);
 
         handHeldItem(InitItems.DOUBLE_CAST_SPELL_ITEM);
         handHeldItem(InitItems.TRIPLE_CAST_SPELL_ITEM);
@@ -87,6 +94,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         handHeldItem(InitItems.RANDOM_SHOT_SPELL_ITEM);
         handHeldItem(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM);
         handHeldItem(InitItems.EXPLOSION_SPELL_ITEM);
+        //handHeldItem(InitItems.SUMMON_MAGIC_SWORD_SPELL_ITEM);
+        //handHeldItem(InitItems.MAGIC_SWORD);
 
         spawnEggItem(InitItems.ANKLE_BITER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_WALKER_SPAWN_EGG);
@@ -95,6 +104,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         spawnEggItem(InitItems.ABDOMINAL_SNOWMAN_SPAWN_EGG);
         spawnEggItem(InitItems.KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG);
         spawnEggItem(InitItems.MOOSICLE);
+        spawnEggItem(InitItems.COMPARABLE_SNOWMAN_SPAWN_EGG);
 
         cubeColumn("bloody_bookshelf", BLOODY_BOOKSHELF, BLOODY_WOOD);
         cubeColumn("darkstone_pillar", DARKSTONE_PILLAR_SIDE, DARKSTONE_PILLAR_TOP);

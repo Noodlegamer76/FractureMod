@@ -2,6 +2,7 @@ package com.noodlegamer76.fracture.entity.ai.behavior;
 
 import com.mojang.datafixers.util.Pair;
 import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
+import com.noodlegamer76.fracture.entity.monster.KnowledgeableSnowman;
 import com.noodlegamer76.fracture.spellcrafting.CardHolder;
 import com.noodlegamer76.fracture.spellcrafting.WandCast;
 import com.noodlegamer76.fracture.spellcrafting.spells.CraftedSpells;
@@ -47,6 +48,7 @@ public class KnowledgeableSnowmanSpellCast<E extends MultiAttackMonster> extends
                 CraftedSpells.setWandSpells(new CraftedSpells().getSnowballShotgun(wand, entity), wand);
                 break;
         }
+        entity.attackNumber = 0;
         new WandCast(entity.level(), entity, wand);
     }
 }

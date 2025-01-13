@@ -15,7 +15,12 @@ public class CastState {
     float maxMana;
     float rechargeTime = 0;
     public float inaccuracyMultiplier = 1;
+    public float baseDamage = 1;
     public float damageMultiplier = 1;
+    public float knockbackMultiplier = 1;
+    public float velocity = 1;
+    public int baseKnockback = 1;
+    public boolean hasGravity = true;
     private CardHolder stateSpells = new CardHolder();
     private CardHolder currentSpells = new CardHolder();
     private CardHolder positiveManaSpells = new CardHolder();
@@ -133,8 +138,14 @@ public class CastState {
 
     private void addSpellStats(Spell spell) {
         if (spell instanceof ProjectileSpell projectileSpell) {
+            projectileSpell.getProjectile().setSpell(projectileSpell);
             projectileSpell.inaccuracyMultiplier = inaccuracyMultiplier;
+            projectileSpell.baseDamage = baseDamage;
             projectileSpell.damageMultiplier = damageMultiplier;
+            projectileSpell.baseKnockback = baseKnockback;
+            projectileSpell.knockbackMultiplier = knockbackMultiplier;
+            projectileSpell.velocity = velocity;
+            projectileSpell.hasGravity = hasGravity;
         }
     }
 

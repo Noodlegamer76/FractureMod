@@ -52,6 +52,11 @@ public class InitEntities {
                     .sized(0.7F, 1.9F)
                     .build("knowledgeable_snowman"));
 
+    public static final RegistryObject<EntityType<ComparableSnowman>> COMPARABLE_SNOWMAN = ENTITIES.register("comparable_snowman",
+            () -> EntityType.Builder.of(ComparableSnowman::new, MobCategory.MONSTER)
+                    .sized(0.7F, 1.9F)
+                    .build("comparable_snowman"));
+
     public static final RegistryObject<EntityType<BloodSlimeEntity>> BLOOD_SLIME = ENTITIES.register("blood_slime",
             () -> EntityType.Builder.of(BloodSlimeEntity::new, MobCategory.MONSTER)
                     .sized(2.99F, 2.99F)

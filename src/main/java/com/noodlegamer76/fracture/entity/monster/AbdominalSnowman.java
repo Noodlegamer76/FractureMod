@@ -69,6 +69,10 @@ public class AbdominalSnowman extends Monster implements GeoEntity, SmartBrainOw
     }
 
     @Override
+    public void checkDespawn() {
+    }
+
+    @Override
     public List<? extends ExtendedSensor<? extends AbdominalSnowman>> getSensors() {
         return List.of(
                 new NearbyPlayersSensor<>(),

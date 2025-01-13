@@ -59,6 +59,17 @@ public class InitItems {
     public static final RegistryObject<Item> PARASITIC_SHOVEL = ITEMS.register("parasitic_shovel",
             () -> new ParasiticShovel(ToolTiers.ModItemTier.BLOOD, 1, -2.4F, new Item.Properties()));
 
+    public static final RegistryObject<Item> PERMAFROST_SWORD = ITEMS.register("permafrost_sword",
+            () -> new PermafrostSword(ToolTiers.ModItemTier.BLOOD, 3, -2.4F, new Item.Properties()));
+    public static final RegistryObject<Item> PERMAFROST_PICKAXE = ITEMS.register("permafrost_pickaxe",
+            () -> new PermafrostPickaxe(ToolTiers.ModItemTier.BLOOD,  1, -2.8F, new Item.Properties()));
+    public static final RegistryObject<Item> PERMAFROST_AXE = ITEMS.register("permafrost_axe",
+            () -> new PermafrostAxe(ToolTiers.ModItemTier.BLOOD, 5.0F, -3.0F, new Item.Properties()));
+    public static final RegistryObject<Item> PERMAFROST_SHOVEL = ITEMS.register("permafrost_shovel",
+            () -> new ShovelItem(ToolTiers.ModItemTier.BLOOD, 1.5F, -3.0F, new Item.Properties()));
+    public static final RegistryObject<Item> PERMAFROST_HOE = ITEMS.register("permafrost_hoe",
+            () -> new HoeItem(ToolTiers.ModItemTier.BLOOD, -3, 0.0F, new Item.Properties()));
+
     public static final RegistryObject<Item> WAND = ITEMS.register("wand",
             () -> new Wand(new Item.Properties()));
     public static final RegistryObject<Item> FROZEN_SPELLBOOK = ITEMS.register("frozen_spellbook",
@@ -82,6 +93,12 @@ public class InitItems {
             () -> new GiantSnowballWithTriggerSpellItem(new Item.Properties()));
     public static final RegistryObject<Item> EXPLOSION_SPELL_ITEM = ITEMS.register("explosion_spell",
             () -> new ExplosionSpellItem(new Item.Properties()));
+    public static final RegistryObject<Item> SUMMON_MAGIC_SWORD_SPELL_ITEM = ITEMS.register("summon_magic_sword_spell",
+            () -> new SummonMagicSwordSpellItem(new Item.Properties()));
+
+
+    public static final RegistryObject<Item> MAGIC_SWORD = ITEMS.register("magic_sword",
+            () -> new MagicSword(Tiers.IRON, 3, -2.4F, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
             () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
@@ -99,6 +116,11 @@ public class InitItems {
     public static final RegistryObject<Item> BLOOD_SLIME_BALL = ITEMS.register("blood_slime_ball",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLESHY_BONE = ITEMS.register("fleshy_bone",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> PERMAFROST_CORE = ITEMS.register("permafrost_core",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PERMAFROST_SHARD = ITEMS.register("permafrost_shard",
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> SKYBOX_GENERATOR = ITEMS.register("skybox_generator",
@@ -142,6 +164,8 @@ public class InitItems {
             () -> new ForgeSpawnEggItem(InitEntities.KNOWLEDGEABLE_SNOWMAN, new Color(Color.WHITE.getRGB()).getRGB(), new Color(Color.gray.getRGB()).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> MOOSICLE = ITEMS.register("moosicle_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.MOOSICLE, new Color(0, 80, 203).getRGB(), new Color(42, 8, 3).getRGB(), new Item.Properties()));
+    public static final RegistryObject<Item> COMPARABLE_SNOWMAN_SPAWN_EGG = ITEMS.register("comparable_snowman_spawn_egg",
+            () -> new ForgeSpawnEggItem(InitEntities.COMPARABLE_SNOWMAN, new Color(0, 80, 203).getRGB(), new Color(127, 127, 199).getRGB(), new Item.Properties()));
 
     public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
             () -> new InvertedGlasses(ArmorTiers.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));

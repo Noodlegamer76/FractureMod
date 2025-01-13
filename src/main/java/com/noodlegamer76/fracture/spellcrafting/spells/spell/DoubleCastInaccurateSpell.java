@@ -21,11 +21,6 @@ public class DoubleCastInaccurateSpell extends Spell {
     }
 
     @Override
-    public void preTicker() {
-        triggerCastState.inaccuracyMultiplier += 1f;
-    }
-
-    @Override
     public int draws() {
         return 2;
     }

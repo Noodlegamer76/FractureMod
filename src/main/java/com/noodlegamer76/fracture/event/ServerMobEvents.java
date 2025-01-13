@@ -22,14 +22,13 @@ public class ServerMobEvents {
         event.put(InitEntities.BLOOD_SLIME.get(), BloodSlimeEntity.createAttributes().build());
         event.put(InitEntities.ABDOMINAL_SNOWMAN.get(), AbdominalSnowman.createAttributes().build());
         event.put(InitEntities.KNOWLEDGEABLE_SNOWMAN.get(), KnowledgeableSnowman.createAttributes().build());
+        event.put(InitEntities.COMPARABLE_SNOWMAN.get(), ComparableSnowman.createAttributes().build());
         event.put(InitEntities.MOOSICLE.get(), Cow.createAttributes().build());
     }
 
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            PacketHandler.register();
-        });
+        event.enqueueWork(PacketHandler::register);
     }
 
 

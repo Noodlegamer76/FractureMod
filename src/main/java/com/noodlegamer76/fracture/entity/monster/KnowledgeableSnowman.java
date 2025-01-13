@@ -88,6 +88,10 @@ public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntit
         attackNumber = random.nextInt(1, 3);
     }
 
+    @Override
+    public void checkDespawn() {
+    }
+
     public static AttributeSupplier.Builder  createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.115D)

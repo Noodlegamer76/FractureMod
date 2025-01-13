@@ -13,7 +13,7 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class IceSpikeRenderer extends GeoEntityRenderer<IceSpikeEntity> {
+public class IceSpikeRenderer extends SpellRenderer<IceSpikeEntity> {
     public IceSpikeRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new DefaultedEntityGeoModel<>(new ResourceLocation(FractureMod.MODID, "ice_spike")));
     }

@@ -40,7 +40,7 @@ public class ModRenderTypes extends RenderStateShard{
     );
 
     public static final RenderType SKYBOX = RenderType.create(
-            "test",
+            "skybox",
             DefaultVertexFormat.POSITION,
             VertexFormat.Mode.QUADS,
             100000,

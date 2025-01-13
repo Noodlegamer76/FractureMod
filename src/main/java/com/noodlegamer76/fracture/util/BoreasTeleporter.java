@@ -29,12 +29,22 @@ public class BoreasTeleporter implements ITeleporter {
 
         if (portalPos == null) {
             portalPos = initialPosition;
-            PortalHelper.createPortal(destWorld, portalPos, frameBlock, portalBlock);
+            int[][] portalShape = {
+                    {3, 2, 2, 2, 2, 2, 3},
+                    {0, 1, 1, 1, 1, 1, 0},
+                    {0, 1, 1, 1, 1, 1, 0},
+                    {0, 1, 1, 1, 1, 1, 0},
+                    {0, 1, 1, 1, 1, 1, 0},
+                    {0, 1, 1, 1, 1, 1, 0},
+                    {3, 2, 2, 2, 2, 2, 3},
+            };
+            PortalHelper.createBoreasPortal(destWorld, portalPos, frameBlock, portalBlock, portalShape);
         }
 
-        // Move the entity to the portal position
-        repositionEntity.apply(true).moveTo(portalPos.getX() + 0.5, portalPos.getY() + 1, portalPos.getZ() + 0.5, yaw, entity.getXRot());
-        return repositionEntity.apply(true);
+        Entity repositioned = repositionEntity.apply(true);
+        repositioned.moveTo(portalPos.getX() + 0.5, portalPos.getY() + 3, portalPos.getZ() + 0.5, yaw, entity.getXRot());
+        repositioned.setPortalCooldown();
+        return repositioned;
     }
 
     @Override

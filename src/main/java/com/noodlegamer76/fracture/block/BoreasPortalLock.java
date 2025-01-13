@@ -52,7 +52,7 @@ public class BoreasPortalLock extends Block {
        for (int x = pos.getX() - 2;x <= pos.getX() + 2; x++ ) {
           for (int z = pos.getZ() - 2;z <= pos.getZ() + 2; z++ ) {
               if (x != pos.getX() || z != pos.getZ()) {
-                  level.setBlock(new BlockPos(x, pos.getY(), z), InitBlocks.VOID_BLOCK.get().defaultBlockState(), 2);
+                  level.setBlock(new BlockPos(x, pos.getY(), z), InitBlocks.BOREAS_PORTAL.get().defaultBlockState(), 2);
               }
           }
        }
