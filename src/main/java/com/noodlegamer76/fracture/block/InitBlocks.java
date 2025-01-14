@@ -82,6 +82,8 @@ public class InitBlocks {
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED)));
     public static final RegistryObject<Block> FLESH_WALL = BLOCKS.register("flesh_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED)));
+    public static final RegistryObject<Block> PRISON_BARS = BLOCKS.register("prison_bars",
+            () -> new PrisonBars(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED)));
 
     //Darkstone
     public static final RegistryObject<Block> DARKSTONE = BLOCKS.register("darkstone",

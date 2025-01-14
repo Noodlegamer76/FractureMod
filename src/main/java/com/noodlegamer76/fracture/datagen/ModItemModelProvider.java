@@ -39,6 +39,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        simpleItem(InitItems.PRISON_BARS);
 
         stairsItem(InitBlocks.FLESH_STAIRS, FLESH_BLOCK);
         slabItem(InitBlocks.FLESH_SLAB, FLESH_BLOCK);

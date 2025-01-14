@@ -93,7 +93,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
                         InitBlocks.SMOKE_STACK.get(),
                         InitBlocks.VOID_BLOCK.get(),
                         InitBlocks.ICE_CRYSTAL_BLOCK.get(),
-                        InitBlocks.RADIANT_ICE.get()
+                        InitBlocks.RADIANT_ICE.get(),
+                        InitBlocks.PRISON_BARS.get()
                         );
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)

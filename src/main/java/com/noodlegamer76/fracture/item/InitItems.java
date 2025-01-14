@@ -47,6 +47,8 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.ICE_CRYSTAL_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> RADIANT_ICE = ITEMS.register("radiant_ice",
             () -> new BlockItem(InitBlocks.RADIANT_ICE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PRISON_BARS = ITEMS.register("prison_bars",
+            () -> new BlockItem(InitBlocks.PRISON_BARS.get(), new Item.Properties()));
 
 
 

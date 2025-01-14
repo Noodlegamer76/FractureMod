@@ -100,6 +100,7 @@ public class FractureTab {
             event.accept(InitItems.PERMAFROST);
             event.accept(InitItems.ICE_CRYSTAL_BLOCK);
             event.accept(InitItems.RADIANT_ICE);
+            event.accept(InitItems.PRISON_BARS);
             event.accept(InitItems.FROZEN_GRASS);
 
 

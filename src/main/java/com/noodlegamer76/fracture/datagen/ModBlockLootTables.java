@@ -25,6 +25,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.FLESH_BLOCK.get());
         dropSelf(InitBlocks.FLESH_STAIRS.get());
         dropSelf(InitBlocks.FLESH_WALL.get());
+        dropSelf(InitBlocks.PRISON_BARS.get());
         this.add(InitBlocks.FLESH_SLAB.get(),
                 block -> createSlabItemTable(InitBlocks.FLESH_SLAB.get()));
 

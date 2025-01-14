@@ -20,6 +20,7 @@
     "fracture:smoke_stack",
     "fracture:void_block",
     "fracture:ice_crystal_block",
-    "fracture:radiant_ice"
+    "fracture:radiant_ice",
+    "fracture:prison_bars"
   ]
 }

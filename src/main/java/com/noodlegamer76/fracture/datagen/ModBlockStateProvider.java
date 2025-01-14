@@ -2,6 +2,7 @@ package com.noodlegamer76.fracture.datagen;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.block.PrisonBars;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -30,7 +31,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        //write here to generate models
+        paneBlockWithRenderType(
+                (IronBarsBlock) InitBlocks.PRISON_BARS.get(),
+                new ResourceLocation(FractureMod.MODID, "block/prison_bars"),
+                new ResourceLocation(FractureMod.MODID, "block/prison_bars"),
+                "cutout"
+        );
 
         blockWithItem(InitBlocks.FLESH_BLOCK);
         stairsBlock((StairBlock) InitBlocks.FLESH_STAIRS.get(), FLESH_BLOCK);
