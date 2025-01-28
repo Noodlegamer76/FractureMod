@@ -3,6 +3,9 @@ package com.noodlegamer76.fracture.datagen;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
+import com.noodlegamer76.fracture.util.registryutils.BlockSet;
+import com.noodlegamer76.fracture.util.registryutils.BlockWithItem;
+import com.noodlegamer76.fracture.util.registryutils.SimpleStoneSet;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -12,6 +15,8 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import static com.noodlegamer76.fracture.datagen.DataGenerators.BLOCKS;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public static final ResourceLocation FLESH_BLOCK = new ResourceLocation(FractureMod.MODID, "block/flesh_block");
@@ -39,7 +44,18 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        for (BlockSet itemSet: BLOCKS) {
+            if (itemSet instanceof SimpleStoneSet set) {
+                ResourceLocation location = set.block.block.getId().withPrefix("block/");
+                stairsItem(set.stairs.block, location);
+                slabItem(set.slab.block, location);
+                wallItem(set.wall.block, location);
+            }
+        }
+
+
         simpleItem(InitItems.PRISON_BARS);
+        simpleItem(InitItems.RUSTY_IRON_BARS);
 
         stairsItem(InitBlocks.FLESH_STAIRS, FLESH_BLOCK);
         slabItem(InitBlocks.FLESH_SLAB, FLESH_BLOCK);

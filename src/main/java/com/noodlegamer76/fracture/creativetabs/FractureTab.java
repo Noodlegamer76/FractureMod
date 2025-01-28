@@ -1,6 +1,10 @@
 package com.noodlegamer76.fracture.creativetabs;
 
+import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.datagen.DataGenerators;
 import com.noodlegamer76.fracture.item.InitItems;
+import com.noodlegamer76.fracture.util.registryutils.BlockSet;
+import com.noodlegamer76.fracture.util.registryutils.BlockWithItem;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -97,11 +101,19 @@ public class FractureTab {
             event.accept(InitItems.INKWOOD_SAPLING);
             event.accept(InitItems.INKWOOD_LEAVES);
 
+            for (BlockSet set: DataGenerators.BLOCKS) {
+                for (BlockWithItem block: set.blockList) {
+                    event.accept(block.getBlock());
+                }
+            }
+
             event.accept(InitItems.PERMAFROST);
             event.accept(InitItems.ICE_CRYSTAL_BLOCK);
             event.accept(InitItems.RADIANT_ICE);
             event.accept(InitItems.PRISON_BARS);
+            event.accept(InitItems.RUSTY_IRON_BARS);
             event.accept(InitItems.FROZEN_GRASS);
+            event.accept(InitBlocks.METAL_GRATE.getItem());
 
 
             event.accept(InitItems.WAND);

@@ -2,10 +2,13 @@ package com.noodlegamer76.fracture.datagen;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.item.InitItems;
+import com.noodlegamer76.fracture.util.registryutils.BlockSet;
+import com.noodlegamer76.fracture.util.registryutils.SimpleStoneSet;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -26,6 +29,16 @@ public class ModItemTagGenerator extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
 
+        for (BlockSet blockSet: DataGenerators.BLOCKS) {
+            if (blockSet instanceof SimpleStoneSet set) {
+                this.tag(ItemTags.STAIRS)
+                        .add(set.stairs.getItem());
+                this.tag(ItemTags.SLABS)
+                        .add(set.slab.getItem());
+                this.tag(ItemTags.WALLS)
+                        .add(set.wall.getItem());
+            }
+        }
 
         //example for adding items to tags, check ModItemTagGenerator to see how to make your own tag
         this.tag(ItemTags.WALLS)

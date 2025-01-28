@@ -1,5 +1,8 @@
 {
   "values": [
+    "fracture:snow_brick_wall",
+    "fracture:metal_sheet_wall",
+    "fracture:slag_wall",
     "fracture:flesh_wall",
     "fracture:fleshy_darkstone_brick_wall",
     "fracture:darkstone_brick_wall",

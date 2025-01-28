@@ -22,7 +22,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.awt.*;
-import java.awt.color.ColorSpace;
 
 public class InitItems {
 
@@ -49,7 +48,8 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.RADIANT_ICE.get(), new Item.Properties()));
     public static final RegistryObject<Item> PRISON_BARS = ITEMS.register("prison_bars",
             () -> new BlockItem(InitBlocks.PRISON_BARS.get(), new Item.Properties()));
-
+    public static final RegistryObject<Item> RUSTY_IRON_BARS = ITEMS.register("rusty_iron_bars",
+            () -> new BlockItem(InitBlocks.RUSTY_IRON_BARS.get(), new Item.Properties()));
 
 
     public static final RegistryObject<Item> PARASITIC_SWORD = ITEMS.register("parasitic_sword",
@@ -62,15 +62,15 @@ public class InitItems {
             () -> new ParasiticShovel(ToolTiers.ModItemTier.BLOOD, 1, -2.4F, new Item.Properties()));
 
     public static final RegistryObject<Item> PERMAFROST_SWORD = ITEMS.register("permafrost_sword",
-            () -> new PermafrostSword(ToolTiers.ModItemTier.BLOOD, 3, -2.4F, new Item.Properties()));
+            () -> new PermafrostSword(ToolTiers.ModItemTier.PERMAFROST, 3, -2.4F, new Item.Properties()));
     public static final RegistryObject<Item> PERMAFROST_PICKAXE = ITEMS.register("permafrost_pickaxe",
-            () -> new PermafrostPickaxe(ToolTiers.ModItemTier.BLOOD,  1, -2.8F, new Item.Properties()));
+            () -> new PermafrostPickaxe(ToolTiers.ModItemTier.PERMAFROST, 1, -2.8F, new Item.Properties()));
     public static final RegistryObject<Item> PERMAFROST_AXE = ITEMS.register("permafrost_axe",
-            () -> new PermafrostAxe(ToolTiers.ModItemTier.BLOOD, 5.0F, -3.0F, new Item.Properties()));
+            () -> new PermafrostAxe(ToolTiers.ModItemTier.PERMAFROST, 5.0F, -3.0F, new Item.Properties()));
     public static final RegistryObject<Item> PERMAFROST_SHOVEL = ITEMS.register("permafrost_shovel",
-            () -> new ShovelItem(ToolTiers.ModItemTier.BLOOD, 1.5F, -3.0F, new Item.Properties()));
+            () -> new ShovelItem(ToolTiers.ModItemTier.PERMAFROST, 1.5F, -3.0F, new Item.Properties()));
     public static final RegistryObject<Item> PERMAFROST_HOE = ITEMS.register("permafrost_hoe",
-            () -> new HoeItem(ToolTiers.ModItemTier.BLOOD, -3, 0.0F, new Item.Properties()));
+            () -> new HoeItem(ToolTiers.ModItemTier.PERMAFROST, -3, 0.0F, new Item.Properties()));
 
     public static final RegistryObject<Item> WAND = ITEMS.register("wand",
             () -> new Wand(new Item.Properties()));
@@ -150,7 +150,7 @@ public class InitItems {
 
     public static final RegistryObject<Item> ICE_CREAM = ITEMS.register("ice_cream",
             () -> new Item(new Item.Properties()
-            .food(new FoodProperties.Builder().nutrition(4).saturationMod(6).build()).stacksTo(16)));
+                    .food(new FoodProperties.Builder().nutrition(4).saturationMod(6).build()).stacksTo(16)));
 
     public static final RegistryObject<Item> ANKLE_BITER_SPAWN_EGG = ITEMS.register("ankle_biter_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.ANKLE_BITER, new Color(74, 10, 3).getRGB(), new Color(74, 3, 3).getRGB(), new Item.Properties()));
@@ -250,7 +250,7 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.BLOODY_BOOKSHELF.get(), new Item.Properties()));
     public static final RegistryObject<Item> INTESTINE = ITEMS.register("intestine",
             () -> new BlockItem(InitBlocks.INTESTINE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> HANGING_FLESH  = ITEMS.register("hanging_flesh",
+    public static final RegistryObject<Item> HANGING_FLESH = ITEMS.register("hanging_flesh",
             () -> new BlockItem(InitBlocks.HANGING_FLESH.get(), new Item.Properties()));
 
 
@@ -258,7 +258,7 @@ public class InitItems {
             () -> new BucketItem(InitFluids.SOURCE_BLOOD,
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
-    public static final RegistryObject<Item> INKWOOD_LOG_ITEM = ITEMS.register( "inkwood_log",
+    public static final RegistryObject<Item> INKWOOD_LOG_ITEM = ITEMS.register("inkwood_log",
             () -> new BlockItem(InitBlocks.INKWOOD_LOG_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> INKWOOD_WOOD_ITEM = ITEMS.register("inkwood_wood",
             () -> new BlockItem(InitBlocks.INKWOOD_WOOD_BLOCK.get(), new Item.Properties()));
@@ -293,7 +293,7 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.INKWOOD_PRESSURE_PLATE_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> INKWOOD_BOAT_ITEM = ITEMS.register("inkwood_boat",
-            () -> new ModBoatItem(false, ModBoatEntity.Type.INKWOOD , new Item.Properties()));
+            () -> new ModBoatItem(false, ModBoatEntity.Type.INKWOOD, new Item.Properties()));
     public static final RegistryObject<Item> INKWOOD_CHEST_BOAT_ITEM = ITEMS.register("inkwood_chest_boat",
             () -> new ModBoatItem(true, ModBoatEntity.Type.INKWOOD, new Item.Properties()));
 

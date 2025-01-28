@@ -1,0 +1,6 @@
+{
+  "parent": "fracture:item/stairs",
+  "textures": {
+    "stairs": "fracture:block/slag"
+  }
+}

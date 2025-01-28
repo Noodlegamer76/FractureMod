@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "category": "blocks",
+  "ingredient": {
+    "item": "minecraft:iron_bars"
+  },
+  "result": "fracture:rusty_iron_bars",
+  "count": 1
+}

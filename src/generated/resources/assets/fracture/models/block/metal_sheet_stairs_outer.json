@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "fracture:block/metal_sheet",
+    "side": "fracture:block/metal_sheet",
+    "top": "fracture:block/metal_sheet"
+  }
+}

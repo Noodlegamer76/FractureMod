@@ -5,8 +5,10 @@ import com.noodlegamer76.fracture.block.signs.ModHangingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModStandingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModWallHangingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModWallSignBlock;
-import com.noodlegamer76.fracture.util.ModWoodTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
+import com.noodlegamer76.fracture.util.ModWoodTypes;
+import com.noodlegamer76.fracture.util.registryutils.BlockWithItem;
+import com.noodlegamer76.fracture.util.registryutils.SimpleStoneSet;
 import com.noodlegamer76.fracture.worldgen.tree.InkwoodTreeGrower;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.*;
@@ -22,6 +24,11 @@ import net.minecraftforge.registries.RegistryObject;
 public class InitBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FractureMod.MODID);
+
+    public static final SimpleStoneSet SNOW_BRICK = new SimpleStoneSet("snow_brick", BlockBehaviour.Properties.copy(Blocks.DIRT).sound(SoundType.SNOW));
+    public static final SimpleStoneSet METAL_SHEET = new SimpleStoneSet("metal_sheet", BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));
+    public static final SimpleStoneSet SLAG = new SimpleStoneSet("slag", BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));
+    public static final BlockWithItem METAL_GRATE = new BlockWithItem("metal_grate", () -> new HalfTransparentBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
     public static final RegistryObject<Block> FROZEN_GRASS = BLOCKS.register("frozen_grass",
             () -> new FrozenGrass(BlockBehaviour.Properties.copy(Blocks.GRASS)));
@@ -83,7 +90,9 @@ public class InitBlocks {
     public static final RegistryObject<Block> FLESH_WALL = BLOCKS.register("flesh_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED)));
     public static final RegistryObject<Block> PRISON_BARS = BLOCKS.register("prison_bars",
-            () -> new PrisonBars(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED)));
+            () -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BARS).mapColor(DyeColor.RED)));
+    public static final RegistryObject<Block> RUSTY_IRON_BARS = BLOCKS.register("rusty_iron_bars",
+            () -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BARS).mapColor(DyeColor.RED)));
 
     //Darkstone
     public static final RegistryObject<Block> DARKSTONE = BLOCKS.register("darkstone",

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "fracture:block/slag_slab"
+    },
+    "type=double": {
+      "model": "fracture:block/slag"
+    },
+    "type=top": {
+      "model": "fracture:block/slag_slab_top"
+    }
+  }
+}

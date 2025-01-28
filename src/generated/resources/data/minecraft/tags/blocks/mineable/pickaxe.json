@@ -21,6 +21,16 @@
     "fracture:void_block",
     "fracture:ice_crystal_block",
     "fracture:radiant_ice",
-    "fracture:prison_bars"
+    "fracture:prison_bars",
+    "fracture:rusty_iron_bars",
+    "fracture:metal_grate",
+    "fracture:metal_sheet",
+    "fracture:metal_sheet_stairs",
+    "fracture:metal_sheet_slab",
+    "fracture:metal_sheet_wall",
+    "fracture:slag",
+    "fracture:slag_stairs",
+    "fracture:slag_slab",
+    "fracture:slag_wall"
   ]
 }

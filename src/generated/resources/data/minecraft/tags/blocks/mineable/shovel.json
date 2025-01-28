@@ -1,5 +1,9 @@
 {
   "values": [
-    "fracture:permafrost"
+    "fracture:permafrost",
+    "fracture:snow_brick",
+    "fracture:snow_brick_stairs",
+    "fracture:snow_brick_slab",
+    "fracture:snow_brick_wall"
   ]
 }

@@ -24,6 +24,7 @@ public class ServerMobEvents {
         event.put(InitEntities.KNOWLEDGEABLE_SNOWMAN.get(), KnowledgeableSnowman.createAttributes().build());
         event.put(InitEntities.COMPARABLE_SNOWMAN.get(), ComparableSnowman.createAttributes().build());
         event.put(InitEntities.MOOSICLE.get(), Cow.createAttributes().build());
+        event.put(InitEntities.GIANT_ROBOT.get(), GiantRobot.createAttributes().build());
     }
 
     @SubscribeEvent

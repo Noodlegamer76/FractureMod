@@ -1,8 +1,9 @@
 {
-  "type": "minecraft:smelting",
+  "type": "minecraft:stonecutting",
   "category": "blocks",
   "ingredient": {
     "item": "minecraft:iron_bars"
   },
-  "result": "fracture:prison_bars"
+  "result": "fracture:prison_bars",
+  "count": 1
 }

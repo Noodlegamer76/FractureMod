@@ -4,6 +4,7 @@ import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.animal.Moosicle;
 import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
 import com.noodlegamer76.fracture.entity.monster.*;
+import com.noodlegamer76.fracture.entity.projectile.ExplosiveBox;
 import com.noodlegamer76.fracture.entity.projectile.GiantSnowballProjectile;
 import com.noodlegamer76.fracture.entity.projectile.IceSpikeEntity;
 import com.noodlegamer76.fracture.entity.projectile.VoidBall;
@@ -98,4 +99,14 @@ public class InitEntities {
                     .sized(0.9F, 1.4F)
                     .clientTrackingRange(10)
                     .build("moosicle"));
+
+    public static final RegistryObject<EntityType<GiantRobot>> GIANT_ROBOT = ENTITIES.register(("giant_robot"),
+            () -> EntityType.Builder.<GiantRobot>of(GiantRobot::new, MobCategory.MONSTER)
+                    .sized(1.25F, 3F)
+                    .build("giant_robot"));
+
+    public static final RegistryObject<EntityType<ExplosiveBox>> EXPLOSIVE_BOX = ENTITIES.register(("explosive_box"),
+            () -> EntityType.Builder.of(ExplosiveBox::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .build("explosive_box"));
 }

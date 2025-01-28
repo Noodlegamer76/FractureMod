@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "fracture:block/metal_sheet_slab"
+    },
+    "type=double": {
+      "model": "fracture:block/metal_sheet"
+    },
+    "type=top": {
+      "model": "fracture:block/metal_sheet_slab_top"
+    }
+  }
+}

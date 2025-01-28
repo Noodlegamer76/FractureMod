@@ -2,17 +2,16 @@ package com.noodlegamer76.fracture.datagen;
 
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
+import com.noodlegamer76.fracture.util.registryutils.BlockSet;
+import com.noodlegamer76.fracture.util.registryutils.SimpleStoneSet;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import java.util.function.Consumer;
@@ -26,9 +25,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+        for (BlockSet blockSet: DataGenerators.BLOCKS) {
+            if (blockSet instanceof SimpleStoneSet set) {
+                stairs(pWriter, set.stairs.getItem(), set.block.getItem());
+                slab(pWriter, RecipeCategory.BUILDING_BLOCKS, set.slab.getItem(), set.block.getItem());
+                wall(pWriter, RecipeCategory.BUILDING_BLOCKS, set.wall.getItem(), set.block.getItem());
+            }
+        }
 
         //example for making a recipe
         // planksFromLogs(pWriter, ItemInit.RAINBOW_PLANKS.get(), ModTags.Items.RAINBOW_WOOD, 4);
+
+        polished(pWriter, RecipeCategory.BUILDING_BLOCKS, InitBlocks.SNOW_BRICK.block.getItem(), Items.SNOW_BLOCK);
+        polished(pWriter, RecipeCategory.BUILDING_BLOCKS, InitBlocks.SLAG.block.getItem(), InitBlocks.METAL_SHEET.getBlock());
 
         //Darkstone
         surroundWith8(pWriter, Items.COAL, Items.STONE, InitItems.DARKSTONE.get());

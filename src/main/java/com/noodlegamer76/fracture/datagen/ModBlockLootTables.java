@@ -2,6 +2,8 @@ package com.noodlegamer76.fracture.datagen;
 
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
+import com.noodlegamer76.fracture.util.registryutils.BlockSet;
+import com.noodlegamer76.fracture.util.registryutils.SimpleStoneSet;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
@@ -18,14 +20,24 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        for (BlockSet blockSet: DataGenerators.BLOCKS) {
+            if (blockSet instanceof SimpleStoneSet set) {
+                dropSelf(set.getBlock());
+                dropSelf(set.getStairs());
+                dropSelf(set.getSlab());
+                dropSelf(set.getWall());
+            }
+        }
 
         //some examples for blocks that don't seem to work by normally using the methods
         //all blocks need to be set here due to how ModLootTableProvider is set up
 
+        dropSelf(InitBlocks.METAL_GRATE.getBlock());
         dropSelf(InitBlocks.FLESH_BLOCK.get());
         dropSelf(InitBlocks.FLESH_STAIRS.get());
         dropSelf(InitBlocks.FLESH_WALL.get());
         dropSelf(InitBlocks.PRISON_BARS.get());
+        dropSelf(InitBlocks.RUSTY_IRON_BARS.get());
         this.add(InitBlocks.FLESH_SLAB.get(),
                 block -> createSlabItemTable(InitBlocks.FLESH_SLAB.get()));
 
@@ -113,7 +125,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.INKWOOD_SAPLING.get());
 
         this.add(InitBlocks.INWKOOD_LEAVES.get(), (block) ->
-                createLeavesDrops(block, InitBlocks.INWKOOD_LEAVES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+                createLeavesDrops(block, InitBlocks.INKWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
         dropSelf(InitBlocks.BOREAS_PORTAL_LOCK.get());
         dropSelf(InitBlocks.BOREAS_PORTAL_FRAME.get());

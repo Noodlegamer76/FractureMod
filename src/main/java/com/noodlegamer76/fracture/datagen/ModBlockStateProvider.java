@@ -2,7 +2,8 @@ package com.noodlegamer76.fracture.datagen;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
-import com.noodlegamer76.fracture.block.PrisonBars;
+import com.noodlegamer76.fracture.util.registryutils.BlockSet;
+import com.noodlegamer76.fracture.util.registryutils.SimpleStoneSet;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -31,10 +32,28 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        for (BlockSet blockSet: DataGenerators.BLOCKS) {
+            if (blockSet instanceof SimpleStoneSet set) {
+                ResourceLocation location = set.block.block.getId().withPrefix("block/");
+                blockWithItem(set.block.block);
+                stairsBlock(set.getStairs(), location);
+                slabBlock(set.getSlab(), location, location);
+                wallBlock(set.getWall(), location);
+            }
+        }
+
+        cutoutWithItem(InitBlocks.METAL_GRATE.block);
+
         paneBlockWithRenderType(
                 (IronBarsBlock) InitBlocks.PRISON_BARS.get(),
                 new ResourceLocation(FractureMod.MODID, "block/prison_bars"),
                 new ResourceLocation(FractureMod.MODID, "block/prison_bars"),
+                "cutout"
+        );
+        paneBlockWithRenderType(
+                (IronBarsBlock) InitBlocks.RUSTY_IRON_BARS.get(),
+                new ResourceLocation(FractureMod.MODID, "block/rusty_iron_bars"),
+                new ResourceLocation(FractureMod.MODID, "block/rusty_iron_bars"),
                 "cutout"
         );
 
@@ -143,6 +162,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void cutout(RegistryObject<Block> blockRegistryObject) {
         simpleBlock(blockRegistryObject.get(),
+                models().cubeAll(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("cutout"));
+    }
+    private void cutoutWithItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(),
                 models().cubeAll(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("cutout"));
     }
     private void cubeColumn(RegistryObject<Block> blockRegistryObject, ResourceLocation side, ResourceLocation top) {

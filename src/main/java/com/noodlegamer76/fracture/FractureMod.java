@@ -2,28 +2,27 @@ package com.noodlegamer76.fracture;
 
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
-import com.noodlegamer76.fracture.client.renderers.entity.block.*;
-import com.noodlegamer76.fracture.gui.WandOverlay;
 import com.noodlegamer76.fracture.client.renderers.entity.*;
-import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderMenu;
-import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderScreen;
-import com.noodlegamer76.fracture.gui.modificationstation.ModificationStationScreen;
-import com.noodlegamer76.fracture.gui.wand.WandMenu;
-import com.noodlegamer76.fracture.gui.wand.WandScreen;
-import com.noodlegamer76.fracture.particles.ConfettiParticle;
-import com.noodlegamer76.fracture.particles.VoidParticle;
-import com.noodlegamer76.fracture.util.ModWoodTypes;
+import com.noodlegamer76.fracture.client.renderers.entity.block.*;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
+import com.noodlegamer76.fracture.datagen.DataGenerators;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
 import com.noodlegamer76.fracture.fluid.InitFluidTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.gui.InitMenus;
+import com.noodlegamer76.fracture.gui.WandOverlay;
+import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderScreen;
+import com.noodlegamer76.fracture.gui.modificationstation.ModificationStationScreen;
 import com.noodlegamer76.fracture.gui.skyboxgenerator.SkyboxGeneratorScreen;
+import com.noodlegamer76.fracture.gui.wand.WandScreen;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.BloodParticle;
+import com.noodlegamer76.fracture.particles.ConfettiParticle;
 import com.noodlegamer76.fracture.particles.InitParticles;
+import com.noodlegamer76.fracture.particles.VoidParticle;
+import com.noodlegamer76.fracture.util.ModWoodTypes;
 import com.noodlegamer76.fracture.worldgen.features.InitFeatures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -83,6 +82,7 @@ public class FractureMod
         InitMenus.MENU_TYPES.register(modEventBus);
         InitFeatures.FEATURES.register(modEventBus);
 
+
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(new FractureTab());
 
@@ -91,6 +91,8 @@ public class FractureMod
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        DataGenerators.registerBaseBlocksWithItems();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -143,6 +145,7 @@ public class FractureMod
             });
         }
 
+
         @SubscribeEvent
         public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(ModBoatRenderer.INKWOOD_BOAT_LAYER, BoatModel::createBodyModel);
@@ -165,6 +168,8 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.COMPARABLE_SNOWMAN.get(), ComparableSnowmanRenderer::new);
             event.registerEntityRenderer(InitEntities.ICE_SPIKE.get(), IceSpikeRenderer::new);
             event.registerEntityRenderer(InitEntities.MOOSICLE.get(), MoosicleRenderer::new);
+            event.registerEntityRenderer(InitEntities.GIANT_ROBOT.get(), GiantRobotRenderer::new);
+            event.registerEntityRenderer(InitEntities.EXPLOSIVE_BOX.get(), ExplosiveBoxRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);

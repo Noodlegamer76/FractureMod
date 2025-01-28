@@ -391,9 +391,33 @@
                 "secondary_depth_range": 0
               },
               "then_run": {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "minecraft:snow_block"
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:y_above",
+                  "anchor": {
+                    "above_bottom": 8
+                  },
+                  "surface_depth_multiplier": 1,
+                  "add_stone_depth": false
+                },
+                "then_run": {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:vertical_gradient",
+                    "random_name": "minecraft:deepslate",
+                    "true_at_and_below": {
+                      "below_top": 8
+                    },
+                    "false_at_and_above": {
+                      "above_bottom": 0
+                    }
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "minecraft:snow_block"
+                    }
+                  }
                 }
               }
             }
@@ -413,7 +437,7 @@
             "then_run": {
               "type": "minecraft:block",
               "result_state": {
-                "Name": "minecraft:deepslate",
+                "Name": "fracture:darkstone",
                 "Properties": {
                   "axis": "y"
                 }

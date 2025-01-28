@@ -2,17 +2,17 @@ package com.noodlegamer76.fracture.datagen;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.util.registryutils.BlockSet;
+import com.noodlegamer76.fracture.util.registryutils.SimpleStoneSet;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ForgeBlockTagsProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -26,6 +26,16 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
 
+        for (BlockSet blockSet: DataGenerators.BLOCKS) {
+            if (blockSet instanceof SimpleStoneSet set) {
+                this.tag(BlockTags.STAIRS)
+                        .add(set.getStairs());
+                this.tag(BlockTags.SLABS)
+                        .add(set.getSlab());
+                this.tag(BlockTags.WALLS)
+                        .add(set.getWall());
+            }
+        }
 
         // How to add a custom tag, use BlockTags for normal tags
         this.tag(BlockTags.STAIRS)
@@ -94,7 +104,17 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
                         InitBlocks.VOID_BLOCK.get(),
                         InitBlocks.ICE_CRYSTAL_BLOCK.get(),
                         InitBlocks.RADIANT_ICE.get(),
-                        InitBlocks.PRISON_BARS.get()
+                        InitBlocks.PRISON_BARS.get(),
+                        InitBlocks.RUSTY_IRON_BARS.get(),
+                        InitBlocks.METAL_GRATE.getBlock(),
+                        InitBlocks.METAL_SHEET.getBlock(),
+                        InitBlocks.METAL_SHEET.getStairs(),
+                        InitBlocks.METAL_SHEET.getSlab(),
+                        InitBlocks.METAL_SHEET.getWall(),
+                        InitBlocks.SLAG.getBlock(),
+                        InitBlocks.SLAG.getStairs(),
+                        InitBlocks.SLAG.getSlab(),
+                        InitBlocks.SLAG.getWall()
                         );
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)
@@ -131,7 +151,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(
-                        InitBlocks.PERMAFROST.get()
+                        InitBlocks.PERMAFROST.get(),
+                        InitBlocks.SNOW_BRICK.getBlock(),
+                        InitBlocks.SNOW_BRICK.getStairs(),
+                        InitBlocks.SNOW_BRICK.getSlab(),
+                        InitBlocks.SNOW_BRICK.getWall()
                 );
 
         this.tag(Tags.Blocks.STONE)
