@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "fracture:block/lightly_cracked_plated_brick"
+  }
+}

@@ -28,6 +28,9 @@ public class InitBlocks {
     public static final SimpleStoneSet SNOW_BRICK = new SimpleStoneSet("snow_brick", BlockBehaviour.Properties.copy(Blocks.DIRT).sound(SoundType.SNOW));
     public static final SimpleStoneSet METAL_SHEET = new SimpleStoneSet("metal_sheet", BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));
     public static final SimpleStoneSet SLAG = new SimpleStoneSet("slag", BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));
+    public static final SimpleStoneSet PLATED_BRICKS = new SimpleStoneSet("plated_brick", BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));
+    public static final SimpleStoneSet LIGHTLY_CRACKED_PLATED_BRICKS = new SimpleStoneSet("lightly_cracked_plated_brick", BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));
+    public static final SimpleStoneSet HEAVILY_CRACKED_PLATED_BRICKS = new SimpleStoneSet("heavily_cracked_plated_brick", BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));
     public static final BlockWithItem METAL_GRATE = new BlockWithItem("metal_grate", () -> new HalfTransparentBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
     public static final RegistryObject<Block> FROZEN_GRASS = BLOCKS.register("frozen_grass",

@@ -31,6 +31,18 @@
     "fracture:slag",
     "fracture:slag_stairs",
     "fracture:slag_slab",
-    "fracture:slag_wall"
+    "fracture:slag_wall",
+    "fracture:plated_brick",
+    "fracture:plated_brick_stairs",
+    "fracture:plated_brick_slab",
+    "fracture:plated_brick_wall",
+    "fracture:lightly_cracked_plated_brick",
+    "fracture:lightly_cracked_plated_brick_stairs",
+    "fracture:lightly_cracked_plated_brick_slab",
+    "fracture:lightly_cracked_plated_brick_wall",
+    "fracture:heavily_cracked_plated_brick",
+    "fracture:heavily_cracked_plated_brick_stairs",
+    "fracture:heavily_cracked_plated_brick_slab",
+    "fracture:heavily_cracked_plated_brick_wall"
   ]
 }

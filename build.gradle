@@ -141,23 +141,23 @@ dependencies {
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-1.20.1:1.15")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    minecraftLibrary("io.github.spair:imgui-java-binding:${imgui_version}")
-    minecraftLibrary("io.github.spair:imgui-java-lwjgl3:${imgui_version}") {
-        exclude group: "org.lwjgl"
-    }
-    minecraftLibrary("io.github.spair:imgui-java-natives-linux:${imgui_version}")
-    minecraftLibrary("io.github.spair:imgui-java-natives-macos:${imgui_version}")
-    minecraftLibrary("io.github.spair:imgui-java-natives-windows:${imgui_version}")
-    minecraftLibrary("io.github.spair:imgui-java-app:${imgui_version}") {
-        exclude group: "org.lwjgl"
-    }
-
-    jarJar("io.github.spair:imgui-java-binding:${imgui_version}")
-    jarJar("io.github.spair:imgui-java-lwjgl3:${imgui_version}")
-    jarJar("io.github.spair:imgui-java-natives-linux:${imgui_version}")
-    jarJar("io.github.spair:imgui-java-natives-macos:${imgui_version}")
-    jarJar("io.github.spair:imgui-java-natives-windows:${imgui_version}")
-    jarJar("io.github.spair:imgui-java-app:${imgui_version}")
+    //minecraftLibrary("io.github.spair:imgui-java-binding:${imgui_version}")
+    //minecraftLibrary("io.github.spair:imgui-java-lwjgl3:${imgui_version}") {
+    //    exclude group: "org.lwjgl"
+    //}
+    //minecraftLibrary("io.github.spair:imgui-java-natives-linux:${imgui_version}")
+    //minecraftLibrary("io.github.spair:imgui-java-natives-macos:${imgui_version}")
+    //minecraftLibrary("io.github.spair:imgui-java-natives-windows:${imgui_version}")
+    //minecraftLibrary("io.github.spair:imgui-java-app:${imgui_version}") {
+    //    exclude group: "org.lwjgl"
+    //}
+//
+    //jarJar("io.github.spair:imgui-java-binding:${imgui_version}")
+    //jarJar("io.github.spair:imgui-java-lwjgl3:${imgui_version}")
+    //jarJar("io.github.spair:imgui-java-natives-linux:${imgui_version}")
+    //jarJar("io.github.spair:imgui-java-natives-macos:${imgui_version}")
+    //jarJar("io.github.spair:imgui-java-natives-windows:${imgui_version}")
+    //jarJar("io.github.spair:imgui-java-app:${imgui_version}")
 
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.

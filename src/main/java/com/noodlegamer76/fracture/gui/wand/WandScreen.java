@@ -3,7 +3,6 @@ package com.noodlegamer76.fracture.gui.wand;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.gui.wand.widgets.WandInvPanel;
 import com.noodlegamer76.fracture.gui.wand.widgets.WandStatsWidget;
-import com.noodlegamer76.fracture.mixin.MixinSlot;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -14,7 +13,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
 public class WandScreen extends AbstractContainerScreen<WandMenu> {
@@ -106,7 +104,7 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
                 widthThird,
                 (int) ((double) imageHeight / 2 - smallGapTop * 1.5));
 
-        for (int i = 0; i < 36 + menu.customSlots.size(); i++) {
+        for (int i = 0; i < menu.slots.size(); i++) {
             Slot slot = this.menu.getSlot(i);
             final int x = leftPos + slot.x - 1;
             final int y = topPos + slot.y - 1;
@@ -153,32 +151,20 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
         int widthOffset = slotAreaWidth % 18 / 2;
         int heightOffset = slotAreaHeight % 18 / 2;
 
-        try {
-            Field xField = Slot.class.getDeclaredField("x");
-            Field yField = Slot.class.getDeclaredField("y");
-            xField.setAccessible(true);
-            yField.setAccessible(true);
+        int slotsSet = 0;
+        for (int row = 0; row < slotsY; row++) {
+            for (int col = 0; col < slotsX; col++) {
+                int xPos = startX + col * slotWidth + widthOffset;
+                int yPos = startY + row * slotHeight + heightOffset;
 
-            int slotsSet = 0;
-            for (int row = 0; row < slotsY; row++) {
-                for (int col = 0; col < slotsX; col++) {
-                    int xPos = startX + col * slotWidth + widthOffset;
-                    int yPos = startY + row * slotHeight + heightOffset;
+                menu.slots.set(slotsSet, new Slot(menu.inv, slotsSet, xPos, yPos));
 
-                    if (slotsSet < this.menu.slots.size()) {
-                        Slot slot = this.menu.getSlot(slotsSet);
-                        xField.setInt(slot, xPos);
-                        yField.setInt(slot, yPos);
-                    }
 
-                    slotsSet++;
+                slotsSet++;
 
-                    if (slotsSet >= 36)
-                        return;
-                }
+                if (slotsSet >= 36)
+                    return;
             }
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
         }
     }
 

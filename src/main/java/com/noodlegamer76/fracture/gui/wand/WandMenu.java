@@ -27,7 +27,7 @@ public class WandMenu extends AbstractContainerMenu implements Supplier<Map<Inte
     public int x, y, z;
     private IItemHandler itemHandler;
     public final Map<Integer, Slot> customSlots = new HashMap<>();
-    private Inventory inv;
+    public Inventory inv;
     private boolean bound = false;
 
     public WandMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
@@ -59,12 +59,12 @@ public class WandMenu extends AbstractContainerMenu implements Supplier<Map<Inte
             }
         }
 
-        for (int i = 0; i < 36; ++i) {
-            addSlot(new Slot(inv, i, 8, 8));
-        }
-        for (int i = 0; i < capacity; i++) {
-            this.customSlots.put(i, this.addSlot(new SpellAndModifierSlot(itemHandler, i, 0, 0)));
-        }
+        //for (int i = 0; i < 36; ++i) {
+        //    addSlot(new Slot(inv, i, 8, 8));
+        //}
+        //for (int i = 0; i < capacity; i++) {
+        //    this.customSlots.put(i, this.addSlot(new SpellAndModifierSlot(itemHandler, i, 0, 0)));
+        //}
     }
 
     public ItemStack getWand() {

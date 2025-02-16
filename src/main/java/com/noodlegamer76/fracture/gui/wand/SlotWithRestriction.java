@@ -20,4 +20,9 @@ public class SlotWithRestriction extends SlotItemHandler {
     public boolean mayPlace(@NotNull ItemStack stack) {
         return this.validator.test(stack);
     }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+    }
 }

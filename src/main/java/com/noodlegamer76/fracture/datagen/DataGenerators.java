@@ -43,5 +43,8 @@ public class DataGenerators {
         BLOCKS.add(InitBlocks.SNOW_BRICK);
         BLOCKS.add(InitBlocks.METAL_SHEET);
         BLOCKS.add(InitBlocks.SLAG);
+        BLOCKS.add(InitBlocks.PLATED_BRICKS);
+        BLOCKS.add(InitBlocks.LIGHTLY_CRACKED_PLATED_BRICKS);
+        BLOCKS.add(InitBlocks.HEAVILY_CRACKED_PLATED_BRICKS);
     }
 }

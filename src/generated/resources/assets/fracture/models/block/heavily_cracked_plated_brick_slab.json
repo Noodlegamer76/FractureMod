@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "fracture:block/heavily_cracked_plated_brick",
+    "side": "fracture:block/heavily_cracked_plated_brick",
+    "top": "fracture:block/heavily_cracked_plated_brick"
+  }
+}

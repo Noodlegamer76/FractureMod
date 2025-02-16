@@ -114,7 +114,19 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
                         InitBlocks.SLAG.getBlock(),
                         InitBlocks.SLAG.getStairs(),
                         InitBlocks.SLAG.getSlab(),
-                        InitBlocks.SLAG.getWall()
+                        InitBlocks.SLAG.getWall(),
+                        InitBlocks.PLATED_BRICKS.getBlock(),
+                        InitBlocks.PLATED_BRICKS.getStairs(),
+                        InitBlocks.PLATED_BRICKS.getSlab(),
+                        InitBlocks.PLATED_BRICKS.getWall(),
+                        InitBlocks.LIGHTLY_CRACKED_PLATED_BRICKS.getBlock(),
+                        InitBlocks.LIGHTLY_CRACKED_PLATED_BRICKS.getStairs(),
+                        InitBlocks.LIGHTLY_CRACKED_PLATED_BRICKS.getSlab(),
+                        InitBlocks.LIGHTLY_CRACKED_PLATED_BRICKS.getWall(),
+                        InitBlocks.HEAVILY_CRACKED_PLATED_BRICKS.getBlock(),
+                        InitBlocks.HEAVILY_CRACKED_PLATED_BRICKS.getStairs(),
+                        InitBlocks.HEAVILY_CRACKED_PLATED_BRICKS.getSlab(),
+                        InitBlocks.HEAVILY_CRACKED_PLATED_BRICKS.getWall()
                         );
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)
