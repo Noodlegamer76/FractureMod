@@ -24,9 +24,13 @@ public abstract class Spell {
     public int life = 0;
 
     public Spell(ItemStack stack, Entity caster) {
+        if (caster == null) {
+            return;
+        }
         this.stack = stack;
         this.caster = caster;
         this.level = caster.level();
+
     }
 
     public void setTriggerCastState(CastState state) {

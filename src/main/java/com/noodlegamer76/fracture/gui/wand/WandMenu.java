@@ -25,10 +25,11 @@ public class WandMenu extends AbstractContainerMenu implements Supplier<Map<Inte
     public final Level level;
     public final Player entity;
     public int x, y, z;
-    private IItemHandler itemHandler;
+    public IItemHandler itemHandler;
     public final Map<Integer, Slot> customSlots = new HashMap<>();
     public Inventory inv;
     private boolean bound = false;
+    public byte hand;
 
     public WandMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         super(InitMenus.WAND_MENU.get(), id);
@@ -46,7 +47,7 @@ public class WandMenu extends AbstractContainerMenu implements Supplier<Map<Inte
         }
         if (pos != null) {
             if (extraData.readableBytes() == 1) {
-                byte hand = extraData.readByte();
+                hand = extraData.readByte();
                 ItemStack itemstack;
                 if (hand == 0)
                     itemstack = this.entity.getMainHandItem();

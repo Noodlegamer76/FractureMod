@@ -2,8 +2,12 @@ package com.noodlegamer76.fracture.spellcrafting.wand;
 
 import com.noodlegamer76.fracture.client.renderers.item.wand.WandRenderer;
 import com.noodlegamer76.fracture.gui.wand.WandMenu;
+import com.noodlegamer76.fracture.network.PacketHandler;
+import com.noodlegamer76.fracture.network.SpellAmountPacket;
 import com.noodlegamer76.fracture.spellcrafting.CreateWand;
 import com.noodlegamer76.fracture.spellcrafting.WandCast;
+import com.noodlegamer76.fracture.spellcrafting.data.PlayerSpellData;
+import com.noodlegamer76.fracture.spellcrafting.data.SpellHelper;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -96,6 +100,18 @@ public class Wand extends Item implements GeoAnimatable {
                         FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
                         packetBuffer.writeBlockPos(player.blockPosition());
                         packetBuffer.writeByte(hand == InteractionHand.MAIN_HAND ? 0 : 1);
+
+                        PlayerSpellData data = SpellHelper.getSpellData(serverPlayer);
+                        int[] amounts = new int[data.getSpells().size()];
+
+                        int index = 0;
+                        for (int amount : data.getSpells().values()) {
+                            amounts[index] = amount;
+                            index++;
+                        }
+
+                        PacketHandler.sendToPlayer(serverPlayer, new SpellAmountPacket(amounts));
+
                         return new WandMenu(id, inventory, packetBuffer);
                     }
 
@@ -106,7 +122,7 @@ public class Wand extends Item implements GeoAnimatable {
             }
 
             if (!serverPlayer.isCrouching()) {
-                    new WandCast(level, (ServerPlayer)  player, item);
+                    new WandCast(level, player, item);
 
             }
         }

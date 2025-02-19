@@ -78,25 +78,25 @@ public class InitItems {
             () -> new FrozenSpellBook(new Item.Properties()));
 
     public static final RegistryObject<Item> VOID_BALL_SPELL_ITEM = ITEMS.register("void_ball_spell",
-            () -> new VoidBallSpellItem(new Item.Properties()));
+            () -> new VoidBallSpellItem(new Item.Properties(), false));
     public static final RegistryObject<Item> GIANT_SNOWBALL_SPELL_ITEM = ITEMS.register("giant_snowball_spell",
-            () -> new GiantSnowBallSpellItem(new Item.Properties()));
+            () -> new GiantSnowBallSpellItem(new Item.Properties(), true));
     public static final RegistryObject<Item> DOUBLE_CAST_SPELL_ITEM = ITEMS.register("double_cast_spell",
-            () -> new DoubleCastSpellItem(new Item.Properties()));
+            () -> new DoubleCastSpellItem(new Item.Properties(), true));
     public static final RegistryObject<Item> TRIPLE_CAST_SPELL_ITEM = ITEMS.register("triple_cast_spell",
-            () -> new TripleCastSpellItem(new Item.Properties()));
+            () -> new TripleCastSpellItem(new Item.Properties(), true));
     public static final RegistryObject<Item> ICE_SPIKE_SCATTER_SPELL_ITEM = ITEMS.register("ice_spike_scatter_spell",
-            () -> new IceSpikeScatterSpellItem(new Item.Properties()));
+            () -> new IceSpikeScatterSpellItem(new Item.Properties(), false));
     public static final RegistryObject<Item> DOUBLE_CAST_INACCURATE_SPELL_ITEM = ITEMS.register("double_cast_inaccurate_spell",
-            () -> new DoubleCastInaccurateSpellItem(new Item.Properties()));
+            () -> new DoubleCastInaccurateSpellItem(new Item.Properties(), true));
     public static final RegistryObject<Item> RANDOM_SHOT_SPELL_ITEM = ITEMS.register("random_shot_spell",
-            () -> new RandomShotSpellItem(new Item.Properties()));
+            () -> new RandomShotSpellItem(new Item.Properties(), true));
     public static final RegistryObject<Item> GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM = ITEMS.register("giant_snowball_with_trigger_spell",
-            () -> new GiantSnowballWithTriggerSpellItem(new Item.Properties()));
+            () -> new GiantSnowballWithTriggerSpellItem(new Item.Properties(), true));
     public static final RegistryObject<Item> EXPLOSION_SPELL_ITEM = ITEMS.register("explosion_spell",
-            () -> new ExplosionSpellItem(new Item.Properties()));
+            () -> new ExplosionSpellItem(new Item.Properties(), true));
     public static final RegistryObject<Item> SUMMON_MAGIC_SWORD_SPELL_ITEM = ITEMS.register("summon_magic_sword_spell",
-            () -> new SummonMagicSwordSpellItem(new Item.Properties()));
+            () -> new SummonMagicSwordSpellItem(new Item.Properties(), false));
 
 
     public static final RegistryObject<Item> MAGIC_SWORD = ITEMS.register("magic_sword",

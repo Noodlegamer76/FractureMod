@@ -1,17 +1,15 @@
 package com.noodlegamer76.fracture.spellcrafting;
 
+import com.noodlegamer76.fracture.spellcrafting.data.SpellHelper;
 import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
 import com.noodlegamer76.fracture.spellcrafting.spells.spell.Spell;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 /**
  * Represents a wand casting system that allows a living entity to cast spells using a wand.
@@ -53,8 +51,6 @@ public class WandCast {
         //inventory slots index starts at 0
 
         //make handler and nbt
-        LazyOptional<IItemHandler> iItemHandler = castItem.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
-        iItemHandler.ifPresent(this::setHandler);
         this.caster = caster;
         nbt = castItem.getTag();
         manager = new CardHolderManager();
@@ -62,6 +58,9 @@ public class WandCast {
         wand = castItem;
 
         capacity = nbt.getInt("capacity");
+        handler = new ItemStackHandler(capacity);
+        setupItems();
+
         castDelay = nbt.getInt("castDelay");
         casts = nbt.getInt("casts");
         rechargeTime = nbt.getInt("rechargeTime");
@@ -173,7 +172,10 @@ public class WandCast {
         }
     }
 
-    public void setHandler(IItemHandler handler) {
-        this.handler = handler;
+    private void setupItems() {
+        CompoundTag tag = wand.getOrCreateTag().getCompound("spells");
+        for (int i = 0; i < capacity; i++) {
+            handler.insertItem(i, SpellHelper.getSpellItemFromName(tag.getString(String.valueOf(i))), false);
+        }
     }
 }

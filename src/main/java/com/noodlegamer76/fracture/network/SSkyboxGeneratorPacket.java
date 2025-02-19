@@ -57,5 +57,6 @@ public class SSkyboxGeneratorPacket {
         level.sendBlockUpdated(pos, entity.getBlockState(), entity.getBlockState(), 2);
         entity.setChanged();
 
+        contextSupplier.get().setPacketHandled(true);
     }
 }

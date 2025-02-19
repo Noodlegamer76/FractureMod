@@ -12,18 +12,27 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+
 public abstract class SpellItem extends SpellcraftingItem {
-    public SpellItem(Properties pProperties) {
+    public static ArrayList<SpellItem> spellItems = new ArrayList<>();
+
+    public SpellItem(Properties pProperties, boolean register) {
         super(pProperties);
+        if (register) {
+            spellItems.add(this);
+        }
     }
 
     public abstract Spell getSpell(ItemStack stack, Entity entity);
+
+    public abstract Component getName();
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         if (!level.isClientSide) {
             PlayerSpellData spellData = SpellHelper.getSpellData(player);
-            Component spellId = getSpell(player.getItemInHand(usedHand), player).getName();
+            Component spellId = getName();
 
             spellData.unlockSpell(spellId, 1);
 

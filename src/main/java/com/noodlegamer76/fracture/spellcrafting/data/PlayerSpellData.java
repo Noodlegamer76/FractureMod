@@ -1,16 +1,17 @@
 package com.noodlegamer76.fracture.spellcrafting.data;
 
+import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PlayerSpellData {
 
-    final Map<Component, Integer> spells = new HashMap<>();
+    final Map<Component, Integer> spells = new LinkedHashMap<>();
 
     public void unlockSpell(Component spell, int amount) {
         spells.put(spell, spells.getOrDefault(spell, 0) + amount);
@@ -45,6 +46,12 @@ public class PlayerSpellData {
 
     public void loadNBTData(CompoundTag tag) {
         spells.clear();
+
+        for (int i = 0; i < SpellItem.spellItems.size(); i++) {
+            Component component = SpellItem.spellItems.get(i).getName();
+            spells.put(component, 0);
+        }
+
         ListTag spellList = tag.getList("Spells", Tag.TAG_COMPOUND);
         for (int i = 0; i < spellList.size(); i++) {
             CompoundTag spellTag = spellList.getCompound(i);
