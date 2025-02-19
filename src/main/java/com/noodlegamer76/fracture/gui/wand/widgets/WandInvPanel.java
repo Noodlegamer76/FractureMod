@@ -22,7 +22,7 @@ public class WandInvPanel extends AbstractScrollWidget {
     private final WandScreen screen;
     private ItemStack hoveredItem;
     private int hoveredItemIndex = -1;
-    private final int itemXAmount = 12;
+    private final int itemXAmount = 10;
     boolean isHovering = false;
     boolean clickedThisFrame = false;
 

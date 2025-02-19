@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.gui.wand.ListIndex;
 import com.noodlegamer76.fracture.gui.wand.WandScreen;
+import com.noodlegamer76.fracture.spellcrafting.spells.item.SpellItem;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractScrollWidget;
@@ -21,10 +22,11 @@ public class ScrollableSpellList extends AbstractScrollWidget {
     private final WandScreen screen;
     private ItemStack hoveredItem;
     private int hoveredItemIndex = -1;
-    private final int itemXAmount = 8;
+    private int hoveredItemAmount = -1;
+    private final int itemXAmount = 6;
 
     private static final ResourceLocation SQUARE_PANEL = new ResourceLocation(FractureMod.MODID, "textures/screens/basic_background.png");
-    private static final ResourceLocation SLOT = new ResourceLocation(FractureMod.MODID, "textures/screens/slot.png");
+    private static final ResourceLocation SLOT = new ResourceLocation(FractureMod.MODID, "textures/screens/wand/slot.png");
 
 
     public ScrollableSpellList(int pX, int pY, int pWidth, int pHeight, Component pMessage, ArrayList<ItemStack> spellsList, ArrayList<Integer> amountList, WandScreen screen) {
@@ -57,7 +59,7 @@ public class ScrollableSpellList extends AbstractScrollWidget {
         int xOffset = (width - totalSlotWidth) / 2;
 
         boolean isHovering = false;
-        for (int i = 0; i < spellsList.size(); i++) {
+        for (int i = 0; i < Math.min(spellsList.size(), amountList.size()); i++) {
 
             int xPos = getX() + xOffset + (itemSize * currentXAmount);
             int yPos = getY() + (itemSize * currentYAmount);
@@ -77,10 +79,30 @@ public class ScrollableSpellList extends AbstractScrollWidget {
             guiGraphics.renderItemDecorations(screen.getMinecraft().font, stack, 0, 0);
             poseStack.popPose();
 
+            if (amountList.get(i) == -1) {
+                poseStack.pushPose();
+                poseStack.translate(0, 0, 500);
+                guiGraphics.blit(new ResourceLocation(FractureMod.MODID, "textures/screens/locked_spell.png"), xPos, yPos,
+                        0, 0, 0,
+                        itemSize, itemSize,
+                        itemSize, itemSize);
+                poseStack.popPose();
+            }
+            else if (amountList.get(i) == 0) {
+                poseStack.pushPose();
+                poseStack.translate(0, 0, 500);
+                guiGraphics.blit(new ResourceLocation(FractureMod.MODID, "textures/screens/out_of_spells    .png"), xPos, yPos,
+                        0, 0, 0,
+                        itemSize, itemSize,
+                        itemSize, itemSize);
+                poseStack.popPose();
+            }
+
             if ((mouseX >= xPos) && (mouseX < xPos + itemSize) && (mouseY + scrollAmount() >= yPos) && (mouseY + scrollAmount() < yPos + itemSize)) {
                 guiGraphics.fillGradient(RenderType.guiOverlay(), xPos, yPos, xPos + itemSize, yPos + itemSize, -2130706433, -2130706433, 0);
                 hoveredItem = spellsList.get(i);
                 hoveredItemIndex = i;
+                hoveredItemAmount = amountList.get(i);
 
                 isHovering = true;
             }
@@ -120,11 +142,29 @@ public class ScrollableSpellList extends AbstractScrollWidget {
 
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        if (hoveredItem != null) {
+        if (hoveredItem != null && hoveredItemAmount != -1 && hoveredItemAmount != 0) {
+            if (screen.selectedItem != null && screen.selectedItem.selectedItem.getItem() instanceof SpellItem) {
+                int index = getIndexFromSelected();
+                amountList.set(index, amountList.get(index) + 1);
+            }
+            amountList.set(hoveredItemIndex, amountList.get(hoveredItemIndex) - 1);
             screen.selectedItem = new SelectedItem(ListIndex.SPELLS_INV, hoveredItemIndex, hoveredItem);
         }
 
         return super.mouseClicked(pMouseX, pMouseY, pButton);
+    }
+
+    public int getIndexFromSelected() {
+        SpellItem spell = (SpellItem) screen.selectedItem.selectedItem.getItem();
+
+        for (int i = 0; i < spellsList.size(); i++) {
+            SpellItem check = (SpellItem) spellsList.get(i).getItem();
+
+            if (spell.equals(check)) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     @Override

@@ -89,6 +89,7 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
             poseStack.translate(mouseX - (8 * itemScale), mouseY - (8 * itemScale), 100);
             poseStack.scale(itemScale, itemScale, itemScale);
 
+            poseStack.translate(0, 0, 500);
             guiGraphics.renderFakeItem(selectedItem.selectedItem, 0, 0);
 
             poseStack.popPose();
@@ -129,8 +130,8 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
     @Override
     public void init() {
         super.init();
-        setupWidgets();
         amountList.addAll(SpellHelper.amounts);
+        setupWidgets();
 
         if (menu.getWand().getTag() != null) {
             CompoundTag spells = menu.getWand().getTag().getCompound("spells");
@@ -138,6 +139,18 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
             for (int i = 0; i < menu.getWand().getTag().getInt("capacity"); i++) {
                 String spellName = spells.getString(String.valueOf(i));
                 wandSpellsList.add(getSpellItemFromName(spellName));
+            }
+
+            for (ItemStack wandStack : wandSpellsList) {
+                for (int i = 0; i < spellsList.size(); i++) {
+                    ItemStack spellStack = spellsList.get(i);
+                    if (ItemStack.isSameItemSameTags(wandStack, spellStack)) {
+                        if (i < amountList.size()) {
+                            amountList.set(i, amountList.get(i) - 1);
+                        }
+                        break;
+                    }
+                }
             }
         }
     }
@@ -147,7 +160,7 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
     @Override
     public boolean keyPressed(int key, int b, int c) {
         if (key == 256) {
-            this.minecraft.player.closeContainer();
+            this.onClose();
             return true;
         }
         return super.keyPressed(key, b, c);
@@ -163,11 +176,6 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
         PacketHandler.sendToServer(new SpellInvPacket(wandSpellsList, menu.hand == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
 
         super.onClose();
-    }
-
-    @Override
-    public boolean shouldCloseOnEsc() {
-        return false;
     }
 
     @Override
@@ -224,7 +232,7 @@ public class WandScreen extends AbstractContainerScreen<WandMenu> {
                 topPos + smallGapTop,
                 widthThird,
                 (int) ((double) imageHeight / 2 - smallGapTop * 1.5) * 2,
-                Component.literal("Spells"),
+                Component.literal("spells"),
                 spellsList,
                 amountList,
                 this));

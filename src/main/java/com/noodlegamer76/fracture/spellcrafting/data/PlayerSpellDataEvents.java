@@ -1,6 +1,8 @@
 package com.noodlegamer76.fracture.spellcrafting.data;
 
+import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.util.InitCapabilities;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -12,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PlayerSpellDataEvents {
-    private static final ResourceLocation SPELL_CAP = new ResourceLocation("modid", "player_spell_data");
+    private static final ResourceLocation SPELL_CAP = new ResourceLocation(FractureMod.MODID, "player_spell_data");
 
     @SubscribeEvent
     public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event) {
@@ -31,4 +33,14 @@ public class PlayerSpellDataEvents {
             });
         });
     }
+
+    @SubscribeEvent
+    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        event.getEntity().getCapability(InitCapabilities.PLAYER_SPELL_DATA).ifPresent(data -> {
+            CompoundTag tag = new CompoundTag();
+            data.saveNBTData(tag);
+            data.loadNBTData(tag);
+        });
+    }
+
 }

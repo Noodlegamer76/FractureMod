@@ -14,11 +14,11 @@ public class PlayerSpellData {
     final Map<Component, Integer> spells = new LinkedHashMap<>();
 
     public void unlockSpell(Component spell, int amount) {
-        spells.put(spell, spells.getOrDefault(spell, 0) + amount);
+        spells.put(spell, Math.max(spells.getOrDefault(spell, 0) + amount, 1));
     }
 
     public int getSpellAmount(Component spell) {
-        return spells.getOrDefault(spell, 0);
+        return spells.getOrDefault(spell, -1);
     }
 
     public Map<Component, Integer> getSpells() {
@@ -30,7 +30,7 @@ public class PlayerSpellData {
     }
 
     public void resetSpell(Component spell) {
-        spells.put(spell, 0);
+        spells.put(spell, -1);
     }
 
     public void saveNBTData(CompoundTag tag) {
@@ -41,7 +41,7 @@ public class PlayerSpellData {
             spellTag.putInt("Amount", entry.getValue());
             spellList.add(spellTag);
         }
-        tag.put("Spells", spellList);
+        tag.put("spells", spellList);
     }
 
     public void loadNBTData(CompoundTag tag) {
@@ -49,10 +49,10 @@ public class PlayerSpellData {
 
         for (int i = 0; i < SpellItem.spellItems.size(); i++) {
             Component component = SpellItem.spellItems.get(i).getName();
-            spells.put(component, 0);
+            spells.put(component, -1);
         }
 
-        ListTag spellList = tag.getList("Spells", Tag.TAG_COMPOUND);
+        ListTag spellList = tag.getList("spells", Tag.TAG_COMPOUND);
         for (int i = 0; i < spellList.size(); i++) {
             CompoundTag spellTag = spellList.getCompound(i);
             Component spell = Component.literal(spellTag.getString("Spell"));

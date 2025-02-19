@@ -7,7 +7,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
@@ -20,6 +19,7 @@ public class WandStatsWidget extends AbstractGuiPanel {
     Component castDelay;
     Component capacity;
     Component casts;
+
     public WandStatsWidget(int pX, int pY, int pWidth, int pHeight, Component pMessage, ResourceLocation texture, Font font, WandMenu menu) {
         super(pX, pY, pWidth, pHeight, pMessage, texture, font, menu);
         wand = getWand();
