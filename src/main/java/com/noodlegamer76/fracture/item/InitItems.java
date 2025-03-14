@@ -8,8 +8,8 @@ import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
 import com.noodlegamer76.fracture.item.modifiable.Broom;
 import com.noodlegamer76.fracture.spellcrafting.spells.item.*;
+import com.noodlegamer76.fracture.spellcrafting.wand.CreativeWand;
 import com.noodlegamer76.fracture.spellcrafting.wand.FrozenSpellBook;
-import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -73,7 +73,7 @@ public class InitItems {
             () -> new HoeItem(ToolTiers.ModItemTier.PERMAFROST, -3, 0.0F, new Item.Properties()));
 
     public static final RegistryObject<Item> WAND = ITEMS.register("wand",
-            () -> new Wand(new Item.Properties()));
+            () -> new CreativeWand(new Item.Properties()));
     public static final RegistryObject<Item> FROZEN_SPELLBOOK = ITEMS.register("frozen_spellbook",
             () -> new FrozenSpellBook(new Item.Properties()));
 
@@ -97,6 +97,8 @@ public class InitItems {
             () -> new ExplosionSpellItem(new Item.Properties(), true));
     public static final RegistryObject<Item> SUMMON_MAGIC_SWORD_SPELL_ITEM = ITEMS.register("summon_magic_sword_spell",
             () -> new SummonMagicSwordSpellItem(new Item.Properties(), false));
+    public static final RegistryObject<Item> MAGIC_BOLT_SPELL_ITEM = ITEMS.register("magic_bolt_spell",
+            () -> new MagicBoltSpellItem(new Item.Properties(), true));
 
 
     public static final RegistryObject<Item> MAGIC_SWORD = ITEMS.register("magic_sword",

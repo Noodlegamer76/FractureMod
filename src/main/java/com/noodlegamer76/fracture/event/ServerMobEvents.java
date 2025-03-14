@@ -1,7 +1,7 @@
 package com.noodlegamer76.fracture.event;
 
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.entity.*;
+import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.monster.*;
 import com.noodlegamer76.fracture.network.PacketHandler;
 import net.minecraft.world.entity.animal.Cow;
@@ -25,6 +25,7 @@ public class ServerMobEvents {
         event.put(InitEntities.COMPARABLE_SNOWMAN.get(), ComparableSnowman.createAttributes().build());
         event.put(InitEntities.MOOSICLE.get(), Cow.createAttributes().build());
         event.put(InitEntities.GIANT_ROBOT.get(), GiantRobot.createAttributes().build());
+        event.put(InitEntities.PLAYER_MIMIC.get(), PlayerMimic.createAttributes().build());
     }
 
     @SubscribeEvent

@@ -1,11 +1,9 @@
 package com.noodlegamer76.fracture.spellcrafting;
 
+import com.noodlegamer76.fracture.spellcrafting.wand.CreativeWand;
 import com.noodlegamer76.fracture.spellcrafting.wand.FrozenSpellBook;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Random;
 
@@ -35,6 +33,9 @@ public class CreateWand {
         if (itemStack.getItem() instanceof FrozenSpellBook) {
             createFrozenSpellbook();
         }
+        else if (itemStack.getItem() instanceof CreativeWand) {
+            createCreativeWand();
+        }
     }
 
     private void createFrozenSpellbook() {
@@ -45,6 +46,15 @@ public class CreateWand {
         capacity = new Random().nextInt(2, 6);
         //usually one, 25% chance to be 2
         casts = (int) (Math.random() + 1.25);
+    }
+
+    private void createCreativeWand() {
+        castDelay = -1000;
+        rechargeTime = -1000;
+        maxMana = 100000;
+        manaRechargeSpeed = 100000;
+        capacity = 120;
+        casts = 1;
     }
 
     public CompoundTag createStats(CompoundTag nbt, ItemStack itemStack) {

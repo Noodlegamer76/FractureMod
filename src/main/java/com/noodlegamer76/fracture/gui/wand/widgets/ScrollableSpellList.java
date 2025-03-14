@@ -9,11 +9,13 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractScrollWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ScrollableSpellList extends AbstractScrollWidget {
@@ -26,7 +28,9 @@ public class ScrollableSpellList extends AbstractScrollWidget {
     private final int itemXAmount = 6;
 
     private static final ResourceLocation SQUARE_PANEL = new ResourceLocation(FractureMod.MODID, "textures/screens/basic_background.png");
-    private static final ResourceLocation SLOT = new ResourceLocation(FractureMod.MODID, "textures/screens/wand/slot.png");
+    private static final ResourceLocation SLOT = new ResourceLocation(FractureMod.MODID, "textures/screens/spell_slot.png");
+    private static final ResourceLocation SPRUCE_PLANKS = new ResourceLocation("textures/block/spruce_planks.png");
+    private static final int color = new Color(188, 188, 188).getRGB();
 
 
     public ScrollableSpellList(int pX, int pY, int pWidth, int pHeight, Component pMessage, ArrayList<ItemStack> spellsList, ArrayList<Integer> amountList, WandScreen screen) {
@@ -91,7 +95,7 @@ public class ScrollableSpellList extends AbstractScrollWidget {
             else if (amountList.get(i) == 0) {
                 poseStack.pushPose();
                 poseStack.translate(0, 0, 500);
-                guiGraphics.blit(new ResourceLocation(FractureMod.MODID, "textures/screens/out_of_spells    .png"), xPos, yPos,
+                guiGraphics.blit(new ResourceLocation(FractureMod.MODID, "textures/screens/out_of_spells.png"), xPos, yPos,
                         0, 0, 0,
                         itemSize, itemSize,
                         itemSize, itemSize);
@@ -121,8 +125,13 @@ public class ScrollableSpellList extends AbstractScrollWidget {
 
 
     @Override
-    protected void renderBackground(GuiGraphics pGuiGraphics) {
-        super.renderBackground(pGuiGraphics);
+    protected void renderBackground(GuiGraphics guiGraphics) {
+        int itemSize = width / itemXAmount;
+        float itemScale = (float) itemSize / 18;
+
+        int i = this.isFocused() ? -1 : color;
+        guiGraphics.fill(getX(), getY(), getX() + width, getY() + height, i);
+        guiGraphics.blit(SPRUCE_PLANKS, getX() + 1, getY() + 1, 0, 0, 0, width - 2, height - 2, itemSize, itemSize);
     }
 
     @Override
@@ -142,7 +151,7 @@ public class ScrollableSpellList extends AbstractScrollWidget {
 
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        if (hoveredItem != null && hoveredItemAmount != -1 && hoveredItemAmount != 0) {
+        if (hoveredItem != null && hoveredItemAmount != -1 && hoveredItemAmount != 0 && !Screen.hasShiftDown() && pButton == 0) {
             if (screen.selectedItem != null && screen.selectedItem.selectedItem.getItem() instanceof SpellItem) {
                 int index = getIndexFromSelected();
                 amountList.set(index, amountList.get(index) + 1);
@@ -150,7 +159,6 @@ public class ScrollableSpellList extends AbstractScrollWidget {
             amountList.set(hoveredItemIndex, amountList.get(hoveredItemIndex) - 1);
             screen.selectedItem = new SelectedItem(ListIndex.SPELLS_INV, hoveredItemIndex, hoveredItem);
         }
-
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 

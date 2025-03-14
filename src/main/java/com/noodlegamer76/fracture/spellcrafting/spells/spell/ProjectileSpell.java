@@ -19,7 +19,10 @@ public abstract class ProjectileSpell extends Spell {
 
     ProjectileSpell(ItemStack stack, Entity caster) {
         super(stack, caster);
+        projectile = setProjectile();
     }
+
+    public abstract AbstractProjectileSpellEntity setProjectile();
 
     public AbstractProjectileSpellEntity getProjectile() {
         return projectile;

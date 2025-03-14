@@ -1,11 +1,11 @@
 package com.noodlegamer76.fracture.spellcrafting.spells.spell;
 
 import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.projectile.AbstractProjectileSpellEntity;
 import com.noodlegamer76.fracture.entity.projectile.GiantSnowballProjectile;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -13,7 +13,11 @@ public class GiantSnowballWithTriggerSpell extends ProjectileSpell {
     boolean casted = false;
     public GiantSnowballWithTriggerSpell(ItemStack stack, Entity caster) {
         super(stack, caster);
-        projectile = new GiantSnowballProjectile(InitEntities.GIANT_SLOWBALL.get(), caster, level);
+    }
+
+    @Override
+    public AbstractProjectileSpellEntity setProjectile() {
+        return new GiantSnowballProjectile(InitEntities.GIANT_SLOWBALL.get(), caster, level);
     }
 
     @Override

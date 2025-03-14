@@ -4,10 +4,7 @@ import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.animal.Moosicle;
 import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
 import com.noodlegamer76.fracture.entity.monster.*;
-import com.noodlegamer76.fracture.entity.projectile.ExplosiveBox;
-import com.noodlegamer76.fracture.entity.projectile.GiantSnowballProjectile;
-import com.noodlegamer76.fracture.entity.projectile.IceSpikeEntity;
-import com.noodlegamer76.fracture.entity.projectile.VoidBall;
+import com.noodlegamer76.fracture.entity.projectile.*;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.entity.vehicle.ModChestBoatEntity;
 import net.minecraft.world.entity.EntityType;
@@ -64,6 +61,14 @@ public class InitEntities {
                     .clientTrackingRange(10)
                     .build("blood_slime"));
 
+    public static final RegistryObject<EntityType<PlayerMimic>> PLAYER_MIMIC = ENTITIES.register("player_mimic",
+            () -> EntityType.Builder.of(PlayerMimic::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.8F)
+                    .clientTrackingRange(32)
+                    .updateInterval(2)
+                    .build("blood_slime"));
+
+
     public static final RegistryObject<EntityType<ModBoatEntity>> MOD_BOAT = ENTITIES.register(("mod_boat"),
             () -> EntityType.Builder.<ModBoatEntity>of(ModBoatEntity::new, MobCategory.MISC)
                     .sized(1.375f, 0.5625f)
@@ -88,6 +93,12 @@ public class InitEntities {
             () -> EntityType.Builder.<GiantSnowballProjectile>of(GiantSnowballProjectile::new, MobCategory.MISC)
                     .sized(1f, 1f)
                     .build("giant_snowball"));
+
+    public static final RegistryObject<EntityType<MagicBoltProjectile>> MAGIC_BOLT = ENTITIES.register(("magic_bolt"),
+            () -> EntityType.Builder.<MagicBoltProjectile>of(MagicBoltProjectile::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .build("magic_bolt"));
 
     public static final RegistryObject<EntityType<IceSpikeEntity>> ICE_SPIKE = ENTITIES.register(("ice_spike"),
             () -> EntityType.Builder.<IceSpikeEntity>of(IceSpikeEntity::new, MobCategory.MISC)

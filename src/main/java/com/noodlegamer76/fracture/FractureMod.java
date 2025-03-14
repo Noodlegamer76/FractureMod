@@ -163,6 +163,7 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.COMPACT_TNT.get(), CompactTntRenderer::new);
             event.registerEntityRenderer(InitEntities.VOID_BALL.get(), VoidBallRenderer::new);
             event.registerEntityRenderer(InitEntities.GIANT_SLOWBALL.get(), GiantSnowballRenderer::new);
+            event.registerEntityRenderer(InitEntities.MAGIC_BOLT.get(), MagicBoltRenderer::new);
             event.registerEntityRenderer(InitEntities.ABDOMINAL_SNOWMAN.get(), AbdominalSnowmanRenderer::new);
             event.registerEntityRenderer(InitEntities.KNOWLEDGEABLE_SNOWMAN.get(), KnowledgeableSnowmanRenderer::new);
             event.registerEntityRenderer(InitEntities.COMPARABLE_SNOWMAN.get(), ComparableSnowmanRenderer::new);
@@ -170,6 +171,7 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.MOOSICLE.get(), MoosicleRenderer::new);
             event.registerEntityRenderer(InitEntities.GIANT_ROBOT.get(), GiantRobotRenderer::new);
             event.registerEntityRenderer(InitEntities.EXPLOSIVE_BOX.get(), ExplosiveBoxRenderer::new);
+            event.registerEntityRenderer(InitEntities.PLAYER_MIMIC.get(), PlayerMimicRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);

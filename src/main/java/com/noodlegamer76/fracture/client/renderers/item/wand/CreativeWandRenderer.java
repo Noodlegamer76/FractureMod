@@ -6,7 +6,7 @@ import com.mojang.math.Axis;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.client.renderers.item.DynamicGeoItemRenderer;
 import com.noodlegamer76.fracture.client.util.ModRenderTypes;
-import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
+import com.noodlegamer76.fracture.spellcrafting.wand.CreativeWand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -16,19 +16,17 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.model.DefaultedItemGeoModel;
-import software.bernie.geckolib.renderer.GeoItemRenderer;
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 import java.util.Objects;
 
-public class WandRenderer extends DynamicGeoItemRenderer<Wand> {
-    public WandRenderer() {
+public class CreativeWandRenderer extends DynamicGeoItemRenderer<CreativeWand> {
+    public CreativeWandRenderer() {
         super(new DefaultedItemGeoModel<>(new ResourceLocation(FractureMod.MODID, "wand")));
         //addRenderLayer(new WandCrystal(this));
     }
 
     @Override
-    public void renderRecursively(PoseStack poseStack, Wand animatable, GeoBone bone, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderRecursively(PoseStack poseStack, CreativeWand animatable, GeoBone bone, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         if (Objects.equals(bone.getName(), "layer")) {
             poseStack.pushPose();
             float rotationAngle = (float) ((Minecraft.getInstance().getPartialTick() + Minecraft.getInstance().level.getGameTime()));
@@ -53,7 +51,7 @@ public class WandRenderer extends DynamicGeoItemRenderer<Wand> {
     }
 
     @Override
-    protected @Nullable RenderType getRenderTypeOverrideForBone(GeoBone bone, Wand animatable, ResourceLocation texturePath, MultiBufferSource bufferSource, float partialTick) {
+    protected @Nullable RenderType getRenderTypeOverrideForBone(GeoBone bone, CreativeWand animatable, ResourceLocation texturePath, MultiBufferSource bufferSource, float partialTick) {
         if (Objects.equals(bone.getName(), "layer")) {
             return ModRenderTypes.SKYBOX;
         } else {

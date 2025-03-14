@@ -4,10 +4,15 @@ import com.noodlegamer76.fracture.client.renderers.item.wand.FrozenSpellbookRend
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
 public class FrozenSpellBook extends Wand implements GeoItem {
+    AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
     public FrozenSpellBook(Properties properties) {
         super(properties);
     }
@@ -24,5 +29,15 @@ public class FrozenSpellBook extends Wand implements GeoItem {
                 return renderer;
             }
         });
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }

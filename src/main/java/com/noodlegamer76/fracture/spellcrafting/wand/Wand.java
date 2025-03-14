@@ -1,6 +1,5 @@
 package com.noodlegamer76.fracture.spellcrafting.wand;
 
-import com.noodlegamer76.fracture.client.renderers.item.wand.WandRenderer;
 import com.noodlegamer76.fracture.gui.wand.WandMenu;
 import com.noodlegamer76.fracture.network.PacketHandler;
 import com.noodlegamer76.fracture.network.SpellAmountPacket;
@@ -9,8 +8,6 @@ import com.noodlegamer76.fracture.spellcrafting.WandCast;
 import com.noodlegamer76.fracture.spellcrafting.data.PlayerSpellData;
 import com.noodlegamer76.fracture.spellcrafting.data.SpellHelper;
 import io.netty.buffer.Unpooled;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -25,22 +22,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkHooks;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
-import java.util.function.Consumer;
 
-public class Wand extends Item implements GeoAnimatable {
-    AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    public double spinTime = 0;
+public class Wand extends Item {
 
     public Wand(Properties properties) {
         super(properties);
@@ -48,10 +37,6 @@ public class Wand extends Item implements GeoAnimatable {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-       spinTime /= 1.025;
-       if (spinTime <= 0) {
-           spinTime = 0;
-       }
        if (pStack.getOrCreateTag().getBoolean("isCreated")) {
            float currentMana = pStack.getTag().getFloat("currentMana");
            float manaRechargeSpeed = pStack.getTag().getFloat("manaRechargeSpeed");
@@ -76,17 +61,8 @@ public class Wand extends Item implements GeoAnimatable {
         double x = player.getX();
         double y = player.getY();
         double z = player.getZ();
-        if (player instanceof LocalPlayer localPlayer) {
-            if (!localPlayer.isCrouching()) {
-                spinTime += 250;
-            }
-        }
         if (player instanceof ServerPlayer serverPlayer) {
             ItemStack item = player.getItemInHand(hand);
-
-
-
-
 
             if (serverPlayer.isCrouching()) {
                 NetworkHooks.openScreen(serverPlayer, new MenuProvider() {
@@ -159,34 +135,5 @@ public class Wand extends Item implements GeoAnimatable {
             stack.getCapability(ForgeCapabilities.ITEM_HANDLER, null)
                     .ifPresent(capability -> ((ItemStackHandler) capability).deserializeNBT((CompoundTag) nbt.get("Inventory")));
         }
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    @Override
-    public double getTick(Object object) {
-        return 0;
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            private WandRenderer renderer = null;
-            // Don't instantiate until ready. This prevents race conditions breaking things
-            @Override public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                if (this.renderer == null)
-                    this.renderer = new WandRenderer();
-
-                return renderer;
-            }
-        });
     }
 }

@@ -4,7 +4,6 @@ import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.util.registryutils.BlockSet;
-import com.noodlegamer76.fracture.util.registryutils.BlockWithItem;
 import com.noodlegamer76.fracture.util.registryutils.SimpleStoneSet;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -111,6 +110,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handHeldItem(InitItems.RANDOM_SHOT_SPELL_ITEM);
         handHeldItem(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM);
         handHeldItem(InitItems.EXPLOSION_SPELL_ITEM);
+        handHeldItem(InitItems.MAGIC_BOLT_SPELL_ITEM);
         //handHeldItem(InitItems.SUMMON_MAGIC_SWORD_SPELL_ITEM);
         //handHeldItem(InitItems.MAGIC_SWORD);
 

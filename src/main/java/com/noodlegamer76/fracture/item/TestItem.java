@@ -1,50 +1,16 @@
 package com.noodlegamer76.fracture.item;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.noodlegamer76.fracture.block.InitBlocks;
-import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderMenu;
-import com.noodlegamer76.fracture.gui.guibuilder.GuiBuilderScreen;
-import com.noodlegamer76.fracture.gui.wand.WandMenu;
-import com.noodlegamer76.fracture.particles.InitParticles;
-import com.noodlegamer76.fracture.util.ModVectors;
-import io.netty.buffer.Unpooled;
-import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.RenderStateShard;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
-import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.gametest.framework.GameTestInfo;
-import net.minecraft.gametest.framework.TestFunction;
-import net.minecraft.network.Connection;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.PacketFlow;
+import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.monster.PlayerMimic;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.GameType;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.UUID;
 
 public class TestItem extends Item {
     public TestItem(Properties pProperties) {
@@ -72,29 +38,20 @@ public class TestItem extends Item {
             //            vec.z
             //    );
             //}
-            System.out.println(player.getPortalCooldown());
-            System.out.println(player.isOnPortalCooldown());
+            //System.out.println(player.getPortalCooldown());
+            //System.out.println(player.isOnPortalCooldown());
+
         }
 
         if (player instanceof ServerPlayer serverPlayer && serverPlayer.isCrouching()) {
-            NetworkHooks.openScreen(serverPlayer, new MenuProvider() {
-                @Override
-                public Component getDisplayName() {
-                    return Component.translatable("gui.fracture.wand");
-                }
-
-                @Override
-                public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-                    FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
-                    packetBuffer.writeBlockPos(player.blockPosition());
-                    packetBuffer.writeByte(hand == InteractionHand.MAIN_HAND ? 0 : 1);
-                    return new GuiBuilderMenu(id, inventory, packetBuffer);
-                }
-
-            }, buf -> {
-                buf.writeBlockPos(player.blockPosition());
-                buf.writeByte(hand == InteractionHand.MAIN_HAND ? 0 : 1);
-            });
+            PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
+            mimic.setPos(player.getX(), player.getY(), player.getZ());
+            level.addFreshEntity(mimic);
+            mimic.setItemInHand(InteractionHand.MAIN_HAND, Items.NETHERITE_SWORD.getDefaultInstance());
+            mimic.setItemSlot(EquipmentSlot.HEAD, Items.NETHERITE_HELMET.getDefaultInstance());
+            mimic.setItemSlot(EquipmentSlot.CHEST, Items.NETHERITE_CHESTPLATE.getDefaultInstance());
+            mimic.setItemSlot(EquipmentSlot.LEGS, Items.NETHERITE_LEGGINGS.getDefaultInstance());
+            mimic.setItemSlot(EquipmentSlot.FEET, Items.NETHERITE_BOOTS.getDefaultInstance());
         }
         return super.use(level, player, hand);
     }

@@ -125,6 +125,7 @@ public class FractureTab {
             event.accept(InitItems.TRIPLE_CAST_SPELL_ITEM);
             event.accept(InitItems.RANDOM_SHOT_SPELL_ITEM);
             event.accept(InitItems.EXPLOSION_SPELL_ITEM);
+            event.accept(InitItems.MAGIC_BOLT_SPELL_ITEM);
             //event.accept(InitItems.SUMMON_MAGIC_SWORD_SPELL_ITEM);
 
             //event.accept(InitItems.MAGIC_SWORD);
