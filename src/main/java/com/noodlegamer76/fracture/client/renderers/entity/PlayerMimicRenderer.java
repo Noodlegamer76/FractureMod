@@ -3,6 +3,7 @@ package com.noodlegamer76.fracture.client.renderers.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.noodlegamer76.fracture.client.renderers.entity.util.PlayerMimicItemInHandLayer;
+import com.noodlegamer76.fracture.client.renderers.entity.util.SkinRegistry;
 import com.noodlegamer76.fracture.entity.monster.PlayerMimic;
 import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.client.model.HumanoidModel;
@@ -15,7 +16,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.*;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -45,9 +45,18 @@ public class PlayerMimicRenderer extends LivingEntityRenderer<PlayerMimic, Playe
         this.addLayer(new BeeStingerLayer<>(this));
     }
 
+    public void renderExtra(PlayerMimic entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+        //EntityDebugRenderers.renderHeadLine(entity, partialTicks, buffer, poseStack, 10);
+    }
+
     public void render(PlayerMimic pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
+        if (pEntity.skinName.equals("N/A")) {
+            pEntity.skinName = pEntity.getEntityData().get(PlayerMimic.SKIN_DATA);
+            pEntity.skinTexture = SkinRegistry.getSkin(pEntity.skinName);
+        }
         this.setModelProperties(pEntity);
         super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
+        renderExtra(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     }
 
     public Vec3 getRenderOffset(PlayerMimic pEntity, float pPartialTicks) {
@@ -135,7 +144,8 @@ public class PlayerMimicRenderer extends LivingEntityRenderer<PlayerMimic, Playe
      * Returns the location of an entity's texture.
      */
     public ResourceLocation getTextureLocation(PlayerMimic pEntity) {
-        return pEntity.getSkinTextureLocation();
+        //return pEntity.getSkinTextureLocation();
+        return pEntity.skinTexture;
     }
 
     protected void scale(PlayerMimic pLivingEntity, PoseStack pMatrixStack, float pPartialTickTime) {
@@ -151,12 +161,12 @@ public class PlayerMimicRenderer extends LivingEntityRenderer<PlayerMimic, Playe
             Objective objective = scoreboard.getDisplayObjective(2);
             if (objective != null) {
                 Score score = scoreboard.getOrCreatePlayerScore(pEntity.getScoreboardName(), objective);
-                super.renderNameTag(pEntity, Component.literal(Integer.toString(score.getScore())).append(CommonComponents.SPACE).append(objective.getDisplayName()), pMatrixStack, pBuffer, pPackedLight);
+                super.renderNameTag(pEntity, Component.literal(pEntity.skinName), pMatrixStack, pBuffer, pPackedLight);
                 pMatrixStack.translate(0.0F, 9.0F * 1.15F * 0.025F, 0.0F);
             }
         }
 
-        super.renderNameTag(pEntity, pDisplayName, pMatrixStack, pBuffer, pPackedLight);
+        super.renderNameTag(pEntity, Component.literal(pEntity.skinName), pMatrixStack, pBuffer, pPackedLight);
         pMatrixStack.popPose();
     }
 

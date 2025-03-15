@@ -46,12 +46,13 @@ public class TestItem extends Item {
         if (player instanceof ServerPlayer serverPlayer && serverPlayer.isCrouching()) {
             PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
             mimic.setPos(player.getX(), player.getY(), player.getZ());
+            mimic.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
+            mimic.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.DIAMOND_HELMET));
+            mimic.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
+            mimic.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.DIAMOND_LEGGINGS));
+            mimic.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.DIAMOND_BOOTS));
             level.addFreshEntity(mimic);
-            mimic.setItemInHand(InteractionHand.MAIN_HAND, Items.NETHERITE_SWORD.getDefaultInstance());
-            mimic.setItemSlot(EquipmentSlot.HEAD, Items.NETHERITE_HELMET.getDefaultInstance());
-            mimic.setItemSlot(EquipmentSlot.CHEST, Items.NETHERITE_CHESTPLATE.getDefaultInstance());
-            mimic.setItemSlot(EquipmentSlot.LEGS, Items.NETHERITE_LEGGINGS.getDefaultInstance());
-            mimic.setItemSlot(EquipmentSlot.FEET, Items.NETHERITE_BOOTS.getDefaultInstance());
+
         }
         return super.use(level, player, hand);
     }
