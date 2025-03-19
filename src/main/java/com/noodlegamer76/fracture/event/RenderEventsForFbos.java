@@ -3,9 +3,7 @@ package com.noodlegamer76.fracture.event;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.client.util.ModRenderTypes;
-import com.noodlegamer76.fracture.client.util.RenderCube;
-import com.noodlegamer76.fracture.client.util.SkyBoxRenderer;
+import com.noodlegamer76.fracture.client.util.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -75,6 +73,8 @@ public class RenderEventsForFbos {
             width = Minecraft.getInstance().getWindow().getWidth();
             height = Minecraft.getInstance().getWindow().getHeight();
             changeTextureSize();
+
+            customUniforms();
 
             int current = GL44.glGetInteger(GL44.GL_FRAMEBUFFER_BINDING);
             GlStateManager._glBindFramebuffer(GL44.GL_FRAMEBUFFER, Fbo);
@@ -148,6 +148,13 @@ public class RenderEventsForFbos {
             GlStateManager._glFramebufferTexture2D(GL44.GL_FRAMEBUFFER, GL44.GL_COLOR_ATTACHMENT0, GL44.GL_TEXTURE_2D, postTexture, 0);
 
             GlStateManager._glBindFramebuffer(GL44.GL_FRAMEBUFFER, current);
+        }
+    }
+
+    public static void customUniforms() {
+        for (ExtendedShaderInstance instance: ExtendedShaders.getExtendedShaders()) {
+            instance.setSamplers();
+            instance.addCustomUniforms();
         }
     }
 }

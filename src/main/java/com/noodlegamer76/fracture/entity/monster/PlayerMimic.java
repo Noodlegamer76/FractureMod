@@ -8,7 +8,6 @@ import com.mojang.util.UUIDTypeAdapter;
 import com.noodlegamer76.fracture.client.renderers.entity.util.SkinRegistry;
 import com.noodlegamer76.fracture.entity.ai.behavior.playermimic.CritOrNormalAttack;
 import com.noodlegamer76.fracture.entity.ai.behavior.playermimic.SprintJumpToTarget;
-import com.noodlegamer76.fracture.entity.ai.behavior.playermimic.TryToSwimFast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.client.resources.SkinManager;
@@ -68,9 +67,11 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
     private static final String SKIN_URL_TEMPLATE = "http://skins.minecraft.net/MinecraftSkins/%s.png";
     protected Vec3 deltaMovementOnPreviousTick = Vec3.ZERO;
     //Player attack range is 3.0, this is lowered to decrease difficulty
-    public static final float ATTACK_RANGE = 2.5f;
+    public static final float ATTACK_RANGE = 3;
     public boolean critAttack;
     public boolean usePreloadedSkin = true;
+    public boolean useRandomSkin = true;
+    public String toSetSkinName;
     public ResourceLocation skinTexture = new ResourceLocation("textures/entity/player/wide/steve.png");
     public String skinName = "N/A";
     private static final Map<Pose, EntityDimensions> POSES = ImmutableMap.<Pose, EntityDimensions>builder()
@@ -84,6 +85,7 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
             .build();
     public static float WALK_SPEED = 0.36F;
     public static float CROUCH_SPEED_MOD = 0.3F;
+    public Runnable onDeathAction;
 
 
     public PlayerMimic(EntityType<? extends Monster> pEntityType, Level pLevel) {
@@ -94,11 +96,18 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
         this.deltaMovementOnPreviousTick = this.getDeltaMovement();
         super.tick();
         setPersistenceRequired();
-        if (usePreloadedSkin && (skinName.equals("N/A") || skinName.equals("")) && !level().isClientSide) {
+        if (usePreloadedSkin && (skinName.equals("N/A") || skinName.equals("")) && !level().isClientSide && useRandomSkin) {
             Map.Entry<String, ResourceLocation> skin = SkinRegistry.getRandomSkin();
             this.skinName = skin.getKey();
             this.skinTexture = skin.getValue();
             entityData.set(SKIN_DATA, skinName);
+        }
+        else if (usePreloadedSkin && !skinName.equals("N/A") && !skinName.equals("") && !level().isClientSide && toSetSkinName != null) {
+            if (SkinRegistry.getUniqueSkin(toSetSkinName) != null) {
+                this.skinName = toSetSkinName;
+                this.skinTexture = SkinRegistry.getUniqueSkin(toSetSkinName);
+                entityData.set(SKIN_DATA, skinName);
+            }
         }
     }
 
@@ -154,7 +163,6 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
                 new FirstApplicableBehaviour<>(
-                        new TryToSwimFast<>(),
                         new FloatToSurfaceOfFluid<>()
                 ),
                 new FirstApplicableBehaviour<>(
@@ -235,7 +243,6 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
         float f = (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
         if (critAttack) {
             f *= 1.5f;
-            System.out.println("CRIT");
             crit(pEntity);
         }
         else {
@@ -359,5 +366,18 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
             default:
                 return 1.62F;
         }
+    }
+
+    public void setOnDeathAction(Runnable onDeathAction) {
+        this.onDeathAction = onDeathAction;
+    }
+
+    @Override
+    public boolean isDeadOrDying() {
+        if (this.onDeathAction != null) {
+            this.onDeathAction.run();
+            onDeathAction = null;
+        }
+        return super.isDeadOrDying();
     }
 }

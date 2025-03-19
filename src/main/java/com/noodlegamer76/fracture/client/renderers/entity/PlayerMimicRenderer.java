@@ -52,7 +52,12 @@ public class PlayerMimicRenderer extends LivingEntityRenderer<PlayerMimic, Playe
     public void render(PlayerMimic pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
         if (pEntity.skinName.equals("N/A")) {
             pEntity.skinName = pEntity.getEntityData().get(PlayerMimic.SKIN_DATA);
-            pEntity.skinTexture = SkinRegistry.getSkin(pEntity.skinName);
+            if (SkinRegistry.getSkin(pEntity.skinName) != null) {
+                pEntity.skinTexture = SkinRegistry.getSkin(pEntity.skinName);
+            }
+            else {
+                pEntity.skinTexture = SkinRegistry.getUniqueSkin(pEntity.skinName);
+            }
         }
         this.setModelProperties(pEntity);
         super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);

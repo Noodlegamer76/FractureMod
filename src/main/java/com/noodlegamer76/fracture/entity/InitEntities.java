@@ -120,4 +120,10 @@ public class InitEntities {
             () -> EntityType.Builder.of(ExplosiveBox::new, MobCategory.MISC)
                     .sized(1f, 1f)
                     .build("explosive_box"));
+
+    public static final RegistryObject<EntityType<SkullChomper>> SKULLCHOMPER = ENTITIES.register(("skullchomper"),
+            () -> EntityType.Builder.of(SkullChomper::new, MobCategory.MISC)
+                    .sized(3.2f, 2f)
+                    .build("explosive_box"));
+
 }

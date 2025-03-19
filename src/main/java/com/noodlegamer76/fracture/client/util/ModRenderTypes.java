@@ -1,25 +1,18 @@
 package com.noodlegamer76.fracture.client.util;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import com.noodlegamer76.fracture.FractureMod;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 public class ModRenderTypes extends RenderStateShard{
-    public static ShaderInstance fog;
-    public static ShaderInstance frostedGlass;
-    public static ShaderInstance skybox;
-    public static ShaderInstance normal;
+    public static ExtendedShaderInstance fog;
+    public static ExtendedShaderInstance frostedGlass;
+    public static ExtendedShaderInstance skybox;
+    public static ExtendedShaderInstance normal;
 
 
     public static final RenderType FOG_RENDERTYPE = RenderType.create(

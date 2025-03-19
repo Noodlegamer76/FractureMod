@@ -26,6 +26,7 @@ public class ServerMobEvents {
         event.put(InitEntities.MOOSICLE.get(), Cow.createAttributes().build());
         event.put(InitEntities.GIANT_ROBOT.get(), GiantRobot.createAttributes().build());
         event.put(InitEntities.PLAYER_MIMIC.get(), PlayerMimic.createAttributes().build());
+        event.put(InitEntities.SKULLCHOMPER.get(), SkullChomper.createAttributes().build());
     }
 
     @SubscribeEvent

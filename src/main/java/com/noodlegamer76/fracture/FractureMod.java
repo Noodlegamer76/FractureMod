@@ -2,6 +2,7 @@ package com.noodlegamer76.fracture;
 
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.client.renderers.SkullchomperRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.*;
 import com.noodlegamer76.fracture.client.renderers.entity.block.*;
 import com.noodlegamer76.fracture.creativetabs.FractureTab;
@@ -172,6 +173,7 @@ public class FractureMod
             event.registerEntityRenderer(InitEntities.GIANT_ROBOT.get(), GiantRobotRenderer::new);
             event.registerEntityRenderer(InitEntities.EXPLOSIVE_BOX.get(), ExplosiveBoxRenderer::new);
             event.registerEntityRenderer(InitEntities.PLAYER_MIMIC.get(), PlayerMimicRenderer::new);
+            event.registerEntityRenderer(InitEntities.SKULLCHOMPER.get(), SkullchomperRenderer::new);
 
             event.registerBlockEntityRenderer(InitBlockEntities.FOG_EMITTER.get(), TestRenderer::new);
             event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);
