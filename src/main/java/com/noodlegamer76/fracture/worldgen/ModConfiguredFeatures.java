@@ -29,22 +29,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> INKWOOD_KEY = registerKey("inkwood");
 
-    public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-
-        register(context, INKWOOD_KEY, Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider
-                .simple(InitBlocks.INKWOOD_LOG_BLOCK.get()), new GiantTrunkPlacer(13, 2, 14),
-                BlockStateProvider.simple(InitBlocks.INWKOOD_LEAVES.get()), new MegaPineFoliagePlacer(ConstantInt.of(0),
-                ConstantInt.of(0), UniformInt.of(13, 17)),
-                new TwoLayersFeatureSize(1, 1, 2))).build());
-    }
-
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(FractureMod.MODID, name));
-    }
-
-    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context,
-                                                                                          ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {
-
-        context.register(key, new ConfiguredFeature<>(feature, configuration));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, name));
     }
 }

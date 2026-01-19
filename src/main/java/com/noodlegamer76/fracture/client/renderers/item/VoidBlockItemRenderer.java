@@ -15,7 +15,7 @@ import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 public class VoidBlockItemRenderer extends GeoItemRenderer<VoidBlockItem> {
     public VoidBlockItemRenderer() {
-        super(new DefaultedBlockGeoModel<>(new ResourceLocation(FractureMod.MODID, "inverted_cube")));
+        super(new DefaultedBlockGeoModel<>(ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "inverted_cube")));
     }
 
     @Override

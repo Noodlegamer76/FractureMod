@@ -37,18 +37,10 @@ public class InitBlocks {
             () -> new FrozenGrass(BlockBehaviour.Properties.copy(Blocks.GRASS)));
     public static final RegistryObject<Block> BOREAS_PORTAL = BLOCKS.register("boreas_portal",
             () -> new BoreasPortal(BlockBehaviour.Properties.copy(Blocks.BEDROCK)));
-    public static final RegistryObject<Block> FROSTED_ICE_CRYSTALS = BLOCKS.register("frosted_ice_crystals",
-            () -> new FrostedIceCrystals(BlockBehaviour.Properties.copy(Blocks.GLASS)));
     public static final RegistryObject<Block> ICE_CRYSTAL_BLOCK = BLOCKS.register("ice_crystal_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
     public static final RegistryObject<Block> RADIANT_ICE = BLOCKS.register("radiant_ice",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).lightLevel((l) -> 10)));
-
-    public static final RegistryObject<Block> FOG_EMITTER = BLOCKS.register("fog_emitter",
-            () -> new FogEmitterBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-
-    public static final RegistryObject<Block> MODIFICATION_STATION = BLOCKS.register("modification_station",
-            () -> new ModificationStationBlock(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE)));
 
     public static final RegistryObject<Block> BOREAS_PORTAL_LOCK = BLOCKS.register("boreas_portal_lock",
             () -> new BoreasPortalLock(BlockBehaviour.Properties.copy(Blocks.BEDROCK).noOcclusion()));
@@ -73,9 +65,6 @@ public class InitBlocks {
 
     public static final RegistryObject<Block> FLESH_SPRAYER = BLOCKS.register("flesh_sprayer",
             () -> new FleshParticleSpawner(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.4F)));
-
-    public static final RegistryObject<Block> SKYBOX_GENERATOR = BLOCKS.register("skybox_generator",
-            () -> new SkyboxGenerator(BlockBehaviour.Properties.of().noOcclusion()));
 
 
     public static final RegistryObject<Block> BLOOD_SLIME_BLOCK = BLOCKS.register("blood_slime_block",

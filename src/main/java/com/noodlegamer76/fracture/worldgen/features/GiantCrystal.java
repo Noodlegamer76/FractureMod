@@ -38,7 +38,6 @@ public class GiantCrystal extends Feature<NoneFeatureConfiguration> {
                 double offsetY = direction.y * j;
                 double offsetZ = direction.z * j;
 
-                // Constrain horizontal distance to 16 blocks
                 double clampedX = Math.min(Math.max(offsetX, -16), 16);
                 double clampedZ = Math.min(Math.max(offsetZ, -16), 16);
 

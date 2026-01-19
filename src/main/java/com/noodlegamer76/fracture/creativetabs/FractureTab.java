@@ -12,8 +12,6 @@ public class FractureTab {
     @SubscribeEvent
     public void buildContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == InitCreativeTabs.FRACTURE_TAB.getKey()) {
-
-            //example of how to add item to creative tab
             event.accept(InitItems.BLOODY_BOOKSHELF);
             event.accept(InitItems.BLOOD_BUCKET);
             event.accept(InitItems.BROOM);
@@ -46,7 +44,6 @@ public class FractureTab {
             event.accept(InitItems.BLOOD_SLIME_BALL);
             event.accept(InitItems.HANGING_FLESH);
             event.accept(InitItems.INTESTINE);
-            event.accept(InitItems.INVERTED_GLASSES);
             event.accept(InitItems.LARGE_FLESH_BULB);
             event.accept(InitItems.LIVING_FLESH);
             event.accept(InitItems.SMALL_FLESH_BULB);
@@ -66,11 +63,6 @@ public class FractureTab {
             event.accept(InitItems.PERMAFROST_SHOVEL);
             event.accept(InitItems.PERMAFROST_HOE);
 
-
-
-
-
-            event.accept(InitItems.SKYBOX_GENERATOR);
             event.accept(InitItems.COMPACT_TNT);
             event.accept(InitItems.SMOKE_STACK);
             //event.accept(InitItems.VOID_BLOCK);
@@ -116,21 +108,7 @@ public class FractureTab {
             event.accept(InitBlocks.METAL_GRATE.getItem());
 
 
-            event.accept(InitItems.WAND);
-            event.accept(InitItems.FROZEN_SPELLBOOK);
-            event.accept(InitItems.GIANT_SNOWBALL_SPELL_ITEM);
-            event.accept(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM);
-            event.accept(InitItems.DOUBLE_CAST_SPELL_ITEM);
-            event.accept(InitItems.DOUBLE_CAST_INACCURATE_SPELL_ITEM);
-            event.accept(InitItems.TRIPLE_CAST_SPELL_ITEM);
-            event.accept(InitItems.RANDOM_SHOT_SPELL_ITEM);
-            event.accept(InitItems.EXPLOSION_SPELL_ITEM);
-            event.accept(InitItems.MAGIC_BOLT_SPELL_ITEM);
-            //event.accept(InitItems.SUMMON_MAGIC_SWORD_SPELL_ITEM);
-
-            //event.accept(InitItems.MAGIC_SWORD);
             event.accept(InitItems.ANKLE_BITER_SPAWN_EGG);
-            event.accept(InitItems.BLOOD_SLIME_SPAWN_EGG);
             event.accept(InitItems.FLESH_SLIME_SPAWN_EGG);
             event.accept(InitItems.FLESH_WALKER_SPAWN_EGG);
             event.accept(InitItems.ABDOMINAL_SNOWMAN_SPAWN_EGG);

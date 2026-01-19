@@ -1,7 +1,7 @@
 package com.noodlegamer76.fracture.gui;
 
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
+import com.noodlegamer76.fracture.item.TestItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
@@ -10,11 +10,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 public class WandOverlay {
-    public static final ResourceLocation MANA_EMPTY = new ResourceLocation(FractureMod.MODID, "textures/hud/mana_empty.png");
-    public static final ResourceLocation MANA_FULL = new ResourceLocation(FractureMod.MODID, "textures/hud/mana_full.png");
+    public static final ResourceLocation MANA_EMPTY = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "textures/hud/mana_empty.png");
+    public static final ResourceLocation MANA_FULL = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "textures/hud/mana_full.png");
 
-    public static final ResourceLocation RECHARGE_EMPTY = new ResourceLocation(FractureMod.MODID, "textures/hud/recharge_empty.png");
-    public static final ResourceLocation RECHARGE_FULL = new ResourceLocation(FractureMod.MODID, "textures/hud/recharge_full.png");
+    public static final ResourceLocation RECHARGE_EMPTY = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "textures/hud/recharge_empty.png");
+    public static final ResourceLocation RECHARGE_FULL = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "textures/hud/recharge_full.png");
 
     public static final IGuiOverlay HUD_MANA = ((gui, guiGraphics, partialTick, screenWidth, screenHeight) -> {
         int x = screenWidth;
@@ -24,10 +24,10 @@ public class WandOverlay {
         assert player != null;
 
         ItemStack wand = null;
-        if (player.getOffhandItem().getItem() instanceof Wand) {
+        if (player.getOffhandItem().getItem() instanceof TestItem) {
             wand = player.getOffhandItem();
         }
-        else if (player.getMainHandItem().getItem() instanceof Wand) {
+        else if (player.getMainHandItem().getItem() instanceof TestItem) {
             wand = player.getMainHandItem();
         }
         if (wand == null || !wand.getOrCreateTag().getBoolean("isCreated")) {

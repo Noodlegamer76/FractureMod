@@ -29,9 +29,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
             }
         }
 
-        //some examples for blocks that don't seem to work by normally using the methods
-        //all blocks need to be set here due to how ModLootTableProvider is set up
-
         dropSelf(InitBlocks.METAL_GRATE.getBlock());
         dropSelf(InitBlocks.FLESH_BLOCK.get());
         dropSelf(InitBlocks.FLESH_STAIRS.get());
@@ -89,7 +86,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.FLESHY_DARKSTONE_PILLAR.get());
 
         dropSelf(InitBlocks.FLESH_SPRAYER.get());
-        dropSelf(InitBlocks.FOG_EMITTER.get());
 
         dropOther(InitBlocks.BLOOD_BLOCK.get(), Blocks.BIRCH_DOOR);
 
@@ -110,9 +106,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.INKWOOD_CEILING_HANGING_SIGN_BLOCK.get());
         dropSelf(InitBlocks.INKWOOD_WALL_HANGING_SIGN_BLOCK.get());
         dropSelf(InitBlocks.VOID_BLOCK.get());
-        dropSelf(InitBlocks.MODIFICATION_STATION.get());
 
-        dropSelf(InitBlocks.SKYBOX_GENERATOR.get());
+
         dropSelf(InitBlocks.COMPACT_TNT.get());
         dropSelf(InitBlocks.SMOKE_STACK.get());
 
@@ -131,18 +126,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(InitBlocks.BOREAS_PORTAL_FRAME.get());
         dropSelf(InitBlocks.BOREAS_PORTAL.get());
         dropSelf(InitBlocks.PERMAFROST.get());
-
-        dropWhenSilkTouch(InitBlocks.FROSTED_ICE_CRYSTALS.get());
-
-        //dropSelf(BlockInit.CRYSTALLIZED_DIRT.get());
-
-        //this.add(BlockInit.RAINBOW_SLAB.get(),
-        //        block -> createSlabItemTable(BlockInit.RAINBOW_SLAB.get()));
-        //this.add(BlockInit.RAINBOW_DOOR.get(),
-        //        block -> createDoorTable(BlockInit.RAINBOW_DOOR.get()));
-
-        //this.add(BlockInit.RAINBOW_LEAVES.get(), (block) ->
-        //        createLeavesDrops(block, BlockInit.RAINBOW_LEAVES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
     }
 
 

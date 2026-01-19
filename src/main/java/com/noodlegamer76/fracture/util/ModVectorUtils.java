@@ -4,7 +4,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-public class ModVectors {
+public class ModVectorUtils {
 
     public static @NotNull Vec3 getForwardVector(@NotNull Entity entity) {
         float yaw = entity.getYRot();
@@ -19,6 +19,4 @@ public class ModVectors {
 
         return new Vec3(x, y, z);
     }
-
-
 }

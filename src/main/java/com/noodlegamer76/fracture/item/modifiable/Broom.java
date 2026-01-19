@@ -17,7 +17,7 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
-public class Broom extends ModifiableItem {
+public class Broom extends Item {
     public Broom(Properties pProperties) {
         super(pProperties);
     }
@@ -25,8 +25,6 @@ public class Broom extends ModifiableItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         double boundary = 2;
-        //AABB box = new AABB(player.getX() - boundary, player.getY() - boundary, player.getZ() - boundary,
-        //        player.getX() + boundary, player.getY() + boundary, player.getZ() + boundary);
         AABB box = new AABB(player.getX() - boundary, player.getY() - boundary, player.getZ() - boundary,
                 player.getX() + boundary, player.getY() + boundary, player.getZ() + boundary);
 

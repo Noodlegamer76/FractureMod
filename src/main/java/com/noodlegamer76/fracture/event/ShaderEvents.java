@@ -15,33 +15,11 @@ import java.io.IOException;
 @Mod.EventBusSubscriber(modid = FractureMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ShaderEvents {
 
-
-
     @SubscribeEvent
     public static void registerShaders(net.minecraftforge.client.event.RegisterShadersEvent event) throws IOException {
         event.registerShader(new ExtendedShaderInstance(event.getResourceProvider(),
-                        new ResourceLocation(FractureMod.MODID, "fog"),
-                        DefaultVertexFormat.POSITION),
-                (e) -> ModRenderTypes.fog = (ExtendedShaderInstance) e);
-
-        event.registerShader(new ExtendedShaderInstance(event.getResourceProvider(),
-                        new ResourceLocation(FractureMod.MODID, "skybox"),
+                        ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "skybox"),
                         DefaultVertexFormat.POSITION),
                 (e) -> ModRenderTypes.skybox = (ExtendedShaderInstance) e);
-
-        event.registerShader(new ExtendedShaderInstance(event.getResourceProvider(),
-                        new ResourceLocation(FractureMod.MODID, "normal"),
-                        DefaultVertexFormat.POSITION),
-                (e) -> ModRenderTypes.normal = (ExtendedShaderInstance) e);
-
-        event.registerShader(new ExtendedShaderInstance(event.getResourceProvider(),
-                        new ResourceLocation(FractureMod.MODID, "frosted_glass"),
-                        DefaultVertexFormat.POSITION),
-                (e) -> ModRenderTypes.frostedGlass = (ExtendedShaderInstance) e);
-    }
-
-    @SubscribeEvent
-    public static void dimensionSpecialEffect(RegisterDimensionSpecialEffectsEvent event) {
-
     }
 }

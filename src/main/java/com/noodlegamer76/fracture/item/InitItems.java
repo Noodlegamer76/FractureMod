@@ -5,11 +5,7 @@ import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.fluid.InitFluids;
-import com.noodlegamer76.fracture.item.armor.InvertedGlasses;
 import com.noodlegamer76.fracture.item.modifiable.Broom;
-import com.noodlegamer76.fracture.spellcrafting.spells.item.*;
-import com.noodlegamer76.fracture.spellcrafting.wand.CreativeWand;
-import com.noodlegamer76.fracture.spellcrafting.wand.FrozenSpellBook;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -38,8 +34,6 @@ public class InitItems {
             () -> new BlockItem(InitBlocks.BOREAS_PORTAL_LOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> BOREAS_PORTAL_FRAME = ITEMS.register("boreas_portal_frame",
             () -> new BlockItem(InitBlocks.BOREAS_PORTAL_FRAME.get(), new Item.Properties()));
-    public static final RegistryObject<Item> MODIFICATION_STATION = ITEMS.register("modification_station",
-            () -> new BlockItem(InitBlocks.MODIFICATION_STATION.get(), new Item.Properties()));
     public static final RegistryObject<Item> PERMAFROST = ITEMS.register("permafrost",
             () -> new BlockItem(InitBlocks.PERMAFROST.get(), new Item.Properties()));
     public static final RegistryObject<Item> ICE_CRYSTAL_BLOCK = ITEMS.register("ice_crystal_block",
@@ -68,50 +62,13 @@ public class InitItems {
     public static final RegistryObject<Item> PERMAFROST_AXE = ITEMS.register("permafrost_axe",
             () -> new PermafrostAxe(ToolTiers.ModItemTier.PERMAFROST, 5.0F, -3.0F, new Item.Properties()));
     public static final RegistryObject<Item> PERMAFROST_SHOVEL = ITEMS.register("permafrost_shovel",
-            () -> new ShovelItem(ToolTiers.ModItemTier.PERMAFROST, 1.5F, -3.0F, new Item.Properties()));
+            () -> new PermafrostShovel(ToolTiers.ModItemTier.PERMAFROST, 1.5F, -3.0F, new Item.Properties()));
     public static final RegistryObject<Item> PERMAFROST_HOE = ITEMS.register("permafrost_hoe",
             () -> new HoeItem(ToolTiers.ModItemTier.PERMAFROST, -3, 0.0F, new Item.Properties()));
 
-    public static final RegistryObject<Item> WAND = ITEMS.register("wand",
-            () -> new CreativeWand(new Item.Properties()));
-    public static final RegistryObject<Item> FROZEN_SPELLBOOK = ITEMS.register("frozen_spellbook",
-            () -> new FrozenSpellBook(new Item.Properties()));
-
-    public static final RegistryObject<Item> VOID_BALL_SPELL_ITEM = ITEMS.register("void_ball_spell",
-            () -> new VoidBallSpellItem(new Item.Properties(), false));
-    public static final RegistryObject<Item> GIANT_SNOWBALL_SPELL_ITEM = ITEMS.register("giant_snowball_spell",
-            () -> new GiantSnowBallSpellItem(new Item.Properties(), true));
-    public static final RegistryObject<Item> DOUBLE_CAST_SPELL_ITEM = ITEMS.register("double_cast_spell",
-            () -> new DoubleCastSpellItem(new Item.Properties(), true));
-    public static final RegistryObject<Item> TRIPLE_CAST_SPELL_ITEM = ITEMS.register("triple_cast_spell",
-            () -> new TripleCastSpellItem(new Item.Properties(), true));
-    public static final RegistryObject<Item> ICE_SPIKE_SCATTER_SPELL_ITEM = ITEMS.register("ice_spike_scatter_spell",
-            () -> new IceSpikeScatterSpellItem(new Item.Properties(), false));
-    public static final RegistryObject<Item> DOUBLE_CAST_INACCURATE_SPELL_ITEM = ITEMS.register("double_cast_inaccurate_spell",
-            () -> new DoubleCastInaccurateSpellItem(new Item.Properties(), true));
-    public static final RegistryObject<Item> RANDOM_SHOT_SPELL_ITEM = ITEMS.register("random_shot_spell",
-            () -> new RandomShotSpellItem(new Item.Properties(), true));
-    public static final RegistryObject<Item> GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM = ITEMS.register("giant_snowball_with_trigger_spell",
-            () -> new GiantSnowballWithTriggerSpellItem(new Item.Properties(), true));
-    public static final RegistryObject<Item> EXPLOSION_SPELL_ITEM = ITEMS.register("explosion_spell",
-            () -> new ExplosionSpellItem(new Item.Properties(), true));
-    public static final RegistryObject<Item> SUMMON_MAGIC_SWORD_SPELL_ITEM = ITEMS.register("summon_magic_sword_spell",
-            () -> new SummonMagicSwordSpellItem(new Item.Properties(), false));
-    public static final RegistryObject<Item> MAGIC_BOLT_SPELL_ITEM = ITEMS.register("magic_bolt_spell",
-            () -> new MagicBoltSpellItem(new Item.Properties(), true));
-
-
-    public static final RegistryObject<Item> MAGIC_SWORD = ITEMS.register("magic_sword",
-            () -> new MagicSword(Tiers.IRON, 3, -2.4F, new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> FOG_EMITTER = ITEMS.register("fog_emitter",
-            () -> new BlockItem(InitBlocks.FOG_EMITTER.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> FROZEN_GRASS = ITEMS.register("frozen_grass",
             () -> new BlockItem(InitBlocks.FROZEN_GRASS.get(), new Item.Properties()));
-
-    public static final RegistryObject<Item> FROSTED_ICE_CRYSTALS = ITEMS.register("frosted_ice_crystals",
-            () -> new BlockItem(InitBlocks.FROSTED_ICE_CRYSTALS.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> VOID_BLOCK = ITEMS.register("void_block",
             () -> new VoidBlockItem(InitBlocks.VOID_BLOCK.get(), new Item.Properties()));
@@ -126,9 +83,6 @@ public class InitItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PERMAFROST_SHARD = ITEMS.register("permafrost_shard",
             () -> new Item(new Item.Properties()));
-
-    public static final RegistryObject<Item> SKYBOX_GENERATOR = ITEMS.register("skybox_generator",
-            () -> new SkyboxGeneratorItem(InitBlocks.SKYBOX_GENERATOR.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> INKWOOD_LEAVES = ITEMS.register("inkwood_leaves",
             () -> new BlockItem(InitBlocks.INWKOOD_LEAVES.get(), new Item.Properties()));
@@ -160,8 +114,6 @@ public class InitItems {
             () -> new ForgeSpawnEggItem(InitEntities.FLESH_WALKER, new Color(74, 10, 3).getRGB(), new Color(207, 95, 110).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> FLESH_SLIME_SPAWN_EGG = ITEMS.register("flesh_slime_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.FLESH_SLIME, new Color(74, 10, 3).getRGB(), new Color(15, 50, 15).getRGB(), new Item.Properties()));
-    public static final RegistryObject<Item> BLOOD_SLIME_SPAWN_EGG = ITEMS.register("blood_slime_spawn_egg",
-            () -> new ForgeSpawnEggItem(InitEntities.BLOOD_SLIME, new Color(74, 10, 3).getRGB(), new Color(255, 0, 0).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> ABDOMINAL_SNOWMAN_SPAWN_EGG = ITEMS.register("abdominal_snowman_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.ABDOMINAL_SNOWMAN, new Color(Color.WHITE.getRGB()).getRGB(), new Color(Color.LIGHT_GRAY.getRGB()).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG = ITEMS.register("knowledgeable_snowman_spawn_egg",
@@ -171,8 +123,6 @@ public class InitItems {
     public static final RegistryObject<Item> COMPARABLE_SNOWMAN_SPAWN_EGG = ITEMS.register("comparable_snowman_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.COMPARABLE_SNOWMAN, new Color(0, 80, 203).getRGB(), new Color(127, 127, 199).getRGB(), new Item.Properties()));
 
-    public static final RegistryObject<Item> INVERTED_GLASSES = ITEMS.register("inverted_glasses",
-            () -> new InvertedGlasses(ArmorTiers.TRINKETS, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> BLOODY_SKULL = ITEMS.register("bloody_skull",
             () -> new ArmorItem(ArmorTiers.BLOOD_HELMET, ArmorItem.Type.HELMET, new Item.Properties()));
 

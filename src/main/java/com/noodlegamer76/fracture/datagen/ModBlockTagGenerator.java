@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagGenerator extends BlockTagsProvider  {
-    public static final TagKey<Block> FLESH_SOLID = BlockTags.create(new ResourceLocation(FractureMod.MODID, "flesh_solid"));
+    public static final TagKey<Block> FLESH_SOLID = BlockTags.create(ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "flesh_solid"));
     public ModBlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, modId, existingFileHelper);
     }
@@ -99,7 +99,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider  {
                         InitBlocks.FLESHY_DARKSTONE_BRICK_SLAB.get(),
                         InitBlocks.FLESHY_DARKSTONE_BRICK_WALL.get(),
                         InitBlocks.FLESHY_DARKSTONE_BRICK_STAIRS.get(),
-                        InitBlocks.SKYBOX_GENERATOR.get(),
                         InitBlocks.SMOKE_STACK.get(),
                         InitBlocks.VOID_BLOCK.get(),
                         InitBlocks.ICE_CRYSTAL_BLOCK.get(),

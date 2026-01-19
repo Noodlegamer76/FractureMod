@@ -15,17 +15,13 @@ public class ServerMobEvents {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(InitEntities.FLESH_RATTLER.get(), FleshRattlerEntity.createAttributes().build());
         event.put(InitEntities.ANKLE_BITER.get(), AnkleBiterEntity.createAttributes().build());
         event.put(InitEntities.FLESH_WALKER.get(), FleshWalkerEntity.createAttributes().build());
         event.put(InitEntities.FLESH_SLIME.get(), FleshSlimeEntity.createAttributes().build());
-        event.put(InitEntities.BLOOD_SLIME.get(), BloodSlimeEntity.createAttributes().build());
         event.put(InitEntities.ABDOMINAL_SNOWMAN.get(), AbdominalSnowman.createAttributes().build());
         event.put(InitEntities.KNOWLEDGEABLE_SNOWMAN.get(), KnowledgeableSnowman.createAttributes().build());
         event.put(InitEntities.COMPARABLE_SNOWMAN.get(), ComparableSnowman.createAttributes().build());
         event.put(InitEntities.MOOSICLE.get(), Cow.createAttributes().build());
-        event.put(InitEntities.GIANT_ROBOT.get(), GiantRobot.createAttributes().build());
-        event.put(InitEntities.PLAYER_MIMIC.get(), PlayerMimic.createAttributes().build());
         event.put(InitEntities.SKULLCHOMPER.get(), SkullChomper.createAttributes().build());
     }
 
@@ -33,8 +29,4 @@ public class ServerMobEvents {
     public static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(PacketHandler::register);
     }
-
-
-
-
 }

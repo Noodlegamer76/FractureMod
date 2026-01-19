@@ -11,30 +11,18 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 public class PacketHandler {
     public static final SimpleChannel INSTANCE = NetworkRegistry.ChannelBuilder.named(
-            new ResourceLocation(FractureMod.MODID, "main"))
+            ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "main"))
             .serverAcceptedVersions((e) -> true)
             .clientAcceptedVersions((e) -> true)
             .networkProtocolVersion(() -> NetworkConstants.NETVERSION)
             .simpleChannel();
 
     public static void register() {
-        INSTANCE.messageBuilder(SSkyboxGeneratorPacket.class, 0, NetworkDirection.PLAY_TO_SERVER)
-                .encoder(SSkyboxGeneratorPacket::encode)
-                .decoder(SSkyboxGeneratorPacket::new)
-                .consumerMainThread(SSkyboxGeneratorPacket::handle)
-                .add();
-
-        INSTANCE.messageBuilder(SpellAmountPacket.class, 1, NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(SpellAmountPacket::encode)
-                .decoder(SpellAmountPacket::new)
-                .consumerMainThread(SpellAmountPacket::handle)
-                .add();
-
-        INSTANCE.messageBuilder(SpellInvPacket.class, 0, NetworkDirection.PLAY_TO_SERVER)
-                .encoder(SpellInvPacket::encode)
-                .decoder(SpellInvPacket::new)
-                .consumerMainThread(SpellInvPacket::handle)
-                .add();
+       //INSTANCE.messageBuilder(SSkyboxGeneratorPacket.class, 0, NetworkDirection.PLAY_TO_SERVER)
+       //        .encoder(SSkyboxGeneratorPacket::encode)
+       //        .decoder(SSkyboxGeneratorPacket::new)
+       //        .consumerMainThread(SSkyboxGeneratorPacket::handle)
+       //        .add();
     }
 
     public static void sendToServer(Object msg) {

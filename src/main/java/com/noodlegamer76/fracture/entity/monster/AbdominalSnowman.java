@@ -1,6 +1,6 @@
 package com.noodlegamer76.fracture.entity.monster;
 
-import com.noodlegamer76.fracture.util.ModVectors;
+import com.noodlegamer76.fracture.util.ModVectorUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
@@ -116,7 +116,7 @@ public class AbdominalSnowman extends Monster implements GeoEntity, SmartBrainOw
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
-        Vec3 forward = ModVectors.getForwardVector(this);
+        Vec3 forward = ModVectorUtils.getForwardVector(this);
         pEntity.addDeltaMovement(forward.scale(2.0));
         return super.doHurtTarget(pEntity);
     }

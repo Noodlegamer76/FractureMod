@@ -1,6 +1,5 @@
 package com.noodlegamer76.fracture.item;
 
-import com.noodlegamer76.fracture.client.renderers.entity.block.VoidBlockRenderer;
 import com.noodlegamer76.fracture.client.renderers.item.VoidBlockItemRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
@@ -34,7 +33,6 @@ public class VoidBlockItem extends BlockItem implements GeoItem {
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             private VoidBlockItemRenderer renderer = null;
-            // Don't instantiate until ready. This prevents race conditions breaking things
             @Override public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (this.renderer == null)
                     this.renderer = new VoidBlockItemRenderer();

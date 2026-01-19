@@ -14,18 +14,18 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockStateProvider extends BlockStateProvider {
-    public static final ResourceLocation FLESH_BLOCK = new ResourceLocation(FractureMod.MODID, "block/flesh_block");
-    public static final ResourceLocation FLESHY_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/fleshy_darkstone_bricks");
-    public static final ResourceLocation DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/darkstone_bricks");
-    public static final ResourceLocation CRACKED_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/cracked_darkstone_bricks");
-    public static final ResourceLocation DARKSTONE = new ResourceLocation(FractureMod.MODID, "block/darkstone");
-    public static final ResourceLocation BLOODY_WOOD = new ResourceLocation(FractureMod.MODID, "block/bloody_wood");
-    public static final ResourceLocation BLOODY_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/bloody_bookshelf");
-    public static final ResourceLocation INKWOOD_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/inkwood_bookshelf");
-    public static final ResourceLocation INKWOOD_PLANKS = new ResourceLocation(FractureMod.MODID, "block/inkwood_planks");
-    public static final ResourceLocation FLESH_SPRAYER = new ResourceLocation(FractureMod.MODID, "block/flesh_sprayer");
-    public static final ResourceLocation SMOKE_STACK_SIDE = new ResourceLocation(FractureMod.MODID, "block/smoke_stack_side");
-    public static final ResourceLocation SMOKE_STACK_TOP = new ResourceLocation(FractureMod.MODID, "block/smoke_stack_top");
+    public static final ResourceLocation FLESH_BLOCK = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/flesh_block");
+    public static final ResourceLocation FLESHY_DARKSTONE_BRICKS = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/fleshy_darkstone_bricks");
+    public static final ResourceLocation DARKSTONE_BRICKS = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/darkstone_bricks");
+    public static final ResourceLocation CRACKED_DARKSTONE_BRICKS = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/cracked_darkstone_bricks");
+    public static final ResourceLocation DARKSTONE = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/darkstone");
+    public static final ResourceLocation BLOODY_WOOD = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/bloody_wood");
+    public static final ResourceLocation BLOODY_BOOKSHELF = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/bloody_bookshelf");
+    public static final ResourceLocation INKWOOD_BOOKSHELF = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_bookshelf");
+    public static final ResourceLocation INKWOOD_PLANKS = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_planks");
+    public static final ResourceLocation FLESH_SPRAYER = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/flesh_sprayer");
+    public static final ResourceLocation SMOKE_STACK_SIDE = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/smoke_stack_side");
+    public static final ResourceLocation SMOKE_STACK_TOP = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/smoke_stack_top");
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, FractureMod.MODID, exFileHelper);
     }
@@ -46,14 +46,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         paneBlockWithRenderType(
                 (IronBarsBlock) InitBlocks.PRISON_BARS.get(),
-                new ResourceLocation(FractureMod.MODID, "block/prison_bars"),
-                new ResourceLocation(FractureMod.MODID, "block/prison_bars"),
+                ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/prison_bars"),
+                ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/prison_bars"),
                 "cutout"
         );
         paneBlockWithRenderType(
                 (IronBarsBlock) InitBlocks.RUSTY_IRON_BARS.get(),
-                new ResourceLocation(FractureMod.MODID, "block/rusty_iron_bars"),
-                new ResourceLocation(FractureMod.MODID, "block/rusty_iron_bars"),
+                ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/rusty_iron_bars"),
+                ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/rusty_iron_bars"),
                 "cutout"
         );
 
@@ -96,9 +96,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         cubeColumn(InitBlocks.INKWOOD_BOOKSHELF, INKWOOD_BOOKSHELF, INKWOOD_PLANKS);
         cubeColumn(InitBlocks.FLESH_SPRAYER, FLESH_BLOCK, FLESH_SPRAYER);
 
-        final ResourceLocation INKWOOD_PLANKS_TEXTURE = new ResourceLocation(FractureMod.MODID, "block/inkwood_planks");
-        final ResourceLocation INKWOOD_LOG_TEXTURE = new ResourceLocation(FractureMod.MODID, "block/inkwood_log");
-        final ResourceLocation STRIPPED_INKWOOD_WOOD = new ResourceLocation(FractureMod.MODID, "block/inkwood_stripped_log");
+        final ResourceLocation INKWOOD_PLANKS_TEXTURE = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_planks");
+        final ResourceLocation INKWOOD_LOG_TEXTURE = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_log");
+        final ResourceLocation STRIPPED_INKWOOD_WOOD = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_stripped_log");
 
         logBlock((RotatedPillarBlock) InitBlocks.INKWOOD_LOG_BLOCK.get());
         axisBlock((RotatedPillarBlock) InitBlocks.INKWOOD_WOOD_BLOCK.get(), INKWOOD_LOG_TEXTURE, INKWOOD_LOG_TEXTURE);

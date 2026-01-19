@@ -46,8 +46,7 @@ public class FleshParticleSpawner extends Block {
 
     @Override
     public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-        if (pEntity instanceof BloodSlimeEntity ||
-                pEntity instanceof FleshSlimeEntity ||
+        if (pEntity instanceof FleshSlimeEntity ||
                 pEntity instanceof AnkleBiterEntity ||
                 pEntity instanceof FleshWalkerEntity ||
                 (pEntity instanceof SkullChomper)) {

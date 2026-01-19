@@ -1,10 +1,5 @@
 package com.noodlegamer76.fracture.entity.monster;
 
-import com.noodlegamer76.fracture.client.renderers.entity.MultiAttackMonster;
-import com.noodlegamer76.fracture.entity.ai.behavior.KnowledgeableSnowmanSpellCast;
-import com.noodlegamer76.fracture.item.InitItems;
-import com.noodlegamer76.fracture.spellcrafting.CreateWand;
-import com.noodlegamer76.fracture.spellcrafting.wand.Wand;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -49,43 +44,18 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntity, SmartBrainOwner<KnowledgeableSnowman> {
+public class KnowledgeableSnowman extends Monster implements GeoEntity, SmartBrainOwner<KnowledgeableSnowman> {
     AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
     public static final RawAnimation CASTING = RawAnimation.begin().thenPlay("casting");
-
-    public final int SNOWBALL_LAUNCH = 1;
-    public final int SNOWBALL_SPREAD_LAUNCH = 2;
-    public final int FROST_BEAM = 3;
-    public final int ICE_CICLE = 4;
 
     public KnowledgeableSnowman(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
 
-    @Override
-    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        setItemInHand(InteractionHand.MAIN_HAND, InitItems.WAND.get().getDefaultInstance());
-        if (getMainHandItem().getItem() instanceof Wand) {
-            CompoundTag nbt = getMainHandItem().getOrCreateTag();
-            if (!nbt.contains("isCreated")) {
-                new CreateWand().createStats(nbt, getMainHandItem());
-            }
-        }
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
-    }
 
     @Override
     protected float getEquipmentDropChance(EquipmentSlot pSlot) {
         return 0.0f;
-    }
-
-    @Override
-    public void setAttackNumber() {
-        if (!resettingSpells) {
-            return;
-        }
-        resettingSpells = false;
-        attackNumber = random.nextInt(1, 3);
     }
 
     @Override
@@ -149,48 +119,12 @@ public class KnowledgeableSnowman extends MultiAttackMonster implements GeoEntit
     public BrainActivityGroup<? extends KnowledgeableSnowman> getFightTasks() {
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>().stopTryingToPathAfter(10),
-                new SetWalkTargetToAttackTarget<>(),
-                new KnowledgeableSnowmanSpellCast<>()
+                new SetWalkTargetToAttackTarget<>()
         );
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "casting", this::casting));
-    }
-
-    private PlayState casting(AnimationState<KnowledgeableSnowman> state) {
-        if (entityData.get(DATA_ATTACK) == 0) {
-            state.resetCurrentAnimation();
-            return PlayState.STOP;
-        }
-        state.setAnimation(CASTING);
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-
-        ItemStack wand = getMainHandItem();
-        if (getMainHandItem().getItem() instanceof Wand) {
-            CompoundTag nbt = getMainHandItem().getOrCreateTag();
-                if (wand.getOrCreateTag().getBoolean("isCreated")) {
-                    float currentMana = wand.getTag().getFloat("currentMana");
-                    float manaRechargeSpeed = wand.getTag().getFloat("manaRechargeSpeed");
-                    float maxMana = wand.getTag().getFloat("maxMana");
-                    if (currentMana + manaRechargeSpeed >= maxMana) {
-                        wand.getTag().putFloat("currentMana", maxMana);
-                    }
-                    else {
-                        wand.getTag().putFloat("currentMana", currentMana + manaRechargeSpeed);
-                    }
-                    float currentCastDelay = wand.getTag().getFloat("currentCastDelay");
-                    if (currentCastDelay > 0) {
-                        wand.getTag().putFloat("currentCastDelay", currentCastDelay - 1);
-                    }
-            }
-        }
     }
 
     @Override

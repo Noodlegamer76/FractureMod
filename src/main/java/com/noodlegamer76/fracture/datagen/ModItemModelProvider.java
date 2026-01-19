@@ -18,25 +18,25 @@ import net.minecraftforge.registries.RegistryObject;
 import static com.noodlegamer76.fracture.datagen.DataGenerators.BLOCKS;
 
 public class ModItemModelProvider extends ItemModelProvider {
-    public static final ResourceLocation FLESH_BLOCK = new ResourceLocation(FractureMod.MODID, "block/flesh_block");
-    public static final ResourceLocation FLESHY_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/fleshy_darkstone_bricks");
-    public static final ResourceLocation DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/darkstone_bricks");
-    public static final ResourceLocation CRACKED_DARKSTONE_BRICKS = new ResourceLocation(FractureMod.MODID, "block/cracked_darkstone_bricks");
-    public static final ResourceLocation DARKSTONE_PILLAR_TOP = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_top");
-    public static final ResourceLocation DARKSTONE_PILLAR_SIDE = new ResourceLocation(FractureMod.MODID, "block/darkstone_pillar_side");
-    public static final ResourceLocation FLESHY_DARKSTONE_PILLAR_TOP = new ResourceLocation(FractureMod.MODID, "block/fleshy_darkstone_pillar_top");
-    public static final ResourceLocation FLESHY_DARKSTONE_PILLAR_SIDE = new ResourceLocation(FractureMod.MODID, "block/fleshy_darkstone_pillar_side");
-    public static final ResourceLocation DARKSTONE = new ResourceLocation(FractureMod.MODID, "block/darkstone");
-    public static final ResourceLocation BLOODY_WOOD = new ResourceLocation(FractureMod.MODID, "block/bloody_wood");
-    public static final ResourceLocation BLOODY_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/bloody_bookshelf");
-    public static final ResourceLocation INKWOOD_PLANKS = new ResourceLocation(FractureMod.MODID, "block/inkwood_planks");
-    final ResourceLocation INKWOOD_LOG_TEXTURE = new ResourceLocation(FractureMod.MODID, "block/inkwood_log");
-    final ResourceLocation INKWOOD_LOG_TOP = new ResourceLocation(FractureMod.MODID, "block/inkwood_log_top");
-    final ResourceLocation STRIPPED_INKWOOD_WOOD = new ResourceLocation(FractureMod.MODID, "block/inkwood_stripped_log");
-    final ResourceLocation INKWOOD_BOOKSHELF = new ResourceLocation(FractureMod.MODID, "block/inkwood_bookshelf");
-    public static final ResourceLocation FLESH_SPRAYER = new ResourceLocation(FractureMod.MODID, "block/flesh_sprayer");
-    public static final ResourceLocation SMOKE_STACK_SIDE = new ResourceLocation(FractureMod.MODID, "block/smoke_stack_side");
-    public static final ResourceLocation SMOKE_STACK_TOP = new ResourceLocation(FractureMod.MODID, "block/smoke_stack_top");
+    public static final ResourceLocation FLESH_BLOCK = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/flesh_block");
+    public static final ResourceLocation FLESHY_DARKSTONE_BRICKS = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/fleshy_darkstone_bricks");
+    public static final ResourceLocation DARKSTONE_BRICKS = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/darkstone_bricks");
+    public static final ResourceLocation CRACKED_DARKSTONE_BRICKS = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/cracked_darkstone_bricks");
+    public static final ResourceLocation DARKSTONE_PILLAR_TOP = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/darkstone_pillar_top");
+    public static final ResourceLocation DARKSTONE_PILLAR_SIDE = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/darkstone_pillar_side");
+    public static final ResourceLocation FLESHY_DARKSTONE_PILLAR_TOP = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/fleshy_darkstone_pillar_top");
+    public static final ResourceLocation FLESHY_DARKSTONE_PILLAR_SIDE = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/fleshy_darkstone_pillar_side");
+    public static final ResourceLocation DARKSTONE = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/darkstone");
+    public static final ResourceLocation BLOODY_WOOD = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/bloody_wood");
+    public static final ResourceLocation BLOODY_BOOKSHELF = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/bloody_bookshelf");
+    public static final ResourceLocation INKWOOD_PLANKS = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_planks");
+    final ResourceLocation INKWOOD_LOG_TEXTURE = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_log");
+    final ResourceLocation INKWOOD_LOG_TOP = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_log_top");
+    final ResourceLocation STRIPPED_INKWOOD_WOOD = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_stripped_log");
+    final ResourceLocation INKWOOD_BOOKSHELF = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/inkwood_bookshelf");
+    public static final ResourceLocation FLESH_SPRAYER = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/flesh_sprayer");
+    public static final ResourceLocation SMOKE_STACK_SIDE = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/smoke_stack_side");
+    public static final ResourceLocation SMOKE_STACK_TOP = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/smoke_stack_top");
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, FractureMod.MODID, existingFileHelper);
     }
@@ -102,22 +102,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         handHeldItem(InitItems.PERMAFROST_AXE);
         handHeldItem(InitItems.PERMAFROST_SHOVEL);
         handHeldItem(InitItems.PERMAFROST_HOE);
-
-        handHeldItem(InitItems.DOUBLE_CAST_SPELL_ITEM);
-        handHeldItem(InitItems.TRIPLE_CAST_SPELL_ITEM);
-        handHeldItem(InitItems.GIANT_SNOWBALL_SPELL_ITEM);
-        handHeldItem(InitItems.DOUBLE_CAST_INACCURATE_SPELL_ITEM);
-        handHeldItem(InitItems.RANDOM_SHOT_SPELL_ITEM);
-        handHeldItem(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL_ITEM);
-        handHeldItem(InitItems.EXPLOSION_SPELL_ITEM);
-        handHeldItem(InitItems.MAGIC_BOLT_SPELL_ITEM);
         //handHeldItem(InitItems.SUMMON_MAGIC_SWORD_SPELL_ITEM);
         //handHeldItem(InitItems.MAGIC_SWORD);
 
         spawnEggItem(InitItems.ANKLE_BITER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_WALKER_SPAWN_EGG);
         spawnEggItem(InitItems.FLESH_SLIME_SPAWN_EGG);
-        spawnEggItem(InitItems.BLOOD_SLIME_SPAWN_EGG);
         spawnEggItem(InitItems.ABDOMINAL_SNOWMAN_SPAWN_EGG);
         spawnEggItem(InitItems.KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG);
         spawnEggItem(InitItems.MOOSICLE);
@@ -144,7 +134,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.INKWOOD_HANGING_SIGN_ITEM);
         simpleItem(InitItems.INKWOOD_BOAT_ITEM);
         simpleItem(InitItems.INKWOOD_CHEST_BOAT_ITEM);
-        simpleItem(InitItems.INVERTED_GLASSES);
 
         simpleItem(InitItems.BLOOD_SLIME_BALL);
         simpleItem(InitItems.FROZEN_GRASS);
@@ -163,8 +152,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(FractureMod.MODID, "block/" + item.getId().getPath()));
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/" + item.getId().getPath()));
     }
 
     public void trapdoorItem(RegistryObject<Block> block) {
@@ -175,14 +164,14 @@ public class ModItemModelProvider extends ItemModelProvider {
     public void fenceItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
                         mcLoc("block/fence_inventory"))
-                .texture("texture",  new ResourceLocation(FractureMod.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("texture", ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     public void buttonItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
                         mcLoc("block/button_inventory"))
                 .texture("texture",
-                        new ResourceLocation(FractureMod.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                        ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     public void wallItem(RegistryObject<Block> block, ResourceLocation texture) {
@@ -195,36 +184,36 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 mcLoc("item/generated"))
                 .texture("layer0",
-                        new ResourceLocation(FractureMod.MODID, "item/" + item.getId().getPath()));
+                        ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "item/" + item.getId().getPath()));
     }
     private ItemModelBuilder simpleBlockItem(RegistryObject<Block> block) {
         return withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
                 mcLoc("fracture:block/" + block.getId().getPath()))
                 .texture("layer0",
-                        new ResourceLocation(FractureMod.MODID, "block/" + block.getId().getPath()));
+                        ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/" + block.getId().getPath()));
     }
 
     private ItemModelBuilder cubeBlockItem(RegistryObject<Block> block) {
         return withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
                 mcLoc("minecraft:block/cube_all" + block.getId().getPath()))
                 .texture("layer0",
-                        new ResourceLocation(FractureMod.MODID, "block/" + block.getId().getPath()));
+                        ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/" + block.getId().getPath()));
     }
     private ItemModelBuilder slabItem(RegistryObject<Block> block, ResourceLocation texture) {
         return withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
-                new ResourceLocation(FractureMod.MODID, "item/slab"))
+                ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "item/slab"))
                 .texture("slab", texture);
     }
     private ItemModelBuilder stairsItem(RegistryObject<Block> block, ResourceLocation texture) {
         return withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
-                new ResourceLocation(FractureMod.MODID, "item/stairs"))
+                ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "item/stairs"))
                 .texture("stairs", texture);
     }
 
     private ItemModelBuilder handHeldItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 mcLoc("item/handheld")).texture("layer0",
-                new ResourceLocation(FractureMod.MODID, "item/" + item.getId().getPath()));
+                ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "item/" + item.getId().getPath()));
     }
     private ItemModelBuilder spawnEggItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),

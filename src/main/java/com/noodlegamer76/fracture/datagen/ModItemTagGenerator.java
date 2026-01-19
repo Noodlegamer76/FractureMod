@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagGenerator extends ItemTagsProvider {
-    public static final TagKey<Item> INKWOOD_LOGS = ItemTags.create(new ResourceLocation(FractureMod.MODID, "inkwood_logs"));
+    public static final TagKey<Item> INKWOOD_LOGS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "inkwood_logs"));
     public ModItemTagGenerator(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> providerCompletableFuture,
                                CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, providerCompletableFuture, tagLookupCompletableFuture, FractureMod.MODID, existingFileHelper);
