@@ -16,6 +16,7 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.PowderSnowBlock;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -34,6 +36,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.move.FloatToSurfaceOfFluid;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
@@ -68,11 +71,11 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
     @Nullable
     private GameProfile profile;
     protected Vec3 deltaMovementOnPreviousTick = Vec3.ZERO;
+    private boolean shouldJumpOverGap = false;
 
     public PlayerMimic(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new PlayerLikeMoveControl(this);
-        this.navigation = new PlayerLikePathNavigation(this, pLevel);
     }
 
     @Override
@@ -81,9 +84,14 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
         this.entityData.define(DATA_MOB_NAME, "");
     }
 
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return new PlayerLikePathNavigation(this, level);
+    }
+
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.13)
+                .add(Attributes.MOVEMENT_SPEED, 0.1)
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D)
                 .add(Attributes.FOLLOW_RANGE, 32.0D);
@@ -105,7 +113,8 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
     public BrainActivityGroup<? extends PlayerMimic> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new MoveToWalkTarget<>(),
-                new LookAtTarget<>()
+                new LookAtTarget<>(),
+                new FloatToSurfaceOfFluid<>()
         );
     }
 
@@ -123,9 +132,7 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
     @Override
     public BrainActivityGroup<? extends PlayerMimic> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<PlayerMimic>(
-                        new TargetOrRetaliate<>()
-                ),
+                new TargetOrRetaliate<>(),
                 new OneRandomBehaviour<PlayerMimic>(
                         new SetRandomWalkTarget<>(),
                         new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60))
@@ -266,5 +273,18 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
     @Override
     public EntityDimensions getDimensions(Pose pPose) {
         return POSES.getOrDefault(pPose, STANDING_DIMENSIONS);
+    }
+
+    @Override
+    public double getMeleeAttackRangeSqr(LivingEntity pEntity) {
+        return 3 * 3;
+    }
+
+    public boolean isShouldJumpOverGap() {
+        return shouldJumpOverGap;
+    }
+
+    public void setShouldJumpOverGap(boolean shouldJumpOverGap) {
+        this.shouldJumpOverGap = shouldJumpOverGap;
     }
 }

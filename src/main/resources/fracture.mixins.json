@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "fracture.refmap.json",
   "mixins": [
+    "accessor.PathAccessor"
   ],
   "client": [
   ],

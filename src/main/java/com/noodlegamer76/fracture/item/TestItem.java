@@ -9,6 +9,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -47,11 +49,14 @@ public class TestItem extends Item {
         }
 
         if (!level.isClientSide) {
-            PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
-            GameProfile profile = new GameProfile(null, "mistermeltdown");
-            mimic.setProfile(profile);
-            mimic.setPos(player.getX(), player.getY(), player.getZ());
-            level.addFreshEntity(mimic);
+           for (int i = 0; i < 1; i++) {
+               PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
+               GameProfile profile = new GameProfile(null, "mackattack20222");
+               mimic.setProfile(profile);
+               mimic.setPos(player.getX(), player.getY(), player.getZ());
+               mimic.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.1);
+               level.addFreshEntity(mimic);
+           }
         }
 
         return super.use(level, player, hand);
