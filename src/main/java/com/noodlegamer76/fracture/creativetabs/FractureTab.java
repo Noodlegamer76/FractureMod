@@ -115,6 +115,13 @@ public class FractureTab {
             event.accept(InitItems.KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG);
             event.accept(InitItems.MOOSICLE);
             event.accept(InitItems.COMPARABLE_SNOWMAN_SPAWN_EGG);
+
+            event.accept(InitItems.DOUBLE_CAST_SPELL);
+            event.accept(InitItems.TRIPLE_CAST_SPELL);
+            event.accept(InitItems.DOUBLE_CAST_INNACURATE_SPELL);
+            event.accept(InitItems.GIANT_SNOWBALL_SPELL);
+            event.accept(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL);
+            event.accept(InitItems.EXPLOSION_SPELL);
         }
     }
 }

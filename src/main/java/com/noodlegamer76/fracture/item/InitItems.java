@@ -74,6 +74,20 @@ public class InitItems {
             () -> new VoidBlockItem(InitBlocks.VOID_BLOCK.get(), new Item.Properties()));
 
 
+    public static final RegistryObject<Item> DOUBLE_CAST_SPELL = ITEMS.register("double_cast_spell",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DOUBLE_CAST_INNACURATE_SPELL = ITEMS.register("double_cast_inaccurate_spell",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> EXPLOSION_SPELL = ITEMS.register("explosion_spell",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GIANT_SNOWBALL_SPELL = ITEMS.register("giant_snowball_spell",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GIANT_SNOWBALL_WITH_TRIGGER_SPELL = ITEMS.register("giant_snowball_with_trigger_spell",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TRIPLE_CAST_SPELL = ITEMS.register("triple_cast_spell",
+            () -> new Item(new Item.Properties()));
+
+
     public static final RegistryObject<Item> BLOOD_SLIME_BALL = ITEMS.register("blood_slime_ball",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLESHY_BONE = ITEMS.register("fleshy_bone",

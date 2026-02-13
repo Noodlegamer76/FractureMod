@@ -6,6 +6,7 @@ import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
 import com.noodlegamer76.fracture.datagen.DataGenerators;
 import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.ai.memory.InitMemoryModuleTypes;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
 import com.noodlegamer76.fracture.fluid.InitFluidTypes;
 import com.noodlegamer76.fracture.fluid.InitFluids;
@@ -41,6 +42,7 @@ public class FractureMod {
         InitBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         InitMenus.MENU_TYPES.register(modEventBus);
         InitFeatures.FEATURES.register(modEventBus);
+        InitMemoryModuleTypes.MEMORY_MODULE_TYPES.register(modEventBus);
 
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);

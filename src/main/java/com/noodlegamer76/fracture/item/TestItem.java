@@ -1,10 +1,14 @@
 package com.noodlegamer76.fracture.item;
 
+import com.mojang.authlib.GameProfile;
 import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.monster.PlayerMimic;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,6 +44,14 @@ public class TestItem extends Item {
             //System.out.println(player.getPortalCooldown());
             //System.out.println(player.isOnPortalCooldown());
 
+        }
+
+        if (!level.isClientSide) {
+            PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
+            GameProfile profile = new GameProfile(null, "mistermeltdown");
+            mimic.setProfile(profile);
+            mimic.setPos(player.getX(), player.getY(), player.getZ());
+            level.addFreshEntity(mimic);
         }
 
         return super.use(level, player, hand);

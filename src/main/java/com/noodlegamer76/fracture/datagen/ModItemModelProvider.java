@@ -139,6 +139,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.FROZEN_GRASS);
         simpleItem(InitItems.ICE_CREAM);
 
+        simpleItem(InitItems.DOUBLE_CAST_SPELL);
+        simpleItem(InitItems.TRIPLE_CAST_SPELL);
+        simpleItem(InitItems.DOUBLE_CAST_INNACURATE_SPELL);
+        simpleItem(InitItems.GIANT_SNOWBALL_SPELL);
+        simpleItem(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL);
+        simpleItem(InitItems.EXPLOSION_SPELL);
+
         cubeColumn("flesh_sprayer", FLESH_BLOCK, FLESH_SPRAYER);
 
         saplingItem(InitBlocks.INKWOOD_SAPLING);
