@@ -51,10 +51,14 @@ public class TestItem extends Item {
         if (!level.isClientSide) {
            for (int i = 0; i < 1; i++) {
                PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
-               GameProfile profile = new GameProfile(null, "mackattack20222");
+               GameProfile profile = new GameProfile(null, "mistermeltdown");
                mimic.setProfile(profile);
                mimic.setPos(player.getX(), player.getY(), player.getZ());
-               mimic.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.1);
+               mimic.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
+               mimic.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.DIAMOND_HELMET));
+               mimic.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
+               mimic.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.DIAMOND_LEGGINGS));
+               mimic.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.DIAMOND_BOOTS));
                level.addFreshEntity(mimic);
            }
         }

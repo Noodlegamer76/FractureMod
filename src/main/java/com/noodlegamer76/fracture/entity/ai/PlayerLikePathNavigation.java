@@ -59,16 +59,19 @@ public class PlayerLikePathNavigation extends GroundPathNavigation implements Ex
 
     @Override
     protected void followThePath() {
-        final Vec3 safeSurfacePos = getTempMobPos();
-        final int shortcutNode = getClosestVerticalTraversal(Mth.floor(safeSurfacePos.y));
-        this.maxDistanceToWaypoint = this.mob.getBbWidth() > 0.75f ? this.mob.getBbWidth() / 2f : 0.75f - this.mob.getBbWidth() / 2f;
+        if (this.path == null || this.path.isDone()) return;
 
-        if (!attemptShortcut(shortcutNode, safeSurfacePos)) {
-            if (isCloseToNextNode(0.5f) || isAboutToTraverseVertically() && isCloseToNextNode(getMaxDistanceToWaypoint()))
+        if (this.mob instanceof PlayerMimic mimic && mimic.isShouldJumpOverGap()) {
+            Vec3 target = this.path.getNextEntityPos(this.mob);
+            mob.getMoveControl().setWantedPosition(target.x, target.y, target.z, this.speedModifier);
+
+            double arrivalDist = 1.25D;
+            if (this.mob.distanceToSqr(target) < arrivalDist * arrivalDist) {
                 this.path.advance();
+            }
+        } else {
+            super.followThePath();
         }
-
-        doStuckDetection(safeSurfacePos);
     }
 
     protected int getClosestVerticalTraversal(int safeSurfaceHeight) {

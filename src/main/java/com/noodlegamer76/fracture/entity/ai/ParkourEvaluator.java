@@ -5,75 +5,75 @@ import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 
 public class ParkourEvaluator extends WalkNodeEvaluator {
+    private static final double MAX_JUMP_DIST_SQ = 16.0;
+    private static final int HORIZONTAL_RANGE = 5;
+    private static final int VERTICAL_UP = 1;
+    private static final int VERTICAL_DOWN = -3;
 
     @Override
     public int getNeighbors(Node[] pNeighbors, Node pNode) {
         int count = super.getNeighbors(pNeighbors, pNode);
         BlockPos startPos = pNode.asBlockPos();
 
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dz = -1; dz <= 1; dz++) {
-                if (dx == 0 && dz == 0) continue;
-                count = addJumpNodesForDirection(pNeighbors, count, startPos, dx, dz);
+        if (!level.getBlockState(startPos.above(2)).isAir()) {
+            return count;
+        }
+
+        for (int dx = -HORIZONTAL_RANGE; dx <= HORIZONTAL_RANGE; dx++) {
+            for (int dz = -HORIZONTAL_RANGE; dz <= HORIZONTAL_RANGE; dz++) {
+                if (Math.abs(dx) <= 1 && Math.abs(dz) <= 1) continue;
+
+                double distSq = (dx * (double)dx) + (dz * (double)dz);
+                if (distSq > MAX_JUMP_DIST_SQ) continue;
+
+                count = addVerticalJumpNodes(pNeighbors, count, startPos, dx, dz);
             }
         }
         return count;
     }
 
-    private int addJumpNodesForDirection(Node[] pNeighbors, int count, BlockPos startPos, int dx, int dz) {
-        if (count > pNeighbors.length - 2) return count;
+    private int addVerticalJumpNodes(Node[] pNeighbors, int count, BlockPos startPos, int dx, int dz) {
+        for (int dy = VERTICAL_UP; dy >= VERTICAL_DOWN; dy--) {
+            if (count >= pNeighbors.length) return count;
 
-        for (int distance = 2; distance <= 4; distance++) {
-            BlockPos targetPos = startPos.offset(dx * distance, 0, dz * distance);
+            BlockPos targetPos = startPos.offset(dx, dy, dz);
 
-            if (!isValidJump(targetPos) && !isValidJump(targetPos.below()) && !isValidJump(targetPos.below(2))) {
-                continue;
-            }
-
-            if (!isPathClear(startPos, targetPos, dx, dz)) {
-                break;
-            }
-
-            BlockPos landingPos = isValidJump(targetPos) ? targetPos :
-                    (isValidJump(targetPos.below()) ? targetPos.below() : targetPos.below(2));
-
-            Node jumpNode = this.getNode(landingPos.getX(), landingPos.getY(), landingPos.getZ());
-            if (!jumpNode.closed) {
-                jumpNode.type = ModBlockPathTypes.JUMP_OVER_IT;
-                pNeighbors[count++] = jumpNode;
-                break;
-            }
-        }
-        return count;
-    }
-
-    private boolean isPathClear(BlockPos start, BlockPos end, int dx, int dz) {
-        int dist = Math.max(Math.abs(end.getX() - start.getX()), Math.abs(end.getZ() - start.getZ()));
-
-        for (int i = 1; i <= dist; i++) {
-            int x = start.getX() + (i * (end.getX() - start.getX()) / dist);
-            int z = start.getZ() + (i * (end.getZ() - start.getZ()) / dist);
-            BlockPos center = new BlockPos(x, start.getY(), z);
-
-            if (isBlocked(center)) return false;
-
-            if (dx != 0 && dz != 0) {
-                if (isBlocked(new BlockPos(x - dx, start.getY(), z)) ||
-                        isBlocked(new BlockPos(x, start.getY(), z - dz))) {
-                    return false;
+            if (isValidJumpLanding(targetPos)) {
+                if (isPathClear(startPos, targetPos)) {
+                    Node jumpNode = this.getNode(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+                    if (!jumpNode.closed) {
+                        jumpNode.type = ModBlockPathTypes.JUMP_OVER_IT;
+                        pNeighbors[count++] = jumpNode;
+                        break;
+                    }
                 }
+            }
+        }
+        return count;
+    }
+
+
+    private boolean isPathClear(BlockPos start, BlockPos end) {
+        int dx = end.getX() - start.getX();
+        int dz = end.getZ() - start.getZ();
+        int steps = Math.max(Math.abs(dx), Math.abs(dz));
+
+        for (int i = 1; i < steps; i++) {
+            double pct = (double) i / steps;
+            int x = (int) Math.round(start.getX() + (dx * pct));
+            int z = (int) Math.round(start.getZ() + (dz * pct));
+
+            int checkY = Math.max(start.getY(), end.getY()) + 1;
+            BlockPos checkPos = new BlockPos(x, checkY, z);
+
+            if (!level.getBlockState(checkPos).isAir() || !level.getBlockState(checkPos.above()).isAir()) {
+                return false;
             }
         }
         return true;
     }
 
-    private boolean isBlocked(BlockPos pos) {
-        return level.getBlockState(pos).isSolid() ||
-                !level.getBlockState(pos.above(1)).isAir() ||
-                !level.getBlockState(pos.above(2)).isAir();
-    }
-
-    private boolean isValidJump(BlockPos pos) {
+    private boolean isValidJumpLanding(BlockPos pos) {
         return level.getBlockState(pos).isSolid() &&
                 level.getBlockState(pos.above(1)).isAir() &&
                 level.getBlockState(pos.above(2)).isAir();
