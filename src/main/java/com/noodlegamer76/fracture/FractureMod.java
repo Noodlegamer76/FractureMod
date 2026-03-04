@@ -14,6 +14,7 @@ import com.noodlegamer76.fracture.gui.InitMenus;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.InitParticles;
 import com.noodlegamer76.fracture.worldgen.features.InitFeatures;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarSerializers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -26,12 +27,13 @@ import software.bernie.geckolib.GeckoLib;
 @Mod(FractureMod.MODID)
 public class FractureMod {
     public static final String MODID = "fracture";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public FractureMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         GeckoLib.initialize();
+        new NativeLoader();
 
         InitEntities.ENTITIES.register(modEventBus);
         InitItems.ITEMS.register(modEventBus);
@@ -43,6 +45,7 @@ public class FractureMod {
         InitMenus.MENU_TYPES.register(modEventBus);
         InitFeatures.FEATURES.register(modEventBus);
         InitMemoryModuleTypes.MEMORY_MODULE_TYPES.register(modEventBus);
+        GenVarSerializers.GEN_VAR_SERIALIZERS.register(modEventBus);
 
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);

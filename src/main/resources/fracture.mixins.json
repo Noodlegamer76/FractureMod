@@ -4,9 +4,11 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "fracture.refmap.json",
   "mixins": [
-    "accessor.PathAccessor"
+    "accessor.PathAccessor",
+    "accessor.StructureTemplateAccessor"
   ],
   "client": [
+    "RenderSystemMixin"
   ],
   "minVersion": "0.8"
 }

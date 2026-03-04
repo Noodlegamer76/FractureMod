@@ -18,11 +18,11 @@ public class PacketHandler {
             .simpleChannel();
 
     public static void register() {
-       //INSTANCE.messageBuilder(SSkyboxGeneratorPacket.class, 0, NetworkDirection.PLAY_TO_SERVER)
-       //        .encoder(SSkyboxGeneratorPacket::encode)
-       //        .decoder(SSkyboxGeneratorPacket::new)
-       //        .consumerMainThread(SSkyboxGeneratorPacket::handle)
-       //        .add();
+       INSTANCE.messageBuilder(StructureInstancePacket.class, 0, NetworkDirection.PLAY_TO_CLIENT)
+               .encoder(StructureInstancePacket::encode)
+               .decoder(StructureInstancePacket::new)
+               .consumerMainThread(StructureInstancePacket::handle)
+               .add();
     }
 
     public static void sendToServer(Object msg) {

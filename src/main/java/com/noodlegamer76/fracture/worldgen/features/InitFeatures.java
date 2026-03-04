@@ -10,8 +10,11 @@ import net.minecraftforge.registries.RegistryObject;
 public class InitFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, FractureMod.MODID);
 
-    public static final RegistryObject<Feature<NoneFeatureConfiguration>> GIANT_CRYSTAL = FEATURES.register(
-            "giant_crystal",
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> GIANT_CRYSTAL = FEATURES.register("giant_crystal",
             () -> new GiantCrystal(NoneFeatureConfiguration.CODEC)
+    );
+
+    public static final RegistryObject<MegaStructureFeature> MEGA_STRUCTURE = FEATURES.register("mega_feature",
+            () -> new MegaStructureFeature(NoneFeatureConfiguration.CODEC)
     );
 }

@@ -1,20 +1,20 @@
 package com.noodlegamer76.fracture.item;
 
-import com.mojang.authlib.GameProfile;
-import com.noodlegamer76.fracture.entity.InitEntities;
-import com.noodlegamer76.fracture.entity.monster.PlayerMimic;
-import net.minecraft.core.BlockPos;
+import com.noodlegamer76.fracture.gui.imgui.imgui.ImGuiRenderer;
+import com.noodlegamer76.fracture.gui.imgui.imgui.ImGuiScreen;
+import com.noodlegamer76.fracture.gui.structure.StructureInstanceVisualizer;
+import com.noodlegamer76.fracture.network.PacketHandler;
+import com.noodlegamer76.fracture.network.StructureInstancePacket;
+import com.noodlegamer76.fracture.worldgen.megastructure.MegaStructureGenerator;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInstance;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class TestItem extends Item {
@@ -49,19 +49,37 @@ public class TestItem extends Item {
         }
 
         if (!level.isClientSide) {
-           for (int i = 0; i < 1; i++) {
-               PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
-               GameProfile profile = new GameProfile(null, "mistermeltdown");
-               mimic.setProfile(profile);
-               mimic.setPos(player.getX(), player.getY(), player.getZ());
-               mimic.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
-               mimic.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.DIAMOND_HELMET));
-               mimic.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
-               mimic.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.DIAMOND_LEGGINGS));
-               mimic.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.DIAMOND_BOOTS));
-               level.addFreshEntity(mimic);
-           }
+         //for (int i = 0; i < 1; i++) {
+         //    PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
+         //    GameProfile profile = new GameProfile(null, "mistermeltdown");
+         //    mimic.setProfile(profile);
+         //    mimic.setPos(player.getX(), player.getY(), player.getZ());
+         //    mimic.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
+         //    mimic.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.DIAMOND_HELMET));
+         //    mimic.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
+         //    mimic.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.DIAMOND_LEGGINGS));
+         //    mimic.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.DIAMOND_BOOTS));
+         //    level.addFreshEntity(mimic);
+         //}
+
+            if (player.isShiftKeyDown()) {
+                StructureInstance structureInstance = MegaStructureGenerator.getLastInstance();
+                StructureInstancePacket packet = new StructureInstancePacket(structureInstance);
+                PacketHandler.sendToPlayer((ServerPlayer) player, packet);
+            }
         }
+
+        if (level.isClientSide) {
+            Minecraft.getInstance().setScreen(
+                    new ImGuiScreen() {
+                        @Override
+                        public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+                            ImGuiRenderer.getInstance().draw(StructureInstanceVisualizer.getInstance()::render);
+                        }
+                    }
+            );
+        }
+
 
         return super.use(level, player, hand);
     }
