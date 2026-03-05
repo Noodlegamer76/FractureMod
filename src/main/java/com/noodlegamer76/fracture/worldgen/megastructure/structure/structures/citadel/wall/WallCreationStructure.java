@@ -8,7 +8,7 @@ import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.Wall;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.WallGenerator;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarSerializers;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WallCreationStructure extends Structure {
-    private final GenVar<Wall> wallVar = new GenVar<>(null, GenVarSerializers.WALL, "wall");
+    private final GenVar<Wall> wallVar = new GenVar<>(null, GenVarTypes.WALL, "wall");
     private static final double COLLINEAR_EPSILON = 1e-6;
     private static final int HEIGHT_STEP = 4;
     private static final int MAX_OVERHANG = 16;

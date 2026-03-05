@@ -11,6 +11,6 @@ public class ServerSetupEvent {
 
     @SubscribeEvent
     public static void serverSetup(ServerStartedEvent event) {
-        Structures.getInstance().setupStructures(event.getServer());
+        Structures.getInstance().setupStructures();
     }
 }

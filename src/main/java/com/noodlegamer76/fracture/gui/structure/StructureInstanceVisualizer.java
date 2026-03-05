@@ -11,7 +11,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static imgui.ImGui.*;
 
@@ -29,8 +31,12 @@ public class StructureInstanceVisualizer {
     private float zoom = 1.0f;
     private static final float ZOOM_MIN = 0.1f;
     private static final float ZOOM_MAX = 10.0f;
+    private int windowWidth = 1280;
+    private int windowHeight = 720;
 
     private List<GenVar<?>> vars = new ArrayList<>();
+    private Map<GenVar<?>, VisualizerEntry<?>> visualizers = Map.of();
+    private Minecraft mc = Minecraft.getInstance();
 
     private final ImVec2 centerPanelCoords = new ImVec2();
 
@@ -43,6 +49,11 @@ public class StructureInstanceVisualizer {
     }
 
     public void render() {
+        mc = Minecraft.getInstance();
+        if (mc != null) {
+            windowWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+            windowHeight = Minecraft.getInstance().getWindow().getGuiScaledHeight();
+        }
         renderLeftPanel();
         renderCenterPanel();
     }
@@ -65,25 +76,25 @@ public class StructureInstanceVisualizer {
     public void renderCenterPanel() {
         int flags = ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoSavedSettings;
 
-        Minecraft mc = Minecraft.getInstance();
-        int windowWidth = mc.getWindow().getWidth();
-        int windowHeight = mc.getWindow().getHeight();
-
         setNextWindowPos(300, 0);
         setNextWindowSize(windowWidth - 300, windowHeight);
         begin("Main Panel", flags);
 
         if (button("Set Position To Player Position")) {
-            if (mc.player != null) {
-                Vec3 position = mc.player.position();
-                zoom = 1.0f;
-                float centerX = (windowWidth - 300) / 2.0f;
-                float centerY = windowHeight / 2.0f;
-                centerPanelCoords.set(
-                        centerX - (float) position.x * zoom,
-                        centerY - (float) position.z * zoom
-                );
+            Vec3 position;
+            if (mc != null && mc.player != null) {
+                position = mc.player.position();
             }
+            else {
+                position = new Vec3(0, 0, 0);
+            }
+            zoom = 1.0f;
+            float centerX = (windowWidth - 300) / 2.0f;
+            float centerY = windowHeight / 2.0f;
+            centerPanelCoords.set(
+                    centerX - (float) position.x * zoom,
+                    centerY - (float) position.z * zoom
+            );
         }
 
         beginChild("ScrollableArea", windowWidth - 300, windowHeight - getFrameHeightWithSpacing(), true, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse);
@@ -131,12 +142,16 @@ public class StructureInstanceVisualizer {
 
         ImDrawList dl = ImGui.getWindowDrawList();
 
-        if (mc.player != null) {
-            Vec3 pos = mc.player.position();
-            float px = windowPos.x + centerPanelCoords.x + (float) pos.x * zoom;
-            float py = windowPos.y + centerPanelCoords.y + (float) pos.z * zoom;
-            dl.addCircleFilled(px, py, 6.0f * zoom, 0xFF00FFFF);
+        Vec3 pos;
+        if (mc != null && mc.player != null) {
+            pos = mc.player.position();
         }
+        else {
+            pos = new Vec3(0, 0, 0);
+        }
+        float px = windowPos.x + centerPanelCoords.x + (float) pos.x * zoom;
+        float py = windowPos.y + centerPanelCoords.y + (float) pos.z * zoom;
+        dl.addCircleFilled(px, py, 6.0f * zoom, 0xFF00FFFF);
 
         for (GenVar<?> var : vars) {
             renderVarVisualizer(var);
@@ -147,17 +162,29 @@ public class StructureInstanceVisualizer {
         end();
     }
 
-    public static <T> void renderVarData(GenVar<T> var) {
-        VisualizerEntry<GenVar<T>> entry = var.getSerializer().visualizerEntry(var);
+    @SuppressWarnings("unchecked")
+    public <T> void renderVarData(GenVar<T> var) {
+        VisualizerEntry<GenVar<T>> entry = (VisualizerEntry<GenVar<T>>) visualizers.get(var);
         entry.renderData();
     }
 
-    public static <T> void renderVarVisualizer(GenVar<T> var) {
-        VisualizerEntry<GenVar<T>> entry = var.getSerializer().visualizerEntry(var);
+    @SuppressWarnings("unchecked")
+    public <T> void renderVarVisualizer(GenVar<T> var) {
+        VisualizerEntry<GenVar<T>> entry = (VisualizerEntry<GenVar<T>>) visualizers.get(var);
         entry.renderVisualization();
     }
 
     public void setVars(List<GenVar<?>> vars) {
         this.vars = vars;
+        visualizers = new HashMap<>();
+        for (GenVar<?> var: vars) {
+            VisualizerEntry<?> entry = createVisualizer(var);
+            visualizers.put(var, entry);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends GenVar<?>> VisualizerEntry<T> createVisualizer(GenVar var) {
+        return (VisualizerEntry<T>) var.getType().visualizer().create(var);
     }
 }

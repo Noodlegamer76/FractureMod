@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.worldgen.megastructure.structure.structures;
+package com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.citadel.wall;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.worldgen.megastructure.Node;
@@ -10,7 +10,7 @@ import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.AnchorP
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.Polygon;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.Wall;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarSerializers;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +38,7 @@ public class WallPlacementStructure extends Structure {
 
     @Override
     public void generate(FeaturePlaceContext<NoneFeatureConfiguration> ctx, Node n, RandomSource random, StructureInstance instance) {
-        GenVar<Wall> wallVar = instance.getGenVar("wall", GenVarSerializers.WALL.get());
+        GenVar<Wall> wallVar = instance.getGenVar("wall", GenVarTypes.WALL);
         if (wallVar == null) return;
 
         Wall wall = wallVar.getValue();

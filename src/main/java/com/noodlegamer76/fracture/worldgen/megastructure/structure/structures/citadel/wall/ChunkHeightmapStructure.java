@@ -7,7 +7,7 @@ import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.ChunkHe
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.PolygonChunkHeightSampler;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.Wall;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarSerializers;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import java.util.List;
 
 public class ChunkHeightmapStructure extends Structure {
-    private final GenVar<ChunkHeightMap> heightMapGenVar = new GenVar<>(null, GenVarSerializers.CHUNK_HEIGHT_MAP, "heightmap");
+    private final GenVar<ChunkHeightMap> heightMapGenVar = new GenVar<>(null, GenVarTypes.CHUNK_HEIGHT_MAP, "heightmap");
 
     public ChunkHeightmapStructure(int priority) {
         super(priority);
@@ -28,7 +28,7 @@ public class ChunkHeightmapStructure extends Structure {
 
     @Override
     public void generate(FeaturePlaceContext<NoneFeatureConfiguration> ctx, Node n, RandomSource random, StructureInstance instance) {
-        GenVar<Wall> wallVar = instance.getGenVar("wall", GenVarSerializers.WALL.get());
+        GenVar<Wall> wallVar = instance.getGenVar("wall", GenVarTypes.WALL);
         if (wallVar == null) return;
 
         Wall wall = wallVar.getValue();

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.placers.Placer;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarSerializer;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarType;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
@@ -65,11 +65,11 @@ public class StructureInstance {
 
     @Nullable
     @SuppressWarnings("unchecked")
-    public <T> GenVar<T> getGenVar(String name, GenVarSerializer<T> serializer) {
+    public <T> GenVar<T> getGenVar(String name, GenVarType<T> type) {
         GenVar<?> raw = genVars.get(name);
         if (raw == null) return null;
 
-        if (raw.getSerializer() != serializer) {
+        if (raw.getType() != type) {
             FractureMod.LOGGER.error("Serializer mismatch for GenVar: " + name);
             return null;
         }

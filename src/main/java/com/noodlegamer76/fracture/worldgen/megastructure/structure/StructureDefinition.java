@@ -53,9 +53,4 @@ public class StructureDefinition {
     public int getHighestNodeLevel() {
         return highestNodeLevel;
     }
-
-    @FunctionalInterface
-    public interface ContextSupplier<T> {
-        T create();
-    }
 }

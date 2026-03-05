@@ -1,18 +1,8 @@
 package com.noodlegamer76.fracture.worldgen.megastructure.structure;
 
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.SurfaceLayerStructure;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.WallPlacementStructure;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.bridge.BridgeStructure;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.citadel.wall.ChunkHeightmapStructure;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.citadel.wall.WallCreationStructure;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.DensityFunction;
-import net.minecraft.world.level.levelgen.Heightmap;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.citadel.wall.WallPlacementStructure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +18,7 @@ public class Structures {
     private final List<StructureDefinition> structures = new ArrayList<>();
     private int nextId;
 
-    public void setupStructures(MinecraftServer server) {
+    public void setupStructures() {
         clearDefinitions();
         //StructureDefinition<EmptyContext> testDef = new StructureDefinition<>(EmptyContext::new);
         //TestStructure<EmptyContext> test = new TestStructure<>(0, ResourceLocation.withDefaultNamespace("village/plains/houses/plains_small_house_1"));
@@ -40,32 +30,32 @@ public class Structures {
         //ancientDef.addStructure(ancient);
         //addDefinition(ancientDef);
 
-        StructureDefinition pathDef  = new StructureDefinition();
-        BlockState path = Blocks.DIRT_PATH.defaultBlockState();
+      //StructureDefinition pathDef  = new StructureDefinition();
+      //BlockState path = Blocks.DIRT_PATH.defaultBlockState();
 
-        SurfaceLayerStructure surfaceLayer = new SurfaceLayerStructure(0, 15, 15, path, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                (pos, ctx, random, instance) -> {
+      //SurfaceLayerStructure surfaceLayer = new SurfaceLayerStructure(0, 15, 15, path, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+      //        (pos, ctx, random, instance) -> {
 
-                    ServerLevel level = ctx.level().getLevel();
-                    DensityFunction.SinglePointContext singlePoint = new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ());
-                    double noise = level.getChunkSource().randomState().sampler().erosion().compute(singlePoint);
-                    BlockState state = ctx.level().getBlockState(pos);
-                    return noise > -0.0025 && noise < 0.0025 &&
-                            state.is(BlockTags.DIRT);
-                });
+      //            ServerLevel level = ctx.level().getLevel();
+      //            DensityFunction.SinglePointContext singlePoint = new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ());
+      //            double noise = level.getChunkSource().randomState().sampler().erosion().compute(singlePoint);
+      //            BlockState state = ctx.level().getBlockState(pos);
+      //            return noise > -0.0025 && noise < 0.0025 &&
+      //                    state.is(BlockTags.DIRT);
+      //        });
 
-        pathDef.addStructure(surfaceLayer);
-        //addDefinition(pathDef);
+      //pathDef.addStructure(surfaceLayer);
+      ////addDefinition(pathDef);
 
-        StructureDefinition bridgeDef = new StructureDefinition();
-        //addDefinition(bridgeDef);
+      //StructureDefinition bridgeDef = new StructureDefinition();
+      ////addDefinition(bridgeDef);
 
-        BridgeStructure bridge = new BridgeStructure(0);
-        bridge.addRule(((ctx, random, structure) -> {
-            ChunkPos chunkPos = new ChunkPos(ctx.origin());
-            return chunkPos.x == 0;
-        }));
-        bridgeDef.addStructure(bridge);
+      //BridgeStructure bridge = new BridgeStructure(0);
+      //bridge.addRule(((ctx, random, structure) -> {
+      //    ChunkPos chunkPos = new ChunkPos(ctx.origin());
+      //    return chunkPos.x == 0;
+      //}));
+      //bridgeDef.addStructure(bridge);
 
         StructureDefinition wallDef = new StructureDefinition();
         addDefinition(wallDef);

@@ -1,18 +1,16 @@
 package com.noodlegamer76.fracture.worldgen.megastructure.structure.variables;
 
-import net.minecraftforge.registries.RegistryObject;
-
 import javax.annotation.Nullable;
 
 public class GenVar<T> {
-    private T value;
-    private final RegistryObject<GenVarSerializer<T>> serializer;
     private String name;
+    private final GenVarType<T> type;
+    private T value;
 
-    public GenVar(T value, RegistryObject<GenVarSerializer<T>> serializer, String name) {
-        this.value = value;
-        this.serializer = serializer;
+    public GenVar(T value, GenVarType<T> type, String name) {
         this.name = name;
+        this.type = type;
+        this.value = value;
     }
 
     public void setValue(T value) {
@@ -24,16 +22,12 @@ public class GenVar<T> {
         return value;
     }
 
-    public GenVarSerializer<T> getSerializer() {
-        return serializer.get();
+    public GenVarType<T> getType() {
+        return type;
     }
 
     public Class<T> getValueClass() {
-        return serializer.get().getValueClass();
-    }
-
-    public RegistryObject<GenVarSerializer<T>> getSerializerRegistryObject() {
-        return serializer;
+        return type.codec().valueClass();
     }
 
     public String getName() {

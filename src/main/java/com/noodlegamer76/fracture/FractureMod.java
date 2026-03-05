@@ -14,7 +14,6 @@ import com.noodlegamer76.fracture.gui.InitMenus;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.InitParticles;
 import com.noodlegamer76.fracture.worldgen.features.InitFeatures;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarSerializers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -45,7 +44,6 @@ public class FractureMod {
         InitMenus.MENU_TYPES.register(modEventBus);
         InitFeatures.FEATURES.register(modEventBus);
         InitMemoryModuleTypes.MEMORY_MODULE_TYPES.register(modEventBus);
-        GenVarSerializers.GEN_VAR_SERIALIZERS.register(modEventBus);
 
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);

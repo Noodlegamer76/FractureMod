@@ -2,11 +2,10 @@ package com.noodlegamer76.fracture.worldgen.megastructure.visualizer;
 
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInstance;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarSerializer;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarSerializers;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarRegistry;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,23 +39,20 @@ public class StructureInstanceSerializer {
 
     @SuppressWarnings("unchecked")
     private static <T> GenVar<T> deserializeGenVar(CompoundTag tag, String name, ResourceLocation serializerId) {
-        RegistryObject<GenVarSerializer<T>> genVarSerializerRegistry =
-                (RegistryObject<GenVarSerializer<T>>) (RegistryObject<?>)
-                        GenVarSerializers.getGenVarSerializer(serializerId);
+        GenVarType<T> type = (GenVarType<T>) GenVarRegistry.get(serializerId);
 
-        if (genVarSerializerRegistry == null) {
-            throw new IllegalArgumentException("No GenVarSerializer found for id: " + serializerId);
+        if (type == null) {
+            throw new IllegalArgumentException("No GenVarType found for id: " + serializerId);
         }
 
-        GenVarSerializer<T> serializer = genVarSerializerRegistry.get();
-        T value = serializer.deserialize(tag, name);
-        return new GenVar<>(value, genVarSerializerRegistry, name);
+        T value = type.codec().decode(tag, name);
+        return new GenVar<>(value, type, name);
     }
 
     private static <T> void serializeGenVar(CompoundTag tag, GenVar<T> var) {
         CompoundTag data = new CompoundTag();
-        var.getSerializer().serialize(tag, var.getName(), var.getValue());
+        var.getType().codec().encode(tag, var.getName(), var.getValue());
         tag.put("value", data);
-        tag.putString("serializer_id", var.getSerializerRegistryObject().getId().toString());
+        tag.putString("serializer_id", var.getType().id().toString());
     }
 }
