@@ -3,13 +3,10 @@ package com.noodlegamer76.fracture.item;
 import com.noodlegamer76.fracture.gui.imgui.imgui.ImGuiRenderer;
 import com.noodlegamer76.fracture.gui.imgui.imgui.ImGuiScreen;
 import com.noodlegamer76.fracture.gui.structure.StructureInstanceVisualizer;
-import com.noodlegamer76.fracture.network.PacketHandler;
-import com.noodlegamer76.fracture.network.StructureInstancePacket;
 import com.noodlegamer76.fracture.worldgen.megastructure.MegaStructureGenerator;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInstance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -63,9 +60,9 @@ public class TestItem extends Item {
          //}
 
             if (player.isShiftKeyDown()) {
-                StructureInstance structureInstance = MegaStructureGenerator.getLastInstance();
-                StructureInstancePacket packet = new StructureInstancePacket(structureInstance);
-                PacketHandler.sendToPlayer((ServerPlayer) player, packet);
+              //StructureInstance structureInstance = MegaStructureGenerator.getLastInstance();
+              //StructureInstancePacket packet = new StructureInstancePacket(structureInstance);
+              //PacketHandler.sendToPlayer((ServerPlayer) player, packet);
             }
         }
 
@@ -78,6 +75,11 @@ public class TestItem extends Item {
                         }
                     }
             );
+
+            if (player.isShiftKeyDown() && MegaStructureGenerator.getLastInstance() != null) {
+                StructureInstance last = MegaStructureGenerator.getLastInstance();
+                StructureInstanceVisualizer.getInstance().setVars(last.getGenVars(), null);
+            }
         }
 
 

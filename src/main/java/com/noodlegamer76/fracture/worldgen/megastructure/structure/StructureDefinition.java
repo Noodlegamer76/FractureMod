@@ -2,37 +2,39 @@ package com.noodlegamer76.fracture.worldgen.megastructure.structure;
 
 import com.noodlegamer76.fracture.worldgen.megastructure.Node;
 import com.noodlegamer76.fracture.worldgen.megastructure.StructMath;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.placers.Placer;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.*;
 
 public class StructureDefinition {
-    //Integer is node level
+    // Integer is node level
     private final TreeMap<Integer, List<Structure>> structures =
             new TreeMap<>(Comparator.reverseOrder());
     private int highestNodeLevel = 0;
 
-    public void generate(FeaturePlaceContext<NoneFeatureConfiguration> ctx, StructureInstance instance) {
+    public void generate(WorldAccess access, StructureInstance instance) {
         for (List<Structure> list : structures.values()) {
             for (Structure structure : list) {
                 int level = structure.getNodeLevel();
-                Node center = new Node(ctx.origin().getX(), ctx.origin().getZ(), level);
+                Node center = new Node(access.origin().getX(), access.origin().getZ(), level);
                 List<Node> nodes = StructMath.get3x3Nodes(center);
 
                 for (Node n : nodes) {
-                    RandomSource random = StructMath.getNodeRandom(n, ctx, structure.getId());
-                    if (structure.shouldGenerate(ctx, random)) {
-                        structure.generate(ctx, n, random, instance);
-                    }
+                    RandomSource random = StructMath.getNodeRandom(n, access, structure.getId());
+
+                    if (!structure.shouldGenerate(access, random)) continue;
+
+                    structure.generate(access, n, random, instance);
                 }
             }
         }
 
-        for (Placer placer : instance.getPlacers()) {
-            placer.place(ctx, ctx.random(), instance);
+        if (access.getFeatureContext() != null) {
+            for (Placer placer : instance.getPlacers()) {
+                placer.place(access.getFeatureContext(), access.random(), instance);
+            }
         }
     }
 

@@ -59,59 +59,113 @@ public final class GenVarCodecs {
     }, Polygon.class);
 
     // Wall codec
-    public static final GenVarCodec<Wall> WALL = GenVarCodec.of((tag, key, wall) -> {
-        CompoundTag wt = new CompoundTag();
-        POLYGON.encode(wt, "polygon", wall.polygon());
-        wt.putIntArray("surface", wall.surface());
-        wt.putIntArray("edgeHeight", wall.edgeHeight());
-        wt.putIntArray("vertexHeight", wall.vertexHeight());
-        // towers as byte array
-        boolean[] towers = wall.isTower();
-        byte[] towerBytes = new byte[towers.length];
-        for (int i = 0; i < towers.length; i++) towerBytes[i] = towers[i] ? (byte)1 : (byte)0;
-        wt.putByteArray("isTower", towerBytes);
-        wt.putDouble("edgeLength", wall.edgeLength());
-        tag.put(key, wt);
-    }, (tag, key) -> {
-        CompoundTag wt = tag.getCompound(key);
-        Polygon poly = POLYGON.decode(wt, "polygon");
-        if (poly == null) return null;
-        int[] surface = wt.getIntArray("surface");
-        int[] edgeHeight = wt.getIntArray("edgeHeight");
-        int[] vertexHeight = wt.getIntArray("vertexHeight");
-        byte[] towerBytes = wt.getByteArray("isTower");
-        boolean[] isTower = new boolean[towerBytes.length];
-        for (int i = 0; i < towerBytes.length; i++) isTower[i] = towerBytes[i] == 1;
-        double edgeLength = wt.getDouble("edgeLength");
-        return new Wall(poly, surface, edgeHeight, vertexHeight, isTower, edgeLength);
-    }, Wall.class);
+    public static final GenVarCodec<Wall> WALL = GenVarCodec.of(
+            (tag, key, wall) -> {
+                CompoundTag wt = new CompoundTag();
+
+                POLYGON.encode(wt, "polygon", wall.polygon());
+                wt.putIntArray("surface", wall.surface());
+                wt.putIntArray("edgeHeight", wall.edgeHeight());
+                wt.putIntArray("vertexHeight", wall.vertexHeight());
+
+                boolean[] towers = wall.isTower();
+                byte[] towerBytes = new byte[towers.length];
+                for (int i = 0; i < towers.length; i++) towerBytes[i] = towers[i] ? (byte)1 : (byte)0;
+                wt.putByteArray("isTower", towerBytes);
+
+                wt.putDouble("edgeLength", wall.edgeLength());
+
+                CompoundTag edgeMapTag = new CompoundTag();
+                for (Map.Entry<Long, List<Integer>> e : wall.edgeChunks().entrySet()) {
+                    long keyLong = e.getKey();
+                    List<Integer> list = e.getValue();
+                    long[] arr = list.stream().mapToLong(Integer::longValue).toArray();
+                    edgeMapTag.putLongArray(Long.toString(keyLong), arr);
+                }
+                wt.put("edgeChunks", edgeMapTag);
+
+                CompoundTag vertexMapTag = new CompoundTag();
+                for (Map.Entry<Long, List<Integer>> e : wall.vertexChunks().entrySet()) {
+                    long keyLong = e.getKey();
+                    List<Integer> list = e.getValue();
+                    long[] arr = list.stream().mapToLong(Integer::longValue).toArray();
+                    vertexMapTag.putLongArray(Long.toString(keyLong), arr);
+                }
+                wt.put("vertexChunks", vertexMapTag);
+
+                tag.put(key, wt);
+            },
+            (tag, key) -> {
+                CompoundTag wt = tag.getCompound(key);
+                Polygon poly = POLYGON.decode(wt, "polygon");
+                if (poly == null) return null;
+
+                int[] surface = wt.getIntArray("surface");
+                int[] edgeHeight = wt.getIntArray("edgeHeight");
+                int[] vertexHeight = wt.getIntArray("vertexHeight");
+
+                byte[] towerBytes = wt.getByteArray("isTower");
+                boolean[] isTower = new boolean[towerBytes.length];
+                for (int i = 0; i < towerBytes.length; i++) isTower[i] = towerBytes[i] == 1;
+
+                double edgeLength = wt.getDouble("edgeLength");
+
+                Map<Long, List<Integer>> edgeChunks = new HashMap<>();
+                CompoundTag edgeMapTag = wt.getCompound("edgeChunks");
+                for (String k : edgeMapTag.getAllKeys()) {
+                    long longKey = Long.parseLong(k);
+                    long[] arr = edgeMapTag.getLongArray(k);
+                    List<Integer> list = new ArrayList<>();
+                    for (long l : arr) list.add((int) l);
+                    edgeChunks.put(longKey, list);
+                }
+
+                Map<Long, List<Integer>> vertexChunks = new HashMap<>();
+                CompoundTag vertexMapTag = wt.getCompound("vertexChunks");
+                for (String k : vertexMapTag.getAllKeys()) {
+                    long longKey = Long.parseLong(k);
+                    long[] arr = vertexMapTag.getLongArray(k);
+                    List<Integer> list = new ArrayList<>();
+                    for (long l : arr) list.add((int) l);
+                    vertexChunks.put(longKey, list);
+                }
+
+                return new Wall(poly, surface, edgeHeight, vertexHeight, isTower, edgeLength, edgeChunks, vertexChunks);
+            },
+            Wall.class
+    );
 
     // ChunkHeightMap codec
     public static final GenVarCodec<ChunkHeightMap> CHUNK_HEIGHT_MAP = GenVarCodec.of((tag, key, map) -> {
+        CompoundTag compound = new CompoundTag();
+        compound.putDouble("edgeLength", map.edgeLength());
         ListTag list = new ListTag();
         for (Map.Entry<Long, Integer> e : map.heights().entrySet()) {
             CompoundTag entry = new CompoundTag();
             long packed = e.getKey();
-            int chunkX = (int)(packed >> 32);
-            int chunkZ = (int)packed;
-            entry.putInt("chunkX", chunkX);
-            entry.putInt("chunkZ", chunkZ);
+            int tileX = (int)(packed >> 32);
+            int tileZ = (int)packed;
+            entry.putInt("tileX", tileX);
+            entry.putInt("tileZ", tileZ);
             entry.putInt("height", e.getValue());
             list.add(entry);
         }
-        tag.put(key, list);
+        compound.put("tiles", list);
+        tag.put(key, compound);
     }, (tag, key) -> {
-        if (!tag.contains(key, Tag.TAG_LIST)) return new ChunkHeightMap(new HashMap<>());
-        ListTag list = tag.getList(key, Tag.TAG_COMPOUND);
+        if (!tag.contains(key, Tag.TAG_COMPOUND)) return new ChunkHeightMap(new HashMap<>(), 16.0);
+        CompoundTag compound = tag.getCompound(key);
+        double edgeLength = compound.contains("edgeLength") ? compound.getDouble("edgeLength") : 16.0;
+        ListTag list = compound.getList("tiles", Tag.TAG_COMPOUND);
         Map<Long, Integer> map = new HashMap<>();
         for (int i = 0; i < list.size(); i++) {
             CompoundTag entry = list.getCompound(i);
-            int cx = entry.getInt("chunkX");
-            int cz = entry.getInt("chunkZ");
+            int tx = entry.getInt("tileX");
+            int tz = entry.getInt("tileZ");
             int h = entry.getInt("height");
-            long packed = (((long)cx) << 32) | (cz & 0xffffffffL);
+            long packed = (((long)tx) << 32) | (tz & 0xffffffffL);
             map.put(packed, h);
         }
-        return new ChunkHeightMap(map);
+        return new ChunkHeightMap(map, edgeLength);
     }, ChunkHeightMap.class);
 }

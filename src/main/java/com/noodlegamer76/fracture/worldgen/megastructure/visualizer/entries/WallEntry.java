@@ -1,5 +1,6 @@
 package com.noodlegamer76.fracture.worldgen.megastructure.visualizer.entries;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.noodlegamer76.fracture.gui.structure.StructureInstanceVisualizer;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.Polygon;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.Wall;
@@ -8,6 +9,8 @@ import com.noodlegamer76.fracture.worldgen.megastructure.visualizer.VisualizerEn
 import imgui.ImDrawList;
 import imgui.ImGui;
 import imgui.ImVec2;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.phys.Vec3;
 
 public class WallEntry<T extends GenVar<Wall>> extends VisualizerEntry<T> {
@@ -46,5 +49,10 @@ public class WallEntry<T extends GenVar<Wall>> extends VisualizerEntry<T> {
             dl.addCircleFilled(sx, sy, 4.0f * zoom, 0xFF00FF00);
             lastLine = vec;
         }
+    }
+
+    @Override
+    public void renderInWorld(LevelRenderer renderer, PoseStack poseStack, int renderTick, float partialTicks, MultiBufferSource bufferSource) {
+
     }
 }

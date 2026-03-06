@@ -3,6 +3,7 @@ package com.noodlegamer76.fracture.worldgen.megastructure.structure.utils;
 import com.google.common.collect.Lists;
 import com.ibm.icu.impl.Pair;
 import com.noodlegamer76.fracture.mixin.accessor.StructureTemplateAccessor;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -17,8 +18,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -207,15 +206,15 @@ public class StructureUtils {
         return Math.max(dx, Math.max(dy, dz));
     }
 
-    public static AABB getChunkIntersection(FeaturePlaceContext<NoneFeatureConfiguration> ctx, AABB structure) {
-        ChunkPos cp = new ChunkPos(ctx.origin());
+    public static AABB getChunkIntersection(WorldAccess access, AABB structure) {
+        ChunkPos cp = new ChunkPos(access.origin());
         int chunkMinX = cp.getMinBlockX();
         int chunkMaxX = cp.getMaxBlockX() + 1;
         int chunkMinZ = cp.getMinBlockZ();
         int chunkMaxZ = cp.getMaxBlockZ() + 1;
 
-        AABB chunk = new AABB(chunkMinX, ctx.level().getMinBuildHeight(), chunkMinZ,
-                chunkMaxX, ctx.level().getMaxBuildHeight(), chunkMaxZ);
+        AABB chunk = new AABB(chunkMinX, access.getMinBuildHeight(), chunkMinZ,
+                chunkMaxX, access.getMaxBuildHeight(), chunkMaxZ);
 
         AABB intersection = structure.intersect(chunk);
 

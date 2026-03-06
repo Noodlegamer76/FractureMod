@@ -5,6 +5,7 @@ import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.ci
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.citadel.wall.WallPlacementStructure;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //Temporary class for definitions
@@ -15,7 +16,7 @@ public class Structures {
         return instance;
     }
 
-    private final List<StructureDefinition> structures = new ArrayList<>();
+    private final List<StructureDefinition> structures = Collections.synchronizedList(new ArrayList<>());
     private int nextId;
 
     public void setupStructures() {
@@ -77,6 +78,7 @@ public class Structures {
     //Debug method
     public void clearDefinitions() {
         structures.clear();
+        nextId = 0;
     }
 
     public List<StructureDefinition> getStructures() {

@@ -3,11 +3,10 @@ package com.noodlegamer76.fracture.worldgen.megastructure.structure;
 import com.noodlegamer76.fracture.worldgen.megastructure.Node;
 import com.noodlegamer76.fracture.worldgen.megastructure.StructMath;
 import com.noodlegamer76.fracture.worldgen.megastructure.rule.IStructureRule;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
 import com.noodlegamer76.fracture.worldgen.megastructure.visualizer.VisualizerEntry;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,21 +23,26 @@ public abstract class Structure {
 
     public abstract int getMaxSize();
 
-    public abstract void generate(FeaturePlaceContext<NoneFeatureConfiguration> ctx, Node n, RandomSource random, StructureInstance instance);
+    public abstract void generate(WorldAccess access, Node n, RandomSource random, StructureInstance instance);
 
     public abstract List<GenVar<?>> getGenVariables();
 
-    public VisualizerEntry getVisualizer() {
+    public VisualizerEntry<?> getVisualizer() {
         return null;
     }
 
-    public boolean shouldGenerate(FeaturePlaceContext<NoneFeatureConfiguration> ctx, RandomSource random) {
+    public boolean shouldGenerate(WorldAccess access, RandomSource random) {
         for (IStructureRule rule: rules) {
-            if (!rule.shouldGenerate(ctx, random, this)) {
+            if (!rule.shouldGenerate(access, random, this)) {
                 return false;
             }
         }
         return true;
+    }
+
+    protected <T> void setVar(GenVar<T> var, T value, StructureInstance instance) {
+        GenVar<T> instanceVar = instance.getGenVar(var.getName(), var.getType());
+        if (instanceVar != null) instanceVar.setValue(value);
     }
 
     public int getNodeLevel() {

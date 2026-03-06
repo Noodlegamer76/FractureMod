@@ -1,8 +1,7 @@
 package com.noodlegamer76.fracture.worldgen.megastructure;
 
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import org.joml.Vector2f;
 
 import java.util.ArrayList;
@@ -39,11 +38,11 @@ public class StructMath {
         return new Vector2f(originX, originY);
     }
 
-    public static RandomSource getNodeRandom(Node node, FeaturePlaceContext<NoneFeatureConfiguration> ctx, int extra) {
+    public static RandomSource getNodeRandom(Node node, WorldAccess access, int extra) {
         Vector2f origin = getNodeOrigin(node.getX(), node.getZ(), node.getLevel());
         int nodeSize = getSizeFromLevel(node.getLevel());
 
-        long worldSeed = ctx.level().getSeed();
+        long worldSeed = access.getSeed();
 
         long seed = worldSeed
                 ^ (((long) origin.x) * 341873128712L)

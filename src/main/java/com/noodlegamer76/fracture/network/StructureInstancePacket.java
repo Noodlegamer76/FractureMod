@@ -32,7 +32,7 @@ public class StructureInstancePacket {
         NetworkEvent.Context context = contextSupplier.get();
         context.enqueueWork(() -> {
             List<GenVar<?>> vars = StructureInstanceSerializer.deserialize(tag);
-            StructureInstanceVisualizer.getInstance().setVars(vars);
+            StructureInstanceVisualizer.getInstance().setVars(vars, null);
         });
         context.setPacketHandled(true);
     }

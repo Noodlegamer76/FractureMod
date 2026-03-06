@@ -37,16 +37,17 @@ public class StructureInstanceSerializer {
         return vars;
     }
 
-    @SuppressWarnings("unchecked")
     private static <T> GenVar<T> deserializeGenVar(CompoundTag tag, String name, ResourceLocation serializerId) {
-        GenVarType<T> type = (GenVarType<T>) GenVarRegistry.get(serializerId);
+        GenVarType<T> type = GenVarRegistry.get(serializerId);
 
         if (type == null) {
             throw new IllegalArgumentException("No GenVarType found for id: " + serializerId);
         }
 
         T value = type.codec().decode(tag, name);
-        return new GenVar<>(value, type, name);
+        GenVar<T> var = new GenVar<>(type, name);
+        var.setValue(value);
+        return var;
     }
 
     private static <T> void serializeGenVar(CompoundTag tag, GenVar<T> var) {

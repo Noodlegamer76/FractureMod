@@ -3,22 +3,20 @@ package com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.c
 import com.noodlegamer76.fracture.worldgen.megastructure.Node;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.Structure;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInstance;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.StructureUtils;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.Polygon;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.Wall;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.WallGenerator;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarTypes;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class WallCreationStructure extends Structure {
-    private final GenVar<Wall> wallVar = new GenVar<>(null, GenVarTypes.WALL, "wall");
+    private final GenVar<Wall> wallVar = new GenVar<>(GenVarTypes.WALL, "wall", true);
     private static final double COLLINEAR_EPSILON = 1e-6;
     private static final int HEIGHT_STEP = 4;
     private static final int MAX_OVERHANG = 16;
@@ -29,15 +27,17 @@ public class WallCreationStructure extends Structure {
 
     @Override
     public int getMaxSize() {
-        return 255;
+        return 1023;
     }
 
     @Override
-    public void generate(FeaturePlaceContext<NoneFeatureConfiguration> ctx, Node n, RandomSource random, StructureInstance instance) {
-        double edgeLength = 18;
+    public void generate(WorldAccess access, Node n, RandomSource random, StructureInstance instance) {
+        double edgeLength = 48;
         int angle = 90;
         int maxTries = 900;
-        int wallHeight = 10;
+        int wallHeight = 40;
+        int edgeChunkWidth = 12;
+        int vertexChunkWidth = 12;
 
         WallGenerator.Settings wallSettings = new WallGenerator.Settings(
                 n.getX(),
@@ -59,11 +59,8 @@ public class WallCreationStructure extends Structure {
         int[] preferredHeight = new int[size];
         for (int i = 0; i < size; i++) {
             Vec3 v = verts.get(i);
-            surface[i] = StructureUtils.getSurfaceHeight(ctx.level().getLevel(), (int) v.x, (int) v.z);
-            surface[i] = Math.max(surface[i], 64);
-            int ideal = surface[i] + wallHeight;
-            int capped = Math.min(ideal, surface[i] + MAX_OVERHANG);
-            preferredHeight[i] = snapDown(capped, HEIGHT_STEP);
+            surface[i] = Math.max(access.getHeight((int) v.x, (int) v.z), 64);
+            preferredHeight[i] = snapDown(Math.min(surface[i] + wallHeight, surface[i] + MAX_OVERHANG), HEIGHT_STEP);
         }
 
         int[] edgeHeight = new int[size];
@@ -81,14 +78,53 @@ public class WallCreationStructure extends Structure {
             int leftEdge = edgeHeight[(i - 1 + size) % size];
             int rightEdge = edgeHeight[i];
 
-            boolean corner = !isCollinear(prev, curr, next);
-            boolean heightChange = leftEdge != rightEdge;
-
-            isTower[i] = corner || heightChange;
+            isTower[i] = !isCollinear(prev, curr, next) || leftEdge != rightEdge;
             vertexHeight[i] = isTower[i] ? Math.max(leftEdge, rightEdge) : leftEdge;
         }
 
-        wallVar.setValue(new Wall(polygon, surface, edgeHeight, vertexHeight, isTower, edgeLength));
+        Map<Long, Set<Integer>> edgeChunkSets = new HashMap<>();
+        for (int i = 0; i < size; i++) {
+            Vec3 start = verts.get(i);
+            Vec3 end = verts.get((i + 1) % size);
+
+            double dx = end.x - start.x;
+            double dz = end.z - start.z;
+            int steps = (int) Math.ceil(Math.sqrt(dx * dx + dz * dz)) + 1;
+
+            for (int s = 0; s <= steps; s++) {
+                double t = (double) s / steps;
+                int baseCx = (int) Math.floor(start.x + t * dx) >> 4;
+                int baseCz = (int) Math.floor(start.z + t * dz) >> 4;
+
+                for (int ex = -edgeChunkWidth; ex <= edgeChunkWidth; ex++) {
+                    for (int ez = -edgeChunkWidth; ez <= edgeChunkWidth; ez++) {
+                        edgeChunkSets.computeIfAbsent(ChunkPos.asLong(baseCx + ex, baseCz + ez), k -> new HashSet<>()).add(i);
+                    }
+                }
+            }
+        }
+
+        Map<Long, List<Integer>> edgeChunks = new HashMap<>(edgeChunkSets.size());
+        edgeChunkSets.forEach((k, v) -> edgeChunks.put(k, new ArrayList<>(v)));
+
+        Map<Long, Set<Integer>> vertexChunkSets = new HashMap<>();
+        for (int i = 0; i < size; i++) {
+            Vec3 v = verts.get(i);
+            int baseCx = (int) Math.floor(v.x) >> 4;
+            int baseCz = (int) Math.floor(v.z) >> 4;
+
+            for (int ex = -vertexChunkWidth; ex <= vertexChunkWidth; ex++) {
+                for (int ez = -vertexChunkWidth; ez <= vertexChunkWidth; ez++) {
+                    vertexChunkSets.computeIfAbsent(ChunkPos.asLong(baseCx + ex, baseCz + ez), k -> new HashSet<>()).add(i);
+                }
+            }
+        }
+
+        Map<Long, List<Integer>> vertexChunks = new HashMap<>(vertexChunkSets.size());
+        vertexChunkSets.forEach((k, v) -> vertexChunks.put(k, new ArrayList<>(v)));
+
+        Wall wall = new Wall(polygon, surface, edgeHeight, vertexHeight, isTower, edgeLength, edgeChunks, vertexChunks);
+        setVar(wallVar, wall, instance);
     }
 
     private static int snapDown(int value, int step) {
@@ -104,7 +140,7 @@ public class WallCreationStructure extends Structure {
     }
 
     @Override
-    public boolean shouldGenerate(FeaturePlaceContext<NoneFeatureConfiguration> ctx, RandomSource random) {
+    public boolean shouldGenerate(WorldAccess access, RandomSource random) {
         return true;
     }
 

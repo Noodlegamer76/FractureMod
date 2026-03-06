@@ -4,19 +4,21 @@ import com.noodlegamer76.fracture.gui.structure.StructureInstanceVisualizer;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureDefinition;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInstance;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.Structures;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.BlankWorldAccess;
 import imgui.ImGui;
 import imgui.ImGuiIO;
 import imgui.flag.ImGuiConfigFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
+import net.minecraft.core.BlockPos;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
 public class WallDebugApp {
-    private static final int WIN_W = 700;
-    private static final int WIN_H = 620;
+    private static final int WIN_W = 1920;
+    private static final int WIN_H = 1080;
 
     public static void main(String[] args) {
         GLFWErrorCallback.createPrint(System.err).set();
@@ -45,6 +47,13 @@ public class WallDebugApp {
         implGl3.init("#version 330 core");
 
         Structures.getInstance().setupStructures();
+        StructureInstanceVisualizer visualizer = StructureInstanceVisualizer.getInstance();
+        StructureDefinition def = Structures.getInstance().getStructures().get(0);
+        StructureInstance instance = new StructureInstance(def);
+        BlankWorldAccess worldAccess = new BlankWorldAccess(visualizer.getCurrentSeed(), new BlockPos((int) visualizer.getCurrentPos()[0], 0, (int) visualizer.getCurrentPos()[1]));
+        instance.generate(worldAccess);
+        long lastSeed;
+        float[] lastPos;
 
         while (!GLFW.glfwWindowShouldClose(window)) {
             GLFW.glfwPollEvents();
@@ -52,11 +61,17 @@ public class WallDebugApp {
             implGlfw.newFrame();
             ImGui.newFrame();
 
-            StructureInstanceVisualizer visualizer = StructureInstanceVisualizer.getInstance();
-            StructureDefinition def = Structures.getInstance().getStructures().get(0);
-            StructureInstance instance = new StructureInstance(def);
-            visualizer.setVars(instance.getGenVars());
+            lastSeed = visualizer.getCurrentSeed();
+            lastPos = visualizer.getCurrentPos();
+
+            visualizer.setVars(instance.getGenVars(), worldAccess);
             visualizer.render();
+            worldAccess.setSeed(visualizer.getCurrentSeed());
+            worldAccess.setOrigin(new BlockPos((int) visualizer.getCurrentPos()[0], 0, (int) visualizer.getCurrentPos()[1]));
+
+            if (lastSeed != visualizer.getCurrentSeed() || lastPos[0] != visualizer.getCurrentPos()[0] || lastPos[1] != visualizer.getCurrentPos()[1]) {
+                instance.generate(worldAccess);
+            }
 
             ImGui.render();
             GL11.glClearColor(0.1f, 0.1f, 0.1f, 1f);

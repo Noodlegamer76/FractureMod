@@ -3,6 +3,8 @@ package com.noodlegamer76.fracture.worldgen.megastructure;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureDefinition;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInstance;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.Structures;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.FeatureWorldAccess;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
@@ -17,7 +19,8 @@ public class MegaStructureGenerator {
 
     private static void generateInstance(FeaturePlaceContext<NoneFeatureConfiguration> ctx, StructureDefinition definition) {
         StructureInstance instance = new StructureInstance(definition);
-        instance.generate(ctx);
+        WorldAccess access = new FeatureWorldAccess(ctx);
+        instance.generate(access);
         lastInstance = instance;
     }
 

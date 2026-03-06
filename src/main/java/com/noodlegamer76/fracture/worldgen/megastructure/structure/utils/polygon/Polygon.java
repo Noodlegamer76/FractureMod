@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record Polygon(List<Edge> edges, List<Vec3> vertices, Vec3 center) {
-
     public Polygon removeCollinearVertices(double epsilon) {
         List<Vec3> verts = new ArrayList<>(vertices());
         if (verts.size() < 3) return this;

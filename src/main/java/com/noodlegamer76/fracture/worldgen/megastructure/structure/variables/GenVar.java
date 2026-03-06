@@ -6,11 +6,18 @@ public class GenVar<T> {
     private String name;
     private final GenVarType<T> type;
     private T value;
+    private final boolean cacheable;
 
-    public GenVar(T value, GenVarType<T> type, String name) {
+    public GenVar(GenVarType<T> type, String name) {
+        this(type, name, false);
+    }
+
+    /** @param cacheable If true, the value computed for a given Node is reused across
+     *                   all chunks that share that Node instead of being regenerated. */
+    public GenVar(GenVarType<T> type, String name, boolean cacheable) {
         this.name = name;
         this.type = type;
-        this.value = value;
+        this.cacheable = cacheable;
     }
 
     public void setValue(T value) {
@@ -36,5 +43,9 @@ public class GenVar<T> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isCacheable() {
+        return cacheable;
     }
 }

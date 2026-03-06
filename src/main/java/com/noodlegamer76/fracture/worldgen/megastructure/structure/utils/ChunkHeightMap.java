@@ -2,7 +2,7 @@ package com.noodlegamer76.fracture.worldgen.megastructure.structure.utils;
 
 import java.util.Map;
 
-public record ChunkHeightMap(Map<Long, Integer> heights) {
+public record ChunkHeightMap(Map<Long, Integer> heights, double edgeLength) {
     public Integer getHeight(int chunkX, int chunkZ) {
         return heights.get(pack(chunkX, chunkZ));
     }

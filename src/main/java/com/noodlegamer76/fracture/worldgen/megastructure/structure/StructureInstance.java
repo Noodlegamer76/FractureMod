@@ -2,11 +2,10 @@ package com.noodlegamer76.fracture.worldgen.megastructure.structure;
 
 import com.google.common.collect.ImmutableList;
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.placers.Placer;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarType;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -25,10 +24,14 @@ public class StructureInstance {
         for (Map.Entry<Integer, List<Structure>> structures: definition.getStructures().entrySet()) {
             for (Structure structure: structures.getValue()) {
                 for (GenVar<?> genVar: structure.getGenVariables()) {
-                    addGenVar(genVar);
+                    addGenVar(copyOf(genVar));
                 }
             }
         }
+    }
+
+    private static <T> GenVar<T> copyOf(GenVar<T> original) {
+        return new GenVar<>(original.getType(), original.getName(), original.isCacheable());
     }
 
     public void addPlacer(Placer placer) {
@@ -39,8 +42,8 @@ public class StructureInstance {
         return placers;
     }
 
-    public void generate(FeaturePlaceContext<NoneFeatureConfiguration> ctx) {
-        definition.generate(ctx, this);
+    public void generate(WorldAccess access) {
+        definition.generate(access, this);
     }
 
     public StructureDefinition getDefinition() {

@@ -1,5 +1,6 @@
 package com.noodlegamer76.fracture.gui.structure;
 
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
 import com.noodlegamer76.fracture.worldgen.megastructure.visualizer.VisualizerEntry;
 import imgui.ImDrawList;
@@ -9,6 +10,8 @@ import imgui.flag.ImGuiWindowFlags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,10 +36,18 @@ public class StructureInstanceVisualizer {
     private static final float ZOOM_MAX = 10.0f;
     private int windowWidth = 1280;
     private int windowHeight = 720;
+    private static final float CELL_SIZE = 16.0f;
 
     private List<GenVar<?>> vars = new ArrayList<>();
     private Map<GenVar<?>, VisualizerEntry<?>> visualizers = Map.of();
     private Minecraft mc = Minecraft.getInstance();
+    private WorldAccess access;
+
+    long currentSeed = System.currentTimeMillis();
+    float[] currentPos = new float[] {0, 0};
+
+    private float contextWorldX;
+    private float contextWorldZ;
 
     private final ImVec2 centerPanelCoords = new ImVec2();
 
@@ -51,8 +62,16 @@ public class StructureInstanceVisualizer {
     public void render() {
         mc = Minecraft.getInstance();
         if (mc != null) {
-            windowWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
-            windowHeight = Minecraft.getInstance().getWindow().getGuiScaledHeight();
+            windowWidth = Minecraft.getInstance().getWindow().getWidth();
+            windowHeight = Minecraft.getInstance().getWindow().getHeight();
+        }
+        else {
+            int[] width = new int[1];
+            int[] height = new int[1];
+            long window = GLFW.glfwGetCurrentContext();
+            GLFW.glfwGetWindowSize(window, width, height);
+            windowWidth = width[0];
+            windowHeight = height[0];
         }
         renderLeftPanel();
         renderCenterPanel();
@@ -97,6 +116,14 @@ public class StructureInstanceVisualizer {
             );
         }
 
+        if (access != null) {
+            inputFloat2("current Position", currentPos);
+
+            if (button("New Seed")) {
+                currentSeed = System.currentTimeMillis();
+            }
+        }
+
         beginChild("ScrollableArea", windowWidth - 300, windowHeight - getFrameHeightWithSpacing(), true, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse);
 
         ImDrawList drawList = getWindowDrawList();
@@ -126,10 +153,9 @@ public class StructureInstanceVisualizer {
             }
         }
 
-        int cellSize = 128;
         int color = 0xFFAAAAAA;
 
-        float scaledCell = cellSize * zoom;
+        float scaledCell = CELL_SIZE * zoom;
         float offsetX = centerPanelCoords.x % scaledCell;
         float offsetY = centerPanelCoords.y % scaledCell;
 
@@ -142,6 +168,12 @@ public class StructureInstanceVisualizer {
 
         ImDrawList dl = ImGui.getWindowDrawList();
 
+        for (GenVar<?> var : vars) {
+            renderVarVisualizer(var);
+            separator();
+        }
+
+
         Vec3 pos;
         if (mc != null && mc.player != null) {
             pos = mc.player.position();
@@ -152,10 +184,31 @@ public class StructureInstanceVisualizer {
         float px = windowPos.x + centerPanelCoords.x + (float) pos.x * zoom;
         float py = windowPos.y + centerPanelCoords.y + (float) pos.z * zoom;
         dl.addCircleFilled(px, py, 6.0f * zoom, 0xFF00FFFF);
+        dl.addCircleFilled(px, py, 2.0f * zoom, 0xFFFF0000);
 
-        for (GenVar<?> var : vars) {
-            renderVarVisualizer(var);
-            separator();
+        if (ImGui.isWindowHovered() && ImGui.isMouseClicked(1)) {
+
+            ImVec2 mouse = ImGui.getMousePos();
+
+            contextWorldX = (mouse.x - windowPos.x - centerPanelCoords.x) / zoom;
+            contextWorldZ = (mouse.y - windowPos.y - centerPanelCoords.y) / zoom;
+
+            ImGui.openPopup("world_context_menu");
+        }
+
+        if (ImGui.beginPopup("world_context_menu")) {
+            if (ImGui.menuItem("Teleport here")) {
+
+                if (mc.player != null) {
+                    int y = Mth.floor(mc.player.getY());
+
+                    mc.player.connection.sendCommand(
+                            "tp " + contextWorldX + " " + y + " " + contextWorldZ
+                    );
+                }
+            }
+
+            ImGui.endPopup();
         }
 
         endChild();
@@ -174,17 +227,31 @@ public class StructureInstanceVisualizer {
         entry.renderVisualization();
     }
 
-    public void setVars(List<GenVar<?>> vars) {
+    public void setVars(List<GenVar<?>> vars, @Nullable WorldAccess access) {
         this.vars = vars;
         visualizers = new HashMap<>();
         for (GenVar<?> var: vars) {
             VisualizerEntry<?> entry = createVisualizer(var);
             visualizers.put(var, entry);
         }
+
+        this.access = access;
     }
 
     @SuppressWarnings("unchecked")
     public <T extends GenVar<?>> VisualizerEntry<T> createVisualizer(GenVar var) {
         return (VisualizerEntry<T>) var.getType().visualizer().create(var);
+    }
+
+    public float[] getCurrentPos() {
+        return currentPos;
+    }
+
+    public long getCurrentSeed() {
+        return currentSeed;
+    }
+
+    public Map<GenVar<?>, VisualizerEntry<?>> getVisualizers() {
+        return visualizers;
     }
 }
