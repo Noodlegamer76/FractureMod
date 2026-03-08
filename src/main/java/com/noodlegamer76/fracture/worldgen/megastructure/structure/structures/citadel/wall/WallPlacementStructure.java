@@ -38,7 +38,7 @@ public class WallPlacementStructure extends Structure {
 
     @Override
     public void generate(WorldAccess access, Node n, RandomSource random, StructureInstance instance) {
-        GenVar<Wall> wallVar = instance.getGenVar("wall", GenVarTypes.WALL);
+        GenVar<Wall> wallVar = instance.getGenVar(n, "wall", GenVarTypes.WALL);
         if (wallVar == null) return;
 
         Wall wall = wallVar.getValue();
@@ -124,7 +124,7 @@ public class WallPlacementStructure extends Structure {
     }
 
     @Override
-    public boolean shouldGenerate(WorldAccess access, RandomSource random) {
+    public boolean shouldGenerate(WorldAccess access, RandomSource random, Node n, StructureInstance instance) {
         return true;
     }
 

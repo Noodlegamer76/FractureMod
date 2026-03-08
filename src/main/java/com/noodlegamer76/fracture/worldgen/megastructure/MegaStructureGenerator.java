@@ -5,6 +5,7 @@ import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInst
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.Structures;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.FeatureWorldAccess;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarCache;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
@@ -14,6 +15,7 @@ public class MegaStructureGenerator {
     public static void generate(FeaturePlaceContext<NoneFeatureConfiguration> ctx) {
         for (StructureDefinition def : Structures.getInstance().getStructures()) {
             generateInstance(ctx, def);
+            GenVarCache.instance().removePendingRemoval();
         }
     }
 

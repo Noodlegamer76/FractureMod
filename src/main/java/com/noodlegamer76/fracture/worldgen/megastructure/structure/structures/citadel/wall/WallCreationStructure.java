@@ -8,6 +8,7 @@ import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.Wall;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.polygon.WallGenerator;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarCache;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
@@ -50,7 +51,10 @@ public class WallCreationStructure extends Structure {
         );
         Polygon polygon = WallGenerator.generate(wallSettings, random);
 
-        if (polygon == null) return;
+        if (polygon == null) {
+            setVar(n, wallVar, null, instance);
+            return;
+        }
 
         List<Vec3> verts = new ArrayList<>(polygon.vertices());
         int size = verts.size();
@@ -124,7 +128,7 @@ public class WallCreationStructure extends Structure {
         vertexChunkSets.forEach((k, v) -> vertexChunks.put(k, new ArrayList<>(v)));
 
         Wall wall = new Wall(polygon, surface, edgeHeight, vertexHeight, isTower, edgeLength, edgeChunks, vertexChunks);
-        setVar(wallVar, wall, instance);
+        setVar(n, wallVar, wall, instance);
     }
 
     private static int snapDown(int value, int step) {
@@ -140,8 +144,9 @@ public class WallCreationStructure extends Structure {
     }
 
     @Override
-    public boolean shouldGenerate(WorldAccess access, RandomSource random) {
-        return true;
+    public boolean shouldGenerate(WorldAccess access, RandomSource random, Node n, StructureInstance instance) {
+        GenVar<Wall> wallVar = GenVarCache.instance().getVar(n, "wall", GenVarTypes.WALL);
+        return wallVar == null || wallVar.getValue() == null;
     }
 
     @Override

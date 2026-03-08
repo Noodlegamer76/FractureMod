@@ -6,28 +6,25 @@ import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldA
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.placers.Placer;
 import net.minecraft.util.RandomSource;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class StructureDefinition {
-    // Integer is node level
-    private final TreeMap<Integer, List<Structure>> structures =
-            new TreeMap<>(Comparator.reverseOrder());
+    private final List<Structure> structures = new ArrayList<>();
     private int highestNodeLevel = 0;
 
     public void generate(WorldAccess access, StructureInstance instance) {
-        for (List<Structure> list : structures.values()) {
-            for (Structure structure : list) {
-                int level = structure.getNodeLevel();
-                Node center = new Node(access.origin().getX(), access.origin().getZ(), level);
-                List<Node> nodes = StructMath.get3x3Nodes(center);
+        for (Structure structure : structures) {
+            int level = structure.getNodeLevel();
+            Node originNode = new Node(access.origin().getX(), access.origin().getZ(), level);
 
-                for (Node n : nodes) {
-                    RandomSource random = StructMath.getNodeRandom(n, access, structure.getId());
+            for (Node n : StructMath.get3x3Nodes(originNode)) {
+                RandomSource random = StructMath.getNodeRandom(n, access, structure.getId());
 
-                    if (!structure.shouldGenerate(access, random)) continue;
+                if (!structure.shouldGenerate(access, random, n, instance)) continue;
 
-                    structure.generate(access, n, random, instance);
-                }
+                structure.generate(access, n, random, instance);
             }
         }
 
@@ -38,16 +35,15 @@ public class StructureDefinition {
         }
     }
 
-    public Map<Integer, List<Structure>> getStructures() {
+    public List<Structure> getStructures() {
         return structures;
     }
 
     public void addStructure(Structure structure) {
         int level = structure.getNodeLevel();
-        List<Structure> list = structures.computeIfAbsent(level, k -> new ArrayList<>());
 
-        list.add(structure);
-        list.sort(Comparator.comparingInt(Structure::getPriority).reversed());
+        structures.add(structure);
+        structures.sort(Comparator.comparingInt(Structure::getPriority).reversed());
 
         if (level > highestNodeLevel) highestNodeLevel = level;
     }

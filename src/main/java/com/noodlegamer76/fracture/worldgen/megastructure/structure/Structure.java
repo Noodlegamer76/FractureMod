@@ -5,6 +5,7 @@ import com.noodlegamer76.fracture.worldgen.megastructure.StructMath;
 import com.noodlegamer76.fracture.worldgen.megastructure.rule.IStructureRule;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarCache;
 import com.noodlegamer76.fracture.worldgen.megastructure.visualizer.VisualizerEntry;
 import net.minecraft.util.RandomSource;
 
@@ -31,7 +32,7 @@ public abstract class Structure {
         return null;
     }
 
-    public boolean shouldGenerate(WorldAccess access, RandomSource random) {
+    public boolean shouldGenerate(WorldAccess access, RandomSource random, Node n, StructureInstance instance) {
         for (IStructureRule rule: rules) {
             if (!rule.shouldGenerate(access, random, this)) {
                 return false;
@@ -40,9 +41,12 @@ public abstract class Structure {
         return true;
     }
 
-    protected <T> void setVar(GenVar<T> var, T value, StructureInstance instance) {
-        GenVar<T> instanceVar = instance.getGenVar(var.getName(), var.getType());
-        if (instanceVar != null) instanceVar.setValue(value);
+    protected <T> void setVar(Node node, GenVar<T> var, T value, StructureInstance instance) {
+        GenVar<T> instanceVar = instance.getGenVar(node, var.getName(), var.getType());
+        if (instanceVar != null) {
+            instanceVar.setValue(value);
+            GenVarCache.instance().addVar(node, instanceVar);
+        }
     }
 
     public int getNodeLevel() {

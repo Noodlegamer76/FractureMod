@@ -9,9 +9,9 @@ public class Node {
     private final int size;
 
     public Node(int worldX, int worldZ, int level) {
-        int nodeSize = 16 << level; // 16 * 2^level
-        this.x = (worldX / nodeSize) * nodeSize;
-        this.z = (worldZ / nodeSize) * nodeSize;
+        int nodeSize = 16 << level;
+        this.x = Math.floorDiv(worldX, nodeSize) * nodeSize;
+        this.z = Math.floorDiv(worldZ, nodeSize) * nodeSize;
         this.level = level;
         this.size = nodeSize;
     }
