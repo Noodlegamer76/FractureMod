@@ -1,9 +1,5 @@
 package com.noodlegamer76.fracture.worldgen.megastructure.structure;
 
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.citadel.wall.ChunkHeightmapStructure;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.citadel.wall.WallCreationStructure;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.structures.citadel.wall.WallPlacementStructure;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,17 +54,17 @@ public class Structures {
       //}));
       //bridgeDef.addStructure(bridge);
 
-        StructureDefinition wallDef = new StructureDefinition();
-        addDefinition(wallDef);
+       //StructureDefinition wallDef = new StructureDefinition();
+       //addDefinition(wallDef);
 
-        WallCreationStructure wallCreation = new WallCreationStructure(10);
-        wallDef.addStructure(wallCreation);
+       //WallCreationStructure wallCreation = new WallCreationStructure(10);
+       //wallDef.addStructure(wallCreation);
 
-        ChunkHeightmapStructure chunkHeightmap = new ChunkHeightmapStructure(9);
-        wallDef.addStructure(chunkHeightmap);
+       //ChunkHeightmapStructure chunkHeightmap = new ChunkHeightmapStructure(9);
+       //wallDef.addStructure(chunkHeightmap);
 
-        WallPlacementStructure wallPlacement = new WallPlacementStructure(0);
-        wallDef.addStructure(wallPlacement);
+       //WallPlacementStructure wallPlacement = new WallPlacementStructure(0);
+       //wallDef.addStructure(wallPlacement);
     }
 
     public void addDefinition(StructureDefinition definition) {
