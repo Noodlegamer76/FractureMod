@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.entity.monster;
+package com.noodlegamer76.fracture.entity.monster.boss;
 
 import com.noodlegamer76.fracture.entity.ai.behavior.SkullchomperWalk;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -100,7 +100,7 @@ public class SkullChomper extends Monster implements GeoEntity, SmartBrainOwner<
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
                 new FloatToSurfaceOfFluid<>(),
-                new SkullchomperWalk<>(2)
+                new SkullchomperWalk<>(1.75f)
         );
     }
 
@@ -184,6 +184,7 @@ public class SkullChomper extends Monster implements GeoEntity, SmartBrainOwner<
 
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
+
 
     }
 

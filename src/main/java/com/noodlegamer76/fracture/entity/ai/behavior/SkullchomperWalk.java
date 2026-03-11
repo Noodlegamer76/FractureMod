@@ -1,12 +1,12 @@
 package com.noodlegamer76.fracture.entity.ai.behavior;
 
-import com.noodlegamer76.fracture.entity.monster.SkullChomper;
+import com.noodlegamer76.fracture.entity.monster.boss.SkullChomper;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.WalkOrRunToWalkTarget;
 
 public class SkullchomperWalk<T extends SkullChomper> extends WalkOrRunToWalkTarget<T> {
-    private final int skipRange;
+    private final float skipRange;
 
-    public SkullchomperWalk(int pSkipRange) {
+    public SkullchomperWalk(float pSkipRange) {
         super();
         skipRange = pSkipRange;
     }
@@ -22,6 +22,6 @@ public class SkullchomperWalk<T extends SkullChomper> extends WalkOrRunToWalkTar
 
     @Override
     protected boolean shouldKeepRunning(T entity) {
-        return super.shouldKeepRunning(entity) && entity.globalAttackTimeout <= 0;
+        return super.shouldKeepRunning(entity);
     }
 }

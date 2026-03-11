@@ -1,9 +1,7 @@
-package com.noodlegamer76.fracture.entity.ai;
+package com.noodlegamer76.fracture.entity.ai.entity.playermimic;
 
 import com.noodlegamer76.fracture.entity.monster.PlayerMimic;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -12,7 +10,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PlayerLikeMoveControl extends MoveControl {
     public PlayerLikeMoveControl(Mob mob) {

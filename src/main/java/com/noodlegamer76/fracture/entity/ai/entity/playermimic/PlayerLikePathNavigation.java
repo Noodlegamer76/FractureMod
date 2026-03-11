@@ -1,21 +1,17 @@
-package com.noodlegamer76.fracture.entity.ai;
+package com.noodlegamer76.fracture.entity.ai.entity.playermimic;
 
 import com.noodlegamer76.fracture.entity.monster.PlayerMimic;
 import com.noodlegamer76.fracture.mixin.accessor.PathAccessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.PathNavigationRegion;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.level.pathfinder.PathFinder;
-import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import net.minecraft.world.phys.Vec3;
 import net.tslat.smartbrainlib.api.core.navigation.ExtendedNavigator;
-import net.tslat.smartbrainlib.api.core.navigation.SmoothGroundNavigation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;

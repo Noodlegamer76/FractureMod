@@ -22,6 +22,7 @@ public class MegaStructureGenerator {
     private static void generateInstance(FeaturePlaceContext<NoneFeatureConfiguration> ctx, StructureDefinition definition) {
         StructureInstance instance = new StructureInstance(definition);
         WorldAccess access = new FeatureWorldAccess(ctx);
+        if (!definition.getSpawnCondition().shouldGenerate(access, definition)) return;
         instance.generate(access);
         lastInstance = instance;
     }

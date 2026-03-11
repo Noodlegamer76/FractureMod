@@ -1,6 +1,9 @@
 package com.noodlegamer76.fracture.block;
 
-import com.noodlegamer76.fracture.entity.monster.*;
+import com.noodlegamer76.fracture.entity.monster.AnkleBiterEntity;
+import com.noodlegamer76.fracture.entity.monster.FleshSlimeEntity;
+import com.noodlegamer76.fracture.entity.monster.FleshWalkerEntity;
+import com.noodlegamer76.fracture.entity.monster.boss.SkullChomper;
 import com.noodlegamer76.fracture.particles.InitParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

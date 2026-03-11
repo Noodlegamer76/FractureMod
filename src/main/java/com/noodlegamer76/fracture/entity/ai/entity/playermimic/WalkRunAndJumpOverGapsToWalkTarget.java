@@ -1,7 +1,6 @@
-package com.noodlegamer76.fracture.entity.ai;
+package com.noodlegamer76.fracture.entity.ai.entity.playermimic;
 
 import com.noodlegamer76.fracture.entity.monster.PlayerMimic;
-import net.minecraft.world.phys.Vec3;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 
 public class WalkRunAndJumpOverGapsToWalkTarget<E extends PlayerMimic> extends MoveToWalkTarget<E> {

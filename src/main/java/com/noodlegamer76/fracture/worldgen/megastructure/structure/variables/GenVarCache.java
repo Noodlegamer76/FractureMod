@@ -52,4 +52,8 @@ public class GenVarCache {
     public boolean contains(Node node, String name) {
         return cache.getOrDefault(node, Map.of()).containsKey(name);
     }
+
+    public void clear() {
+        cache.clear();
+    }
 }

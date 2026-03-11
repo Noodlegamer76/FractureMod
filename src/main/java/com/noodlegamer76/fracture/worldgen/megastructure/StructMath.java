@@ -44,15 +44,14 @@ public class StructMath {
 
         long worldSeed = access.getSeed();
 
-        long seed = worldSeed
-                ^ (((long) origin.x) * 341873128712L)
-                ^ (((long) origin.y) * 132897987541L)
+        long seed = (worldSeed << 32) | (worldSeed & 0xFFFFFFFFL);
+        seed ^= ((long) origin.x * 341873128712L)
+                ^ ((long) origin.y * 132897987541L)
                 ^ nodeSize
-                ^ (((long) extra) * 2654435761L);
+                ^ ((long) extra * 2654435761L);
 
         return RandomSource.create(seed);
     }
-
 
     /**
      * Returns the size of a quadtree node at the given level.

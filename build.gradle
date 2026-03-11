@@ -168,7 +168,7 @@ dependencies {
     implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-1.20.1:1.15")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    //implementation fg.deobf("curse.maven:distant-horizons-508933:6387680")
+    implementation fg.deobf("curse.maven:distant-horizons-508933:6387680")
     implementation fg.deobf("curse.maven:spark-361579:4738952")
 
 
@@ -179,8 +179,16 @@ dependencies {
         exclude group: "org.lwjgl"
     }
 
-    runtimeOnly "io.github.spair:imgui-java-natives-windows:${project.imguiVersion}"
-    runtimeOnly "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
+    //runtimeOnly "io.github.spair:imgui-java-natives-windows:${project.imguiVersion}"
+    //runtimeOnly "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
+
+
+    shadow("io.github.spair:imgui-java-binding:${project.imguiVersion}") {
+        exclude group: "org.lwjgl"
+    }
+    shadow("io.github.spair:imgui-java-lwjgl3:${project.imguiVersion}") {
+        exclude group: "org.lwjgl"
+    }
 
     //minecraftLibrary("io.github.spair:imgui-java-binding:${imgui_version}")
     //minecraftLibrary("io.github.spair:imgui-java-lwjgl3:${imgui_version}") {

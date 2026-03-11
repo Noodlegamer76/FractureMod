@@ -13,6 +13,15 @@ import java.util.List;
 public class StructureDefinition {
     private final List<Structure> structures = new ArrayList<>();
     private int highestNodeLevel = 0;
+    private final StructureGenerateCondition spawnCondition;
+
+    public StructureDefinition(StructureGenerateCondition spawnCondition) {
+        this.spawnCondition = spawnCondition;
+    }
+
+    public StructureDefinition() {
+        this.spawnCondition = (access, definition) -> true;
+    }
 
     public void generate(WorldAccess access, StructureInstance instance) {
         for (Structure structure : structures) {
@@ -46,6 +55,10 @@ public class StructureDefinition {
         structures.sort(Comparator.comparingInt(Structure::getPriority).reversed());
 
         if (level > highestNodeLevel) highestNodeLevel = level;
+    }
+
+    public StructureGenerateCondition getSpawnCondition() {
+        return spawnCondition;
     }
 
     public int getHighestNodeLevel() {

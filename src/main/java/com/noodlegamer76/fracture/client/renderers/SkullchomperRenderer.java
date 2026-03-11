@@ -3,7 +3,7 @@ package com.noodlegamer76.fracture.client.renderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.entity.monster.SkullChomper;
+import com.noodlegamer76.fracture.entity.monster.boss.SkullChomper;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

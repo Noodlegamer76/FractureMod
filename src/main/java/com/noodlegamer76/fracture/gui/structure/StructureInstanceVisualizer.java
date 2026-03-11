@@ -120,7 +120,7 @@ public class StructureInstanceVisualizer {
             inputFloat2("current Position", currentPos);
 
             if (button("New Seed")) {
-                currentSeed = System.currentTimeMillis();
+                currentSeed = System.nanoTime();
             }
         }
 
@@ -199,12 +199,15 @@ public class StructureInstanceVisualizer {
         if (ImGui.beginPopup("world_context_menu")) {
             if (ImGui.menuItem("Teleport here")) {
 
-                if (mc.player != null) {
+                if (mc != null && mc.player != null) {
                     int y = Mth.floor(mc.player.getY());
 
                     mc.player.connection.sendCommand(
                             "tp " + contextWorldX + " " + y + " " + contextWorldZ
                     );
+                }
+                else {
+                    currentPos = new float[] {contextWorldX, contextWorldZ};
                 }
             }
 

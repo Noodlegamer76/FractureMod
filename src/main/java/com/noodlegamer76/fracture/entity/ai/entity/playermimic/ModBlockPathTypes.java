@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.entity.ai;
+package com.noodlegamer76.fracture.entity.ai.entity.playermimic;
 
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 

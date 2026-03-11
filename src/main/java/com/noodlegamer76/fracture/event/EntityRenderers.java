@@ -4,7 +4,7 @@ package com.noodlegamer76.fracture.event;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.client.renderers.SkullchomperRenderer;
 import com.noodlegamer76.fracture.client.renderers.entity.*;
-import com.noodlegamer76.fracture.client.renderers.entity.block.*;
+import com.noodlegamer76.fracture.client.renderers.entity.block.BoreasPortalRenderer;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
 import net.minecraft.client.model.BoatModel;
@@ -36,7 +36,6 @@ public class EntityRenderers {
         event.registerEntityRenderer(InitEntities.COMPARABLE_SNOWMAN.get(), ComparableSnowmanRenderer::new);
         event.registerEntityRenderer(InitEntities.MOOSICLE.get(), MoosicleRenderer::new);
         event.registerEntityRenderer(InitEntities.SKULLCHOMPER.get(), SkullchomperRenderer::new);
-        event.registerEntityRenderer(InitEntities.FLESH_NUB.get(), FleshNubRenderer::new);
         event.registerEntityRenderer(InitEntities.PLAYER_MIMIC.get(), PlayerMimicRenderer::new);
 
         event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);

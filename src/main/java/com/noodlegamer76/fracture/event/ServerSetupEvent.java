@@ -2,6 +2,7 @@ package com.noodlegamer76.fracture.event;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.Structures;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarCache;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -12,10 +13,12 @@ public class ServerSetupEvent {
 
     @SubscribeEvent
     public static void serverSetup(ServerStartedEvent event) {
+        GenVarCache.instance().clear();
         Structures.getInstance().setupStructures();
     }
 
     @SubscribeEvent
     public static void serverUnload(ServerStoppedEvent event) {
+        GenVarCache.instance().clear();
     }
 }

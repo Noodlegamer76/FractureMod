@@ -4,7 +4,7 @@ import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.animal.Moosicle;
 import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
 import com.noodlegamer76.fracture.entity.monster.*;
-import com.noodlegamer76.fracture.entity.monster.boss.FleshNub;
+import com.noodlegamer76.fracture.entity.monster.boss.SkullChomper;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.entity.vehicle.ModChestBoatEntity;
 import net.minecraft.world.entity.EntityType;
@@ -74,11 +74,6 @@ public class InitEntities {
             () -> EntityType.Builder.of(SkullChomper::new, MobCategory.MISC)
                     .sized(3.2f, 2f)
                     .build("skullchomper"));
-
-    public static final RegistryObject<EntityType<FleshNub>> FLESH_NUB = ENTITIES.register(("flesh_nub"),
-            () -> EntityType.Builder.of(FleshNub::new, MobCategory.MISC)
-                    .sized(3.2f, 2f)
-                    .build("flesh_nub"));
 
     public static final RegistryObject<EntityType<PlayerMimic>> PLAYER_MIMIC = ENTITIES.register(("player_mimic"),
             () -> EntityType.Builder.of(PlayerMimic::new, MobCategory.MONSTER)
