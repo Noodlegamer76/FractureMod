@@ -3,6 +3,7 @@ package com.noodlegamer76.fracture.event;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.monster.*;
+import com.noodlegamer76.fracture.entity.monster.boss.FleshObelisk;
 import com.noodlegamer76.fracture.entity.monster.boss.SkullChomper;
 import com.noodlegamer76.fracture.network.PacketHandler;
 import net.minecraft.world.entity.animal.Cow;
@@ -25,6 +26,7 @@ public class ServerMobEvents {
         event.put(InitEntities.MOOSICLE.get(), Cow.createAttributes().build());
         event.put(InitEntities.SKULLCHOMPER.get(), SkullChomper.createAttributes().build());
         event.put(InitEntities.PLAYER_MIMIC.get(), PlayerMimic.createAttributes().build());
+        event.put(InitEntities.FLESH_OBELISK.get(), FleshObelisk.createAttributes().build());
     }
 
     @SubscribeEvent

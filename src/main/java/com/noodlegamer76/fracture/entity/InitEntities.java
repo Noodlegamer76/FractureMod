@@ -3,7 +3,9 @@ package com.noodlegamer76.fracture.entity;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.animal.Moosicle;
 import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
+import com.noodlegamer76.fracture.entity.misc.ObeliskLaser;
 import com.noodlegamer76.fracture.entity.monster.*;
+import com.noodlegamer76.fracture.entity.monster.boss.FleshObelisk;
 import com.noodlegamer76.fracture.entity.monster.boss.SkullChomper;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.entity.vehicle.ModChestBoatEntity;
@@ -79,5 +81,15 @@ public class InitEntities {
             () -> EntityType.Builder.of(PlayerMimic::new, MobCategory.MONSTER)
                     .sized(0.6F, 1.8F)
                     .build("player_mimic"));
+
+    public static final RegistryObject<EntityType<FleshObelisk>> FLESH_OBELISK = ENTITIES.register(("flesh_obelisk"),
+            () -> EntityType.Builder.of(FleshObelisk::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.8F)
+                    .build("flesh_obelisk"));
+
+    public static final RegistryObject<EntityType<ObeliskLaser>> OBELISK_LASER = ENTITIES.register(("obelisk_laser"),
+            () -> EntityType.Builder.<ObeliskLaser>of(((pEntityType, pLevel) -> new ObeliskLaser(pLevel)), MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .build("obelisk_laser"));
 
 }

@@ -1,12 +1,5 @@
 package com.noodlegamer76.fracture.item;
 
-import com.noodlegamer76.fracture.gui.imgui.imgui.ImGuiRenderer;
-import com.noodlegamer76.fracture.gui.imgui.imgui.ImGuiScreen;
-import com.noodlegamer76.fracture.gui.structure.StructureInstanceVisualizer;
-import com.noodlegamer76.fracture.worldgen.megastructure.MegaStructureGenerator;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInstance;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -66,21 +59,7 @@ public class TestItem extends Item {
             }
         }
 
-        if (level.isClientSide) {
-            Minecraft.getInstance().setScreen(
-                    new ImGuiScreen() {
-                        @Override
-                        public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-                            ImGuiRenderer.getInstance().draw(StructureInstanceVisualizer.getInstance()::render);
-                        }
-                    }
-            );
-
-            if (player.isShiftKeyDown() && MegaStructureGenerator.getLastInstance() != null) {
-                StructureInstance last = MegaStructureGenerator.getLastInstance();
-                StructureInstanceVisualizer.getInstance().setVars(last.getGenVars(), null);
-            }
-        }
+      
 
 
         return super.use(level, player, hand);

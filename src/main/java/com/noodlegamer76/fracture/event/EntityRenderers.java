@@ -37,6 +37,8 @@ public class EntityRenderers {
         event.registerEntityRenderer(InitEntities.MOOSICLE.get(), MoosicleRenderer::new);
         event.registerEntityRenderer(InitEntities.SKULLCHOMPER.get(), SkullchomperRenderer::new);
         event.registerEntityRenderer(InitEntities.PLAYER_MIMIC.get(), PlayerMimicRenderer::new);
+        event.registerEntityRenderer(InitEntities.FLESH_OBELISK.get(), FleshObeliskRenderer::new);
+        event.registerEntityRenderer(InitEntities.OBELISK_LASER.get(), ObeliskLaserRenderer::new);
 
         event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);
         event.registerBlockEntityRenderer(InitBlockEntities.INKWOOD_SIGN.get(), SignRenderer::new);
