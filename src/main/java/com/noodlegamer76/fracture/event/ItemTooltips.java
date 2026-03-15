@@ -15,7 +15,7 @@ public class ItemTooltips {
         if (event.getItemStack().is(InitItems.PARASITIC_SWORD.get())) {
             event.getToolTip().add(1, Component.literal("§4Absorbs health when you hit mobs"));
         }
-        else if (event.getItemStack().is(InitItems.BLOODY_SKULL.get())) {
+        else if (event.getItemStack().is(InitItems.INFESTED_CORE.get())) {
             event.getToolTip().add(1, Component.literal("§4Enhances the lifesteal of the Parasitic Sword"));
         }
         else if (event.getItemStack().is(InitItems.PARASITIC_AXE.get()) ||

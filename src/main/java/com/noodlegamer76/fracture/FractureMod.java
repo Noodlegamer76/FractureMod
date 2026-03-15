@@ -13,6 +13,7 @@ import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.gui.InitMenus;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.InitParticles;
+import com.noodlegamer76.fracture.sound.InitSoundEvents;
 import com.noodlegamer76.fracture.worldgen.features.InitFeatures;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -43,6 +44,7 @@ public class FractureMod {
         InitMenus.MENU_TYPES.register(modEventBus);
         InitFeatures.FEATURES.register(modEventBus);
         InitMemoryModuleTypes.MEMORY_MODULE_TYPES.register(modEventBus);
+        InitSoundEvents.SOUND_EVENTS.register(modEventBus);
 
 
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);

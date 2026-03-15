@@ -17,7 +17,7 @@
 	"item.fracture.parasitic_axe": "Parasitic Axe",
 	"item.fracture.parasitic_shovel": "Parasitic Shovel",
 	"item.fracture.fleshy_bone": "Fleshy Bone",
-	"item.fracture.bloody_skull": "Bloody Skull",
+	"item.fracture.infested_core": "Infested Core",
 	"item.fracture.boreas_key": "Boreas Key",
 	"item.fracture.abdominal_snowman_spawn_egg": "Abdominal Snowman Spawn Egg",
 	"item.fracture.knowledgeable_snowman_spawn_egg": "Knowledgeable Snowman Spawn Egg",
@@ -40,6 +40,7 @@
 	"item.fracture.permafrost_axe": "Permafrost Axe",
 	"item.fracture.permafrost_shovel": "Permafrost Shovel",
 	"item.fracture.permafrost_hoe": "Permafrost Hoe",
+	"item.fracture.flesh_obelisk_spawn_egg": "Flesh Obelisk Spawn Egg",
 
 	"block.fracture.prison_bars": "Prison Bars",
 	"block.fracture.rusty_iron_bars": "Rusty Iron Bars",
@@ -140,6 +141,7 @@
 	"entity.fracture.knowledgeable_snowman": "Knowledgeable Snowman",
 	"entity.fracture.moosicle": "Moosicle",
 	"entity.fracture.comparable_snowman": "Comparable Snowman",
+	"entity.fracture.flesh_obelisk": "Flesh Obelisk",
 
 	"filled_map.flesh_treasure_map": "Fleshy Treasure Map",
 

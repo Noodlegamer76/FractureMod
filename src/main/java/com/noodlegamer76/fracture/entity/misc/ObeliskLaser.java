@@ -1,6 +1,8 @@
 package com.noodlegamer76.fracture.entity.misc;
 
 import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.monster.boss.FleshObelisk;
+import com.noodlegamer76.fracture.sound.InitSoundEvents;
 import com.noodlegamer76.fracture.util.RaycastUtils;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.nbt.CompoundTag;
@@ -43,6 +45,7 @@ public class ObeliskLaser extends Entity implements GeoEntity {
     private Vector3f clientLastLaserPosition = new Vector3f();
     private final Vector3f clientPrevSyncedLaserPosition = new Vector3f();
     private Consumer<ObeliskLaser> positionCallback;
+    private boolean playSounds = true;
 
     public ObeliskLaser(Level level) {
         this(Vec3.ZERO, level, 7, 75, 20, 30, null);
@@ -104,13 +107,29 @@ public class ObeliskLaser extends Entity implements GeoEntity {
             if (tickCount > cooldownEnd) {
                 remove(RemovalReason.DISCARDED);
             }
+
+            if (shouldPlaySounds()) {
+                if (tickCount == chargeEnd) {
+                    playSound(InitSoundEvents.FLESH_OBELISK_LASER_MIDDLE.get());
+                }
+                if (tickCount == 1) {
+                    playSound(InitSoundEvents.FLESH_OBELISK_LASER_START.get());
+                }
+            }
         }
 
         if (level().isClientSide) {
-            clientLastLaserPosition.set(clientPrevSyncedLaserPosition);
-            clientPrevSyncedLaserPosition.set(entityData.get(DATA_ID_ATTACK_POSITION));
+            Vector3f synced = entityData.get(DATA_ID_ATTACK_POSITION);
 
-            Vector3f end = entityData.get(DATA_ID_ATTACK_POSITION);
+            if (clientLastLaserPosition.lengthSquared() < 1e-6f && synced.lengthSquared() > 1e-6f) {
+                clientLastLaserPosition.set(synced);
+            } else {
+                clientLastLaserPosition.set(clientPrevSyncedLaserPosition);
+            }
+
+            clientPrevSyncedLaserPosition.set(synced);
+
+            Vector3f end = synced;
             laserBox = new AABB(getEyePosition(), new Vec3(end.x(), end.y(), end.z())).inflate(0.1f);
         }
     }
@@ -150,7 +169,7 @@ public class ObeliskLaser extends Entity implements GeoEntity {
         double length = beam.length();
         Vec3 dir = beam.normalize();
 
-        double radius = 1.5;
+        double radius = 1.2;
 
         AABB box = new AABB(start, end).inflate(radius);
 
@@ -162,6 +181,9 @@ public class ObeliskLaser extends Entity implements GeoEntity {
         doLaserParticles(start, dir, length);
 
         for (LivingEntity hit : entities) {
+            if (hit instanceof FleshObelisk) {
+                continue;
+            }
             double distance = distanceToLine(hit.position(), start, dir, length);
             distance = Math.min(distance, distanceToLine(hit.getEyePosition(), start, dir, length));
 
@@ -278,5 +300,13 @@ public class ObeliskLaser extends Entity implements GeoEntity {
 
     public Vector3f getLockedEnd() {
         return lockedEnd;
+    }
+
+    public boolean shouldPlaySounds() {
+        return playSounds;
+    }
+
+    public void setPlaySounds(boolean playSounds) {
+        this.playSounds = playSounds;
     }
 }

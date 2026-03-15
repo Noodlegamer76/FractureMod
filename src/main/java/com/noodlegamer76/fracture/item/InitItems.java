@@ -136,8 +136,10 @@ public class InitItems {
             () -> new ForgeSpawnEggItem(InitEntities.MOOSICLE, new Color(0, 80, 203).getRGB(), new Color(42, 8, 3).getRGB(), new Item.Properties()));
     public static final RegistryObject<Item> COMPARABLE_SNOWMAN_SPAWN_EGG = ITEMS.register("comparable_snowman_spawn_egg",
             () -> new ForgeSpawnEggItem(InitEntities.COMPARABLE_SNOWMAN, new Color(0, 80, 203).getRGB(), new Color(127, 127, 199).getRGB(), new Item.Properties()));
+    public static final RegistryObject<Item> FLESH_OBELISK_SPAWN_EGG = ITEMS.register("flesh_obelisk_spawn_egg",
+            () -> new ForgeSpawnEggItem(InitEntities.FLESH_OBELISK, new Color(37, 0, 0).getRGB(), new Color(84, 5, 5).getRGB(), new Item.Properties()));
 
-    public static final RegistryObject<Item> BLOODY_SKULL = ITEMS.register("bloody_skull",
+    public static final RegistryObject<Item> INFESTED_CORE = ITEMS.register("infected_core",
             () -> new ArmorItem(ArmorTiers.BLOOD_HELMET, ArmorItem.Type.HELMET, new Item.Properties()));
 
 

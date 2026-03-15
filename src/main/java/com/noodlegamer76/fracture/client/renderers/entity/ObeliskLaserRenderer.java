@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.misc.ObeliskLaser;
-import com.noodlegamer76.fracture.entity.monster.boss.FleshObelisk;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,6 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
@@ -38,9 +38,10 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
     }
 
     private void laserAttack(PoseStack poseStack, MultiBufferSource bufferSource, int clientTick, float partialTick) {
-        int chargeUpEnd = FleshObelisk.LASER_BEAM_FREEZE_TIME + FleshObelisk.LASER_BEAM_CHARGE_UP;
-        int fireEnd = chargeUpEnd + FleshObelisk.LASER_BEAM_FIRE_TIME;
-        int cooldownEnd = fireEnd + FleshObelisk.LASER_BEAM_COOLDOWN;
+        int freezeTime = animatable.getLaserFreezeTime();
+        int chargeUpEnd = animatable.getChargeTime();
+        int fireEnd = animatable.getFireTime();
+        int cooldownEnd = animatable.getCooldownTime();
         poseStack.pushPose();
 
         if (clientTick >= 0 && clientTick < fireEnd) {
@@ -63,23 +64,30 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
         Vector3f worldStart = animatable.getEyePosition(partialTick).toVector3f().sub(entityPos);
 
         Vector3f worldEnd = animatable.getInterpolatedLaserPosition(partialTick);
-        worldEnd.sub(entityPos);
+        if (worldEnd.lengthSquared() > 1e-6f) {
+            worldEnd.sub(entityPos);
+        } else {
+            worldEnd = new Vector3f(worldStart).add(0, 1, 0);
+        }
+
+        float maxDelta = freezeTime + chargeUpEnd;
+        float size = Mth.lerp((clientTick + partialTick) / maxDelta, 0.0f, 1.25f);
 
         if (clientTick < chargeUpEnd) {
             float t = (float)clientTick / chargeUpEnd;
-            int r = lerpColor(120, 255, t);
-            int g = lerpColor(0, 0, t);
-            int b = lerpColor(200, 0, t);
+            int r = lerpColor(255, 180, t);
+            int g = lerpColor(255, 0, t);
+            int b = lerpColor(255, 0, t);
             VertexConsumer smallBeam = bufferSource.getBuffer(RenderType.entityTranslucentEmissive(SMALL_OBELISK_BEAM));
-            renderStackedCrossBeam(poseStack, smallBeam, worldStart, worldEnd, 0.2f, 0.6f, r, g, b, partialTick);
+            renderStackedCrossBeam(poseStack, smallBeam, animatable, worldStart, worldEnd, size * 0.25f, 50, r, g, b, clientTick, partialTick);
             VertexConsumer circle = bufferSource.getBuffer(RenderType.entityTranslucentEmissive(MAGIC_CIRCLE));
-            renderMagicCirclePlane(poseStack, circle, worldStart, worldEnd, 0.5f, r, g, b, partialTick);
+            renderMagicCirclePlane(poseStack, circle, worldStart, worldEnd, size, r, g, b, animatable, clientTick, partialTick);
         } else if (clientTick < fireEnd) {
             spawnBeamParticles(animatable, worldStart, worldEnd, entityPos, 1, partialTick, 255, 50, 255);
             VertexConsumer largeBeam = bufferSource.getBuffer(RenderType.entityTranslucentEmissive(LARGE_OBELISK_BEAM));
-            renderStackedCrossBeam(poseStack, largeBeam, worldStart, worldEnd, 1.0f, 3.0f, 255, 255, 255, partialTick);
+            renderStackedCrossBeam(poseStack, largeBeam, animatable, worldStart, worldEnd, 0.6f, 50.0f, 255, 255, 255, clientTick, partialTick);
             VertexConsumer circle = bufferSource.getBuffer(RenderType.entityTranslucentEmissive(MAGIC_CIRCLE));
-            renderMagicCirclePlane(poseStack, circle, worldStart, worldEnd, 1.25f, 180, 0, 180, partialTick);
+            renderMagicCirclePlane(poseStack, circle, worldStart, worldEnd, size, 180, 0, 180, animatable, clientTick, partialTick);
         }
 
         poseStack.popPose();
@@ -97,11 +105,13 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
     private static void renderStackedCrossBeam(
             PoseStack poseStack,
             VertexConsumer consumer,
+            ObeliskLaser laser,
             Vector3f startWorld,
             Vector3f endWorld,
             float width,
             float segmentLength,
             int r, int g, int b,
+            int clientTick,
             float partialTick
     ) {
         Vector3f diff = new Vector3f(endWorld).sub(startWorld);
@@ -119,6 +129,22 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
         poseStack.mulPose(Axis.YP.rotation(-yaw));
         poseStack.mulPose(Axis.ZP.rotation(pitch));
 
+        Vec3 camPos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        Vec3 entityPos = laser.position();
+        Vector3f camRelative = new Vector3f(
+                (float)(camPos.x - entityPos.x) - startWorld.x,
+                (float)(camPos.y - entityPos.y) - startWorld.y,
+                (float)(camPos.z - entityPos.z) - startWorld.z
+        );
+
+        Vector3f camPerp = new Vector3f(camRelative).sub(new Vector3f(dir).mul(camRelative.dot(dir)));
+
+        Vector3f localY = new Vector3f(-Mth.cos(yaw) * Mth.sin(pitch), Mth.cos(pitch), -Mth.sin(yaw) * Mth.sin(pitch));
+        Vector3f localZ = new Vector3f(-Mth.sin(yaw), 0, Mth.cos(yaw));
+
+        float billboardAngle = (float) Math.atan2(camPerp.dot(localZ), camPerp.dot(localY));
+        poseStack.mulPose(Axis.XP.rotation(billboardAngle));
+
         float half = width * 0.8f;
 
         int segments = Mth.ceil(totalLength / segmentLength);
@@ -127,7 +153,7 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
         for (int i = 0; i < segments; i++) {
             float startX = i * segmentLength;
             float endX = Math.min((i + 1) * segmentLength, totalLength);
-            drawCrossSection(poseStack, consumer, startX, endX, half, r, g, b, partialTick);
+            drawCrossSection(poseStack, consumer, laser, startX, endX, half, r, g, b, clientTick, partialTick);
         }
 
         poseStack.popPose();
@@ -140,8 +166,13 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
             Vector3f endWorld,
             float size,
             int r, int g, int b,
+            ObeliskLaser laser,
+            int clientTick,
             float partialTick
     ) {
+        float delta = clientTick + partialTick;
+        int maxDelta = laser.getLaserFreezeTime() + laser.getChargeTime() + laser.getFireTime();
+        float rotationSpeed = Mth.lerp(delta / maxDelta, 0.0f, 1.0f) * 10;
         Vector3f diff = new Vector3f(endWorld).sub(startWorld);
         float totalLength = diff.length();
         if (totalLength <= 1e-6f) return;
@@ -156,8 +187,7 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
         poseStack.translate(startWorld.x, startWorld.y, startWorld.z);
         poseStack.mulPose(Axis.YP.rotation(-yaw));
         poseStack.mulPose(Axis.ZP.rotation(pitch));
-        float rotation = Minecraft.getInstance().levelRenderer.getTicks() + partialTick * (size / 2.0f);
-        poseStack.mulPose(Axis.XP.rotation(rotation));
+        poseStack.mulPose(Axis.XP.rotation(rotationSpeed));
 
         Matrix4f pose = poseStack.last().pose();
         Matrix3f normal = poseStack.last().normal();
@@ -179,23 +209,28 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
     private static void drawCrossSection(
             PoseStack poseStack,
             VertexConsumer consumer,
+            ObeliskLaser laser,
             float start,
             float end,
             float halfWidth,
             int r, int g, int b,
+            int clientTick,
             float partialTick
     ) {
         Matrix4f pose = poseStack.last().pose();
         Matrix3f normal = poseStack.last().normal();
         int light = LightTexture.pack(15, 15);
-        float scroll = -partialTick;
-        float u1 = start + scroll;
-        float u2 = end + scroll;
+        float maxDelta = laser.getLaserFreezeTime() + laser.getChargeTime();
+        float scrollSpeed = Mth.lerp((clientTick + partialTick) / maxDelta, 0.0f, 0.75f);
+        float scroll = -clientTick * scrollSpeed;
+        float scale = 1.0f / (8 * halfWidth);
+        float u1 = (start + scroll) * scale;
+        float u2 = (end + scroll) * scale;
 
         vertex(pose, normal, consumer, start, -halfWidth, -halfWidth, u1, 0, r, g, b, light);
         vertex(pose, normal, consumer, end, -halfWidth, -halfWidth, u2, 0, r, g, b, light);
-        vertex(pose, normal, consumer, end,  halfWidth,  halfWidth, u2, 1, r, g, b, light);
-        vertex(pose, normal, consumer, start,  halfWidth,  halfWidth, u1, 1, r, g, b, light);
+        vertex(pose, normal, consumer, end, halfWidth, halfWidth, u2, 1, r, g, b, light);
+        vertex(pose, normal, consumer, start, halfWidth, halfWidth, u1, 1, r, g, b, light);
 
         poseStack.pushPose();
         poseStack.mulPose(Axis.XP.rotationDegrees(90));
@@ -205,8 +240,8 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
 
         vertex(pose, normal, consumer, start, -halfWidth, -halfWidth, u1, 0, r, g, b, light);
         vertex(pose, normal, consumer, end, -halfWidth, -halfWidth, u2, 0, r, g, b, light);
-        vertex(pose, normal, consumer, end,  halfWidth,  halfWidth, u2, 1, r, g, b, light);
-        vertex(pose, normal, consumer, start,  halfWidth,  halfWidth, u1, 1, r, g, b, light);
+        vertex(pose, normal, consumer, end, halfWidth, halfWidth, u2, 1, r, g, b, light);
+        vertex(pose, normal, consumer, start, halfWidth, halfWidth, u1, 1, r, g, b, light);
 
         poseStack.popPose();
     }
@@ -266,7 +301,7 @@ public class ObeliskLaserRenderer extends GeoEntityRenderer<ObeliskLaser> {
                 .uv(u, v)
                 .overlayCoords(OverlayTexture.NO_OVERLAY)
                 .uv2(light)
-                .normal(normal, 0,1,0)
+                .normal(normal, 0, 1, 0)
                 .endVertex();
     }
 }

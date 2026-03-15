@@ -84,7 +84,7 @@ public class InitEntities {
 
     public static final RegistryObject<EntityType<FleshObelisk>> FLESH_OBELISK = ENTITIES.register(("flesh_obelisk"),
             () -> EntityType.Builder.of(FleshObelisk::new, MobCategory.MONSTER)
-                    .sized(0.6F, 1.8F)
+                    .sized(0.9F, 2.6F)
                     .build("flesh_obelisk"));
 
     public static final RegistryObject<EntityType<ObeliskLaser>> OBELISK_LASER = ENTITIES.register(("obelisk_laser"),

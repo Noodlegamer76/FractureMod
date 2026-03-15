@@ -1,0 +1,14 @@
+{
+  "entity.flesh_obelisk.laser_middle": {
+    "subtitle": "fracture.subtitle.entity.flesh_obelisk.laser_middle",
+    "sounds": [
+      "fracture:entity/flesh_obelisk/laser_middle"
+    ]
+  },
+  "entity.flesh_obelisk.laser_start": {
+    "subtitle": "fracture.subtitle.entity.flesh_obelisk.laser_start",
+    "sounds": [
+      "fracture:entity/flesh_obelisk/laser_start"
+    ]
+  }
+}

@@ -2,12 +2,10 @@ package com.noodlegamer76.fracture.event;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.item.InitItems;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -23,7 +21,7 @@ public class DamageEvents {
                 float damage = event.getAmount();
                 player.heal(damage / 6 > 12 ? 12 : damage / 6);
 
-                if (player.getItemBySlot(EquipmentSlot.HEAD).is(InitItems.BLOODY_SKULL.get())) {
+                if (player.getItemBySlot(EquipmentSlot.HEAD).is(InitItems.INFESTED_CORE.get())) {
                     player.heal(damage / 6 > 12 ? 12 : damage / 6);
                 }
             }

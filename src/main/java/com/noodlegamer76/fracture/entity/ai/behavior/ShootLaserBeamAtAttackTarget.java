@@ -13,6 +13,7 @@ import net.tslat.smartbrainlib.util.BrainUtils;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class ShootLaserBeamAtAttackTarget<E extends Mob> extends ExtendedBehaviour<E> {
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS =
@@ -22,26 +23,28 @@ public class ShootLaserBeamAtAttackTarget<E extends Mob> extends ExtendedBehavio
             );
     private final Consumer<ObeliskLaser> positionCallback;
 
-    private int chargeTime;
-    private int fireTime;
-    private int cooldownTime;
-    private int laserFreezeTime;
+    private final int chargeTime;
+    private final int fireTime;
+    private final int cooldownTime;
+    private final int laserFreezeTime;
+    private final Predicate<E> setCooldown;
 
     private LivingEntity target;
     private int currentTick;
 
     private ObeliskLaser laser;
 
-    public ShootLaserBeamAtAttackTarget(int chargeTime, int fireTime, int cooldownTime, int laserFreezeTime, Consumer<ObeliskLaser> positionCallback) {
+    public ShootLaserBeamAtAttackTarget(int chargeTime, int fireTime, int cooldownTime, int laserFreezeTime, Consumer<ObeliskLaser> positionCallback, Predicate<E> setCooldown) {
         this.chargeTime = chargeTime;
         this.fireTime = fireTime;
         this.cooldownTime = cooldownTime;
         this.laserFreezeTime = laserFreezeTime;
         this.positionCallback = positionCallback;
+        this.setCooldown = setCooldown;
     }
 
-    public ShootLaserBeamAtAttackTarget(int chargeTime, int fireTime, int cooldownTime, int laserFreezeTime) {
-        this(chargeTime, fireTime, cooldownTime, laserFreezeTime, null);
+    public ShootLaserBeamAtAttackTarget(int chargeTime, int fireTime, int cooldownTime, int laserFreezeTime, Predicate<E> setCooldown) {
+        this(chargeTime, fireTime, cooldownTime, laserFreezeTime, null, setCooldown);
     }
 
     @Override
@@ -53,7 +56,9 @@ public class ShootLaserBeamAtAttackTarget<E extends Mob> extends ExtendedBehavio
             return;
 
         int totalDuration = laserFreezeTime + chargeTime + fireTime + cooldownTime;
-        BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, totalDuration);
+        if (setCooldown != null && setCooldown.test(entity)) {
+            BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, totalDuration);
+        }
 
         laser = new ObeliskLaser(
                 entity.getEyePosition().add(0, 2.5, 0),
@@ -86,7 +91,7 @@ public class ShootLaserBeamAtAttackTarget<E extends Mob> extends ExtendedBehavio
 
         if (currentTick > 0 && currentTick <= freezeEnd) {
             Vec3 look = start.add(targetDir.scale(10));
-            entity.getLookControl().setLookAt(look.x, look.y, look.z, 30f, 30f);
+            //entity.getLookControl().setLookAt(look.x, look.y, look.z, 30f, 30f);
         }
 
         laser.setLaserDirection(targetDir);

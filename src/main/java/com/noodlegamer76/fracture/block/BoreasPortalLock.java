@@ -1,22 +1,16 @@
 package com.noodlegamer76.fracture.block;
 
-import com.google.common.base.Predicates;
 import com.noodlegamer76.fracture.item.BoreasKey;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.pattern.BlockInWorld;
-import net.minecraft.world.level.block.state.pattern.BlockPattern;
-import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
-import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -30,9 +24,21 @@ public class BoreasPortalLock extends Block {
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (pLevel.isClientSide && pPlayer.getItemInHand(pHand).getItem() instanceof BoreasKey) {
+            if (pPlayer.getItemInHand(pHand).getItem() instanceof BoreasKey) {
+                Minecraft mc = Minecraft.getInstance();
+                if (mc.player != null) {
+                    mc.player.displayClientMessage(
+                            Component.literal("The portal remains locked, The dimension isn't ready yet!"),
+                            true
+                    );
+                }
+            }
             return InteractionResult.SUCCESS;
         }
         if (pPlayer.getItemInHand(pHand).getItem() instanceof BoreasKey) {
+            if (true) {
+                return InteractionResult.SUCCESS;
+            }
             buildPortal(pPos, pLevel);
             if (!pPlayer.isCreative()) {
                 pPlayer.getItemInHand(pHand).shrink(1);

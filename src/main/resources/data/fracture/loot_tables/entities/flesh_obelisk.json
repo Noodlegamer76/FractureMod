@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "conditions": [],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [],
+          "name": "fracture:boreas_key"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}
