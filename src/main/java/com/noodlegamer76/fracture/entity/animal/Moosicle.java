@@ -1,16 +1,18 @@
 package com.noodlegamer76.fracture.entity.animal;
 
-import com.noodlegamer76.fracture.entity.InitEntities;
-import com.noodlegamer76.fracture.entity.monster.FleshWalkerEntity;
+import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.item.InitItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
@@ -18,6 +20,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -44,7 +48,6 @@ public class Moosicle extends Cow implements GeoEntity {
     protected SoundEvent getDeathSound() {
         return SoundEvents.GLASS_BREAK;
     }
-
 
     protected void playStepSound(BlockPos pPos, BlockState pBlock) {
         this.playSound(SoundEvents.GLASS_STEP, 0.15F, 1.0F);
@@ -90,5 +93,9 @@ public class Moosicle extends Cow implements GeoEntity {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return animatableInstanceCache;
+    }
+
+    public static boolean checkMoosicleSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return pLevel.getBlockState(pPos.below()).is(Blocks.BLUE_ICE) || pLevel.getBlockState(pPos.below()).is(InitBlocks.ICE_CRYSTAL_BLOCK.get());
     }
 }

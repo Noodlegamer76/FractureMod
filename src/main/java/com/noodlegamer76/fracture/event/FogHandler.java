@@ -30,9 +30,9 @@ public class FogHandler {
         if (mc.player == null) return;
 
         if (mc.player.level().dimension() == ModDimensionKeys.BOREAS) {
-            event.setRed(0.25f);
-            event.setGreen(0.3f);
-            event.setBlue(0.4f);
+            event.setRed(0.85f);
+            event.setGreen(0.9f);
+            event.setBlue(1f);
         }
     }
 }

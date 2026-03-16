@@ -2,7 +2,7 @@ package com.noodlegamer76.fracture.entity.misc;
 
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.monster.boss.FleshObelisk;
-import com.noodlegamer76.fracture.sound.InitSoundEvents;
+import com.noodlegamer76.fracture.util.InitSoundEvents;
 import com.noodlegamer76.fracture.util.RaycastUtils;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.nbt.CompoundTag;

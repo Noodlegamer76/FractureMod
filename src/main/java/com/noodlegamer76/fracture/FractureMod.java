@@ -2,7 +2,6 @@ package com.noodlegamer76.fracture;
 
 import com.mojang.logging.LogUtils;
 import com.noodlegamer76.fracture.block.InitBlocks;
-import com.noodlegamer76.fracture.creativetabs.FractureTab;
 import com.noodlegamer76.fracture.creativetabs.InitCreativeTabs;
 import com.noodlegamer76.fracture.datagen.DataGenerators;
 import com.noodlegamer76.fracture.entity.InitEntities;
@@ -13,7 +12,7 @@ import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.gui.InitMenus;
 import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.particles.InitParticles;
-import com.noodlegamer76.fracture.sound.InitSoundEvents;
+import com.noodlegamer76.fracture.util.InitSoundEvents;
 import com.noodlegamer76.fracture.worldgen.features.InitFeatures;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -45,10 +44,7 @@ public class FractureMod {
         InitFeatures.FEATURES.register(modEventBus);
         InitMemoryModuleTypes.MEMORY_MODULE_TYPES.register(modEventBus);
         InitSoundEvents.SOUND_EVENTS.register(modEventBus);
-
-
         InitCreativeTabs.CREATIVE_TABS.register(modEventBus);
-        modEventBus.register(new FractureTab());
 
         MinecraftForge.EVENT_BUS.register(this);
 

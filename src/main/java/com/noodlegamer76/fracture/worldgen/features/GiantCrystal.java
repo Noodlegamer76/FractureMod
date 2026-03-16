@@ -3,10 +3,7 @@ package com.noodlegamer76.fracture.worldgen.features;
 import com.mojang.serialization.Codec;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -38,8 +35,8 @@ public class GiantCrystal extends Feature<NoneFeatureConfiguration> {
                 double offsetY = direction.y * j;
                 double offsetZ = direction.z * j;
 
-                double clampedX = Math.min(Math.max(offsetX, -16), 16);
-                double clampedZ = Math.min(Math.max(offsetZ, -16), 16);
+                double clampedX = Math.min(Math.max(offsetX, -15), 15);
+                double clampedZ = Math.min(Math.max(offsetZ, -15), 15);
 
                 current.set(
                         origin.getX() + Math.round(clampedX),

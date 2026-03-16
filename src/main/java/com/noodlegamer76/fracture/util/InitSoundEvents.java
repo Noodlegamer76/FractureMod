@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.sound;
+package com.noodlegamer76.fracture.util;
 
 import com.noodlegamer76.fracture.FractureMod;
 import net.minecraft.resources.ResourceLocation;

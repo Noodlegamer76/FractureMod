@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class MoosicleRenderer extends GeoEntityRenderer<Moosicle> {
@@ -19,7 +18,12 @@ public class MoosicleRenderer extends GeoEntityRenderer<Moosicle> {
 
     @Override
     public void render(Moosicle entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        poseStack.pushPose();
+        if (entity.isBaby()) {
+            poseStack.scale(0.5F, 0.5F, 0.5F);
+        }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        poseStack.popPose();
     }
 
     @Override

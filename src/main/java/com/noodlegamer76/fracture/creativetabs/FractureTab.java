@@ -1,5 +1,6 @@
 package com.noodlegamer76.fracture.creativetabs;
 
+import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.datagen.DataGenerators;
 import com.noodlegamer76.fracture.item.InitItems;
@@ -7,10 +8,13 @@ import com.noodlegamer76.fracture.util.registryutils.BlockSet;
 import com.noodlegamer76.fracture.util.registryutils.BlockWithItem;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = FractureMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FractureTab {
+
     @SubscribeEvent
-    public void buildContents(BuildCreativeModeTabContentsEvent event) {
+    public static void buildContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == InitCreativeTabs.FRACTURE_TAB.getKey()) {
             event.accept(InitItems.BLOODY_BOOKSHELF);
             event.accept(InitItems.BLOOD_BUCKET);
@@ -115,13 +119,6 @@ public class FractureTab {
             event.accept(InitItems.KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG);
             event.accept(InitItems.MOOSICLE);
             event.accept(InitItems.COMPARABLE_SNOWMAN_SPAWN_EGG);
-
-            event.accept(InitItems.DOUBLE_CAST_SPELL);
-            event.accept(InitItems.TRIPLE_CAST_SPELL);
-            event.accept(InitItems.DOUBLE_CAST_INNACURATE_SPELL);
-            event.accept(InitItems.GIANT_SNOWBALL_SPELL);
-            event.accept(InitItems.GIANT_SNOWBALL_WITH_TRIGGER_SPELL);
-            event.accept(InitItems.EXPLOSION_SPELL);
         }
     }
 }
