@@ -1,6 +1,6 @@
 package com.noodlegamer76.fracture.item;
 
-import com.noodlegamer76.fracture.client.renderers.item.VoidBlockItemRenderer;
+import com.noodlegamer76.fracture.client.render.item.VoidBlockItemRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;

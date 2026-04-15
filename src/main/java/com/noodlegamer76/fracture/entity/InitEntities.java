@@ -3,10 +3,11 @@ package com.noodlegamer76.fracture.entity;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.animal.Moosicle;
 import com.noodlegamer76.fracture.entity.misc.CompactPrimedTnt;
-import com.noodlegamer76.fracture.entity.misc.ObeliskLaser;
 import com.noodlegamer76.fracture.entity.monster.*;
 import com.noodlegamer76.fracture.entity.monster.boss.FleshObelisk;
 import com.noodlegamer76.fracture.entity.monster.boss.SkullChomper;
+import com.noodlegamer76.fracture.entity.projectile.IceCube;
+import com.noodlegamer76.fracture.entity.projectile.ObeliskLaser;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
 import com.noodlegamer76.fracture.entity.vehicle.ModChestBoatEntity;
 import net.minecraft.world.entity.EntityType;
@@ -91,5 +92,10 @@ public class InitEntities {
             () -> EntityType.Builder.<ObeliskLaser>of(((pEntityType, pLevel) -> new ObeliskLaser(pLevel)), MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .build("obelisk_laser"));
+
+    public static final RegistryObject<EntityType<IceCube>> ICE_CUBE = ENTITIES.register(("ice_cube"),
+            () -> EntityType.Builder.<IceCube>of((IceCube::new), MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .build("ice_cube"));
 
 }

@@ -1,7 +1,7 @@
 package com.noodlegamer76.fracture.block;
 
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.entity.block.BoreasPortalEntity;
+import com.noodlegamer76.fracture.tile.BoreasPortalEntity;
 import com.noodlegamer76.fracture.util.BoreasTeleporter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -12,7 +12,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;

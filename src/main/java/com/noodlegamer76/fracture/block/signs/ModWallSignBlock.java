@@ -1,6 +1,6 @@
 package com.noodlegamer76.fracture.block.signs;
 
-import com.noodlegamer76.fracture.entity.block.ModSignBlockEntity;
+import com.noodlegamer76.fracture.tile.ModSignBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;

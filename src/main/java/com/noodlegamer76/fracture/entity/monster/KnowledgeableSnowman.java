@@ -1,25 +1,24 @@
 package com.noodlegamer76.fracture.entity.monster;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.InteractionHand;
+import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.projectile.IceCube;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
@@ -32,19 +31,15 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliat
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class KnowledgeableSnowman extends Monster implements GeoEntity, SmartBrainOwner<KnowledgeableSnowman> {
+public class KnowledgeableSnowman extends Monster implements GeoEntity, SmartBrainOwner<KnowledgeableSnowman>, RangedAttackMob {
     AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
     public static final RawAnimation CASTING = RawAnimation.begin().thenPlay("casting");
 
@@ -119,7 +114,8 @@ public class KnowledgeableSnowman extends Monster implements GeoEntity, SmartBra
     public BrainActivityGroup<? extends KnowledgeableSnowman> getFightTasks() {
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>().stopTryingToPathAfter(10),
-                new SetWalkTargetToAttackTarget<>()
+                new SetWalkTargetToAttackTarget<>(),
+                new AnimatableRangedAttack<>(50)
         );
     }
 
@@ -130,5 +126,20 @@ public class KnowledgeableSnowman extends Monster implements GeoEntity, SmartBra
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return animatableInstanceCache;
+    }
+
+    @Override
+    public void performRangedAttack(LivingEntity pTarget, float pDistanceFactor) {
+        IceCube cube = new IceCube(InitEntities.ICE_CUBE.get(), level());
+        cube.setPos(getX(), getEyeY(), getZ());
+
+        double d0 = pTarget.getX() - this.getX();
+        double d1 = pTarget.getY(0.3333333333333333D) - cube.getY();
+        double d2 = pTarget.getZ() - this.getZ();
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+
+        cube.shoot(d0, d1 + d3 * 0.2, d2, 1.6F, (float)(14 - this.level().getDifficulty().getId() * 4));
+        this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.level().addFreshEntity(cube);
     }
 }

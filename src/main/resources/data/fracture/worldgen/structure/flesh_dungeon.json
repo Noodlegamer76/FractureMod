@@ -8,15 +8,15 @@
       "spawns": [
         {
           "type": "fracture:flesh_slime",
-          "weight": 10,
+          "weight": 6,
           "minCount": 1,
-          "maxCount": 6
+          "maxCount": 2
         },
         {
           "type": "fracture:flesh_walker",
-          "weight": 10,
+          "weight": 6,
           "minCount": 1,
-          "maxCount": 2
+          "maxCount": 1
         },
         {
           "type": "fracture:ankle_biter",

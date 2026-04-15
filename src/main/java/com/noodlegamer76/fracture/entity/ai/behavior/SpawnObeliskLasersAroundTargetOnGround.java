@@ -1,7 +1,7 @@
 package com.noodlegamer76.fracture.entity.ai.behavior;
 
 import com.mojang.datafixers.util.Pair;
-import com.noodlegamer76.fracture.entity.misc.ObeliskLaser;
+import com.noodlegamer76.fracture.entity.projectile.ObeliskLaser;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

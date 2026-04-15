@@ -85,11 +85,20 @@ repositories {
     }
     mavenCentral()
     maven { url = 'https://jitpack.io' }
+    maven {
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
 }
 
 dependencies {
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.9')
+
     implementation fg.deobf('net.tslat.smartbrainlib:SmartBrainLib-forge-1.20.1:1.15')
+
+    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
+    runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
+
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
    //implementation fg.deobf("curse.maven:distant-horizons-508933:6387680")

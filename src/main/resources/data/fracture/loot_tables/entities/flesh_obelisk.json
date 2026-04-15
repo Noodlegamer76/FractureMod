@@ -12,6 +12,15 @@
         }
       ],
       "rolls": 1
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "fracture:crumbling_void_gem"
+        }
+      ]
     }
   ]
 }

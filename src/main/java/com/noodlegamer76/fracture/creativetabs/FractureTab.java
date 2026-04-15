@@ -66,6 +66,7 @@ public class FractureTab {
             event.accept(InitItems.PERMAFROST_AXE);
             event.accept(InitItems.PERMAFROST_SHOVEL);
             event.accept(InitItems.PERMAFROST_HOE);
+            event.accept(InitItems.CRUMBLING_VOID_GEM);
 
             event.accept(InitItems.COMPACT_TNT);
             event.accept(InitItems.SMOKE_STACK);
@@ -119,6 +120,7 @@ public class FractureTab {
             event.accept(InitItems.KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG);
             event.accept(InitItems.MOOSICLE);
             event.accept(InitItems.COMPARABLE_SNOWMAN_SPAWN_EGG);
+            event.accept(InitItems.FLESH_OBELISK_SPAWN_EGG);
         }
     }
 }

@@ -2,11 +2,11 @@ package com.noodlegamer76.fracture.event;
 
 
 import com.noodlegamer76.fracture.FractureMod;
-import com.noodlegamer76.fracture.client.renderers.SkullchomperRenderer;
-import com.noodlegamer76.fracture.client.renderers.entity.*;
-import com.noodlegamer76.fracture.client.renderers.entity.block.BoreasPortalRenderer;
+import com.noodlegamer76.fracture.client.render.SkullchomperRenderer;
+import com.noodlegamer76.fracture.client.render.entity.*;
+import com.noodlegamer76.fracture.client.render.entity.block.BoreasPortalRenderer;
 import com.noodlegamer76.fracture.entity.InitEntities;
-import com.noodlegamer76.fracture.entity.block.InitBlockEntities;
+import com.noodlegamer76.fracture.tile.InitBlockEntities;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
@@ -39,6 +39,7 @@ public class EntityRenderers {
         event.registerEntityRenderer(InitEntities.PLAYER_MIMIC.get(), PlayerMimicRenderer::new);
         event.registerEntityRenderer(InitEntities.FLESH_OBELISK.get(), FleshObeliskRenderer::new);
         event.registerEntityRenderer(InitEntities.OBELISK_LASER.get(), ObeliskLaserRenderer::new);
+        event.registerEntityRenderer(InitEntities.ICE_CUBE.get(), IceCubeRenderer::new);
 
         event.registerBlockEntityRenderer(InitBlockEntities.INKWOOK_HANGING_SIGN.get(), HangingSignRenderer::new);
         event.registerBlockEntityRenderer(InitBlockEntities.INKWOOD_SIGN.get(), SignRenderer::new);

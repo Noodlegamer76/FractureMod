@@ -2,9 +2,9 @@ package com.noodlegamer76.fracture.item;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.InitBlocks;
+import com.noodlegamer76.fracture.block.fluid.InitFluids;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
-import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.item.modifiable.Broom;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
@@ -77,6 +77,9 @@ public class InitItems {
     public static final RegistryObject<Item> BLOOD_SLIME_BALL = ITEMS.register("blood_slime_ball",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLESHY_BONE = ITEMS.register("fleshy_bone",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> CRUMBLING_VOID_GEM = ITEMS.register("crumbling_void_gem",
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> PERMAFROST_CORE = ITEMS.register("permafrost_core",

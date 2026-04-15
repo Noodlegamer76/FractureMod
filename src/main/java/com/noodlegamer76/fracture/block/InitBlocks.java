@@ -1,11 +1,11 @@
 package com.noodlegamer76.fracture.block;
 
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.block.fluid.InitFluids;
 import com.noodlegamer76.fracture.block.signs.ModHangingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModStandingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModWallHangingSignBlock;
 import com.noodlegamer76.fracture.block.signs.ModWallSignBlock;
-import com.noodlegamer76.fracture.fluid.InitFluids;
 import com.noodlegamer76.fracture.util.ModWoodTypes;
 import com.noodlegamer76.fracture.util.registryutils.BlockWithItem;
 import com.noodlegamer76.fracture.util.registryutils.SimpleStoneSet;

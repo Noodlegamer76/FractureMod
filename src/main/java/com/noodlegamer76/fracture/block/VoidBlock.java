@@ -1,13 +1,12 @@
 package com.noodlegamer76.fracture.block;
 
-import com.noodlegamer76.fracture.entity.block.VoidBlockEntity;
 import com.noodlegamer76.fracture.particles.InitParticles;
+import com.noodlegamer76.fracture.tile.VoidBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;

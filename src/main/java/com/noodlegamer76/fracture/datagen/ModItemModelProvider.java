@@ -83,6 +83,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.HANGING_FLESH);
         simpleItem(InitItems.LIVING_FLESH);
         simpleItem(InitItems.FLESHY_BONE);
+        simpleItem(InitItems.CRUMBLING_VOID_GEM);
         simpleItem(InitItems.PERMAFROST_CORE);
         simpleItem(InitItems.PERMAFROST_SHARD);
         simpleItem(InitItems.BOREAS_KEY);
@@ -112,6 +113,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         spawnEggItem(InitItems.KNOWLEDGEABLE_SNOWMAN_SPAWN_EGG);
         spawnEggItem(InitItems.MOOSICLE);
         spawnEggItem(InitItems.COMPARABLE_SNOWMAN_SPAWN_EGG);
+        spawnEggItem(InitItems.FLESH_OBELISK_SPAWN_EGG);
 
         cubeColumn("bloody_bookshelf", BLOODY_BOOKSHELF, BLOODY_WOOD);
         cubeColumn("darkstone_pillar", DARKSTONE_PILLAR_SIDE, DARKSTONE_PILLAR_TOP);
