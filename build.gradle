@@ -1,3 +1,7 @@
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
+
 plugins {
     id 'eclipse'
     id 'idea'
@@ -5,6 +9,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.+'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
 version = mod_version
@@ -14,11 +19,18 @@ base {
     archivesName = mod_id
 }
 
+configurations {
+    natives {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'parchment', version: '2023.06.26-1.20.1'
+    mappings channel: 'parchment', version: '2023.09.03-1.20.1'
 
     copyIdeResources = true
 
@@ -82,12 +94,22 @@ repositories {
 
     maven {
         url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
     }
     mavenCentral()
     maven { url = 'https://jitpack.io' }
     maven {
         name = "Illusive Soulworks maven"
         url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        name "KosmX's maven"
+        url 'https://maven.kosmx.dev/'
+    }
+    maven {
+        url "https://maven.blamejared.com"
     }
 }
 
@@ -96,32 +118,35 @@ dependencies {
 
     implementation fg.deobf('net.tslat.smartbrainlib:SmartBrainLib-forge-1.20.1:1.15')
 
+    //implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.player_anim}")
+
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
+
+    runtimeOnly fg.deobf("curse.maven:distant-horizons-508933:6387680")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
    //implementation fg.deobf("curse.maven:distant-horizons-508933:6387680")
    //implementation fg.deobf("curse.maven:spark-361579:4738952")
 
+    minecraftLibrary("io.github.spair:imgui-java-binding:${project.imguiVersion}") {
+        exclude group: "org.lwjgl"
+    }
+   minecraftLibrary("io.github.spair:imgui-java-lwjgl3:${project.imguiVersion}") {
+       exclude group: "org.lwjgl"
+   }
 
-   //minecraftLibrary("io.github.spair:imgui-java-binding:${project.imguiVersion}") {
-   //    exclude group: "org.lwjgl"
-   //}
-   //minecraftLibrary("io.github.spair:imgui-java-lwjgl3:${project.imguiVersion}") {
-   //    exclude group: "org.lwjgl"
-   //}
-
-   ////runtimeOnly "io.github.spair:imgui-java-natives-windows:${project.imguiVersion}"
-   ////runtimeOnly "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
-
+    natives "io.github.spair:imgui-java-natives-windows:${project.imguiVersion}"
+    natives "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
+    natives "io.github.spair:imgui-java-natives-macos:${project.imguiVersion}"
 
    //shadow("io.github.spair:imgui-java-binding:${project.imguiVersion}") {
    //    exclude group: "org.lwjgl"
    //}
-   //shadow("io.github.spair:imgui-java-lwjgl3:${project.imguiVersion}") {
-   //    exclude group: "org.lwjgl"
-   //}
+   shadow("io.github.spair:imgui-java-lwjgl3:${project.imguiVersion}") {
+       exclude group: "org.lwjgl"
+   }
 
     //minecraftLibrary("io.github.spair:imgui-java-binding:${imgui_version}")
     //minecraftLibrary("io.github.spair:imgui-java-lwjgl3:${imgui_version}") {
@@ -193,6 +218,122 @@ publishing {
         }
     }
 }
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+//    classifier 'shadow-dev'
+    dependencies {
+        exclude(dependency('org.lwjgl:lwjgl'))
+        exclude(dependency('org.lwjgl:lwjgl-glfw'))
+        exclude(dependency('org.lwjgl:lwjgl-opengl'))
+    }
+}
+
+task moveFiles {
+    doLast {
+        // Input and output files based on the shadowJar and jar archive file names
+        def inputFile = file("$buildDir/libs/" + shadowJar.archiveFileName.get())
+        def outputFile = file("$buildDir/libs/" + jar.archiveFileName.get())
+
+        // Temporary file for the updated output
+        def tempFile = file("$buildDir/libs/" + "output_temp.zip")
+
+        if (inputFile.exists() && outputFile.exists()) {
+            def sourceZip = new ZipFile(inputFile)
+            def destinationZip = new ZipFile(outputFile)
+            def zipOut = new ZipOutputStream(new FileOutputStream(tempFile))
+
+            // Copy existing contents of the destination ZIP to the temporary file
+            destinationZip.entries().each { entry ->
+                zipOut.putNextEntry(new ZipEntry(entry.getName()))
+                zipOut.write(destinationZip.getInputStream(entry).readAllBytes())
+                zipOut.closeEntry()
+            }
+
+            // Copy new files from the source ZIP that aren't already in the destination ZIP
+            sourceZip.entries().each { entry ->
+                if (destinationZip.getEntry(entry.getName()) == null) {
+                    zipOut.putNextEntry(new ZipEntry(entry.getName()))
+                    zipOut.write(sourceZip.getInputStream(entry).readAllBytes())
+                    zipOut.closeEntry()
+                } else {
+                    println "File already exists in destination ZIP: ${entry.getName()}. Skipping."
+                }
+            }
+
+            // Close all streams
+            zipOut.close()
+            sourceZip.close()
+            destinationZip.close()
+
+            // Replace the original destination file with the new one
+            if (outputFile.exists()) {
+                outputFile.delete() // Delete the old output file if it exists
+            }
+            tempFile.renameTo(outputFile) // Rename temp file to the destination file
+            inputFile.delete() // Delete the source file (inputFile) after moving
+        } else {
+            println "Input or output ZIP file not found."
+        }
+    }
+}
+
+build {
+    dependsOn shadowJar
+    finalizedBy moveFiles
+}
+
+task extractNativesToResources {
+    group = "build"
+    doLast {
+        configurations.natives.incoming.artifacts.each { artifact ->
+            // Rename 'file' to 'artifactFile' to avoid the naming conflict
+            def artifactFile = artifact.file
+            println "Processing: ${artifactFile.name}"
+
+            def zip = new java.util.zip.ZipFile(artifactFile)
+            try {
+                zip.entries().each { entry ->
+                    if (entry.isDirectory()) return
+
+                    def fileName = entry.name.substring(entry.name.lastIndexOf('/') + 1)
+                    String subdir = null
+
+                    if (fileName.endsWith(".dll")) subdir = "windows/x86_64"
+                    else if (fileName.endsWith(".so")) subdir = "linux/x86_64"
+                    else if (fileName.endsWith(".dylib")) {
+                        subdir = fileName.contains("arm") ? "osx/arm64" : "osx/x86_64"
+                    }
+
+                    if (subdir != null) {
+                        // Now 'file()' refers to the Gradle method correctly
+                        def destDir = file("src/main/resources/natives/${subdir}")
+                        destDir.mkdirs()
+
+                        def outFile = new File(destDir, fileName)
+
+                        zip.getInputStream(entry).withStream { input ->
+                            outFile.withOutputStream { output ->
+                                input.transferTo(output)
+                            }
+                        }
+                        println "Extracted: $fileName -> $subdir"
+                    }
+                }
+            } finally {
+                zip.close()
+            }
+        }
+    }
+}
+
+
+compileJava.dependsOn(extractNativesToResources)
+processResources.dependsOn(extractNativesToResources)
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'

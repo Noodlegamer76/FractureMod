@@ -307,6 +307,17 @@ public class StructureUtils {
         return new AABB(minX, minY, minZ, maxX, maxY, maxZ);
     }
 
+    public static AABB getChunkAABB(ChunkPos chunkPos, WorldAccess worldAccess) {
+        return new AABB(
+                chunkPos.getMinBlockX(),
+                worldAccess.getMinBuildHeight(),
+                chunkPos.getMinBlockZ(),
+                chunkPos.getMaxBlockX() + 1,
+                worldAccess.getMaxBuildHeight(),
+                chunkPos.getMaxBlockZ() + 1
+        );
+    }
+
     public static int getSurfaceHeight(ServerLevel serverLevel, int x, int z) {
         int minY = serverLevel.getMinBuildHeight();
         int maxY = serverLevel.getMaxBuildHeight();

@@ -6,7 +6,6 @@ import com.noodlegamer76.fracture.client.util.ExtendedShaderInstance;
 import com.noodlegamer76.fracture.client.util.ModRenderTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterDimensionSpecialEffectsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -21,5 +20,10 @@ public class ShaderEvents {
                         ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "skybox"),
                         DefaultVertexFormat.POSITION),
                 (e) -> ModRenderTypes.skybox = (ExtendedShaderInstance) e);
+
+        event.registerShader(new ExtendedShaderInstance(event.getResourceProvider(),
+                        ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "fluid_flow"),
+                        DefaultVertexFormat.POSITION_TEX),
+                (e) -> ModRenderTypes.fluidFlow = (ExtendedShaderInstance) e);
     }
 }

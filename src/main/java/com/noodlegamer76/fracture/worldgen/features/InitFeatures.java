@@ -13,6 +13,9 @@ public class InitFeatures {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> GIANT_CRYSTAL = FEATURES.register("giant_crystal",
             () -> new GiantCrystal(NoneFeatureConfiguration.CODEC));
 
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> FLESH_BOSS_FLOOR = FEATURES.register("flesh_boss_floor",
+            () -> new FleshBossFloorFeature(NoneFeatureConfiguration.CODEC));
+
     public static final RegistryObject<MegaStructureFeature> MEGA_STRUCTURE = FEATURES.register("mega_feature",
             () -> new MegaStructureFeature(NoneFeatureConfiguration.CODEC));
 }

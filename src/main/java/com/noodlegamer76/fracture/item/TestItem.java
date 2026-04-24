@@ -1,7 +1,7 @@
 package com.noodlegamer76.fracture.item;
 
-import com.noodlegamer76.fracture.entity.InitEntities;
-import com.noodlegamer76.fracture.entity.projectile.IceCube;
+import com.noodlegamer76.fracture.gui.imgui.core.ImGuiScreen;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -60,11 +60,11 @@ public class TestItem extends Item {
               //PacketHandler.sendToPlayer((ServerPlayer) player, packet);
             }
 
-            IceCube iceCube = new IceCube(InitEntities.ICE_CUBE.get(), level);
-            iceCube.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.5f, 1);
-            iceCube.setOwner(player);
-            iceCube.setPos(player.getX(), player.getEyeY(), player.getZ());
-            level.addFreshEntity(iceCube);
+
+        }
+
+        if (level.isClientSide) {
+            Minecraft.getInstance().setScreen(new ImGuiScreen());
         }
 
         return super.use(level, player, hand);

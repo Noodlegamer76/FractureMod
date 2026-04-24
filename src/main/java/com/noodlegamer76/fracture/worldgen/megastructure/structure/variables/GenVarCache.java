@@ -30,7 +30,7 @@ public class GenVarCache {
 
     @Nullable
     @SuppressWarnings("unchecked")
-    public <T extends GenVar<V>, V> T getVar(Node node, String name, GenVarType<V> type) {
+    public <T extends GenVar<V>, V> T getVar(Node node, String name, Class<V> type) {
         GenVar<?> var = cache.getOrDefault(node, Map.of()).get(name);
         if (var == null || var.getType() != type) {
             return null;

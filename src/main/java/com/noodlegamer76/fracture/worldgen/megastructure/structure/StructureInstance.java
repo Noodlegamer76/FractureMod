@@ -7,7 +7,6 @@ import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldA
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.placers.Placer;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarCache;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVarType;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -18,23 +17,10 @@ import java.util.Map;
 public class StructureInstance {
     private final StructureDefinition definition;
     private final List<Placer> placers = new ArrayList<>();
-    private final Map<String, GenVar<?>> genVars = new HashMap<>();
+    private final Map<String, GenVar<?>> vars = new HashMap<>();
 
     public StructureInstance(StructureDefinition definition) {
         this.definition = definition;
-
-        for (Structure structure: definition.getStructures()) {
-            for (GenVar<?> genVar: structure.getGenVariables()) {
-                if (genVars.containsKey(genVar.getName())) {
-                    FractureMod.LOGGER.error("Duplicate GenVar: " + genVar.getName() + ". This should not happen!");
-                }
-                addGenVar(genVar);
-            }
-        }
-    }
-
-    private static <T> GenVar<T> copyOf(GenVar<T> original) {
-        return new GenVar<>(original.getType(), original.getName(), original.isCacheable());
     }
 
     public void addPlacer(Placer placer) {
@@ -53,24 +39,32 @@ public class StructureInstance {
         return definition;
     }
 
-    public void addGenVar(GenVar<?> genVar) {
-        genVars.put(genVar.getName(), genVar);
+    public void setGenVar(GenVar<?> genVar) {
+        vars.put(genVar.getName(), genVar);
+    }
+
+    public void setGenVar(String name, Object object) {
+        vars.put(name, new  GenVar<>(name, object));
+    }
+
+    public void setGenVar(String name, Object object, boolean cachable) {
+        vars.put(name, new  GenVar<>(name, object, cachable));
     }
 
     public List<GenVar<?>> getGenVars() {
-        return genVars.values().stream().collect(ImmutableList.toImmutableList());
+        return vars.values().stream().collect(ImmutableList.toImmutableList());
     }
 
     @Nullable
     @SuppressWarnings("unchecked")
-    public <T> GenVar<T> getGenVar(Node node, String name, GenVarType<T> type) {
-        GenVar<?> raw = genVars.get(name);
+    public <T> GenVar<T> getGenVar(Node node, String name, Class<T> type) {
+        GenVar<?> raw = vars.get(name);
         if (raw == null) {
             return null;
         }
 
-        if (raw.getType() != type) {
-            FractureMod.LOGGER.error("Serializer mismatch for GenVar: " + name);
+        if (!type.isAssignableFrom(raw.getType())) {
+            FractureMod.LOGGER.error("Clazz mismatch for GenVar: " + name);
             return null;
         }
 
@@ -84,5 +78,13 @@ public class StructureInstance {
         }
 
         return result;
+    }
+
+    public void clearGenVars() {
+        vars.clear();
+    }
+
+    public void removeGenVar(String name) {
+        vars.remove(name);
     }
 }

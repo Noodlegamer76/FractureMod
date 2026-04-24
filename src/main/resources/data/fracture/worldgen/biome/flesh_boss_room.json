@@ -1,0 +1,22 @@
+{
+  "temperature": 0,
+  "downfall": 0,
+  "has_precipitation": false,
+  "temperature_modifier": "none",
+  "effects": {
+    "sky_color": 9044736,
+    "fog_color": 9044736,
+    "water_color": 9044736,
+    "water_fog_color": 9044736,
+    "grass_color": 9044736,
+    "foliage_color": 9044736
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [
+      "fracture:flesh_boss_floor"
+    ]
+  ]
+}

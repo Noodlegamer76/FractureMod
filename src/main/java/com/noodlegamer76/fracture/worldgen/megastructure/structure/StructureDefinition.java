@@ -12,7 +12,6 @@ import java.util.List;
 
 public class StructureDefinition {
     private final List<Structure> structures = new ArrayList<>();
-    private int highestNodeLevel = 0;
     private final StructureGenerateCondition spawnCondition;
 
     public StructureDefinition(StructureGenerateCondition spawnCondition) {
@@ -31,8 +30,6 @@ public class StructureDefinition {
             for (Node n : StructMath.get3x3Nodes(originNode)) {
                 RandomSource random = StructMath.getNodeRandom(n, access, structure.getId());
 
-                if (!structure.shouldGenerate(access, random, n, instance)) continue;
-
                 structure.generate(access, n, random, instance);
             }
         }
@@ -49,19 +46,11 @@ public class StructureDefinition {
     }
 
     public void addStructure(Structure structure) {
-        int level = structure.getNodeLevel();
-
         structures.add(structure);
         structures.sort(Comparator.comparingInt(Structure::getPriority).reversed());
-
-        if (level > highestNodeLevel) highestNodeLevel = level;
     }
 
     public StructureGenerateCondition getSpawnCondition() {
         return spawnCondition;
-    }
-
-    public int getHighestNodeLevel() {
-        return highestNodeLevel;
     }
 }

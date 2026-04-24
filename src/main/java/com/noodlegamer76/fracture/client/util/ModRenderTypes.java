@@ -10,6 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ModRenderTypes extends RenderStateShard{
     public static ExtendedShaderInstance skybox;
+    public static ExtendedShaderInstance fluidFlow;
 
     public static final RenderType SKYBOX = RenderType.create(
             "skybox",

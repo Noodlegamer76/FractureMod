@@ -32,6 +32,7 @@ public class FractureMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         GeckoLib.initialize();
+        NativeLibraryLoader.loadNatives();
 
         InitEntities.ENTITIES.register(modEventBus);
         InitItems.ITEMS.register(modEventBus);

@@ -10,10 +10,12 @@ import net.minecraft.world.phys.AABB;
 
 public class BlockPlacer extends Placer {
     private final BlockState blockState;
+    private final BlockPlacerCondition condition;
 
-    public BlockPlacer(AABB boundingBox, BlockState state) {
+    public BlockPlacer(AABB boundingBox, BlockState state, BlockPlacerCondition condition) {
         super(boundingBox);
         this.blockState = state;
+        this.condition = condition;
     }
 
     @Override
@@ -37,10 +39,16 @@ public class BlockPlacer extends Placer {
             for (int y = minY; y < maxY; y++) {
                 for (int z = minZ; z < maxZ; z++) {
                     pos.set(x, y, z);
-                    ctx.level().setBlock(pos, blockState, 2);
+                    if (condition.shouldPlace(pos, ctx, random, instance)) {
+                        ctx.level().setBlock(pos, blockState, 2);
+                    }
                 }
             }
         }
+    }
+
+    public BlockPlacerCondition getCondition() {
+        return condition;
     }
 
     @Override

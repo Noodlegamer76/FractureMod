@@ -4,10 +4,12 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "fracture.refmap.json",
   "mixins": [
+    "MultiNoiseBiomeSourceMixin",
     "accessor.PathAccessor",
     "accessor.StructureTemplateAccessor"
   ],
   "client": [
+    "RenderSystemMixin"
   ],
   "minVersion": "0.8"
 }

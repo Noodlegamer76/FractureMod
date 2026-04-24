@@ -3,6 +3,7 @@ package com.noodlegamer76.fracture.client.util;
 import com.mojang.blaze3d.shaders.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceProvider;
@@ -26,6 +27,12 @@ public class ExtendedShaderInstance extends ShaderInstance {
         if (inverseModelViewMat != null) {
             inverseModelViewMat.set(RenderSystem.getModelViewMatrix().invert());
         }
+
+        Uniform cameraPos = getUniform("cameraPos");
+        if (cameraPos != null) {
+            cameraPos.set(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f());
+        }
+
         super.apply();
     }
 }

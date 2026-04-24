@@ -4,20 +4,20 @@ import javax.annotation.Nullable;
 
 public class GenVar<T> {
     private String name;
-    private final GenVarType<T> type;
     private T value;
+    private Class<T> type;
     private final boolean cacheable;
 
-    public GenVar(GenVarType<T> type, String name) {
-        this(type, name, false);
+    public GenVar(String name, T object) {
+        this(name, object, false);
     }
 
-    /** @param cacheable If true, the value computed for a given Node is reused across
-     *                   all chunks that share that Node instead of being regenerated. */
-    public GenVar(GenVarType<T> type, String name, boolean cacheable) {
+    @SuppressWarnings("unchecked")
+    public GenVar( String name, T object, boolean cacheable) {
         this.name = name;
-        this.type = type;
+        value = object;
         this.cacheable = cacheable;
+        this.type = (Class<T>) object.getClass();
     }
 
     public void setValue(T value) {
@@ -29,12 +29,8 @@ public class GenVar<T> {
         return value;
     }
 
-    public GenVarType<T> getType() {
+    public Class<T> getType() {
         return type;
-    }
-
-    public Class<T> getValueClass() {
-        return type.codec().valueClass();
     }
 
     public String getName() {
