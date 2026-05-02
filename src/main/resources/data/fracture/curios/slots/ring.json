@@ -1,0 +1,7 @@
+{
+  "size": 2,
+  "order": 10,
+  "icon": "curios:slot/empty_ring_slot",
+  "priority": 100,
+  "render_toggle": true
+}

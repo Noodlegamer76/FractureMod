@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#G#",
+        "G G",
+        "#G#"
+    ],
+    "key": {
+        "#": {
+            "item": "fracture:fleshy_bone"
+        },
+        "G": {
+            "item": "fracture:living_flesh"
+        }
+    },
+    "result": {
+        "item": "fracture:parasitic_ring",
+        "count": 1
+    }
+}

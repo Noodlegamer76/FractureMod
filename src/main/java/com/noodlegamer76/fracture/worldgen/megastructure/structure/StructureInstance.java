@@ -31,8 +31,8 @@ public class StructureInstance {
         return placers;
     }
 
-    public void generate(WorldAccess access) {
-        definition.generate(access, this);
+    public void generate(WorldAccess access, boolean onlyCenter) {
+        definition.generate(access, this, onlyCenter);
     }
 
     public StructureDefinition getDefinition() {

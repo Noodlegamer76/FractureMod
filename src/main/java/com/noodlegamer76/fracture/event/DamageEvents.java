@@ -28,4 +28,9 @@ public class DamageEvents {
 
         }
     }
+
+    @SubscribeEvent
+    public static void onHurt(LivingDamageEvent event) {
+
+    }
 }

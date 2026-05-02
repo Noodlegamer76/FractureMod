@@ -2,6 +2,7 @@ package com.noodlegamer76.fracture.event;
 
 
 import com.noodlegamer76.fracture.FractureMod;
+import com.noodlegamer76.fracture.client.model.SimpleRingModel;
 import com.noodlegamer76.fracture.client.render.SkullchomperRenderer;
 import com.noodlegamer76.fracture.client.render.entity.*;
 import com.noodlegamer76.fracture.client.render.entity.block.BoreasPortalRenderer;
@@ -23,6 +24,7 @@ public class EntityRenderers {
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModBoatRenderer.INKWOOD_BOAT_LAYER, BoatModel::createBodyModel);
         event.registerLayerDefinition(ModBoatRenderer.INKWOOD_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+        event.registerLayerDefinition(SimpleRingModel.LAYER_LOCATION, SimpleRingModel::createBodyLayer);
     }
 
     @SubscribeEvent

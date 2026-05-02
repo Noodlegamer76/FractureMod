@@ -5,6 +5,7 @@ import com.noodlegamer76.fracture.block.InitBlocks;
 import com.noodlegamer76.fracture.block.fluid.InitFluids;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.vehicle.ModBoatEntity;
+import com.noodlegamer76.fracture.item.accessories.ParasiticRing;
 import com.noodlegamer76.fracture.item.modifiable.Broom;
 import com.noodlegamer76.fracture.util.ArmorTiers;
 import com.noodlegamer76.fracture.util.ToolTiers;
@@ -54,6 +55,9 @@ public class InitItems {
             () -> new ParasiticAxe(ToolTiers.ModItemTier.BLOOD, 6, -1.2F, new Item.Properties()));
     public static final RegistryObject<Item> PARASITIC_SHOVEL = ITEMS.register("parasitic_shovel",
             () -> new ParasiticShovel(ToolTiers.ModItemTier.BLOOD, 1, -2.4F, new Item.Properties()));
+
+    public static final RegistryObject<Item> PARASITIC_RING = ITEMS.register("parasitic_ring",
+            () -> new ParasiticRing(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> PERMAFROST_SWORD = ITEMS.register("permafrost_sword",
             () -> new PermafrostSword(ToolTiers.ModItemTier.PERMAFROST, 3, -2.4F, new Item.Properties()));

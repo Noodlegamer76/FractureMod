@@ -87,6 +87,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(InitItems.PERMAFROST_CORE);
         simpleItem(InitItems.PERMAFROST_SHARD);
         simpleItem(InitItems.BOREAS_KEY);
+        simpleItem(InitItems.PARASITIC_RING);
 
         simpleItem(InitItems.BLOOD_BUCKET);
 

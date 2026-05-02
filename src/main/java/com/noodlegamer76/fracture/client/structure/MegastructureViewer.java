@@ -2,10 +2,13 @@ package com.noodlegamer76.fracture.client.structure;
 
 import com.noodlegamer76.fracture.client.structure.visualizer.ImGuiContext;
 import com.noodlegamer76.fracture.client.structure.visualizer.MegastructureOverlayTab;
+import com.noodlegamer76.fracture.worldgen.megastructure.MegaStructureGenerator;
 import com.noodlegamer76.fracture.worldgen.megastructure.rules.StructureRule;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.Structure;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureDefinition;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInstance;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.Structures;
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.BlankWorldAccess;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.placers.Placer;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.variables.GenVar;
 import imgui.ImGui;
@@ -15,6 +18,7 @@ import imgui.flag.ImGuiWindowFlags;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;
 import imgui.type.ImLong;
+import net.minecraft.core.BlockPos;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -26,7 +30,6 @@ public final class MegastructureViewer {
         List<StructureDefinition> getDefinitions();
         StructureInstance getLastInstance();
         List<DebugEvent> getDebugEvents();
-        default void requestRegenerate(boolean sameSeed) {}
     }
 
     public static class DebugEvent {
@@ -65,6 +68,7 @@ public final class MegastructureViewer {
     private final ImInt selectedStructureIndex = new ImInt(0);
     private final ImInt selectedEventIndex = new ImInt(-1);
     private final ImLong seed = new ImLong(0L);
+    private BlockPos origin = new BlockPos(0, 0, 0);
 
     public MegastructureViewer(SnapshotProvider provider) {
         this.provider = Objects.requireNonNull(provider, "provider");
@@ -134,11 +138,12 @@ public final class MegastructureViewer {
         }
         ImGui.sameLine();
         if (ImGui.button("Regenerate Same Seed")) {
-            provider.requestRegenerate(true);
+            regenerateDummyInstance();
         }
         ImGui.sameLine();
         if (ImGui.button("Regenerate New Seed")) {
-            provider.requestRegenerate(false);
+            seed.set(System.currentTimeMillis());
+            regenerateDummyInstance();
         }
 
         if (instance != null) {
@@ -375,6 +380,28 @@ public final class MegastructureViewer {
         }
 
         ImGui.endChild();
+    }
+
+    public void setOrigin(BlockPos origin) {
+        this.origin = origin;
+    }
+
+    public BlockPos getOrigin() {
+        return origin;
+    }
+
+    public void regenerateDummyInstance() {
+        StructureDefinition def = Structures.getInstance().getStructures().get(0);
+        StructureInstance instance = new StructureInstance(def);
+
+        BlankWorldAccess access = new BlankWorldAccess(
+                seed.get(),
+                getOrigin()
+        );
+
+        instance.generate(access, true);
+
+        MegaStructureGenerator.setLastInstance(instance);
     }
 
     private static boolean isAtomic(Object value) {

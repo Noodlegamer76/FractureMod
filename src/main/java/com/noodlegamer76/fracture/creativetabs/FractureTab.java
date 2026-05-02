@@ -58,6 +58,7 @@ public class FractureTab {
             event.accept(InitItems.PARASITIC_PICKAXE);
             event.accept(InitItems.PARASITIC_AXE);
             event.accept(InitItems.PARASITIC_SHOVEL);
+            event.accept(InitItems.PARASITIC_RING);
             event.accept(InitItems.INFESTED_CORE);
             event.accept(InitItems.PERMAFROST_SHARD);
             event.accept(InitItems.PERMAFROST_CORE);

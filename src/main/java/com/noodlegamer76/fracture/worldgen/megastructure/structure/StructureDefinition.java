@@ -22,15 +22,34 @@ public class StructureDefinition {
         this.spawnCondition = (access, definition) -> true;
     }
 
-    public void generate(WorldAccess access, StructureInstance instance) {
+
+    /**
+     * Generates structures within the provided world context. Structures are generated
+     * based on their node levels, and depending on the {@code onlyCenter} flag, either
+     * only the center node or a 3x3 grid of nodes around the origin is processed.
+     * After all structure generation, placers defined in the structure instance
+     * are used to place additional elements into the world.
+     *
+     * @param access the world access object providing context such as origin, randomness, and dimensions
+     * @param instance the structure instance defining the current generation context, including placers and variables
+     * @param onlyCenter if true, structures will only process the center node; if false, a 3x3 grid of nodes will be processed. This is for debug purposes.
+     */
+    public void generate(WorldAccess access, StructureInstance instance, boolean onlyCenter) {
         for (Structure structure : structures) {
             int level = structure.getNodeLevel();
             Node originNode = new Node(access.origin().getX(), access.origin().getZ(), level);
 
-            for (Node n : StructMath.get3x3Nodes(originNode)) {
-                RandomSource random = StructMath.getNodeRandom(n, access, structure.getId());
+            if (onlyCenter) {
+                RandomSource random = StructMath.getNodeRandom(originNode, access, structure.getId());
+                structure.generate(access, originNode, random, instance);
+            }
+            else {
+                for (Node n : StructMath.get3x3Nodes(originNode)) {
+                    instance.clearGenVars();
+                    RandomSource random = StructMath.getNodeRandom(n, access, structure.getId());
 
-                structure.generate(access, n, random, instance);
+                    structure.generate(access, n, random, instance);
+                }
             }
         }
 

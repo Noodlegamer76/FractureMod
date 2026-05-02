@@ -3,7 +3,9 @@ package com.noodlegamer76.fracture.event;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.block.fluid.InitFluids;
 import com.noodlegamer76.fracture.client.render.entity.ModBoatRenderer;
+import com.noodlegamer76.fracture.client.render.item.ParasiticRingRenderer;
 import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.item.InitItems;
 import com.noodlegamer76.fracture.util.ModWoodTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -13,6 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 
 @Mod.EventBusSubscriber(modid = FractureMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -26,5 +29,7 @@ public class ClientSetup {
         Sheets.addWoodType(ModWoodTypes.INKWOOD);
         EntityRenderers.register(InitEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
         EntityRenderers.register(InitEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, true));
+
+        CuriosRendererRegistry.register(InitItems.PARASITIC_RING.get(), ParasiticRingRenderer::new);
     }
 }

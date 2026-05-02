@@ -23,11 +23,15 @@ public class MegaStructureGenerator {
         StructureInstance instance = new StructureInstance(definition);
         WorldAccess access = new FeatureWorldAccess(ctx);
         if (!definition.getSpawnCondition().shouldGenerate(access, definition)) return;
-        instance.generate(access);
+        instance.generate(access, false);
         lastInstance = instance;
     }
 
     public static StructureInstance getLastInstance() {
         return lastInstance;
+    }
+
+    public static void setLastInstance(StructureInstance instance) {
+        lastInstance = instance;
     }
 }

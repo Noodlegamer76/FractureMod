@@ -1,8 +1,7 @@
 package com.noodlegamer76.fracture.client.structure;
 
 import com.noodlegamer76.fracture.NativeLibraryLoader;
-import com.noodlegamer76.fracture.worldgen.megastructure.rules.RandomPosInNode;
-import com.noodlegamer76.fracture.worldgen.megastructure.structure.Structure;
+import com.noodlegamer76.fracture.worldgen.megastructure.MegaStructureGenerator;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureDefinition;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.StructureInstance;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.Structures;
@@ -11,13 +10,12 @@ import imgui.ImGui;
 import imgui.ImGuiIO;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
-import net.minecraft.core.BlockPos;
+import imgui.type.ImLong;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
 public class StandaloneImGuiLauncher {
-
     private long window;
 
     private final ImGuiImplGlfw implGlfw = new ImGuiImplGlfw();
@@ -70,18 +68,10 @@ public class StandaloneImGuiLauncher {
         setupDummyStructures();
 
         adapter = new MegastructureEditorAdapter() {
-            @Override
-            public void requestRegenerate(boolean sameSeed) {
-                super.requestRegenerate(sameSeed);
-                
-                if (sameSeed) {
-                    System.out.println("Regenerating with same seed...");
-                    regenerateDummyInstance();
-                } else {
-                    System.out.println("Regenerating with new seed...");
-                    setupDummyStructures();
-                    regenerateDummyInstance();
-                }
+            public void requestRegenerate(ImLong seed) {
+                System.out.println("Regenerating...");
+                setupDummyStructures();
+                regenerateDummyInstance(seed);
             }
         };
 
@@ -92,45 +82,23 @@ public class StandaloneImGuiLauncher {
     }
 
     private void setupDummyStructures() {
-        Structures.getInstance().clearDefinitions();
-
-        StructureDefinition def = new StructureDefinition();
-        Structures.getInstance().addDefinition(def);
-
-        Structure testStructure = new Structure(100, 4);
-        testStructure.addRule(new RandomPosInNode());
-        def.addStructure(testStructure);
-
-        Structure testStructure2 = new Structure(50, 3);
-        testStructure2.addRule(new RandomPosInNode());
-        def.addStructure(testStructure2);
+        Structures.getInstance().setupStructures();
     }
 
-    private void regenerateDummyInstance() {
+    public void regenerateDummyInstance(ImLong seed) {
         StructureDefinition def = Structures.getInstance().getStructures().get(0);
         StructureInstance instance = new StructureInstance(def);
 
         BlankWorldAccess access = new BlankWorldAccess(
-            System.currentTimeMillis(),
-            new BlockPos(0, 64, 0)
+                seed.get(),
+                editor.getOrigin()
         );
 
-        instance.generate(access);
+        instance.generate(access, true);
 
-        setLastInstanceViaReflection(instance);
+        MegaStructureGenerator.setLastInstance(instance);
         
         adapter.recordEvent("generate", "instance", "Generated test instance");
-    }
-
-    private void setLastInstanceViaReflection(StructureInstance instance) {
-        try {
-            var generatorClass = Class.forName("com.noodlegamer76.fracture.worldgen.megastructure.MegaStructureGenerator");
-            var field = generatorClass.getDeclaredField("lastInstance");
-            field.setAccessible(true);
-            field.set(null, instance);
-        } catch (Exception e) {
-            System.err.println("Failed to set last instance: " + e.getMessage());
-        }
     }
 
     private void loop() {

@@ -30,15 +30,6 @@ public class MegastructureEditorAdapter implements MegastructureViewer.SnapshotP
         return new ArrayList<>(debugEvents);
     }
 
-    @Override
-    public void requestRegenerate(boolean sameSeed) {
-        debugEvents.add(new MegastructureViewer.DebugEvent(
-                "regenerate",
-                "editor",
-                sameSeed ? "Regenerate with same seed" : "Regenerate with new seed"
-        ));
-    }
-
     public void recordEvent(String type, String source, String message) {
         debugEvents.add(new MegastructureViewer.DebugEvent(type, source, message));
 

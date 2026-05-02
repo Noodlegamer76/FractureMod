@@ -1,6 +1,7 @@
 package com.noodlegamer76.fracture.client.structure;
 
 import imgui.ImGui;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec2;
 
 import java.util.HashMap;
@@ -28,6 +29,20 @@ public class StructureInspectorRegistry {
             if (ImGui.treeNode(label + " (Vec2)")) {
                 ImGui.text("X: " + value.x);
                 ImGui.text("Y: " + value.y);
+                ImGui.treePop();
+            }
+        });
+
+        //AABB
+        register(AABB.class, (label, value) -> {
+            if (ImGui.treeNode(label + " (AABB)")) {
+                ImGui.text("Min X: " + value.minX);
+                ImGui.text("Min Y: " + value.minY);
+                ImGui.text("Min Z: " + value.minZ);
+                ImGui.separator();
+                ImGui.text("Max X: " + value.maxX);
+                ImGui.text("Max Y: " + value.maxY);
+                ImGui.text("Max Z: " + value.maxZ);
                 ImGui.treePop();
             }
         });

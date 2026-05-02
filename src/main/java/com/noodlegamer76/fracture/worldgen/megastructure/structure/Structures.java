@@ -1,12 +1,9 @@
 package com.noodlegamer76.fracture.worldgen.megastructure.structure;
 
-import com.noodlegamer76.fracture.worldgen.megastructure.rules.RandomPosInNode;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//Temporary class for definitions
 public class Structures {
     private static final Structures instance = new Structures();
 
@@ -21,13 +18,18 @@ public class Structures {
         clearDefinitions();
 
 
-        StructureDefinition structureDefinition = new StructureDefinition();
-        addDefinition(structureDefinition);
+       //StructureDefinition castle = new StructureDefinition();
+       //addDefinition(castle);
 
-        Structure test = new Structure(100, 4);
-        test.addRule(new RandomPosInNode());
+       //Structure castleLayout = new Structure(100, 6);
+       //castleLayout.addRule(new RandomPosInNode());
+       //castleLayout.addRule(new CastleFootprontGeneratorRule());
+       //castleLayout.addRule(new CastleAnchorGraphRule());
+       //castle.addStructure(castleLayout);
 
-        structureDefinition.addStructure(test);
+       //Structure castleGraphCulling = new Structure(90, 4);
+       //castleGraphCulling.addRule(new CastleGraphCullingRule());
+       //castle.addStructure(castleGraphCulling);
     }
 
     public void addDefinition(StructureDefinition definition) {
