@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ded",
+    "eae",
+    "dad"
+  ],
+  "key": {
+    "e": {
+      "item": "fracture:fleshy_bone"
+    },
+    "d": {
+      "item": "fracture:living_flesh"
+    },
+    "a": {
+      "item": "fracture:crumbling_void_gem"
+    }
+  },
+  "result": {
+    "item": "fracture:infected_core",
+    "count": 1
+  }
+}

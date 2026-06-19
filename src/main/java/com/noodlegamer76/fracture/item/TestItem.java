@@ -1,12 +1,17 @@
 package com.noodlegamer76.fracture.item;
 
+import com.mojang.authlib.GameProfile;
+import com.noodlegamer76.fracture.entity.InitEntities;
+import com.noodlegamer76.fracture.entity.monster.PlayerMimic;
 import com.noodlegamer76.fracture.gui.imgui.core.ImGuiScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class TestItem extends Item {
@@ -41,18 +46,18 @@ public class TestItem extends Item {
         }
 
         if (!level.isClientSide) {
-         //for (int i = 0; i < 1; i++) {
-         //    PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
-         //    GameProfile profile = new GameProfile(null, "mistermeltdown");
-         //    mimic.setProfile(profile);
-         //    mimic.setPos(player.getX(), player.getY(), player.getZ());
-         //    mimic.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
-         //    mimic.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.DIAMOND_HELMET));
-         //    mimic.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
-         //    mimic.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.DIAMOND_LEGGINGS));
-         //    mimic.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.DIAMOND_BOOTS));
-         //    level.addFreshEntity(mimic);
-         //}
+         for (int i = 0; i < 1; i++) {
+             PlayerMimic mimic = new PlayerMimic(InitEntities.PLAYER_MIMIC.get(), level);
+             GameProfile profile = new GameProfile(null, "mistermeltdown");
+             mimic.setProfile(profile);
+             mimic.setPos(player.getX(), player.getY(), player.getZ());
+             mimic.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.DIAMOND_SWORD));
+             mimic.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.DIAMOND_HELMET));
+             mimic.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
+             mimic.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.DIAMOND_LEGGINGS));
+             mimic.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.DIAMOND_BOOTS));
+             level.addFreshEntity(mimic);
+         }
 
             if (player.isShiftKeyDown()) {
               //StructureInstance structureInstance = MegaStructureGenerator.getLastInstance();
@@ -64,7 +69,7 @@ public class TestItem extends Item {
         }
 
         if (level.isClientSide) {
-            Minecraft.getInstance().setScreen(new ImGuiScreen());
+            //Minecraft.getInstance().setScreen(new ImGuiScreen());
         }
 
         return super.use(level, player, hand);

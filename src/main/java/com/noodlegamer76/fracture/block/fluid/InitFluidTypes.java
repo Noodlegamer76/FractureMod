@@ -11,9 +11,9 @@ import org.joml.Vector3f;
 import java.awt.*;
 
 public class InitFluidTypes {
-    public static final ResourceLocation BLOOD_STILL = ResourceLocation.withDefaultNamespace("block/water_still");
-    public static final ResourceLocation BLOOD_FLOWING = ResourceLocation.withDefaultNamespace("block/water_flow");
-    public static final ResourceLocation BLOOD_OVERLAY = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "misc/in_soap_water");
+    public static final ResourceLocation BLOOD_STILL = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/blood_still");
+    public static final ResourceLocation BLOOD_FLOWING = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "block/blood_flow");
+    public static final ResourceLocation BLOOD_OVERLAY = ResourceLocation.fromNamespaceAndPath(FractureMod.MODID, "misc/in_water");
 
     public static final DeferredRegister<FluidType> FLUID_TYPES =
             DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, FractureMod.MODID);

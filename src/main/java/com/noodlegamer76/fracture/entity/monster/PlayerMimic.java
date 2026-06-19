@@ -38,6 +38,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.FloatToSurfaceOfFluid;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.move.WalkOrRunToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
@@ -73,7 +74,7 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
 
     public PlayerMimic(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.moveControl = new PlayerLikeMoveControl(this);
+        //this.moveControl = new PlayerLikeMoveControl(this);
     }
 
     @Override
@@ -84,13 +85,14 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
 
     @Override
     protected PathNavigation createNavigation(Level level) {
-        return new PlayerLikePathNavigation(this, level);
+       // return new PlayerLikePathNavigation(this, level);
+        return super.createNavigation(level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return LivingEntity.createLivingAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.1F)
+                .add(Attributes.MOVEMENT_SPEED, 0.35F)
                 .add(Attributes.MAX_HEALTH, 20.0F)
                 .add(Attributes.FOLLOW_RANGE, 32.0f)
                 .add(Attributes.ATTACK_SPEED)
@@ -115,7 +117,7 @@ public class PlayerMimic extends Monster implements SmartBrainOwner<PlayerMimic>
     @Override
     public BrainActivityGroup<? extends PlayerMimic> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
-                new WalkRunAndJumpOverGapsToWalkTarget<>(),
+                new WalkOrRunToWalkTarget<>(),
                 new LookAtTarget<>(),
                 new FloatToSurfaceOfFluid<>()
         );

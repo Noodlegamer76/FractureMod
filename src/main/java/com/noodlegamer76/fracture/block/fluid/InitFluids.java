@@ -22,6 +22,6 @@ public class InitFluids {
 
     public static final ForgeFlowingFluid.Properties BLOOD_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
             InitFluidTypes.BLOOD_FLUID, SOURCE_BLOOD, FLOWING_BLOOD)
-            .slopeFindDistance(2).levelDecreasePerBlock(1).block(InitBlocks.BLOOD_BLOCK)
+            .slopeFindDistance(2).levelDecreasePerBlock(1).tickRate(20).block(InitBlocks.BLOOD_BLOCK)
             .bucket(InitItems.BLOOD_BUCKET);
 }

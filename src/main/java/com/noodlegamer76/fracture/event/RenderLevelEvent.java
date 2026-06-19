@@ -40,12 +40,12 @@ public class RenderLevelEvent {
 
         if (level != null && level.dimension().equals(ModDimensionKeys.FLESH)) {
             if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES) {
-                viewStack.pushPose();
+               //viewStack.pushPose();
 
-                viewStack.translate(0, 64.995 - camPos.y, 0);
-                FleshBossWaterRenderer.renderQuad(viewStack);
+               //viewStack.translate(0, 64.995 - camPos.y, 0);
+               //FleshBossWaterRenderer.renderQuad(viewStack);
 
-                viewStack.popPose();
+               //viewStack.popPose();
             }
         }
 

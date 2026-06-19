@@ -37,7 +37,7 @@ public class ParasiticRing extends Item implements ICurioItem {
                 new AttributeModifier(
                         PARASITIC_RING_DAMAGE_UUID,
                         "Parasitic Ring Damage Bonus",
-                        2.0D,
+                        4.0D,
                         AttributeModifier.Operation.ADDITION
                 )
         );
