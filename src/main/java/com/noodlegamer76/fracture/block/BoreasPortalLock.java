@@ -23,18 +23,18 @@ public class BoreasPortalLock extends Block {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel.isClientSide && pPlayer.getItemInHand(pHand).getItem() instanceof BoreasKey) {
-            if (pPlayer.getItemInHand(pHand).getItem() instanceof BoreasKey) {
-                Minecraft mc = Minecraft.getInstance();
-                if (mc.player != null) {
-                    mc.player.displayClientMessage(
-                            Component.literal("The portal remains locked, The dimension isn't ready yet!"),
-                            true
-                    );
-                }
-            }
-            return InteractionResult.SUCCESS;
-        }
+       if (pLevel.isClientSide && pPlayer.getItemInHand(pHand).getItem() instanceof BoreasKey) {
+           if (pPlayer.getItemInHand(pHand).getItem() instanceof BoreasKey) {
+               Minecraft mc = Minecraft.getInstance();
+               if (mc.player != null) {
+                   mc.player.displayClientMessage(
+                           Component.literal("The portal remains locked, The dimension isn't ready yet!"),
+                           true
+                   );
+               }
+           }
+           return InteractionResult.SUCCESS;
+       }
         if (pPlayer.getItemInHand(pHand).getItem() instanceof BoreasKey) {
             if (true) {
                 return InteractionResult.SUCCESS;

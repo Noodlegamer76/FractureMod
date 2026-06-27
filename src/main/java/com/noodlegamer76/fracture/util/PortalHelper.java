@@ -78,21 +78,29 @@ public class PortalHelper {
         int height = shapePattern.length;
         int width = shapePattern[0].length;
 
+        int airHeight = 5;
+
         for (int x = 0; x < width; x++) {
             for (int z = 0; z < height; z++) {
-                BlockPos pos = center.offset(x, 0, z);
-                if (shapePattern[x][z] == 1) {
-                    level.setBlock(pos, portalBlock.defaultBlockState(), 2);
-                }
-                else if (shapePattern[x][z] == 2 && frameBlock instanceof BoreasPortalFrame portal) {
-                    BlockState state = portal.defaultBlockState().rotate(level, pos, Rotation.CLOCKWISE_90);
-                    level.setBlock(pos, state, 2);
-                }
-                else if (shapePattern[x][z] == 3) {
-                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
-                }
-                else {
-                    level.setBlock(pos, frameBlock.defaultBlockState(), 2);
+                for (int y = 0; y < airHeight; y++) {
+                    if (y > 0) {
+                        level.setBlock(center.offset(x, y, z), Blocks.AIR.defaultBlockState(), 2);
+                        continue;
+                    }
+                    BlockPos pos = center.offset(x, 0, z);
+                    if (shapePattern[x][z] == 1) {
+                        level.setBlock(pos, portalBlock.defaultBlockState(), 2);
+                    }
+                    else if (shapePattern[x][z] == 2 && frameBlock instanceof BoreasPortalFrame portal) {
+                        BlockState state = portal.defaultBlockState().rotate(level, pos, Rotation.CLOCKWISE_90);
+                        level.setBlock(pos, state, 2);
+                    }
+                    else if (shapePattern[x][z] == 3) {
+                        level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+                    }
+                    else {
+                        level.setBlock(pos, frameBlock.defaultBlockState(), 2);
+                    }
                 }
             }
         }

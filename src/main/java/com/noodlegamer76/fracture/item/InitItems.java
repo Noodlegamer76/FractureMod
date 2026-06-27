@@ -78,6 +78,10 @@ public class InitItems {
             () -> new VoidBlockItem(InitBlocks.VOID_BLOCK.get(), new Item.Properties()));
 
 
+    public static final RegistryObject<Item> LASER_GUN = ITEMS.register("laser_gun",
+            () -> new LaserGunItem(new Item.Properties()));
+
+
     public static final RegistryObject<Item> BLOOD_SLIME_BALL = ITEMS.register("blood_slime_ball",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLESHY_BONE = ITEMS.register("fleshy_bone",

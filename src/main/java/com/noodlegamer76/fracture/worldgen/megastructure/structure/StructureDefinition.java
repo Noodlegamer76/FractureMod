@@ -41,13 +41,14 @@ public class StructureDefinition {
 
             if (onlyCenter) {
                 RandomSource random = StructMath.getNodeRandom(originNode, access, structure.getId());
+                instance.setCurrentNode(originNode);
                 structure.generate(access, originNode, random, instance);
             }
             else {
                 for (Node n : StructMath.get3x3Nodes(originNode)) {
-                    instance.clearGenVars();
                     RandomSource random = StructMath.getNodeRandom(n, access, structure.getId());
 
+                    instance.setCurrentNode(n);
                     structure.generate(access, n, random, instance);
                 }
             }
@@ -71,5 +72,12 @@ public class StructureDefinition {
 
     public StructureGenerateCondition getSpawnCondition() {
         return spawnCondition;
+    }
+
+    public int getMaxNodeLevel() {
+        return structures.stream()
+                .mapToInt(Structure::getNodeLevel)
+                .max()
+                .orElse(0);
     }
 }

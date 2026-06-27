@@ -118,15 +118,17 @@ repositories {
 
 dependencies {
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.9')
-
     implementation fg.deobf('net.tslat.smartbrainlib:SmartBrainLib-forge-1.20.1:1.15')
+    implementation fg.deobf("curse.maven:shadered-1158056:8284264")
+    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    implementation fg.deobf("org.embeddedt:embeddium-1.20.1:0.3.31-beta.53+mc1.20.1")
 
     //implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${project.player_anim}")
 
-    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
-    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
-
+    //debug stuff
     runtimeOnly fg.deobf("curse.maven:distant-horizons-508933:6387680")
+    runtimeOnly fg.deobf("curse.maven:spark-361579:4738952")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     minecraftLibrary 'org.locationtech.jts:jts-core:1.20.0'

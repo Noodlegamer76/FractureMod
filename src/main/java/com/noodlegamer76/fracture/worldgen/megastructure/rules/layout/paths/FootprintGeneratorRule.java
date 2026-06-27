@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.castle;
+package com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.paths;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.worldgen.megastructure.Node;
@@ -14,13 +14,18 @@ import org.locationtech.jts.geom.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastleFootprontGeneratorRule implements StructureRule {
-    public static final String CASTLE_ANCHORS_KEY = "castle_anchors";
+public class FootprintGeneratorRule implements StructureRule {
+    public static final String PATH_ANCHORS_KEY = "castle_anchors";
 
     private static final float MIN_DISTANCE = 100f;
     private static final float MIN_DISTANCE_SQ = MIN_DISTANCE * MIN_DISTANCE;
 
     private static final GeometryFactory GEOMETRY_FACTORY = new GeometryFactory();
+
+    @Override
+    public boolean shouldRun(WorldAccess access, Node n, RandomSource random, StructureInstance instance) {
+        return !instance.hasGenVar(PATH_ANCHORS_KEY);
+    }
 
     @Override
     public void run(
@@ -45,7 +50,7 @@ public class CastleFootprontGeneratorRule implements StructureRule {
         Vec2 origin = posVar.getValue();
 
         anchors.add(new GraphNode(
-                CastleLayoutTag.ORIGIN.name(),
+                LayoutTag.ORIGIN.name(),
                 origin,
                 GEOMETRY_FACTORY.createPoint(
                         new Coordinate(origin.x, origin.y)
@@ -53,12 +58,11 @@ public class CastleFootprontGeneratorRule implements StructureRule {
         ));
 
         int size = n.getSize();
-        float half = size * 0.5f;
 
-        float minX = origin.x - half;
-        float maxX = origin.x + half;
-        float minZ = origin.y - half;
-        float maxZ = origin.y + half;
+        float minX = origin.x;
+        float maxX = origin.x + size;
+        float minZ = origin.y;
+        float maxZ = origin.y + size;
 
         Coordinate[] footprint = new Coordinate[]{
                 new Coordinate(minX, minZ),
@@ -70,36 +74,36 @@ public class CastleFootprontGeneratorRule implements StructureRule {
 
         Polygon castleBounds = GEOMETRY_FACTORY.createPolygon(footprint);
 
-        addAnchor(anchors, coordinates, CastleLayoutTag.WALL.name(), new Vec2(minX, minZ));
-        addAnchor(anchors, coordinates, CastleLayoutTag.WALL.name(), new Vec2(maxX, minZ));
-        addAnchor(anchors, coordinates, CastleLayoutTag.WALL.name(), new Vec2(maxX, maxZ));
-        addAnchor(anchors, coordinates, CastleLayoutTag.WALL.name(), new Vec2(minX, maxZ));
+        addAnchor(anchors, coordinates, LayoutTag.WALL.name(), new Vec2(minX, minZ));
+        addAnchor(anchors, coordinates, LayoutTag.WALL.name(), new Vec2(maxX, minZ));
+        addAnchor(anchors, coordinates, LayoutTag.WALL.name(), new Vec2(maxX, maxZ));
+        addAnchor(anchors, coordinates, LayoutTag.WALL.name(), new Vec2(minX, maxZ));
 
         addAnchor(
                 anchors,
                 coordinates,
-                CastleLayoutTag.WALL.name(),
+                LayoutTag.WALL.name(),
                 new Vec2((minX + maxX) * 0.5f, minZ)
         );
 
         addAnchor(
                 anchors,
                 coordinates,
-                CastleLayoutTag.WALL.name(),
+                LayoutTag.WALL.name(),
                 new Vec2(maxX, (minZ + maxZ) * 0.5f)
         );
 
         addAnchor(
                 anchors,
                 coordinates,
-                CastleLayoutTag.WALL.name(),
+                LayoutTag.WALL.name(),
                 new Vec2((minX + maxX) * 0.5f, maxZ)
         );
 
         addAnchor(
                 anchors,
                 coordinates,
-                CastleLayoutTag.WALL.name(),
+                LayoutTag.WALL.name(),
                 new Vec2(minX, (minZ + maxZ) * 0.5f)
         );
 
@@ -133,7 +137,7 @@ public class CastleFootprontGeneratorRule implements StructureRule {
                 boolean tooClose = false;
 
                 for (GraphNode a : anchors) {
-                    if (!a.tag().equals(CastleLayoutTag.INTERIOR.name())) {
+                    if (!a.tag().equals(LayoutTag.INTERIOR.name())) {
                         continue;
                     }
 
@@ -153,7 +157,7 @@ public class CastleFootprontGeneratorRule implements StructureRule {
                 }
 
                 anchors.add(new GraphNode(
-                        CastleLayoutTag.INTERIOR.name(),
+                        LayoutTag.INTERIOR.name(),
                         new Vec2(x, z),
                         point
                 ));
@@ -168,11 +172,13 @@ public class CastleFootprontGeneratorRule implements StructureRule {
         );
 
         instance.setGenVar(
-                CASTLE_ANCHORS_KEY,
+                n,
+                PATH_ANCHORS_KEY,
                 new Anchors(
                         anchors,
                         castleBounds,
-                        layoutPoints
+                        layoutPoints,
+                        new ArrayList<>()
                 ),
                 true
         );
@@ -205,7 +211,8 @@ public class CastleFootprontGeneratorRule implements StructureRule {
     public record Anchors(
             List<GraphNode> anchors,
             Polygon bounds,
-            MultiPoint points
+            MultiPoint points,
+            List<Polygon> triangles
     ) {
     }
 }

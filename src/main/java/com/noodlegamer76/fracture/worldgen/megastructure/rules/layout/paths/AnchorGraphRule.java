@@ -1,4 +1,4 @@
-package com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.castle;
+package com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.paths;
 
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.worldgen.megastructure.Node;
@@ -13,19 +13,25 @@ import net.minecraft.util.RandomSource;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineString;
+import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.triangulate.DelaunayTriangulationBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastleAnchorGraphRule implements StructureRule {
-    public static final String CASTLE_ANCHORS_KEY =
-            CastleFootprontGeneratorRule.CASTLE_ANCHORS_KEY;
+public class AnchorGraphRule implements StructureRule {
+    public static final String PATH_ANCHORS_KEY =
+            FootprintGeneratorRule.PATH_ANCHORS_KEY;
 
-    public static final String CASTLE_GRAPH_KEY = "castle_graph";
+    public static final String PATH_GRAPH_KEY = "path_graph";
 
     private static final GeometryFactory GEOMETRY_FACTORY =
             new GeometryFactory();
+
+    @Override
+    public boolean shouldRun(WorldAccess access, Node n, RandomSource random, StructureInstance instance) {
+        return !instance.hasGenVar(PATH_GRAPH_KEY);
+    }
 
     @Override
     public void run(
@@ -34,30 +40,40 @@ public class CastleAnchorGraphRule implements StructureRule {
             RandomSource random,
             StructureInstance instance
     ) {
-        GenVar<CastleFootprontGeneratorRule.Anchors> anchorsVar =
+        GenVar<FootprintGeneratorRule.Anchors> anchorsVar =
                 instance.getGenVar(
                         n,
-                        CASTLE_ANCHORS_KEY,
-                        CastleFootprontGeneratorRule.Anchors.class
+                        PATH_ANCHORS_KEY,
+                        FootprintGeneratorRule.Anchors.class
                 );
 
         if (anchorsVar == null) {
             FractureMod.LOGGER.error(
                     this.getClass().getSimpleName()
                             + " ran before variable ["
-                            + CASTLE_ANCHORS_KEY
+                            + PATH_ANCHORS_KEY
                             + "] was set"
             );
             return;
         }
 
-        CastleFootprontGeneratorRule.Anchors anchors =
+        FootprintGeneratorRule.Anchors anchors =
                 anchorsVar.getValue();
 
         DelaunayTriangulationBuilder builder =
                 new DelaunayTriangulationBuilder();
 
         builder.setSites(anchors.points());
+
+        Geometry triangleGeometry = builder.getTriangles(GEOMETRY_FACTORY);
+        List<Polygon> triangles = new ArrayList<>();
+
+        for (int i = 0; i < triangleGeometry.getNumGeometries(); i++) {
+            Geometry geometry = triangleGeometry.getGeometryN(i);
+            if (geometry instanceof Polygon polygon) {
+                triangles.add(polygon);
+            }
+        }
 
         Geometry edgeGeometry =
                 builder.getEdges(GEOMETRY_FACTORY);
@@ -108,11 +124,13 @@ public class CastleAnchorGraphRule implements StructureRule {
         }
 
         instance.setGenVar(
-                CASTLE_GRAPH_KEY,
+                n,
+                PATH_GRAPH_KEY,
                 new StructureGraph(
                         anchors.anchors(),
                         edges,
-                        edgeGeometry
+                        edgeGeometry,
+                        triangles
                 ),
                 true
         );
@@ -146,10 +164,10 @@ public class CastleAnchorGraphRule implements StructureRule {
             GraphNode b
     ) {
         boolean wallA =
-                a.tag().equals(CastleLayoutTag.WALL.name());
+                a.tag().equals(LayoutTag.WALL.name());
 
         boolean wallB =
-                b.tag().equals(CastleLayoutTag.WALL.name());
+                b.tag().equals(LayoutTag.WALL.name());
 
         if (wallA && wallB) {
             return "WALL";
@@ -160,6 +178,6 @@ public class CastleAnchorGraphRule implements StructureRule {
 
     @Override
     public String getDescription() {
-        return "Builds connectivity graph from castle anchors";
+        return "Builds connectivity graph from anchors";
     }
 }

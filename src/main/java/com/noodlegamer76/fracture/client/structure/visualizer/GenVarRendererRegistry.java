@@ -1,13 +1,18 @@
 package com.noodlegamer76.fracture.client.structure.visualizer;
 
+import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.geometry.Polygons;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.graph.GraphEdge;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.graph.GraphNode;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.utils.graph.StructureGraph;
 import imgui.ImDrawList;
 import imgui.ImGui;
+import imgui.ImVec2;
 import net.minecraft.world.phys.Vec2;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Polygon;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GenVarRendererRegistry {
@@ -48,58 +53,124 @@ public class GenVarRendererRegistry {
 
             StructureGraph graph = var.getValue();
 
-            if (graph == null || graph.edges() == null) {
+            if (graph == null) {
                 return;
             }
 
-            for (GraphEdge edge : graph.edges()) {
-                if (edge == null || edge.from() == null || edge.to() == null) {
-                    continue;
+            if (graph.triangles() != null) {
+                int triangleColor = 0x44FFFF00;
+
+                for (Polygon triangle : graph.triangles()) {
+                    if (triangle == null || triangle.getExteriorRing() == null) {
+                        continue;
+                    }
+
+                    Coordinate[] coords = triangle.getExteriorRing().getCoordinates();
+
+                    if (coords.length < 4) {
+                        continue;
+                    }
+
+                    ImVec2[] points = new ImVec2[] {
+                            new ImVec2(
+                                    overlay.worldXToCanvasX((float) coords[0].x),
+                                    overlay.worldZToCanvasY((float) coords[0].y)
+                            ),
+                            new ImVec2(
+                                    overlay.worldXToCanvasX((float) coords[1].x),
+                                    overlay.worldZToCanvasY((float) coords[1].y)
+                            ),
+                            new ImVec2(
+                                    overlay.worldXToCanvasX((float) coords[2].x),
+                                    overlay.worldZToCanvasY((float) coords[2].y)
+                            )
+                    };
+
+                    draw.addConvexPolyFilled(points, 3, triangleColor);
                 }
-
-                Vec2 from = edge.from().pos();
-                Vec2 to = edge.to().pos();
-
-                if (from == null || to == null) {
-                    continue;
-                }
-
-                int color = switch (edge.tag()) {
-                    case "WALL" -> 0xFFFF4444;
-                    case "PATH" -> 0xFF44FF44;
-                    default -> 0xFFFFFFFF;
-                };
-
-                String label = edge.tag() + " (" + (int) edge.length() + ")";
-
-                addGraphLine(
-                        draw,
-                        overlay,
-                        from,
-                        to,
-                        color,
-                        label
-                );
             }
 
-            if (graph.nodes() == null) {
-                return;
+            if (graph.edges() != null) {
+                for (GraphEdge edge : graph.edges()) {
+                    if (edge == null || edge.from() == null || edge.to() == null) {
+                        continue;
+                    }
+
+                    Vec2 from = edge.from().pos();
+                    Vec2 to = edge.to().pos();
+
+                    if (from == null || to == null) {
+                        continue;
+                    }
+
+                    int color = switch (edge.tag()) {
+                        case "WALL" -> 0xFFFF4444;
+                        case "PATH" -> 0xFF44FF44;
+                        default -> 0xFFFFFFFF;
+                    };
+
+                    String label = edge.tag() + " (" + (int) edge.length() + ")";
+
+                    addGraphLine(
+                            draw,
+                            overlay,
+                            from,
+                            to,
+                            color,
+                            label
+                    );
+                }
             }
 
-            for (GraphNode node : graph.nodes()) {
-                if (node == null || node.pos() == null) {
+            if (graph.nodes() != null) {
+                for (GraphNode node : graph.nodes()) {
+                    if (node == null || node.pos() == null) {
+                        continue;
+                    }
+
+                    float x = overlay.worldXToCanvasX(node.pos().x);
+                    float y = overlay.worldZToCanvasY(node.pos().y);
+
+                    addPositionCircle(
+                            draw,
+                            node.tag(),
+                            x,
+                            y
+                    );
+                }
+            }
+        });
+
+        //Polygons
+        register(Polygons.class, (ctx, var) -> {
+            List<Polygon> polygons = var.getValue().polygons();
+            MegastructureOverlayTab overlay = ctx.overlay;
+            ImDrawList draw = ImGui.getWindowDrawList();
+
+            int polygonColor = 0x44FFFF00;
+
+            for (Polygon polygon : polygons) {
+                if (polygon == null || polygon.getExteriorRing() == null) {
                     continue;
                 }
 
-                float x = overlay.worldXToCanvasX(node.pos().x);
-                float y = overlay.worldZToCanvasY(node.pos().y);
+                Coordinate[] coords = polygon.getExteriorRing().getCoordinates();
 
-                addPositionCircle(
-                        draw,
-                        node.tag(),
-                        x,
-                        y
-                );
+                if (coords.length < 4) {
+                    continue;
+                }
+
+                int numPoints = coords.length - 1;
+                ImVec2[] points = new ImVec2[numPoints];
+
+                for (int i = 0; i < numPoints; i++) {
+                    points[i] = new ImVec2(
+                            overlay.worldXToCanvasX((float) coords[i].x),
+                            overlay.worldZToCanvasY((float) coords[i].y)
+                    );
+                }
+
+                draw.addConvexPolyFilled(points, numPoints, polygonColor);
             }
         });
     }

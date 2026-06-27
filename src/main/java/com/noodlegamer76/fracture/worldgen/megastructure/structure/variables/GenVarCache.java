@@ -19,41 +19,61 @@ public class GenVarCache {
     }
 
     public static final int MAX_CACHE_SIZE = 100;
-    private final Map<Node, Map<String, GenVar<?>>> cache = new LinkedHashMap<>();
+
+    private final Object lock = new Object();
+    private final Map<Node, Map<String, Object>> cache = new LinkedHashMap<>();
 
     public void addVar(Node node, GenVar<?> var) {
-        if (!var.isCacheable()) {
+        if (!var.isCacheable() || var.getValue() == null) {
             return;
         }
-        cache.computeIfAbsent(node, n -> new HashMap<>()).put(var.getName(), var);
+
+        synchronized (lock) {
+            cache.computeIfAbsent(node, n -> new HashMap<>()).put(var.getName(), var.getValue());
+            this.removePendingRemoval();
+        }
     }
 
     @Nullable
     @SuppressWarnings("unchecked")
-    public <T extends GenVar<V>, V> T getVar(Node node, String name, Class<V> type) {
-        GenVar<?> var = cache.getOrDefault(node, Map.of()).get(name);
-        if (var == null || var.getType() != type) {
-            return null;
+    public <V> V getRawValue(Node node, String name, Class<V> type) {
+        synchronized (lock) {
+            Map<String, Object> nodeVars = cache.get(node);
+            if (nodeVars == null) {
+                return null;
+            }
+
+            Object value = nodeVars.get(name);
+            if (value == null || !type.isAssignableFrom(value.getClass())) {
+                return null;
+            }
+            return (V) value;
         }
-        return (T) var;
     }
 
     public void removePendingRemoval() {
-        if (cache.size() > MAX_CACHE_SIZE) {
-            Iterator<Map.Entry<Node, Map<String, GenVar<?>>>> iterator = cache.entrySet().iterator();
+        synchronized (lock) {
+            if (cache.size() > MAX_CACHE_SIZE) {
+                Iterator<Map.Entry<Node, Map<String, Object>>> iterator = cache.entrySet().iterator();
 
-            while (cache.size() > MAX_CACHE_SIZE && iterator.hasNext()) {
-                iterator.next();
-                iterator.remove();
+                while (cache.size() > MAX_CACHE_SIZE && iterator.hasNext()) {
+                    iterator.next();
+                    iterator.remove();
+                }
             }
         }
     }
 
     public boolean contains(Node node, String name) {
-        return cache.getOrDefault(node, Map.of()).containsKey(name);
+        synchronized (lock) {
+            Map<String, Object> nodeVars = cache.get(node);
+            return nodeVars != null && nodeVars.containsKey(name);
+        }
     }
 
     public void clear() {
-        cache.clear();
+        synchronized (lock) {
+            cache.clear();
+        }
     }
 }

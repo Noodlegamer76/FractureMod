@@ -22,6 +22,9 @@ public class Structure {
 
     public void generate(WorldAccess access, Node n, RandomSource random, StructureInstance instance) {
         for (StructureRule rule: rules) {
+            if (!rule.shouldRun(access, n, random, instance)) {
+                continue;
+            }
             rule.run(access, n, random, instance);
         }
     }

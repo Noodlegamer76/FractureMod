@@ -111,6 +111,7 @@ public class FractureTab {
             event.accept(InitItems.PRISON_BARS);
             event.accept(InitItems.RUSTY_IRON_BARS);
             event.accept(InitItems.FROZEN_GRASS);
+            event.accept(InitItems.LASER_GUN);
             event.accept(InitBlocks.METAL_GRATE.getItem());
 
 

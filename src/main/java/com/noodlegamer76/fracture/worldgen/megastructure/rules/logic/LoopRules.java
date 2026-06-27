@@ -26,10 +26,13 @@ public class LoopRules implements StructureRule {
     public void run(WorldAccess access, Node n, RandomSource random, StructureInstance instance) {
         int loopCount = iterationSupplier.getIterationCount(access, n, random, instance);
 
-        instance.setGenVar("loop_count", loopCount);
+        instance.setGenVar(n, "loop_count", loopCount);
         for (int i = 0; i < loopCount; i++) {
-            instance.setGenVar("loop_index", i);
+            instance.setGenVar(n, "loop_index", i);
             for (StructureRule rule : rules) {
+                if (!rule.shouldRun(access, n, random, instance)) {
+                    continue;
+                }
                 rule.run(access, n, random, instance);
             }
         }

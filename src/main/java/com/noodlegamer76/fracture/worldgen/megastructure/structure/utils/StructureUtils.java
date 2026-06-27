@@ -3,6 +3,7 @@ package com.noodlegamer76.fracture.worldgen.megastructure.structure.utils;
 import com.google.common.collect.Lists;
 import com.ibm.icu.impl.Pair;
 import com.noodlegamer76.fracture.mixin.accessor.StructureTemplateAccessor;
+import com.noodlegamer76.fracture.worldgen.megastructure.Node;
 import com.noodlegamer76.fracture.worldgen.megastructure.structure.access.WorldAccess;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -25,7 +27,11 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.BitSetDiscreteVoxelShape;
 import net.minecraft.world.phys.shapes.DiscreteVoxelShape;
+import org.locationtech.jts.geom.*;
+import org.locationtech.jts.operation.buffer.BufferOp;
+import org.locationtech.jts.operation.buffer.BufferParameters;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -226,7 +232,25 @@ public class StructureUtils {
         return intersection;
     }
 
+    public static AABB getChunkIntersection(FeaturePlaceContext<?> access, AABB structure) {
+        ChunkPos cp = new ChunkPos(access.origin());
+        int chunkMinX = cp.getMinBlockX();
+        int chunkMaxX = cp.getMaxBlockX() + 1;
+        int chunkMinZ = cp.getMinBlockZ();
+        int chunkMaxZ = cp.getMaxBlockZ() + 1;
 
+        AABB chunk = new AABB(chunkMinX, access.origin().getY(), chunkMinZ,
+                chunkMaxX, access.origin().getY() + 1, chunkMaxZ);
+
+        AABB intersection = structure.intersect(chunk);
+
+        if (intersection.minX >= intersection.maxX ||
+                intersection.minY >= intersection.maxY ||
+                intersection.minZ >= intersection.maxZ) {
+            return null;
+        }
+        return intersection;
+    }
 
     public static BlockPos getAnchorOffset(StructureTemplate template, AnchorPoint anchor) {
         Vec3i size = template.getSize();
@@ -352,5 +376,91 @@ public class StructureUtils {
             case EAST -> new BlockPos(sizeX, 0, 0);
             case WEST -> new BlockPos(-sizeX, 0, 0);
         };
+    }
+
+    public static List<Polygon> getAlignedTilesInside(Polygon polygon, double n) {
+        List<Polygon> tiles = new ArrayList<>();
+        GeometryFactory gf = polygon.getFactory();
+        Envelope env = polygon.getEnvelopeInternal();
+
+        double startX = Math.floor(env.getMinX() / n) * n;
+        double startY = Math.floor(env.getMinY() / n) * n;
+
+        for (double x = startX; x < env.getMaxX(); x += n) {
+            for (double y = startY; y < env.getMaxY(); y += n) {
+
+                Coordinate[] coords = new Coordinate[] {
+                        new Coordinate(x, y),
+                        new Coordinate(x + n, y),
+                        new Coordinate(x + n, y + n),
+                        new Coordinate(x, y + n),
+                        new Coordinate(x, y)
+                };
+
+                Polygon tile = gf.createPolygon(coords);
+
+                if (polygon.covers(tile)) {
+                    tiles.add(tile);
+                }
+            }
+        }
+        return tiles;
+    }
+
+    public static List<Polygon> shrinkPolygons(List<Polygon> inputPolygons, double distance) {
+        if (distance <= 0) {
+            throw new IllegalArgumentException("Distance must be greater than 0.");
+        }
+
+        List<Polygon> results = new ArrayList<>();
+
+        BufferParameters params = new BufferParameters();
+        params.setJoinStyle(BufferParameters.JOIN_MITRE);
+        params.setMitreLimit(5.0);
+
+        for (Polygon poly : inputPolygons) {
+            if (poly == null || poly.isEmpty()) continue;
+
+            Geometry shrunkGeom = BufferOp.bufferOp(poly, -distance, params);
+
+            if (shrunkGeom == null || shrunkGeom.isEmpty()) continue;
+
+            if (shrunkGeom instanceof Polygon) {
+                results.add((Polygon) shrunkGeom);
+            } else if (shrunkGeom instanceof MultiPolygon) {
+                MultiPolygon mp = (MultiPolygon) shrunkGeom;
+                for (int i = 0; i < mp.getNumGeometries(); i++) {
+                    Geometry part = mp.getGeometryN(i);
+                    if (part instanceof Polygon) {
+                        results.add((Polygon) part);
+                    }
+                }
+            }
+        }
+
+        return results;
+    }
+
+    public static Polygon getNodePolygon(Node n) {
+        int startX = n.getX();
+        int startZ = n.getZ();
+        int endX = startX + n.getSize();
+        int endZ = startZ + n.getSize();
+
+        GeometryFactory factory = new GeometryFactory();
+
+        Coordinate[] coordinates = new Coordinate[] {
+                new Coordinate(startX, startZ),
+                new Coordinate(startX, endZ),
+                new Coordinate(endX, endZ),
+                new Coordinate(endX, startZ),
+                new Coordinate(startX, startZ)
+        };
+
+        LinearRing exterior = factory.createLinearRing(coordinates);
+
+        Polygon polygon = factory.createPolygon(exterior, null);
+
+        return polygon;
     }
 }

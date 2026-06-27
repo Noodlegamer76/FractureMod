@@ -1,8 +1,12 @@
 package com.noodlegamer76.fracture.worldgen.megastructure.structure;
 
-import com.noodlegamer76.fracture.worldgen.megastructure.rules.RandomPosInNode;
-import com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.castle.CastleAnchorGraphRule;
-import com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.castle.CastleFootprontGeneratorRule;
+import com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.castle.PlaceStoneTowersFromTilesRule;
+import com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.castle.ShrinkStructureGraphPolygonsRule;
+import com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.geometry.GetTilesInPolygons;
+import com.noodlegamer76.fracture.worldgen.megastructure.rules.pos.NodePos;
+import com.noodlegamer76.fracture.worldgen.megastructure.rules.pos.RandomPosInNode;
+import com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.paths.AnchorGraphRule;
+import com.noodlegamer76.fracture.worldgen.megastructure.rules.layout.paths.FootprintGeneratorRule;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,19 +25,29 @@ public class Structures {
     public void setupStructures() {
         clearDefinitions();
 
+        //setupBoreasFactory();
+    }
 
-       StructureDefinition castle = new StructureDefinition();
-       addDefinition(castle);
+    public void setupBoreasFactory() {
+        StructureDefinition boreasFactory = new StructureDefinition();
+        addDefinition(boreasFactory);
 
-       Structure castleLayout = new Structure(100, 6);
-       castleLayout.addRule(new RandomPosInNode());
-       castleLayout.addRule(new CastleFootprontGeneratorRule());
-       castleLayout.addRule(new CastleAnchorGraphRule());
-       castle.addStructure(castleLayout);
+        String buildingPolygons = ShrinkStructureGraphPolygonsRule.BUILDING_POLYGONS_KEY;
+        String buildingTiles = "building_tiles";
 
-       //Structure castleGraphCulling = new Structure(90, 4);
-       //castleGraphCulling.addRule(new CastleGraphCullingRule());
-       //castle.addStructure(castleGraphCulling);
+        Structure layout = new Structure(100, 6);
+        layout.addRule(new NodePos());
+        layout.addRule(new FootprintGeneratorRule());
+        layout.addRule(new AnchorGraphRule());
+        layout.addRule(new ShrinkStructureGraphPolygonsRule(8));
+        boreasFactory.addStructure(layout);
+
+        Structure placement = new Structure(95, 1);
+        placement.addRule(new GetTilesInPolygons(buildingPolygons, buildingTiles, 8));
+        placement.addRule(new PlaceStoneTowersFromTilesRule(buildingTiles));
+
+        boreasFactory.addStructure(placement);
+
     }
 
     public void addDefinition(StructureDefinition definition) {
