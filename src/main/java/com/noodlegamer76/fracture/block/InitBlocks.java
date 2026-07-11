@@ -72,7 +72,7 @@ public class InitBlocks {
             () -> new BloodSlimeBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).noCollission()));
 
     public static final RegistryObject<Block> INKWOOD_BOOKSHELF = BLOCKS.register("inkwood_bookshelf",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.BOOKSHELF)));
+            () -> new InkwoodBookshelfBlock(BlockBehaviour.Properties.copy(Blocks.BOOKSHELF)));
 
     public static final RegistryObject<Block> FLESH_BLOCK = BLOCKS.register("flesh_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).mapColor(DyeColor.RED).strength(0.4F)));
@@ -159,7 +159,7 @@ public class InitBlocks {
     public static final RegistryObject<Block> SMALL_FLESH_BULB = BLOCKS.register("small_flesh_bulb",
             () -> new LanternBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).noOcclusion().lightLevel((blockState) -> 15).strength(0.1F)));
     public static final RegistryObject<Block> BLOODY_BOOKSHELF = BLOCKS.register("bloody_bookshelf",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.BOOKSHELF).mapColor(MapColor.COLOR_RED)));
+            () -> new BloodyBookshelfBlock(BlockBehaviour.Properties.copy(Blocks.BOOKSHELF).mapColor(MapColor.COLOR_RED)));
     public static final RegistryObject<Block> INTESTINE = BLOCKS.register("intestine",
             () -> new ChainBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(0.1F)));
 
