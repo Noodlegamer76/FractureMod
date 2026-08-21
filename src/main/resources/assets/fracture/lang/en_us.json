@@ -43,6 +43,8 @@
 	"item.fracture.permafrost_hoe": "Permafrost Hoe",
 	"item.fracture.flesh_obelisk_spawn_egg": "Flesh Obelisk Spawn Egg",
 	"item.fracture.parasitic_ring": "Parasitic Ring",
+	"item.fracture.laser_gun": "Laser Gun",
+	"item.fracture.laser_gun.tooltip": "§5Summons a laser that pierces through §lall§r§5 obstacles",
 
 	"block.fracture.prison_bars": "Prison Bars",
 	"block.fracture.rusty_iron_bars": "Rusty Iron Bars",
