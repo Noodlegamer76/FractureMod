@@ -5,16 +5,9 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.noodlegamer76.fracture.FractureMod;
 import com.noodlegamer76.fracture.entity.monster.boss.FleshObelisk;
 import com.noodlegamer76.fracture.item.LaserGunItem;
-import com.noodlegamer76.shadered.client.util.ModRenderTypes;
-import com.noodlegamer76.shadered.client.util.SkyblockType;
-import com.noodlegamer76.shadered.client.util.skyblock.SkyblockPass;
-import com.noodlegamer76.shadered.item.SkyblockHolderBlockItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -25,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.model.DefaultedItemGeoModel;
-import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 public class LaserGunRenderer extends GeoItemRenderer<LaserGunItem> {

@@ -31,3 +31,4 @@ forge*changelog.txt
 /.idea/
 /.gradle/
 /logs/
+/src/main/resources/natives/
