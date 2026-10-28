@@ -134,43 +134,6 @@ dependencies {
     //implementation fg.deobf("curse.maven:distant-horizons-508933:6387680")
     //implementation fg.deobf("curse.maven:spark-361579:4738952")
 
-    minecraftLibrary("io.github.spair:imgui-java-binding:${project.imguiVersion}") {
-        exclude group: "org.lwjgl"
-    }
-    minecraftLibrary("io.github.spair:imgui-java-lwjgl3:${project.imguiVersion}") {
-        exclude group: "org.lwjgl"
-    }
-
-    natives "io.github.spair:imgui-java-natives-windows:${project.imguiVersion}"
-    natives "io.github.spair:imgui-java-natives-linux:${project.imguiVersion}"
-    natives "io.github.spair:imgui-java-natives-macos:${project.imguiVersion}"
-
-    //shadow("io.github.spair:imgui-java-binding:${project.imguiVersion}") {
-    //    exclude group: "org.lwjgl"
-    //}
-    shadow 'org.locationtech.jts:jts-core:1.20.0'
-    shadow("io.github.spair:imgui-java-lwjgl3:${project.imguiVersion}") {
-        exclude group: "org.lwjgl"
-    }
-
-    //minecraftLibrary("io.github.spair:imgui-java-binding:${imgui_version}")
-    //minecraftLibrary("io.github.spair:imgui-java-lwjgl3:${imgui_version}") {
-    //    exclude group: "org.lwjgl"
-    //}
-    //minecraftLibrary("io.github.spair:imgui-java-natives-linux:${imgui_version}")
-    //minecraftLibrary("io.github.spair:imgui-java-natives-macos:${imgui_version}")
-    //minecraftLibrary("io.github.spair:imgui-java-natives-windows:${imgui_version}")
-    //minecraftLibrary("io.github.spair:imgui-java-app:${imgui_version}") {
-    //    exclude group: "org.lwjgl"
-    //}
-//
-    //jarJar("io.github.spair:imgui-java-binding:${imgui_version}")
-    //jarJar("io.github.spair:imgui-java-lwjgl3:${imgui_version}")
-    //jarJar("io.github.spair:imgui-java-natives-linux:${imgui_version}")
-    //jarJar("io.github.spair:imgui-java-natives-macos:${imgui_version}")
-    //jarJar("io.github.spair:imgui-java-natives-windows:${imgui_version}")
-    //jarJar("io.github.spair:imgui-java-app:${imgui_version}")
-
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 }
 

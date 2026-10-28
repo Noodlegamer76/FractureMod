@@ -5,11 +5,9 @@
   "refmap": "fracture.refmap.json",
   "mixins": [
     "MultiNoiseBiomeSourceMixin",
-    "accessor.PathAccessor",
-    "accessor.StructureTemplateAccessor"
+    "accessor.PathAccessor"
   ],
   "client": [
-    "RenderSystemMixin"
   ],
   "minVersion": "0.8"
 }

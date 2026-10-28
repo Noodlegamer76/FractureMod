@@ -3,7 +3,6 @@ package com.noodlegamer76.fracture.item;
 import com.mojang.authlib.GameProfile;
 import com.noodlegamer76.fracture.entity.InitEntities;
 import com.noodlegamer76.fracture.entity.monster.PlayerMimic;
-import com.noodlegamer76.fracture.gui.imgui.core.ImGuiScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
